@@ -1,0 +1,25 @@
+Index: packages/apps/Settings/src/com/android/settings/ResetNetwork.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/ResetNetwork.java	(revision 4844)
++++ packages/apps/Settings/src/com/android/settings/ResetNetwork.java	(revision 4845)
+@@ -52,6 +52,7 @@
+ import android.net.wifi.WifiManager;
+ import android.telephony.TelephonyManager;
+ import com.android.ims.ImsManager;
++import android.util.Log;
+ 
+ 
+ /**
+@@ -268,10 +269,11 @@
+ 
+             BluetoothManager btManager = (BluetoothManager)
+                     context.getSystemService(Context.BLUETOOTH_SERVICE);
+-            if (btManager != null) {
++        if (btManager != null) {
+                 BluetoothAdapter btAdapter = btManager.getAdapter();
+                 if (btAdapter != null) {
+                     btAdapter.factoryReset();
++                    btAdapter.disable();
+                 }
+             }
+         int phoneId;

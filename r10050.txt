@@ -1,0 +1,25 @@
+Index: packages/apps/Settings/src/com/android/settings/IccLockSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/IccLockSettings.java	(revision 10049)
++++ packages/apps/Settings/src/com/android/settings/IccLockSettings.java	(revision 10050)
+@@ -270,18 +270,10 @@
+             SubscriptionManager sm = SubscriptionManager.from(getContext());
+             for (int i = 0; i < numSims; ++i) {
+                 final SubscriptionInfo subInfo = sm.getActiveSubscriptionInfoForSimSlotIndex(i);						
+-				if(subInfo != null) {	
+-					if(tm.getSimState(PhoneConstants.SIM_ID_1) != TelephonyManager.SIM_STATE_ABSENT) {
+-						mTabHost.addTab(buildTabSpec(String.valueOf(i),String.valueOf(subInfo.getDisplayName())));	
+-					} else {
+-						mTabHost.addTab(buildTabSpec(String.valueOf(0),String.valueOf(subInfo.getDisplayName())));	
+-					}								
+-				}
+-				
+-                /*mTabHost.addTab(buildTabSpec(String.valueOf(i),
++                mTabHost.addTab(buildTabSpec(String.valueOf(i),
+                         String.valueOf(subInfo == null
+                             ? getContext().getString(R.string.sim_editor_title, i + 1)
+-                            : subInfo.getDisplayName())));*/
++                            : subInfo.getDisplayName())));
+             }
+             final SubscriptionInfo sir = sm.getActiveSubscriptionInfoForSimSlotIndex(0);
+ 

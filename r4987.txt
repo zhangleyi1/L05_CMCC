@@ -1,0 +1,45 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/recents/RecentsActivity.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/recents/RecentsActivity.java	(revision 4986)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/recents/RecentsActivity.java	(revision 4987)
+@@ -370,7 +370,7 @@
+ 				      DecimalFormat df=new DecimalFormat("0.00");
+ 				      String rdf = df.format(releaseDalvikFree);
+ 				      Log.d(TAG,"duxingheng----releaseDalvikFree="+releaseDalvikFree);
+-				      Toast.makeText(getApplicationContext(),rdf + " MB memory freed up",Toast.LENGTH_SHORT).show();
++				      Toast.makeText(getApplicationContext(),rdf +getApplicationContext().getString(R.string.recent_clean_toast_hint),Toast.LENGTH_SHORT).show();
+ 					  }
+                 }
+             });
+@@ -409,7 +409,7 @@
+ 
+         // Notify of the next draw
+         mRecentsView.getViewTreeObserver().addOnPreDrawListener(mRecentsDrawnEventListener);
+-		Log.d(TAG, "javen onStart done");
++		//Log.d(TAG, "javen onStart done");
+     }
+ 
+     @Override
+Index: frameworks/base/packages/SystemUI/res/values/strings.xml
+===================================================================
+--- frameworks/base/packages/SystemUI/res/values/strings.xml	(revision 4986)
++++ frameworks/base/packages/SystemUI/res/values/strings.xml	(revision 4987)
+@@ -1711,6 +1711,7 @@
+     <string name="switch_screen_mode_toast">Screen change to 18:9 and restart application now ...</string>
+     <string name="Share_screen_shot">Share screen shot</string>
+     <!-- ADD-E By Justin.Shen for switch screen mode from 16:9 to 18:9 -->
++    <string name="recent_clean_toast_hint"> MB memory freed up</string>
+      <!-- Warning shown when user input has been blocked due to another app overlaying screen
+          content. Since we don't know what the app is showing on top of the input target, we
+          can't verify user consent. [CHAR LIMIT=NONE] -->
+Index: frameworks/base/packages/SystemUI/res/values-zh-rCN/strings.xml
+===================================================================
+--- frameworks/base/packages/SystemUI/res/values-zh-rCN/strings.xml	(revision 4986)
++++ frameworks/base/packages/SystemUI/res/values-zh-rCN/strings.xml	(revision 4987)
+@@ -686,5 +686,6 @@
+     <string name="switch_screen_mode_toast">屏幕切换成18:9，正在重启应用...</string>
+     <string name="Share_screen_shot">分享屏幕截图</string>
+     <!-- ADD-E By Justin.Shen for switch screen mode from 16:9 to 18:9 -->
++	<string name="recent_clean_toast_hint"> MB内存释放了</string>
+     <string name="func_search_no_content_toast">没有结果</string>
+ </resources>

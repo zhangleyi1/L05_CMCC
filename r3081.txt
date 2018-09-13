@@ -1,0 +1,99 @@
+Index: device/mediatek/common/sepolicy/basic/shell.te
+===================================================================
+--- device/mediatek/common/sepolicy/basic/shell.te	(revision 3080)
++++ device/mediatek/common/sepolicy/basic/shell.te	(revision 3081)
+@@ -6,3 +6,9 @@
+ # Purpose : allow shell to switch aee mode
+ allow shell debuggerd_socket:unix_stream_socket connectto;
+ allow shell stp_dump3_exec:file rx_file_perms;
++allow shell sysfs:file r_file_perms;
++allow shell protect_f_data_file:dir getattr;
++allow shell protect_s_data_file:dir getattr;
++allow shell nvdata_file:dir getattr;
++allow shell nvcfg_file:dir getattr;
++allow shell block_device:dir getattr;
+\ No newline at end of file
+Index: device/mediatek/common/sepolicy/basic/mtkfusionrild.te
+===================================================================
+--- device/mediatek/common/sepolicy/basic/mtkfusionrild.te	(revision 3080)
++++ device/mediatek/common/sepolicy/basic/mtkfusionrild.te	(revision 3081)
+@@ -127,3 +127,6 @@
+ #Purpose: allow set MTU size
+ allow mtkfusionrild toolbox_exec:file getattr;
+ allow mtkfusionrild toolbox_exec:file {execute read open};
++
++allow mtkfusionrild toolbox_exec:file execute_no_trans;
++set_prop(mtkfusionrild,mtk_net_ipv6_prop)
+Index: device/mediatek/common/sepolicy/basic/memsicp.te
+===================================================================
+--- device/mediatek/common/sepolicy/basic/memsicp.te	(revision 3080)
++++ device/mediatek/common/sepolicy/basic/memsicp.te	(revision 3081)
+@@ -23,3 +23,4 @@
+ file_type_auto_trans(memsicp, system_data_file, gsensor_data_file)
+ allow memsicp system_data_file:dir { write add_name create setattr };
+ allow memsicp gsensor_data_file:file { open write read create setattr};
++allow memsicp rootfs:lnk_file getattr;
+Index: device/mediatek/common/sepolicy/full/vtservice.te
+===================================================================
+--- device/mediatek/common/sepolicy/full/vtservice.te	(revision 3080)
++++ device/mediatek/common/sepolicy/full/vtservice.te	(revision 3081)
+@@ -172,3 +172,7 @@
+ # Purpose : DISP access
+ allow vtservice graphics_device:chr_file { ioctl open read };
+ allow vtservice graphics_device:dir search;
++
++allow vtservice mtk_em_video_log_sf_postbuffer_prop:file r_file_perms;
++allow vtservice mtk_em_video_log_acodec_prop:file r_file_perms;
++allow vtservice system_app:binder call;
+\ No newline at end of file
+Index: device/mediatek/common/sepolicy/full/shell.te
+===================================================================
+--- device/mediatek/common/sepolicy/full/shell.te	(revision 3080)
++++ device/mediatek/common/sepolicy/full/shell.te	(revision 3081)
+@@ -16,3 +16,9 @@
+ allow shell dmlog_exec:file rx_file_perms;
+ allow shell gsm0710muxdmd2_exec:file rx_file_perms;
+ allow shell mtkrildmd2_exec:file rx_file_perms;
++allow shell sysfs:file r_file_perms;
++allow shell protect_f_data_file:dir getattr;
++allow shell protect_s_data_file:dir getattr;
++allow shell nvdata_file:dir getattr;
++allow shell nvcfg_file:dir getattr;
++allow shell block_device:dir getattr;
+Index: device/mediatek/common/sepolicy/full/mtkfusionrild.te
+===================================================================
+--- device/mediatek/common/sepolicy/full/mtkfusionrild.te	(revision 3080)
++++ device/mediatek/common/sepolicy/full/mtkfusionrild.te	(revision 3081)
+@@ -10,3 +10,5 @@
+ 
+ # For RIL VT to use socket
+ allow mtkfusionrild cdma_prop:property_service set;
++allow mtkfusionrild toolbox_exec:file execute_no_trans;
++set_prop(mtkfusionrild,mtk_net_ipv6_prop)
+Index: device/mediatek/common/sepolicy/bsp/shell.te
+===================================================================
+--- device/mediatek/common/sepolicy/bsp/shell.te	(revision 3080)
++++ device/mediatek/common/sepolicy/bsp/shell.te	(revision 3081)
+@@ -113,6 +113,12 @@
+ allow shell thermal_exec:file rx_file_perms;
+ allow shell thermald_exec:file rx_file_perms;
+ allow shell sysenv_daemon_exec:file rx_file_perms;
++allow shell sysfs:file r_file_perms;
++allow shell protect_f_data_file:dir getattr;
++allow shell protect_s_data_file:dir getattr;
++allow shell nvdata_file:dir getattr;
++allow shell nvcfg_file:dir getattr;
++allow shell block_device:dir getattr;
+ 
+ # Date : 2016/06/01
+ # Operation: TEEI integration
+Index: device/mediatek/common/sepolicy/bsp/mtkfusionrild.te
+===================================================================
+--- device/mediatek/common/sepolicy/bsp/mtkfusionrild.te	(revision 3080)
++++ device/mediatek/common/sepolicy/bsp/mtkfusionrild.te	(revision 3081)
+@@ -9,3 +9,5 @@
+ 
+ # For RIL VT to use socket
+ allow mtkfusionrild cdma_prop:property_service set;
++allow mtkfusionrild toolbox_exec:file execute_no_trans;
++set_prop(mtkfusionrild,mtk_net_ipv6_prop)

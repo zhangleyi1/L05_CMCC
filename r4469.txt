@@ -1,0 +1,73 @@
+Index: packages/apps/Settings/src/com/android/settings/MasterClearConfirm.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/MasterClearConfirm.java	(revision 4468)
++++ packages/apps/Settings/src/com/android/settings/MasterClearConfirm.java	(revision 4469)
+@@ -21,6 +21,7 @@
+ import android.content.Intent;
+ import android.content.pm.ActivityInfo;
+ import android.os.AsyncTask;
++import android.os.BatteryManager;
+ import android.os.Bundle;
+ import android.os.UserHandle;
+ import android.os.UserManager;
+@@ -36,6 +37,7 @@
+ import android.os.ServiceManager;
+ import android.os.IBinder;
+ import android.util.Log;
++import android.widget.Toast;
+ 
+ 
+ import com.android.internal.logging.MetricsProto.MetricsEvent;
+@@ -58,8 +60,9 @@
+     private View mContentView;
+     private boolean mEraseSdCard;
+ 	private static final int CALL_INFO_NV_POS = 850;    
+-	private static final int CALL_INFO_STEP = 15; 	
++	private static final int CALL_INFO_STEP = 15;
+ 	private static final String PRODUCT_INFO_NVRAM_PATH = "/data/nvram/APCFG/APRDEB/PRODUCT_INFO";
++    private static final int LOW_BATTERY_TO_RESET = 30;
+ 
+     /**
+      * The user has gone through the multiple confirmation, so now we go ahead
+@@ -69,8 +72,17 @@
+     private Button.OnClickListener mFinalClickListener = new Button.OnClickListener() {
+ 
+         public void onClick(View v) {
+-		
+-			resetHandleCallTimes();
++            BatteryManager batteryManager = (BatteryManager) getActivity()
++                    .getSystemService(Context.BATTERY_SERVICE);
++            int batteryCapacity = batteryManager
++                    .getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
++            if (batteryCapacity < LOW_BATTERY_TO_RESET) {
++                Toast.makeText(getActivity(), R.string.battery_low_to_reset, Toast.LENGTH_LONG)
++                        .show();
++                return;
++            }
++
++            resetHandleCallTimes();
+             if (Utils.isMonkeyRunning()) {
+                 return;
+             }
+Index: packages/apps/Settings/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 4468)
++++ packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 4469)
+@@ -3441,4 +3441,6 @@
+     <string name="button_remove">"移除"</string>
+     <string name="button_cancel">取消</string>
+     <string name="sound_modecategory_title">模式</string>
++
++    <string name="battery_low_to_reset">电量小于30%，不能恢复出厂设置。</string>
+ </resources>
+Index: packages/apps/Settings/res/values/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values/strings.xml	(revision 4468)
++++ packages/apps/Settings/res/values/strings.xml	(revision 4469)
+@@ -8110,4 +8110,6 @@
+ 	<string name="battery_charge_summary">Light is on when battery is Charging.</string>
+ 	<string name="battery_low_title">Low battery</string>
+ 	<string name="battery_low_summary">Light up automatically at 15% battery.</string>
++
++    <string name="battery_low_to_reset">Can not do factory data reset when battery is less than 30%.</string>
+ </resources>

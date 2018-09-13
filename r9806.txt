@@ -1,0 +1,67 @@
+Index: frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 9805)
++++ frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 9806)
+@@ -558,6 +558,9 @@
+ 
+     private final ArrayList<PowerManagerInternal.LowPowerModeListener> mLowPowerModeListeners
+             = new ArrayList<PowerManagerInternal.LowPowerModeListener>();
++	// Techain add for id by zhangle at 2018/03/12 start.
++	private ArrayList<String> mScreenOnBlackList = new ArrayList<String>();
++	// Techain add for id by zhangle at 2018/03/12 end.
+ 
+     // True if brightness should be affected by twilight.
+     private boolean mBrightnessUseTwilight;
+@@ -685,6 +688,9 @@
+             mWirelessChargerDetector = new WirelessChargerDetector(sensorManager,
+                     createSuspendBlockerLocked("PowerManagerService.WirelessChargerDetector"),
+                     mHandler);
++			// Techain modify for id by zhangle at 2018/03/12 start.
++			createScreenOnBlacklist();
++			// Techain modify for id by zhangle at 2018/03/12 end.
+             mSettingsObserver = new SettingsObserver(mHandler);
+ 
+             mLightsManager = getLocalService(LightsManager.class);
+@@ -1122,7 +1128,8 @@
+             }
+ 
+             // Techain modify for 121355 by zhangle at 2018/03/07 start
+-            if( packageName != null && packageName.contains("com.tencent.mobileqq") && !isInteractiveInternal()) {return;}
++			if(isInSreenOnBlackList(packageName) && !isInteractiveInternal()){return;}
++            // if( packageName != null && packageName.contains("com.tencent.mobileqq") && !isInteractiveInternal()) {return;}
+             // Techain modify for 121355 by zhangle at 2018/03/07 end
+             WakeLock wakeLock;
+             int index = findWakeLockIndexLocked(lock);
+@@ -3465,6 +3472,32 @@
+         return suspendBlocker;
+     }
+ 
++	// Techain modify for 121355 by zhangle at 2018/03/12 start
++	private void createScreenOnBlacklist() {
++		if(mScreenOnBlackList == null) {return;}
++		mScreenOnBlackList.clear();
++		mScreenOnBlackList.add("com.tencent.mobileqq");
++		mScreenOnBlackList.add("com.android.email");
++		mScreenOnBlackList.add("com.tencent.mm");
++	}
++
++	/**
++	 * pkgName: app's package name.
++	 * true if package in blacklist false not in blacklist.
++	 */
++	private boolean isInSreenOnBlackList(String pkgName){
++		if(pkgName == null || mScreenOnBlackList == null || mScreenOnBlackList.size() == 0 ) {
++			return false;
++		}
++		for(String item:mScreenOnBlackList) {
++			if(pkgName.trim().contains(item)) {
++				return true;
++			}
++		}
++		return false;
++	}
++	// Techain modify for 121355 by zhangle at 2018/03/12 end
++
+     private void incrementBootCount() {
+         synchronized (mLock) {
+             int count;

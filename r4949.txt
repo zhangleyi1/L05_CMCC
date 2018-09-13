@@ -1,0 +1,32 @@
+Index: packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java	(revision 4948)
++++ packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java	(revision 4949)
+@@ -442,6 +442,7 @@
+         }
+     }
+ 
++
+     @Override
+     public void onSaveInstanceState(Bundle outState) {
+         super.onSaveInstanceState(outState);
+@@ -455,8 +456,17 @@
+     @Override
+     public void onPause() {
+         super.onPause();
+-        if (mApplications != null) {
+-            mApplications.pause();
++        if (this.getActivity().isInMultiWindowMode()) {
++            updateView();
++            updateOptionsMenu();
++            if (mApplications != null) {
++                mApplications.resume(mSortOrder);
++                mApplications.updateLoading();
++            }
++        } else {
++            if (mApplications != null) {
++                mApplications.pause();
++            }
+         }
+     }
+ 

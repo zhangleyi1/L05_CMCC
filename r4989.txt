@@ -1,0 +1,576 @@
+Index: device/mediatek/common/sepolicy/bsp/ifaad.te
+===================================================================
+--- device/mediatek/common/sepolicy/bsp/ifaad.te	(revision 4988)
++++ device/mediatek/common/sepolicy/bsp/ifaad.te	(revision 4989)
+@@ -11,9 +11,6 @@
+ 
+ allow ifaad self:capability sys_module;
+ allow ifaad teei_client_device:chr_file create_file_perms;
+-#allow ifaad teei_data_file:dir create_dir_perms;
+-#allow ifaad teei_data_file:file rw_file_perms;
+-#allow ifaad teei_data_file:file create_file_perms;
+ allow ifaad self:capability dac_override;
+ allow ifaad device:dir rw_dir_perms;
+ allow ifaad cache_file:file rw_file_perms;
+Index: vendor/mediatek/proprietary/hardware/meta/common/Android.mk
+===================================================================
+--- vendor/mediatek/proprietary/hardware/meta/common/Android.mk	(revision 4988)
++++ vendor/mediatek/proprietary/hardware/meta/common/Android.mk	(revision 4989)
+@@ -486,6 +486,9 @@
+ LOCAL_PROPRIETARY_MODULE := true
+ LOCAL_MODULE_OWNER := mtk
+ 
++ifeq ($(MICROTRUST_TEE_SUPPORT),yes)
++LOCAL_CFLAGS += -DMICROTRUST_FACTORY_SUPPORT
++endif
+ 
+ include $(MTK_EXECUTABLE)
+ 
+Index: vendor/mediatek/proprietary/hardware/meta/common/src/FtModule.cpp
+===================================================================
+--- vendor/mediatek/proprietary/hardware/meta/common/src/FtModule.cpp	(revision 4988)
++++ vendor/mediatek/proprietary/hardware/meta/common/src/FtModule.cpp	(revision 4989)
+@@ -21,6 +21,29 @@
+ #include "wifi_api.h"
+ #include "MSocket.h"
+ 
++#ifdef MICROTRUST_FACTORY_SUPPORT
++#include <stdlib.h>
++#include <unistd.h>
++#include <errno.h>
++#include <sys/wait.h>
++#include <sys/sem.h>
++#define MICROTRUST_USE_COMMAND_ID       251
++#define BUFFER_MAX_SIZE                 2000
++#define DATA_OUT_BUFFER_SIZE            1998
++#define WRITE_BUFFER_TO_PHONE           0
++#define READ_FILE_TO_BUFFER             1
++#define CHANGE_PHONE_FILE_PERMISSION    2
++#define CALL_PHONE_PROGRAM              4
++#define TEST_FILE_EXIST                 5
++#define GET_FILE_LENGTH                 6
++#define REMOVE_FILE                     7
++#define CHECK_INIT_THH_STATUS           8
++#define GET_FILENAME_BY_SUFFIX          10
++#define CHECK_SOTER_STATUS              11
++#define CHECK_ACTIVE_STATUS             13
++static int  handle_spmeta_request(unsigned char *data_in, int data_in_len, char *peer_buf, int *peer_buff_size);
++#endif
++
+ #define SIM_SWITCH_MODE_FILE  "/sys/mtk_ssw/mode"
+ #define SIM_SWITCH_MODE_STR_LEN 8
+ 
+@@ -2081,19 +2104,52 @@
+ 	ft_cnf.type = req->type;
+     ft_cnf.status = META_SUCCESS;
+ 	
+-	peer_buf = (char*)malloc(pFrm->peerLen());
+-	if (peer_buf == NULL)
+-	{
+-	    META_LOG("[Meta][FT] Ft_Customer malloc fail");
+-		return;
+-	}
+-	memcpy(peer_buf, pFrm->peerBuf(), pFrm->peerLen());
+-	peer_buff_size = pFrm->peerLen();
++#if defined(MICROTRUST_FACTORY_SUPPORT)
++    if (req->cmd.m_u1Dummy == MICROTRUST_USE_COMMAND_ID)
++    {
++        peer_buf = (char*)malloc(BUFFER_MAX_SIZE);
++        if (peer_buf == NULL)
++        {
++            META_LOG("[Meta][FT] Ft_Customer malloc fail");
++            peer_buff_size = 0;
++        }
++        else
++        {
++            handle_spmeta_request(pFrm->peerBuf(), pFrm->peerLen(), peer_buf, &peer_buff_size);
++        }
++        META_LOG("[Meta] peer_buff_size:%d ", peer_buff_size);
++    }
++    else
++    {
++#endif
++		peer_buf = (char*)malloc(2000);
++		if (peer_buf == NULL)
++		{
++		    META_LOG("[Meta][FT] Ft_Customer malloc fail");
++			return;
++		}
+ 	
+-	META_LOG("[Meta][FT] FT_CUSTOMER_OP successful, OP type is %d!", req->type);
++		META_LOG("[Meta][FT] FT_CUSTOMER_OP successful, OP type is %d!", req->type);
++		switch(req->cmd.m_u1Dummy)
++		{
++			case MICROTRUST_USE_COMMAND_ID:
++				handle_spmeta_request(pFrm->peerBuf(), pFrm->peerLen(), peer_buf, &peer_buff_size);
++				break;
++			default:
++				META_LOG("[Meta} unknow cmd!!!");
++				peer_buff_size = strlen(peer_buf);
++				break;
++		}
++#if defined(MICROTRUST_FACTORY_SUPPORT)
++    }
++#endif
++	META_LOG("[Meta] peer_buff_size:%d ", peer_buff_size);
+ 	
+     WriteDataToPC(&ft_cnf, sizeof(ft_cnf), peer_buf, peer_buff_size);
+-	free(peer_buf);
++	if (peer_buf)
++	{
++		free(peer_buf);
++	}
+ }
+ 
+ ///////////////////////////////////////////////////////////////////////////////////////////////
+@@ -3694,5 +3750,450 @@
+ 
+ /////////////////////////////////////////////////////////////////////////////////////////
+ 
++#ifdef MICROTRUST_FACTORY_SUPPORT
++/*
++ * name: check_active_status
++ * function: check Microtrust soter status
++ */
++static void check_active_status(char *data_out, int *data_out_len)
++{
++    int result = 0;
++    char property_result[128] = { 0 };
++    *data_out_len = 1;
++    data_out[0] = 3;
+ 
++    META_LOG("[Meta][Microtrust] check_active_status in");
+ 
++    property_get("soter.teei.thh.init", property_result, NULL);
++    if (0 == strncmp(property_result, "ACTIVE", strlen("ACTIVE")))
++    {
++        data_out[0] = 0;
++        META_LOG("[Meta][Microtrust] check_active_status out, check status ok, status is %s", property_result);
++    }
++    else
++    {
++        data_out[0] = 1;
++        META_LOG("[Meta][Microtrust] check_active_status out, check status failed, status is %s", property_result);
++    }
++
++    return;
++}
++
++/*
++ * name: check_soter_status
++ * function: check Microtrust soter status
++ */
++static void check_soter_status(char *data_out, int *data_out_len)
++{
++    int result = 0;
++    char property_result[128] = { 0 };
++    *data_out_len = 1;
++    data_out[0] = 3;
++
++    META_LOG("[Meta][Microtrust] check_soter_status in");
++
++	property_get("soter.teei.init", property_result, NULL);
++    if (0 == strncmp(property_result, "INIT_OK", strlen("INIT_OK")))
++    {
++        data_out[0] = 0;
++        META_LOG("[Meta][Microtrust] check_soer_status out, check status ok, status is %s", property_result);
++    }
++    else
++    {
++        data_out[0] = 1;
++        META_LOG("[Meta][Microtrust] check_soter_status out, check status failed, status is %s", property_result);
++    }
++
++    return;
++}
++
++/*
++ * name: check_init_thh_status
++ * function: check Microtrust factory status
++ */
++static void check_init_thh_status(char *data_out, int *data_out_len)
++{
++    int result = 0;
++    *data_out_len = 1;
++    data_out[0] = 3;
++
++    META_LOG("[Meta][Microtrust] check_init_thh_status in");
++
++    result = access("/data/thh/tee_00/thh_startload.lock", F_OK);
++    if (result == 0)
++    {
++        data_out[0] = 2;
++        META_LOG("[Meta][Microtrust] check_init_thh_status out, lock file is exist");
++        return;
++    }
++
++    system("init_thh initcheck");
++
++    result = access("/data/thh/tee_00/init_thh_SUCCESS", F_OK);
++    if (result == 0)
++    {
++        data_out[0] = 0;
++        remove("/data/thh/tee_00/init_thh_SUCCESS");
++        META_LOG("[Meta][Microtrust] check_init_thh_status out, check status ok");
++
++        return;
++    }
++
++    result = access("/data/thh/tee_00/init_thh_FAILED", F_OK);
++    if (result == 0)
++    {
++        data_out[0] = 1;
++        remove("/data/thh/tee_00/init_thh_FAILED");
++        META_LOG("[Meta][Microtrust] check_init_thh_status out, check status failed");
++
++        return;
++    }
++
++    return;
++}
++
++/*
++ * name: read_file_to_buffer
++ * function:read file content to buffer
++ */
++static void read_file_to_buffer(const char *file_path, char *data_out, int file_seek_counter, int *data_out_len)
++{
++    int fseek_result = 0;
++    size_t read_bytes_count = 0;
++
++    FILE *read_stream = fopen(file_path, "rb");
++    if (read_stream == NULL)
++    {
++        META_LOG("[Meta][Microtrust]read_file_to_buffer fopen file return NULL, file path is %s", file_path);
++        data_out[0] = 1;
++        *data_out_len = 1;
++
++        goto END;
++    }
++
++    fseek_result = fseek(read_stream, DATA_OUT_BUFFER_SIZE*file_seek_counter, SEEK_SET);
++    if (fseek_result != 0)
++    {
++        META_LOG("[Meta][Microtrust]read_file_to_buffer, fseek file failed");
++        data_out[0] = 2;
++        *data_out_len = 1;
++
++        goto END;
++    }
++
++    if (!feof(read_stream))
++    {
++        read_bytes_count = fread(&data_out[2], 1, DATA_OUT_BUFFER_SIZE, read_stream);
++        if (read_bytes_count == DATA_OUT_BUFFER_SIZE)
++        {
++            data_out[1] = file_seek_counter + 1;
++        }
++        else
++        {
++            data_out[1] = 0;
++        }
++        *data_out_len = read_bytes_count + 2;
++    }
++    data_out[0] = 0;
++
++END:
++    if (read_stream)
++    {
++        fclose(read_stream);
++        read_stream = NULL;
++    }
++
++    return;
++}
++
++/*
++ * name: write_buffer_to_file
++ * function: write buffer content to file
++ */
++static void write_buffer_to_file(const void *buffer, const char *filepath, int write_file_len, char *data_out, int *data_out_len)
++{
++    FILE *write_stream = NULL;
++    size_t ret = 0;
++    *data_out_len = 1;
++
++    write_stream = fopen(filepath, "aw+");
++    if (write_stream == NULL)
++    {
++        META_LOG("[Meta][Microtrust]write_buffer_to_file fopen file return  NULL, file path is: %s", filepath);
++        data_out[0] = 1;
++
++        return;
++    }
++    ret = fwrite(buffer, 1, write_file_len, write_stream);
++    if (ret < write_file_len)
++    {
++        META_LOG("[Meta][Microtrust]write_buffer_to_file fwrite file failed, buffer length is: %d, return value is: %d", write_file_len, ret);
++        data_out[0] = 2;
++        fclose(write_stream);
++
++        return;
++    }
++
++    if (write_stream)
++    {
++        fclose(write_stream);
++        write_stream = NULL;
++    }
++    data_out[0] = 0;
++
++    return;
++}
++
++/*
++ * name: remove_file
++ * function: remove files
++ */
++static void remove_file(const char *filepath, unsigned int filepath_len, char *data_out, int *data_out_len)
++{
++    int result = 0;
++    *data_out_len = 1;
++    char remove_filepath[512] = { 0 };
++
++    memcpy(remove_filepath,filepath, filepath_len);
++    //strncat(remove_filepath, filepath, filepath_len);
++
++    result = remove(remove_filepath);
++
++    if (result == 0)
++    {
++        data_out[0] = 0;
++    }
++    else
++    {
++        data_out[0] = errno;
++        META_LOG("[Meta][Microtrust]remove %s failed,error: %s ", remove_filepath, strerror(errno));
++    }
++
++    return;
++}
++
++/*
++ * name: call_phone_program
++ * function: call Microtrust product line command for export uuids and pubkeys
++ */
++static void call_phone_program(char *command, char *data_out, int *data_out_len)
++{
++    int result = 0;
++    *data_out_len = 1;
++
++    META_LOG("[Meta][Microtrust] call_phone_program in, command is: %s", command);
++
++    result = system(command);
++    if (result == 0)
++    {
++        data_out[0] = 0;
++    }
++    else
++    {
++        data_out[0] = 1;
++    }
++
++    META_LOG("[Meta][Microtrust] call_phone_program out");
++
++    return;
++}
++
++/*
++ * name: test_file_exist
++ * function: test if exist file
++ */
++static void test_file_exist(const char *filepath, char *data_out, int *data_out_len)
++{
++    int result[256] = { 0 };
++    char folder[256] = { 0 };
++    int i = 0;
++    int j = 0;
++    *data_out_len = 1;
++
++    META_LOG("[Meta][Microtrust] test_file_exist in");
++    while (filepath[i] != '\0')
++    {
++        if (filepath[i] == '/')
++        {
++            memcpy(folder, filepath, i + 1);
++            result[j] = access(folder, F_OK);
++            j++;
++        }
++        i++;
++    }
++    if (result[j - 1] == 0)
++    {
++        data_out[0] = 0;  // the file exist
++    }
++    else
++    {
++        data_out[0] = 1;  // the folder no exist
++
++        return;
++    }
++
++    if (access(filepath, F_OK) == -1)
++    {
++        data_out[0] = 2;  // the folder exist but file not exist
++        META_LOG("[Meta][Microtrust] the folder exist but file not exist");
++    }
++
++    META_LOG("[Meta][Microtrust] test_file_exist out");
++
++    return;
++}
++
++/*
++ * name: get_file_length
++ * function: get file length
++ */
++static void get_file_length(const char *filepath, char *data_out, int *data_out_len)
++{
++    FILE *fp = NULL;
++
++    META_LOG("[Meta][Microtrust] get_file_length in");
++
++    if ((fp = fopen(filepath, "r")) == NULL)
++    {
++        *data_out_len = 1;
++        data_out[0] = 1;
++        META_LOG("[Meta][Microtrust] get_file_length fopen file failed, file path is: %s", filepath);
++    }
++    else
++    {
++        fseek(fp, 0, 2);
++        snprintf(&data_out[1], DATA_OUT_BUFFER_SIZE-1, "%d", ftell(fp));
++        data_out[0] = 0;
++        *data_out_len = DATA_OUT_BUFFER_SIZE;
++    }
++
++    if (fp)
++    {
++        fclose(fp);
++        fp = NULL;
++    }
++
++    META_LOG("[Meta][Microtrust] get_file_length out");
++
++    return;
++}
++
++/*
++ * name: get_filename_by_suffix
++ * function: find file by suffix, use for search Microtrust factory config file
++ */
++static void get_filename_by_suffix(const char *filepath, char *file_suffix, char *data_out, int *data_out_len)
++{
++    struct dirent *dir_entry = NULL;
++    DIR *dir_info = NULL;
++    int filename_length = 0;
++    int suffix_length = 0;
++
++    data_out[0] = 1;
++    suffix_length = strlen(file_suffix);
++
++    dir_info = opendir(filepath);
++    if (dir_info)
++    {
++        while ((dir_entry = readdir(dir_info)) != NULL)
++        {
++            filename_length = strlen(dir_entry->d_name);
++            if (strncmp(&dir_entry->d_name[filename_length - 4], file_suffix, suffix_length) == 0)
++            {
++                memcpy(&data_out[1], dir_entry->d_name, filename_length);
++                data_out[0] = 0;
++                break;
++            }
++        }
++    }
++
++    if (dir_info)
++    {
++        closedir(dir_info);
++    }
++
++    *data_out_len = filename_length + 1;
++
++    return;
++}
++
++/*
++ * name: handle_spmeta_request
++ * function: handle request from PC tool
++ */
++static int  handle_spmeta_request(unsigned char *data_in, int data_in_len, char *peer_buf, int *peer_buff_size)
++{
++    unsigned int filepath_len = 0;
++    int tmp = data_in[1];
++    int file_seek_counter = 0;
++    char filepath[256] = { 0 };
++    char file_suffix[8] = { 0 };
++    char command[512] = { 0 };
++
++    META_LOG("[Meta][Microtrust] handle_spmeta_request in, request is %d", data_in[0]);
++
++    switch (data_in[0]) {
++    case WRITE_BUFFER_TO_PHONE:
++        filepath_len = data_in[1];
++        memcpy(filepath, &data_in[2], data_in[1]);
++        write_buffer_to_file(&data_in[2 + filepath_len], filepath, data_in_len - 2 - data_in[1], peer_buf, peer_buff_size);
++        break;
++    case READ_FILE_TO_BUFFER:
++        file_seek_counter = data_in[2];
++        memcpy(filepath, &data_in[3], data_in[1]);
++        read_file_to_buffer(filepath, peer_buf, file_seek_counter, peer_buff_size);
++        break;
++    case CALL_PHONE_PROGRAM:
++        if (255 == data_in[1])
++        {
++            memcpy(command, &data_in[3], data_in[1]+data_in[2]);
++        }
++        else
++        {
++            memcpy(command, &data_in[2], data_in[1]);
++        }
++        call_phone_program(command, peer_buf, peer_buff_size);
++        break;
++    case TEST_FILE_EXIST:
++        memcpy(filepath, &data_in[2], data_in[1]);
++        test_file_exist(filepath, peer_buf, peer_buff_size);
++        break;
++    case GET_FILE_LENGTH:
++        memcpy(filepath, &data_in[2], data_in[1]);
++        get_file_length(filepath, peer_buf, peer_buff_size);
++        break;
++    case REMOVE_FILE:
++        filepath_len = data_in[1];
++        memcpy(filepath, &data_in[2], data_in[1]);
++        remove_file(filepath, filepath_len, peer_buf, peer_buff_size);
++        break;
++    case CHECK_INIT_THH_STATUS:
++        check_init_thh_status(peer_buf, peer_buff_size);
++        break;
++    case GET_FILENAME_BY_SUFFIX:
++        memcpy(filepath, &data_in[2], tmp);
++        memcpy(file_suffix, &data_in[2 + tmp + 1], data_in[2 + tmp]);
++        get_filename_by_suffix(filepath, file_suffix, peer_buf, peer_buff_size);
++        break;
++    case CHECK_SOTER_STATUS:
++        check_soter_status(peer_buf, peer_buff_size);
++        break;
++    case CHECK_ACTIVE_STATUS:
++        check_active_status(peer_buf, peer_buff_size);
++        break;
++    default:
++        peer_buf[0] = 123;
++        break;
++    }
++
++    META_LOG("[Meta][Microtrust] handle_spmeta_request out");
++
++    return 0;
++}
++#endif
++// End Microtrust
++
++/////////////////////////////////////////////////////////////////////////////////////////
++
++
++

@@ -1,0 +1,182 @@
+Index: packages/apps/Settings/src/com/android/settings/DeviceInfoSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/DeviceInfoSettings.java	(revision 6194)
++++ packages/apps/Settings/src/com/android/settings/DeviceInfoSettings.java	(revision 6195)
+@@ -53,6 +53,11 @@
+ 
+ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+ 
++//lance add for Diagnostic @{
++import android.content.ActivityNotFoundException;
++import android.content.pm.PackageManager.NameNotFoundException;
++// @}
++
+ public class DeviceInfoSettings extends SettingsPreferenceFragment implements Indexable {
+ 
+     private static final String LOG_TAG = "DeviceInfoSettings";
+@@ -75,6 +80,7 @@
+     private static final String KEY_DEVICE_FEEDBACK = "device_feedback";
+     private static final String KEY_SAFETY_LEGAL = "safetylegal";
+     private static final String KEY_RELEASE_TIME = "release_time";
++	private static final String KEY_INFORMED_CONSENT = "informed_consent";//lance add for Diagnostic
+ 
+     static final int TAPS_TO_BE_A_DEVELOPER = 7;
+ 
+@@ -190,11 +196,45 @@
+         removePreferenceIfActivityMissing(
+                 "safety_info", "android.settings.SHOW_SAFETY_AND_REGULATORY_INFO");
+ 
++        //lance add for diagnostic @{
++        if(!shouldShowInformedConsent()) {
++            getPreferenceScreen().removePreference(findPreference(KEY_INFORMED_CONSENT));
++        } else {
++            findPreference(KEY_INFORMED_CONSENT).setEnabled(true);
++        }
++        //@}
++
+         ///M:
+         mExts = new DeviceInfoSettingsExts(getActivity(), this);
+         mExts.initMTKCustomization(getPreferenceScreen());
+     }
++	
++    //lance add for diagnostic @{
++    public boolean shouldShowInformedConsent() {
++        return hasDiagnosticApp() && (getResources().getBoolean(R.bool.def_settings_informed_consent_show));   
++    }
+ 
++    public boolean hasDiagnosticApp() {
++        try {
++            getPackageManager().getApplicationIcon("com.tct.diagnostics");
++            return true;
++        } catch (NameNotFoundException e) {
++            // TODO Auto-generated catch block
++            Log.w(LOG_TAG, "get com.tct.diagnostics failed!");
++            return false;
++        }
++    }
++	
++    private void updateInformedSummary(){
++        Preference pre = findPreference(KEY_INFORMED_CONSENT);
++        if(null != pre){
++            int isOn = Settings.Global.getInt(getContentResolver(), "def.diagnostic.on", 0);
++            pre.setSummary(isOn == 1 ? R.string.informed_consent_on
++                    : R.string.informed_consent_off);
++        }
++    }
++	//@}
++
+     @Override
+     public void onResume() {
+         super.onResume();
+@@ -210,6 +250,7 @@
+                 getActivity(), UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
+         mDebuggingFeaturesDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(
+                 getActivity(), UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
++		updateInformedSummary();//lance add for Diagnostic
+     }
+ 
+     @Override
+@@ -313,7 +354,16 @@
+             startActivity(intent);
+             return true;
+             //[BUGFIX]-Mod-END by TCTNB.yubin.ying
++            //lance add for Diagnostic @{
++        }	else if (preference.getKey().equals(KEY_INFORMED_CONSENT)){
++            Intent intent = new Intent("com.tct.diagnostic.INFORMEDCONSENT");
++            try{
++                startActivity(intent);
++            }catch(ActivityNotFoundException e){
++                Log.d(LOG_TAG, "lancelot happened error:this activity can not be found");
++            }
+         }
++		// @}
+         /// M:
+         mExts.onCustomizedPreferenceTreeClick(preference);
+         return super.onPreferenceTreeClick(preference);
+Index: packages/apps/Settings/res/values/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values/strings.xml	(revision 6194)
++++ packages/apps/Settings/res/values/strings.xml	(revision 6195)
+@@ -8115,4 +8115,8 @@
+     <string name="fingerprint_cannot_be_repeated">The name of the fingerprint cannot be repeated.</string>
+ 
+     <string name="alarm_priority">Alarms are always priority interruptions</string>
++
++    <string name="informed_consent">Experience improvement</string>
++    <string name="informed_consent_on">On</string>
++    <string name="informed_consent_off">Off</string>
+ </resources>
+Index: packages/apps/Settings/res/values/bools.xml
+===================================================================
+--- packages/apps/Settings/res/values/bools.xml	(revision 6194)
++++ packages/apps/Settings/res/values/bools.xml	(revision 6195)
+@@ -47,8 +47,9 @@
+     <!--Whether help links are defined. -->
+     <bool name="config_has_help">false</bool>
+ 	
+-	<!-- remove sound settings cast -->
+-	<bool name="remove_sound_settings_cast">true</bool>
++    <!-- remove sound settings cast -->
++    <bool name="remove_sound_settings_cast">true</bool>
+ 	
+-	<bool name="config_remove_wifi_calling">true</bool>
++    <bool name="config_remove_wifi_calling">true</bool>
++    <bool name="def_settings_informed_consent_show">true</bool>
+ </resources>
+Index: packages/apps/Settings/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 6194)
++++ packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 6195)
+@@ -3447,4 +3447,8 @@
+     <string name="fingerprint_cannot_be_repeated">指纹名称不能重复</string>
+ 
+     <string name="alarm_priority">闹钟始终为优先打扰内容</string>
++
++    <string name="informed_consent">体验改善</string>
++    <string name="informed_consent_on">开</string>
++    <string name="informed_consent_off">关</string>
+ </resources>
+Index: packages/apps/Settings/res/xml/device_info_settings.xml
+===================================================================
+--- packages/apps/Settings/res/xml/device_info_settings.xml	(revision 6194)
++++ packages/apps/Settings/res/xml/device_info_settings.xml	(revision 6195)
+@@ -45,6 +45,13 @@
+ 	     android:summary="@string/software_updates_more_summary" >
+ 	</PreferenceScreen>
+ 
++        <!-- lance add for Diagnostic -->
++        <Preference android:key="informed_consent"
++                android:enabled="false"
++                android:shouldDisableView="false"
++                android:title="@string/informed_consent"
++                android:summary="@string/informed_consent_off"/>
++
+         <!-- Device status - launches activity -->
+         <PreferenceScreen android:key="status_info"
+                 android:title="@string/device_status"
+Index: packages/apps/Settings/res/values-zh-rTW/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 6194)
++++ packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 6195)
+@@ -3344,4 +3344,8 @@
+ 	<string name="fingerprint_unlock_device_summary">使用指紋解鎖您的設備</string>
+ 	<string name="fingerprint_luncher_shortcuts_title">快速啟動功能快捷鍵</string>
+ 	<string name="fingerprint_luncher_shortcuts_summary">使用獨特的指紋從鎖定屏幕立即啟動相關的Func快捷方式</string>
++
++  <string name="informed_consent">體驗改善</string>
++  <string name="informed_consent_on">開</string>
++  <string name="informed_consent_off">關</string>
+ </resources>
+Index: packages/apps/Settings/res/values-zh-rHK/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 6194)
++++ packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 6195)
+@@ -3347,4 +3347,8 @@
+ 	<string name="fingerprint_unlock_device_summary">使用指紋解鎖您的設備</string>
+ 	<string name="fingerprint_luncher_shortcuts_title">快速啟動功能快捷鍵</string>
+ 	<string name="fingerprint_luncher_shortcuts_summary">使用獨特的指紋從鎖定屏幕立即啟動相關的Func快捷方式</string>
++
++  <string name="informed_consent">體驗改善</string>
++  <string name="informed_consent_on">開</string>
++  <string name="informed_consent_off">關</string>
+ </resources>

@@ -1,0 +1,115 @@
+Index: packages/services/Telephony/src/com/android/phone/MobileNetworkSettings.java
+===================================================================
+--- packages/services/Telephony/src/com/android/phone/MobileNetworkSettings.java	(revision 2157)
++++ packages/services/Telephony/src/com/android/phone/MobileNetworkSettings.java	(revision 2158)
+@@ -874,7 +874,7 @@
+                 mButtonEnabledNetworks.setEntryValues(
+                         R.array.preferred_network_mode_values_world_mode);
+             }
+-            mButtonEnabledNetworks.setOnPreferenceChangeListener(this);
++            //mButtonEnabledNetworks.setOnPreferenceChangeListener(this);
+             if (DBG) {
+                 log("settingsNetworkMode: " + settingsNetworkMode);
+             }
+@@ -994,7 +994,7 @@
+         }*/
+ 
+         /// Add for cmcc open market @{
+-        mOmEx.updateNetworkTypeSummary(mButtonEnabledNetworks);
++        //mOmEx.updateNetworkTypeSummary(mButtonEnabledNetworks);
+         /// @}
+ 
+         /// M: Add for L+W DSDS.
+@@ -1004,7 +1004,7 @@
+             if (DBG) {
+                 log("Enter plug-in update updateNetworkTypeSummary - Enabled again!");
+             }
+-            mExt.updateNetworkTypeSummary(mButtonEnabledNetworks);
++            //mExt.updateNetworkTypeSummary(mButtonEnabledNetworks);
+         }
+         /// @}
+     }
+@@ -1384,11 +1384,11 @@
+                         R.string.preferred_network_mode_global_summary);
+         }
+         /// Add for Plug-in @{
+-        mExt.updateNetworkTypeSummary(mButtonPreferredNetworkMode);
+-        mExt.customizePreferredNetworkMode(mButtonPreferredNetworkMode, mPhone.getSubId());
++       // mExt.updateNetworkTypeSummary(mButtonPreferredNetworkMode);
++        //mExt.customizePreferredNetworkMode(mButtonPreferredNetworkMode, mPhone.getSubId());
+         /// @}
+         /// Add for cmcc open market @{
+-        mOmEx.updateNetworkTypeSummary(mButtonPreferredNetworkMode);
++        //mOmEx.updateNetworkTypeSummary(mButtonPreferredNetworkMode);
+         /// @}
+     }
+ 
+@@ -1578,10 +1578,10 @@
+             if (DBG) {
+                 log("Enter plug-in update updateNetworkTypeSummary - Enabled.");
+             }
+-            mExt.updateNetworkTypeSummary(mButtonEnabledNetworks);
+-            mExt.customizePreferredNetworkMode(mButtonEnabledNetworks, mPhone.getSubId());
++            //mExt.updateNetworkTypeSummary(mButtonEnabledNetworks);
++            //mExt.customizePreferredNetworkMode(mButtonEnabledNetworks, mPhone.getSubId());
+             /// Add for cmcc open market @{
+-            mOmEx.updateNetworkTypeSummary(mButtonEnabledNetworks);
++            //mOmEx.updateNetworkTypeSummary(mButtonEnabledNetworks);
+             /// @}
+         }
+         /// @}
+@@ -1861,7 +1861,7 @@
+         /// @}
+ 
+         /// Add for plug-in @{
+-        if (mPhone != null) {
++        /*if (mPhone != null) {
+             mExt.initOtherMobileNetworkSettings(this, mPhone.getSubId());
+         }
+         mExt.initMobileNetworkSettings(this, convertTabToSlot(mCurrentTab));
+@@ -1868,7 +1868,7 @@
+         /// @}
+         /// Add for cmcc open market @{
+         mOmEx.initMobileNetworkSettings(this, convertTabToSlot(mCurrentTab));
+-        /// @}
++        /// @}*/
+ 
+         updateScreenStatus();
+         mExt.onResume();
+@@ -2048,11 +2048,11 @@
+                 updatePreferredNetworkUIFromDb();
+             }
+             /// Add for Plug-in @{
+-            mExt.customizePreferredNetworkMode(preference, mPhone.getSubId());
+-            mExt.updateLTEModeStatus(preference);
++            //mExt.customizePreferredNetworkMode(preference, mPhone.getSubId());
++           // mExt.updateLTEModeStatus(preference);
+             /// @}
+             /// Add for cmcc open market @{
+-            mOmEx.updateLTEModeStatus(preference);
++            //mOmEx.updateLTEModeStatus(preference);
+             /// @}
+         }
+     }
+Index: packages/services/Telephony/res/values/strings.xml
+===================================================================
+--- packages/services/Telephony/res/values/strings.xml	(revision 2157)
++++ packages/services/Telephony/res/values/strings.xml	(revision 2158)
+@@ -661,13 +661,13 @@
+     </string-array>
+     <string-array name="enabled_networks_4g_choices" translatable="false">
+         <item>@string/network_4G</item>
+-        <item>@string/network_3G</item>
+-        <item>@string/network_2G</item>
++        <!--<item>@string/network_3G</item>
++        <item>@string/network_2G</item>-->
+     </string-array>
+     <string-array name="enabled_networks_values" translatable="false">
+         <item>"9"</item>
+-        <item>"0"</item>
+-        <item>"1"</item>
++        <!--<item>"0"</item>
++        <item>"1"</item>-->
+     </string-array>
+ 
+     <string-array name="enabled_networks_cdma_choices" translatable="false">

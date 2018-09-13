@@ -1,0 +1,14 @@
+Index: packages/apps/Settings/src/com/android/settings/wifi/WifiConfigController.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/wifi/WifiConfigController.java	(revision 10800)
++++ packages/apps/Settings/src/com/android/settings/wifi/WifiConfigController.java	(revision 10801)
+@@ -431,7 +431,8 @@
+             enabled = ipAndProxyFieldsAreValid();
+         }
+         if (mEapCaCertSpinner != null
+-                && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE) {
++                && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE
++                && (mAccessPointSecurity == AccessPoint.SECURITY_EAP)) {
+             String caCertSelection = (String) mEapCaCertSpinner.getSelectedItem();
+             if (caCertSelection.equals(mUnspecifiedCertString)) {
+                 // Disallow submit if the user has not selected a CA certificate for an EAP network

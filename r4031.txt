@@ -1,0 +1,12 @@
+Index: device/ausshine/aus6739_66_n1/system.prop
+===================================================================
+--- device/ausshine/aus6739_66_n1/system.prop	(revision 4030)
++++ device/ausshine/aus6739_66_n1/system.prop	(revision 4031)
+@@ -89,3 +89,6 @@
+ ro.business.name=TCL V760
+ ro.mtk_gemini_support = 1
+ persist.sys.timezone = Asia/Shanghai
++
++ro.com.google.rlzbrandcode=TCTB
++ro.com.google.rlz_ap_whitelist=YG
+\ No newline at end of file

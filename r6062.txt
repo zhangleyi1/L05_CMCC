@@ -1,0 +1,32 @@
+Index: vendor/customer/apps/139mail/PE-A-V7.4.1-20180111_27347-apm-other__1193001.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/PE-A-V7.4.1-20180115-27433-apm__1193001.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/PE-A-V7.4.1-20180115-27433-apm__1193001.apk
+===================================================================
+--- vendor/customer/apps/139mail/PE-A-V7.4.1-20180115-27433-apm__1193001.apk	(revision 0)
++++ vendor/customer/apps/139mail/PE-A-V7.4.1-20180115-27433-apm__1193001.apk	(revision 6062)
+
+Property changes on: vendor/customer/apps/139mail/PE-A-V7.4.1-20180115-27433-apm__1193001.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/139mail/Android.mk
+===================================================================
+--- vendor/customer/apps/139mail/Android.mk	(revision 6061)
++++ vendor/customer/apps/139mail/Android.mk	(revision 6062)
+@@ -3,7 +3,7 @@
+ include $(CLEAR_VARS)
+ LOCAL_MODULE := 139mail
+ LOCAL_MODULE_TAGS := optional
+-LOCAL_SRC_FILES := PE-A-V7.4.1-20180111_27347-apm-other__1193001.apk
++LOCAL_SRC_FILES := PE-A-V7.4.1-20180115-27433-apm__1193001.apk
+ LOCAL_MODULE_CLASS := APPS
+ LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+ LOCAL_CERTIFICATE := PRESIGNED

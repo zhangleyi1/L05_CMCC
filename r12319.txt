@@ -1,0 +1,72 @@
+Index: vendor/branch/CMCC_Netcom/packages/apps/Dialer/src/com/android/dialer/SpecialCharSequenceMgr.java
+===================================================================
+--- vendor/branch/CMCC_Netcom/packages/apps/Dialer/src/com/android/dialer/SpecialCharSequenceMgr.java	(revision 12318)
++++ vendor/branch/CMCC_Netcom/packages/apps/Dialer/src/com/android/dialer/SpecialCharSequenceMgr.java	(revision 12319)
+@@ -124,6 +124,7 @@
+ 	private static final String MMI_CHECK_Efused= "*#9463*5#";
+ 	private static final String MMI_CHECK_ROOT2="*#7668#";
+ 	private static final String CUSTOMER_VERSION_FOR_TCL = "*#3228#";	
++	private static final String DATA_CONTROL_SWITCH = "*#888#";
+     /// @}
+ 
+     /**
+@@ -214,7 +215,8 @@
+                 ||handleInternalVersion(context, dialString)
+                 ||handleExternalVersion(context, dialString)
+                 ||handleCheckEfused(context, dialString)
+-                ||handleCheckRoot2(context, dialString) 
++                ||handleCheckRoot2(context, dialString)
++                ||handleDataControl(context, dialString)
+                 /// @}
+                 ) {
+             return true;
+@@ -667,6 +669,17 @@
+ 		}				 
+ 		return false;	   
+ 	}
++	
++	 static boolean handleDataControl(Context context, String input) {	 
++		if (input.equals(DATA_CONTROL_SWITCH)) {
++			  ContentResolver contentResolver=context.getContentResolver();
++			  Settings.System.putInt(contentResolver,"SimDataControl",1);	
++			  Log.v(TAG, "handleDataControl..open");    
++			  return true;		   
++		}
++		return false;
++	} 
++	
+ 	private static  void initProductInfo() {
+ 		binder = ServiceManager.getService("NvRAMAgent");
+ 		agent = NvRAMAgent.Stub.asInterface(binder);
+Index: vendor/branch/CMCC_Netcom/frameworks/opt/telephony/src/java/com/mediatek/internal/telephony/dataconnection/DataSubSelector.java
+===================================================================
+--- vendor/branch/CMCC_Netcom/frameworks/opt/telephony/src/java/com/mediatek/internal/telephony/dataconnection/DataSubSelector.java	(revision 12318)
++++ vendor/branch/CMCC_Netcom/frameworks/opt/telephony/src/java/com/mediatek/internal/telephony/dataconnection/DataSubSelector.java	(revision 12319)
+@@ -132,7 +132,7 @@
+ 
+     protected static SharedPreferences mSimSwitchPreference;
+     private PreferenceListener mPrefListener;
+-    private static final boolean mSet_DefaulData_to_Slot0= false;
++    private int mSet_DefaulData_to_Slot0 = 0;
+ 
+     protected BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+         @Override
+@@ -1243,7 +1243,7 @@
+         int detectedType = (intent == null) ? getSimStatus() :
+                 intent.getIntExtra(SubscriptionManager.INTENT_KEY_DETECT_STATUS, 0);
+         String[] currIccId = new String[mPhoneNum];
+-
++		mSet_DefaulData_to_Slot0 = Settings.System.getInt(mContext.getContentResolver(),"SimDataControl",0);
+         log("DataSubSelector for op01");
+         mIsNeedPreCheck = false;
+ 
+@@ -1361,7 +1361,8 @@
+         } else if (insertedSimCount >= 2) {
+             // default data policy for this case will be executed
+             //     in checkOp01CapSwitch6m->handleDefaultDataOp01MultiSims()
+-          if(true == mSet_DefaulData_to_Slot0){
++           log("mSet_DefaulData_to_Slot0 :" + mSet_DefaulData_to_Slot0);
++          if(1 == mSet_DefaulData_to_Slot0){
+              phoneId = 0;
+  
+             if (isCanSwitch() == false) {

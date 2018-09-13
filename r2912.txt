@@ -1,0 +1,14 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/src/com/mediatek/backuprestore/RestoreTabFragment.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/src/com/mediatek/backuprestore/RestoreTabFragment.java	(revision 2911)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/src/com/mediatek/backuprestore/RestoreTabFragment.java	(revision 2912)
+@@ -334,8 +334,7 @@
+                     break;
+                 case MessageID.SCANNER_FINISH:
+                     if (getActivity() != null) {
+-                        Toast.makeText(getActivity(), R.string.scan_finish, Toast.LENGTH_SHORT)
+-                                .show();
++                        //Toast.makeText(getActivity(), R.string.scan_finish, Toast.LENGTH_SHORT).show();
+                         boolean flag = false;
+                         if (msg.obj != null) {
+                             List<Object> dataList = (List<Object>) msg.obj;

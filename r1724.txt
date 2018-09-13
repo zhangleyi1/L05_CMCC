@@ -1,0 +1,16 @@
+Index: build/tools/buildinfo.sh
+===================================================================
+--- build/tools/buildinfo.sh	(revision 1723)
++++ build/tools/buildinfo.sh	(revision 1724)
+@@ -6,9 +6,9 @@
+ echo "ro.build.id=$BUILD_ID"
+ echo "ro.build.display.id=V760_CN_CMCC_V01"
+ echo "ro.build.version.custintid=V760_CN_CMCC_V01"
+-echo "ro.build.version.incremental=CN_980CN1_L055_M01_CMCC_S01_171118"
++echo "ro.build.version.incremental=CN_980CN1_L055_M01_CMCC_S01_171121"
+ echo "ro.tct.sys.ver=V760_CN_CMCC_V01"
+-echo "ro.build.display.factoryid=Plat:CN_980CN1_L055_M01_CMCC_S01_171118Outer:V760_CN_CMCC_V01End"
++echo "ro.build.display.factoryid=Plat:CN_980CN1_L055_M01_CMCC_S01_171121Outer:V760_CN_CMCC_V01End"
+ echo "ro.build.version.sdk=$PLATFORM_SDK_VERSION"
+ echo "ro.build.version.preview_sdk=$PLATFORM_PREVIEW_SDK_VERSION"
+ echo "ro.build.version.codename=$PLATFORM_VERSION_CODENAME"

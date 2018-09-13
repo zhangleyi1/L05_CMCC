@@ -1,0 +1,326 @@
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/lib/armeabi/libinit_thh.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/AndroidManifest.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/AndroidManifest.xml	(revision 6581)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/AndroidManifest.xml	(revision 6582)
+@@ -198,6 +198,9 @@
+ 		<activity
+              android:name=".efuse.Efuse"
+              android:screenOrientation="portrait" />
++		<activity
++             android:name=".flag.Flag"
++             android:screenOrientation="portrait" />
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 6581)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 6582)
+@@ -73,7 +73,8 @@
+  import com.android.mmi.dtv.Dtv;
+  import com.android.mmi.batterylevel.BatteryLevel;
+  import com.android.mmi.frontcameraflasher.FrontCameraFlasher;
+-	
++ import com.android.mmi.efuse.Efuse;
++ import com.android.mmi.flag.Flag;	
+ 
+ 
+ public class MMITestDevice extends Activity implements OnClickListener {
+@@ -138,6 +139,8 @@
+   	public static final int TESTITEM_DTV = 40;
+ 	public static final int TESTITEM_BATTERY_LEVERl = 41;
+ 	public static final int TESTITEM_CAMERA_SUBMAIN = 42;
++	public static final int TESTITEM_EFUSE = 43;
++	public static final int TESTITEM_FLAG = 44;
+ 
+ 	private static int currentTestMode = 0;
+ 	public static int currenttestitem = TESTITEM_TRACABILITY;
+@@ -190,7 +193,8 @@
+ 			
+   			TESTITEM_CALLING,
+ 			TESTITEM_FACTORY_RESET,
+-			TESTITEM_BATTERY_LEVERl
++			TESTITEM_BATTERY_LEVERl,
++			TESTITEM_FLAG
+   		//	TESTITEM_HALL,
+   		//	TESTITEM_NFC,
+   		//	TESTITEM_TPRAWDATA,
+@@ -236,6 +240,7 @@
+ 		TESTITEM_WIFI, 
+ 		TESTITEM_GPS, 
+ 		TESTITEM_FINGER,
++		TESTITEM_FLAG
+ //  	TESTITEM_CALLING,
+ //  	TESTITEM_GYRO
+ //	 	TESTITEM_HALL,
+@@ -537,6 +542,12 @@
+ 		case TESTITEM_BATTERY_LEVERl:
+   			str = getString(R.string.battery_level_name);
+   			break;	
++		case TESTITEM_EFUSE:
++			str = getString(R.string.efuse_name);
++  			break;	
++		case TESTITEM_FLAG:
++			str = getString(R.string.flag_name);
++			break;
+ 		}
+ 		
+ 		return str;
+@@ -721,6 +732,14 @@
+   			intent.setClass(this, BatteryLevel.class);
+   			startActivityForResult(intent, TESTITEM_BATTERY_LEVERl);
+   			break;			
++		case TESTITEM_EFUSE:
++			intent.setClass(this, Efuse.class);
++			startActivityForResult(intent, TESTITEM_EFUSE);
++			break;	
++		case TESTITEM_FLAG:
++			intent.setClass(this, Flag.class);
++			startActivityForResult(intent, TESTITEM_FLAG);
++			break;	
+ 		}
+ 	}
+ 
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/flag/Flag.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/flag/Flag.java	(revision 0)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/flag/Flag.java	(revision 6582)
+@@ -0,0 +1,128 @@
++package com.android.mmi.flag;
++
++import android.app.Activity;
++import android.content.BroadcastReceiver;
++import android.content.Context;
++import android.content.Intent;
++import android.content.IntentFilter;
++import android.os.BatteryManager;
++import android.os.SystemProperties;
++import android.os.Bundle;
++import android.util.Log;
++import android.view.KeyEvent;
++import android.view.View;
++import android.view.View.OnClickListener;
++import android.view.Window;
++import android.view.WindowManager;
++import android.widget.Button;
++import android.widget.TextView;
++
++import com.android.mmi.MMITestDevice;
++import com.android.mmi.R;
++
++import java.io.BufferedReader;
++import java.io.FileReader;
++import java.io.IOException;
++import java.io.File;
++public class Flag extends Activity implements OnClickListener {
++	
++	TextView attk_falg, iffa_flag, weixin_key,tv_base_title;
++	String attk_falg_string = "ATTK FLAG :";
++	String iffa_flag_string = "IFFA FLAG : ";
++	String weixin_key_string = "weixin key: ";
++	Button bt_base_left, bt_base_right;
++
++	@Override
++	protected void onCreate(Bundle savedInstanceState) {
++		// TODO Auto-generated method stub
++		super.onCreate(savedInstanceState);
++		requestWindowFeature(Window.FEATURE_NO_TITLE);
++		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
++				WindowManager.LayoutParams.FLAG_FULLSCREEN);
++		getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_GESTURE_ISOLATED);
++		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
++		setContentView(R.layout.activity_flag);
++	
++		tv_base_title = (TextView) this.findViewById(R.id.tv_base_title);
++		tv_base_title.setText(R.string.flag_name);
++		attk_falg = (TextView) this.findViewById(R.id.attk_falg);
++		attk_falg.setText(attk_falg_string+getBeanPodkey());
++		
++		iffa_flag = (TextView) this.findViewById(R.id.iffa_flag);
++		iffa_flag.setText(iffa_flag_string+getPaykey());
++		
++		weixin_key = (TextView) this.findViewById(R.id.weixin_key);
++		weixin_key.setText(weixin_key_string+getWeChatkey());
++		
++		bt_base_left = (Button) findViewById(R.id.bt_base_left);
++		bt_base_left.setText(R.string.bt_pass);
++		bt_base_left.setEnabled(false);
++		bt_base_left.setOnClickListener(this);
++		bt_base_right = (Button) findViewById(R.id.bt_base_right);
++		bt_base_right.setText(R.string.bt_fail);
++		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
++		if(getPaykey().equals("success") && getBeanPodkey().equals("success") && getWeChatkey().equals("success")){
++		bt_base_left.setEnabled(true);
++		}
++	
++	}
++
++	@Override
++	protected void onResume() {
++		super.onResume();
++	}
++
++	@Override
++	protected void onPause() {
++		super.onPause();
++		
++	}
++
++	@Override
++	protected void onDestroy() {
++		super.onDestroy();
++	}
++
++	
++	@Override
++	public void onClick(View v) {
++		switch (v.getId()) {
++		case R.id.bt_base_left: {
++			Intent intent = new Intent(Flag.this, MMITestDevice.class);
++			setResult(RESULT_OK, intent);
++			finish();
++			break;
++		}
++
++		case R.id.bt_base_right: {
++			Intent intent = new Intent(Flag.this, MMITestDevice.class);
++			setResult(RESULT_CANCELED, intent);
++			finish();
++			break;
++		}
++
++		}
++	}
++	
++	@Override
++	public boolean onKeyUp(int keyCode, KeyEvent event) {
++		if (MMITestDevice.isAutoTest()) {			
++			return true;
++		}
++		return super.onKeyUp(keyCode, event);
++	}
++	private String getPaykey(){
++		String resultPaykey = SystemProperties.get("soter.teei.thh.ifaa", "failed");
++		return resultPaykey;
++	}
++	private String getBeanPodkey(){
++		String resultBeanPodkey = SystemProperties.get("soter.teei.thh.ek", "failed");
++		return resultBeanPodkey;
++	}
++	private String getWeChatkey(){
++		String resultWeChatkey = SystemProperties.get("soter.teei.thh.wechat", "failed");
++		return resultWeChatkey;
++	}		
++}
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/layout/activity_autotestitem.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/layout/activity_autotestitem.xml	(revision 6581)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/layout/activity_autotestitem.xml	(revision 6582)
+@@ -44,7 +44,7 @@
+             android:layout_weight="1"
+             android:background="@drawable/button_bg"
+             android:gravity="center"
+-            android:textColor="@color/black"
++            android:textColor="@color/green"
+             android:textSize="@dimen/base_bottom_button_textsize" />
+ 
+         <Button
+@@ -55,7 +55,7 @@
+             android:layout_weight="1"
+             android:background="@drawable/button_bg"
+             android:gravity="center"
+-            android:textColor="@color/black"
++            android:textColor="@color/red"
+             android:textSize="@dimen/base_bottom_button_textsize" />
+ 
+         <Button
+@@ -66,7 +66,7 @@
+             android:layout_weight="1"
+             android:background="@drawable/button_bg"
+             android:gravity="center"
+-            android:textColor="@color/black"
++            android:textColor="@color/blue"
+             android:textSize="@dimen/base_bottom_button_textsize" />
+     </LinearLayout>
+ 
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/layout/activity_flag.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/layout/activity_flag.xml	(revision 0)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/layout/activity_flag.xml	(revision 6582)
+@@ -0,0 +1,57 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="@color/black" >
++
++    <include
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_alignParentTop="true"
++        layout="@layout/base_title" />
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_centerInParent="true"
++        android:gravity="center"
++        android:orientation="vertical" >
++
++        <TextView
++            android:layout_marginBottom="16dp"
++            android:id="@+id/attk_falg"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:background="@color/transparent"
++            android:gravity="center"
++            android:textColor="@color/font_white"
++            android:textSize="@dimen/base_title_tv_textsize" />
++
++        <TextView
++            android:layout_marginBottom="16dp"
++            android:id="@+id/iffa_flag"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:background="@color/transparent"
++            android:gravity="center"
++            android:textColor="@color/font_white"
++            android:textSize="@dimen/base_title_tv_textsize" />
++        <TextView
++            android:layout_marginBottom="16dp"
++            android:id="@+id/weixin_key"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:background="@color/transparent"
++            android:gravity="center"
++            android:textColor="@color/font_white"
++            android:textSize="@dimen/base_title_tv_textsize" />
++         
++    </LinearLayout>
++
++    <include
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_alignParentBottom="true"
++        layout="@layout/base_button" />
++
++</RelativeLayout>
+\ No newline at end of file
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/values/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/values/strings.xml	(revision 6581)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/values/strings.xml	(revision 6582)
+@@ -110,4 +110,5 @@
+ 	<string name="efuse_name">EFUSE test</string>
+ 	<string name="efuse_tips">EFUSE </string>
+ 	<string name="efuse_content">EFUSE:</string>
++	<string name="flag_name">FLAG test</string>
+ </resources>
+\ No newline at end of file

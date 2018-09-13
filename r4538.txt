@@ -1,0 +1,18 @@
+Index: packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java	(revision 4537)
++++ packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java	(revision 4538)
+@@ -942,6 +942,13 @@
+             for (int i = 0; i < size; i++) {
+                 AppEntry appEntry = entries.get(i);
+                 PackageItemInfo info = appEntry.info;
++
++                if(info != null) {
++                    if ("com.techain.nfctest".equals(info.packageName) || "com.android.nfc".equals(info.packageName)) {
++                        continue;
++                    }
++                }
++
+                 if (!packageNameEquals(lastInfo, appEntry.info)) {
+                     returnEntries.add(appEntry);
+                 }

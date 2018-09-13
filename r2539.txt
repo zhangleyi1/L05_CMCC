@@ -1,0 +1,15 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/res/values/defaults.xml
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/res/values/defaults.xml	(revision 2538)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/res/values/defaults.xml	(revision 2539)
+@@ -18,8 +18,8 @@
+ -->
+ <resources>
+ <!-- OP01 default resource -->
+-    <bool name="def_auto_time_op01">false</bool>
+-    <bool name="def_auto_time_zone_op01">false</bool> 
++    <bool name="def_auto_time_op01">true</bool>
++    <bool name="def_auto_time_zone_op01">true</bool> 
+     <bool name="def_haptic_feedback_op01">false</bool>
+     <integer name="def_telephony_misc_feature_config_op01">7</integer>
+ </resources>

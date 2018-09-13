@@ -1,0 +1,24 @@
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/Android.mk
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/Android.mk	(revision 7802)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/Android.mk	(revision 7803)
+@@ -32,5 +32,5 @@
+ include $(BUILD_PACKAGE)
+ 
+ include $(call all-makefiles-under,$(LOCAL_PATH))
+-#endif
++endif
+ 
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/values-en/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/values-en/strings.xml	(revision 7802)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/values-en/strings.xml	(revision 7803)
+@@ -18,7 +18,7 @@
+     <string name="complex_password">Complex Passwords</string>
+     <string name="connect_wlan">Connect wireless local area network</string>
+     <string name="english">English</string>
+-    <string name="face_code">Facial Recognition</string>
++    <string name="face_code">Face key</string>
+     <string name="face_code_title">Can use to face code access unlock the screen.</string>
+     <string name="face_code_finish">Facial data entry successfully</string>
+     <string name="fast_payment">WeChat, alipay and quick payment</string>

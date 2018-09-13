@@ -1,0 +1,287 @@
+Index: device/ausshine/aus6739_66_n1/ProjectConfig.mk
+===================================================================
+--- device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 2796)
++++ device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 2797)
+@@ -596,7 +596,7 @@
+ MTK_SENSOR_SUPPORT = yes
+ MTK_SHARED_SDCARD = yes
+ MTK_SHOW_MSENSOR_TOAST_SUPPORT = no
+-MTK_SIGNATURE_CUSTOMIZATION = no
++MTK_SIGNATURE_CUSTOMIZATION = yes
+ MTK_SIGNMODEM_SUPPORT = no
+ MTK_SIM1_SOCKET_TYPE = 1
+ MTK_SIM2_SOCKET_TYPE = 1
+Index: device/mediatek/common/security/aus6739_66_n1/releasekey.x509.pem
+===================================================================
+--- device/mediatek/common/security/aus6739_66_n1/releasekey.x509.pem	(revision 0)
++++ device/mediatek/common/security/aus6739_66_n1/releasekey.x509.pem	(revision 2797)
+@@ -0,0 +1,23 @@
++-----BEGIN CERTIFICATE-----
++MIID2zCCAsOgAwIBAgIJAMaM4brvKjCoMA0GCSqGSIb3DQEBBQUAMIGDMQswCQYD
++VQQGEwJDTjEQMA4GA1UECAwHQmVpSmluZzEQMA4GA1UEBwwHSGFpRGlhbjERMA8G
++A1UECgwITWVkaWFUZWsxDDAKBgNVBAsMA1dDRDENMAsGA1UEAwwEZGVtbzEgMB4G
++CSqGSIb3DQEJARYRZGVtb0BtZWRpYXRlay5jb20wHhcNMTcxMjA3MTAyNTU1WhcN
++NDUwNDI0MTAyNTU1WjCBgzELMAkGA1UEBhMCQ04xEDAOBgNVBAgMB0JlaUppbmcx
++EDAOBgNVBAcMB0hhaURpYW4xETAPBgNVBAoMCE1lZGlhVGVrMQwwCgYDVQQLDANX
++Q0QxDTALBgNVBAMMBGRlbW8xIDAeBgkqhkiG9w0BCQEWEWRlbW9AbWVkaWF0ZWsu
++Y29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv9rb9u2F9PHsvO7E
++CJPqpJrrYNcx0wJletarGx9Pqx1S13x79UDizHMknlMacf1wDOBpumzV6O+BtxYP
++kXCbQqqfeRn6lxik6JqzYS5bemgUWV2Z5lswmM69ULzHBK+EOKjFvJEIqiY1lIMu
++wpf/y8XpQGDJIOOJS6bhDZ8mSgoF/qnTOB9WwefEd0WaQMByFiUPq9APPnlWGd9K
++jyEtTMgfQt9XDQplzyFIQ7PWycUpMr9CS6m1vtJ0UuhTCcSKSm4CqFhxgFC0gzrx
++VaUCzezmQ8e6lwa5MBpyAoCAus23AKkIpu6w1N/XgRpcZQP9pln0EudPj0PW7NHm
++Uv8GXwIDAQABo1AwTjAdBgNVHQ4EFgQU4Anz0Ia8hNOFuAxsd5a7N4FAELgwHwYD
++VR0jBBgwFoAU4Anz0Ia8hNOFuAxsd5a7N4FAELgwDAYDVR0TBAUwAwEB/zANBgkq
++hkiG9w0BAQUFAAOCAQEAGIdgwmUYnnBy1ruIZxcGyhWBd9/atHk6q9lCnN2b7SW6
++XDXe7g818QA3tetvFOLa57IdlRaNGPUcaBzKNSucxOOR7qTEDGF+vpSoxiqZB1Ei
++OS7HZFHsK5R8OIayOl6wpWJEUzVwPcOkKextqFde3nA+qL2kQDvPA9WLK1MX0nsc
++Bhzr1PGoxm1kGK/atbjtoV4XiTZVjgXwY/ZuuJkf5yWI5iLAvUay8rBLfX7v8get
++Z/e9qdEwEwsCyuBGJ3P0QgE0UlqCxtAIqnoBc0DH4y9N8zMAxo7Y9FZtCcvM4mdE
++7KZNlOrttTQ0+hAcCCEWyhNUbd34vXnwM4JNCGGUrw==
++-----END CERTIFICATE-----
+
+Property changes on: device/mediatek/common/security/aus6739_66_n1/releasekey.x509.pem
+___________________________________________________________________
+Added: svn:executable
+## -0,0 +1 ##
++*
+\ No newline at end of property
+Index: device/mediatek/common/security/aus6739_66_n1/media.pk8
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: device/mediatek/common/security/aus6739_66_n1/media.pk8
+===================================================================
+--- device/mediatek/common/security/aus6739_66_n1/media.pk8	(revision 0)
++++ device/mediatek/common/security/aus6739_66_n1/media.pk8	(revision 2797)
+
+Property changes on: device/mediatek/common/security/aus6739_66_n1/media.pk8
+___________________________________________________________________
+Added: svn:executable
+## -0,0 +1 ##
++*
+\ No newline at end of property
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: device/mediatek/common/security/aus6739_66_n1/media.x509.pem
+===================================================================
+--- device/mediatek/common/security/aus6739_66_n1/media.x509.pem	(revision 0)
++++ device/mediatek/common/security/aus6739_66_n1/media.x509.pem	(revision 2797)
+@@ -0,0 +1,23 @@
++-----BEGIN CERTIFICATE-----
++MIID2zCCAsOgAwIBAgIJALVnYwvQNTQxMA0GCSqGSIb3DQEBBQUAMIGDMQswCQYD
++VQQGEwJDTjEQMA4GA1UECAwHQmVpSmluZzEQMA4GA1UEBwwHSGFpRGlhbjERMA8G
++A1UECgwITWVkaWFUZWsxDDAKBgNVBAsMA1dDRDENMAsGA1UEAwwEZGVtbzEgMB4G
++CSqGSIb3DQEJARYRZGVtb0BtZWRpYXRlay5jb20wHhcNMTcxMjA3MTAyNjE1WhcN
++NDUwNDI0MTAyNjE1WjCBgzELMAkGA1UEBhMCQ04xEDAOBgNVBAgMB0JlaUppbmcx
++EDAOBgNVBAcMB0hhaURpYW4xETAPBgNVBAoMCE1lZGlhVGVrMQwwCgYDVQQLDANX
++Q0QxDTALBgNVBAMMBGRlbW8xIDAeBgkqhkiG9w0BCQEWEWRlbW9AbWVkaWF0ZWsu
++Y29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0ZSl5qx/IX0fpawq
++hj5TgFEv6NvzryykAP7dbRb3LLrkpJPyVn2VWPEGa9mTBQ0SkeW2mQ/Pi+YmZmLz
++OAYOvRUylZNcQTsE0JhS4+cqOcR/PVQIg771Q6Xz+mWx6lQOXmRXqG0nTiE/GCJE
++6YaMVLmzyiZFU1EPGrRLqlJHtUe2AqShIsryKO2mZDDetq/2FzySYQnG2bLYlRn+
++i7yBHWLKnY5p8xCrw1lbqqNboJ4+SknBX4UmmmiEv9ZoQEtWNFVO02udnitDKu3n
++fMupuUtvzq126R4WcBwofJMS5BBVJqYBFYvceGMtblgoZBWzYhgNhekoBDgDlmUX
++TsChwwIDAQABo1AwTjAdBgNVHQ4EFgQUH/L07YXC/+emXSMQoPNb5Tk4r7UwHwYD
++VR0jBBgwFoAUH/L07YXC/+emXSMQoPNb5Tk4r7UwDAYDVR0TBAUwAwEB/zANBgkq
++hkiG9w0BAQUFAAOCAQEABLkrUBBt05yUu5Rd6NsrERzyXDUzLhddm5WcriBT9JOF
++4ZsraskDyBR/uIsv6sgNop17Tisedk+SvrWvN5L3jVy2Nt9JbNvF25PNeEjaBCdH
++ajU7DPExbn1hx3p5AGlvJE1ciaUjyv+eu8fAqMyNs0qdWExadO+PAFauQWFxgrBJ
++ENRlSIbNs/7eBoR2aKSZBbpZAidbL5m2fd+t2cfQJeFYIsy4Hazhu/Wd+YFsOoKM
++mnXTqchBuudL9yFYeQEmyjZQ6J0Wgqi5JPMAhmS3moz0YckKCccGp8mhsQTgKwI3
++f6r7p13sE/IXgM+dBxEi54dTLsDTkc99sNurgzN3Ng==
++-----END CERTIFICATE-----
+
+Property changes on: device/mediatek/common/security/aus6739_66_n1/media.x509.pem
+___________________________________________________________________
+Added: svn:executable
+## -0,0 +1 ##
++*
+\ No newline at end of property
+Index: device/mediatek/common/security/aus6739_66_n1/platform.pk8
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: device/mediatek/common/security/aus6739_66_n1/platform.pk8
+===================================================================
+--- device/mediatek/common/security/aus6739_66_n1/platform.pk8	(revision 0)
++++ device/mediatek/common/security/aus6739_66_n1/platform.pk8	(revision 2797)
+
+Property changes on: device/mediatek/common/security/aus6739_66_n1/platform.pk8
+___________________________________________________________________
+Added: svn:executable
+## -0,0 +1 ##
++*
+\ No newline at end of property
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: device/mediatek/common/security/aus6739_66_n1/shared.pk8
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: device/mediatek/common/security/aus6739_66_n1/shared.pk8
+===================================================================
+--- device/mediatek/common/security/aus6739_66_n1/shared.pk8	(revision 0)
++++ device/mediatek/common/security/aus6739_66_n1/shared.pk8	(revision 2797)
+
+Property changes on: device/mediatek/common/security/aus6739_66_n1/shared.pk8
+___________________________________________________________________
+Added: svn:executable
+## -0,0 +1 ##
++*
+\ No newline at end of property
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: device/mediatek/common/security/aus6739_66_n1/platform.x509.pem
+===================================================================
+--- device/mediatek/common/security/aus6739_66_n1/platform.x509.pem	(revision 0)
++++ device/mediatek/common/security/aus6739_66_n1/platform.x509.pem	(revision 2797)
+@@ -0,0 +1,23 @@
++-----BEGIN CERTIFICATE-----
++MIID2zCCAsOgAwIBAgIJAILZu/Rlb9pSMA0GCSqGSIb3DQEBBQUAMIGDMQswCQYD
++VQQGEwJDTjEQMA4GA1UECAwHQmVpSmluZzEQMA4GA1UEBwwHSGFpRGlhbjERMA8G
++A1UECgwITWVkaWFUZWsxDDAKBgNVBAsMA1dDRDENMAsGA1UEAwwEZGVtbzEgMB4G
++CSqGSIb3DQEJARYRZGVtb0BtZWRpYXRlay5jb20wHhcNMTcxMjA3MTAyNjA1WhcN
++NDUwNDI0MTAyNjA1WjCBgzELMAkGA1UEBhMCQ04xEDAOBgNVBAgMB0JlaUppbmcx
++EDAOBgNVBAcMB0hhaURpYW4xETAPBgNVBAoMCE1lZGlhVGVrMQwwCgYDVQQLDANX
++Q0QxDTALBgNVBAMMBGRlbW8xIDAeBgkqhkiG9w0BCQEWEWRlbW9AbWVkaWF0ZWsu
++Y29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4uFj+gLlC9quvmSR
++nKdUckQe1y/F15/4k3MoGwbTsCkW6+xznzIf33J5j3MryA685PRrXkNxSTqrywZS
++p4Va/qnKJhJEAl5vJjmXz7Uk4W4KYeZXPVqz6NLfpQ2bWk+llgbTRrF4urpWpA6D
++CRO/NG54R4vQw6T19bhP4gjIbF+Q87Yhxw9wlfAMMvZggmK95dbzu9y+TS4cdG4D
++pQnJ2oTDZN17Li2s3l3sZkcjJMLo995wWn1Qt5ceRdQktBP4RwOqOHlFp/GavxXk
++msOf6GS+5b4GBKOLtMMSdf+ofn3KOzRM4KRYsmHPpWoHrSUofXHeIssBeP5NJ75u
++reBOzQIDAQABo1AwTjAdBgNVHQ4EFgQU0xwXzHicviPe6Ur+6ZxSQoVK0cMwHwYD
++VR0jBBgwFoAU0xwXzHicviPe6Ur+6ZxSQoVK0cMwDAYDVR0TBAUwAwEB/zANBgkq
++hkiG9w0BAQUFAAOCAQEAFzdfIR9j6EzfHuv6Z/B1YRzyFF/qI4+ksFtefmBMVi8N
++DFkakVpOGGx/RSNMuBEPOlbUF1q0Wqgo0gNbyQFu87xJbKE1WFbnUTuSCJ2cJ5L4
++wR0hkTl7Ilom7/WRRvktcw3nxk+7Qztxt1Vf4d9+edvn3f//NFABFT0DmSLMGzoo
++uniRwxqCOzen7BdOp9XtHY98wmR/xM6hWyCTtRq3JW7nNwKv0H9h7u8fMiJH0c/S
++MNMLIhgrPxh3fVgST73DOdBGBYlJNDSrdKquGM0RESQ0xfAz4aaxFpJBMzDN7CWp
++hVAIlZ4Saz0meUC7HVA0BCtLa2pYSznZBNvrQ69vsQ==
++-----END CERTIFICATE-----
+
+Property changes on: device/mediatek/common/security/aus6739_66_n1/platform.x509.pem
+___________________________________________________________________
+Added: svn:executable
+## -0,0 +1 ##
++*
+\ No newline at end of property
+Index: device/mediatek/common/security/aus6739_66_n1/testkey.pk8
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: device/mediatek/common/security/aus6739_66_n1/testkey.pk8
+===================================================================
+--- device/mediatek/common/security/aus6739_66_n1/testkey.pk8	(revision 0)
++++ device/mediatek/common/security/aus6739_66_n1/testkey.pk8	(revision 2797)
+
+Property changes on: device/mediatek/common/security/aus6739_66_n1/testkey.pk8
+___________________________________________________________________
+Added: svn:executable
+## -0,0 +1 ##
++*
+\ No newline at end of property
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: device/mediatek/common/security/aus6739_66_n1/releasekey.pk8
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: device/mediatek/common/security/aus6739_66_n1/releasekey.pk8
+===================================================================
+--- device/mediatek/common/security/aus6739_66_n1/releasekey.pk8	(revision 0)
++++ device/mediatek/common/security/aus6739_66_n1/releasekey.pk8	(revision 2797)
+
+Property changes on: device/mediatek/common/security/aus6739_66_n1/releasekey.pk8
+___________________________________________________________________
+Added: svn:executable
+## -0,0 +1 ##
++*
+\ No newline at end of property
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: device/mediatek/common/security/aus6739_66_n1/shared.x509.pem
+===================================================================
+--- device/mediatek/common/security/aus6739_66_n1/shared.x509.pem	(revision 0)
++++ device/mediatek/common/security/aus6739_66_n1/shared.x509.pem	(revision 2797)
+@@ -0,0 +1,23 @@
++-----BEGIN CERTIFICATE-----
++MIID2zCCAsOgAwIBAgIJAP3lpW/xliiHMA0GCSqGSIb3DQEBBQUAMIGDMQswCQYD
++VQQGEwJDTjEQMA4GA1UECAwHQmVpSmluZzEQMA4GA1UEBwwHSGFpRGlhbjERMA8G
++A1UECgwITWVkaWFUZWsxDDAKBgNVBAsMA1dDRDENMAsGA1UEAwwEZGVtbzEgMB4G
++CSqGSIb3DQEJARYRZGVtb0BtZWRpYXRlay5jb20wHhcNMTcxMjA3MTAyNjMwWhcN
++NDUwNDI0MTAyNjMwWjCBgzELMAkGA1UEBhMCQ04xEDAOBgNVBAgMB0JlaUppbmcx
++EDAOBgNVBAcMB0hhaURpYW4xETAPBgNVBAoMCE1lZGlhVGVrMQwwCgYDVQQLDANX
++Q0QxDTALBgNVBAMMBGRlbW8xIDAeBgkqhkiG9w0BCQEWEWRlbW9AbWVkaWF0ZWsu
++Y29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxsY4ifNpIMMhheTn
++jvruL6B6IB6XwoxDtTGqmz/JXPcGgfC+ddg5C5MyGajcSDP38J5Pk3qw09zINwXF
+++W8jrjuG64L/PsiTsVPHy+ubbZtPKuxNOdJ5289gIy5zMBLnmBVaOrOlPkY3Q59p
++FBxBKjorYSgZex6QBZYOsQhqVZ8L4aPqhF5ngpZBHRKPP8dNf+TeFnOGIuTGdLdP
++EFo46OM38Z4SuuxmcoCoxfu4itx1j64L28ZOVZAFI+QPnSfDKES1wEyUuaOEwdqG
++1Ol92ojF0fxSVAwn+TQQyAAIIeuWtqIRoN/yJHH1v6pIbMipPy32lz6JrAlz4idr
++4H/CzQIDAQABo1AwTjAdBgNVHQ4EFgQUBM+mt2QFTZuDX47LSQgVZAbxW9QwHwYD
++VR0jBBgwFoAUBM+mt2QFTZuDX47LSQgVZAbxW9QwDAYDVR0TBAUwAwEB/zANBgkq
++hkiG9w0BAQUFAAOCAQEABSQBXF4KX1eg6YmM0SlzdNBZC8jLTwt38oEpZrbyxf1C
++n2S56iNJtRTJLA+S0JcNWwz65ORJYNVPAZMnpJiah0j4l2aCxJjbPVrMxrjreH4a
++kvF8v/ElnsKpE1ROiIlq0qhwUXl8FhAU4BJZgmhdmpF99XZl03Rw8HYhUIhsNUgn
++dVoCKSrEpa5glzBViweANX3TgTUzfLG4FBYZXuGlPNBTkEVDZk0bIvwuDD1ZIyD8
++TAXX+omvakZYP+R4EP3lHkpNOZfpJw16KhBh04p7MmovUXHHd8MEL8sHKUme9IKQ
++FPgRHaJkFPdWeryE9rpNpY7xbAH6qDgYG8NKbLGnEQ==
++-----END CERTIFICATE-----
+
+Property changes on: device/mediatek/common/security/aus6739_66_n1/shared.x509.pem
+___________________________________________________________________
+Added: svn:executable
+## -0,0 +1 ##
++*
+\ No newline at end of property
+Index: device/mediatek/common/security/aus6739_66_n1/testkey.x509.pem
+===================================================================
+--- device/mediatek/common/security/aus6739_66_n1/testkey.x509.pem	(revision 0)
++++ device/mediatek/common/security/aus6739_66_n1/testkey.x509.pem	(revision 2797)
+@@ -0,0 +1,27 @@
++-----BEGIN CERTIFICATE-----
++MIIEqDCCA5CgAwIBAgIJAJNurL4H8gHfMA0GCSqGSIb3DQEBBQUAMIGUMQswCQYD
++VQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4g
++VmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UE
++AxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTAe
++Fw0wODAyMjkwMTMzNDZaFw0zNTA3MTcwMTMzNDZaMIGUMQswCQYDVQQGEwJVUzET
++MBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4G
++A1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9p
++ZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTCCASAwDQYJKoZI
++hvcNAQEBBQADggENADCCAQgCggEBANaTGQTexgskse3HYuDZ2CU+Ps1s6x3i/waM
++qOi8qM1r03hupwqnbOYOuw+ZNVn/2T53qUPn6D1LZLjk/qLT5lbx4meoG7+yMLV4
++wgRDvkxyGLhG9SEVhvA4oU6Jwr44f46+z4/Kw9oe4zDJ6pPQp8PcSvNQIg1QCAcy
++4ICXF+5qBTNZ5qaU7Cyz8oSgpGbIepTYOzEJOmc3Li9kEsBubULxWBjf/gOBzAzU
++RNps3cO4JFgZSAGzJWQTT7/emMkod0jb9WdqVA2BVMi7yge54kdVMxHEa5r3b97s
++zI5p58ii0I54JiCUP5lyfTwE/nKZHZnfm644oLIXf6MdW2r+6R8CAQOjgfwwgfkw
++HQYDVR0OBBYEFEhZAFY9JyxGrhGGBaR0GawJyowRMIHJBgNVHSMEgcEwgb6AFEhZ
++AFY9JyxGrhGGBaR0GawJyowRoYGapIGXMIGUMQswCQYDVQQGEwJVUzETMBEGA1UE
++CBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMH
++QW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAG
++CSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbYIJAJNurL4H8gHfMAwGA1Ud
++EwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADggEBAHqvlozrUMRBBVEY0NqrrwFbinZa
++J6cVosK0TyIUFf/azgMJWr+kLfcHCHJsIGnlw27drgQAvilFLAhLwn62oX6snb4Y
++LCBOsVMR9FXYJLZW2+TcIkCRLXWG/oiVHQGo/rWuWkJgU134NDEFJCJGjDbiLCpe
+++ZTWHdcwauTJ9pUbo8EvHRkU3cYfGmLaLfgn9gP+pWA7LFQNvXwBnDa6sppCccEX
++31I828XzgXpJ4O+mDL1/dBd+ek8ZPUP0IgdyZm5MTYPhvVqGCHzzTy3sIeJFymwr
++sBbmg2OAUNLEMO6nwmocSdN2ClirfxqCzJOLSDE4QyS9BAH6EhY6UFcOaE0=
++-----END CERTIFICATE-----
+
+Property changes on: device/mediatek/common/security/aus6739_66_n1/testkey.x509.pem
+___________________________________________________________________
+Added: svn:executable
+## -0,0 +1 ##
++*
+\ No newline at end of property

@@ -1,0 +1,18 @@
+Index: frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 8054)
++++ frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 8055)
+@@ -7228,8 +7228,12 @@
+     @Override
+     public void screenTurnedOff() {
+         if (DEBUG_WAKEUP) Slog.i(TAG, "Screen turned off...");
+-		Log.d("TAG","exitFaceVerify when screenTurnedOff ");
++		Log.d(TAG,"exitFaceVerify when screenTurnedOff ");
+ 		exitFaceVerify();
++		if("2".equals(SystemProperties.get("debug.camera.open"))){
++			SystemProperties.set("debug.camera.open", "-1");
++			Log.d(TAG,"debug.camera.open := "+ SystemProperties.get("debug.camera.open"));
++		}
+         updateScreenOffSleepToken(true);
+         synchronized (mLock) {
+             mScreenOnEarly = false;

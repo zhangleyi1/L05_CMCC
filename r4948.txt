@@ -1,0 +1,71 @@
+Index: packages/apps/Settings/src/com/android/settings/ColorTemperaturePreference.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/ColorTemperaturePreference.java	(revision 4947)
++++ packages/apps/Settings/src/com/android/settings/ColorTemperaturePreference.java	(revision 4948)
+@@ -34,7 +34,7 @@
+ /**
+  * Created by Administrator on 2017/8/18.
+  */
+-public class ColorTemperaturePreference extends Preference implements OnSeekBarChangeListener{
++public class ColorTemperaturePreference extends Preference implements OnSeekBarChangeListener, View.OnClickListener {
+     private static final String TAG = "ColorTemperaturePreference";
+ 	private static final String PREFERENCE_NAME = "com.android.settings";
+ 	private static final String NIGHT_MODE_LEVEL = "night_mode_level";
+@@ -53,6 +53,8 @@
+ 
+    
+    private TextView title;
++   private TextView mLessWarm;
++   private TextView mMoreWarm;
+    	private SeekBar seekBar;
+    
+ 	private   int mode_level;
+@@ -109,6 +111,20 @@
+ 
+    
+ */
++    @Override
++    public void onClick(View view) {
++        if (view.getId() == R.id.less_warm) {
++            if(callback!=null){
++                seekBar.setProgress(seekBar.getProgress() - 1);
++                callback.onNightModeLevel(seekBar.getProgress());
++	    } 
++        } else if (view.getId() == R.id.more_warm) {
++            if(callback!=null){
++                seekBar.setProgress(seekBar.getProgress() + 1);
++                callback.onNightModeLevel(seekBar.getProgress());
++	    } 
++        }
++}
+  	
+   @Override
+     public void onBindViewHolder(PreferenceViewHolder holder) {
+@@ -116,10 +132,14 @@
+       
+ 		title=(TextView)holder.findViewById(R.id.title);
+ 		seekBar=(SeekBar)holder.findViewById(R.id.seek_bar);
++                mLessWarm = (TextView)holder.findViewById(R.id.less_warm);
++                mMoreWarm = (TextView)holder.findViewById(R.id.more_warm);
+ 		modePrenference = mContext.getSharedPreferences(PREFERENCE_NAME,  0);
+ 		seekBar.setProgress(modePrenference.getInt(NIGHT_MODE_LEVEL,5));
+         seekBar.setMax(10);
+ 		seekBar.setOnSeekBarChangeListener(this);
++                mLessWarm.setOnClickListener(this);
++                mMoreWarm.setOnClickListener(this);
+ 		
+     }
+  	
+Index: packages/apps/Settings/res/layout/preference_color_temperature.xml
+===================================================================
+--- packages/apps/Settings/res/layout/preference_color_temperature.xml	(revision 4947)
++++ packages/apps/Settings/res/layout/preference_color_temperature.xml	(revision 4948)
+@@ -82,7 +82,7 @@
+             android:singleLine="true"
+             android:textColor="?android:attr/textColorHint" />
+         <TextView
+-            android:id="@+id/more_warn"
++            android:id="@+id/more_warm"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"

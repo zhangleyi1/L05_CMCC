@@ -1,0 +1,32 @@
+Index: vendor/customer/apps/FileManager/FileManager_CN_v7.1.7.1.0701.2_signed_platformkey_alldpi.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/FileManager/FileManager_CN_v7.1.7.1.0702.2_signed_platformkey_alldpi.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/FileManager/FileManager_CN_v7.1.7.1.0702.2_signed_platformkey_alldpi.apk
+===================================================================
+--- vendor/customer/apps/FileManager/FileManager_CN_v7.1.7.1.0702.2_signed_platformkey_alldpi.apk	(revision 0)
++++ vendor/customer/apps/FileManager/FileManager_CN_v7.1.7.1.0702.2_signed_platformkey_alldpi.apk	(revision 8414)
+
+Property changes on: vendor/customer/apps/FileManager/FileManager_CN_v7.1.7.1.0702.2_signed_platformkey_alldpi.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/FileManager/Android.mk
+===================================================================
+--- vendor/customer/apps/FileManager/Android.mk	(revision 8413)
++++ vendor/customer/apps/FileManager/Android.mk	(revision 8414)
+@@ -3,7 +3,7 @@
+ include $(CLEAR_VARS)
+ LOCAL_MODULE := FileManagerTcl
+ LOCAL_MODULE_TAGS := optional
+-LOCAL_SRC_FILES := FileManager_CN_v7.1.7.1.0701.2_signed_platformkey_alldpi.apk
++LOCAL_SRC_FILES := FileManager_CN_v7.1.7.1.0702.2_signed_platformkey_alldpi.apk
+ LOCAL_MODULE_CLASS := APPS
+ LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+ LOCAL_PRIVILEGED_MODULE := true

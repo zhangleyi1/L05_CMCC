@@ -1,0 +1,15 @@
+Index: vendor/customer/apps/shuqi/3298_rtm_shuqi_android_v10.6.3.58_145_release_android24_3015_noad_Build180105164429.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/shuqi/3298_rtm_shuqi_android_v10.6.3.58_145_release_android24_3015_noad_Build180105164429.apk
+===================================================================
+--- vendor/customer/apps/shuqi/3298_rtm_shuqi_android_v10.6.3.58_145_release_android24_3015_noad_Build180105164429.apk	(revision 0)
++++ vendor/customer/apps/shuqi/3298_rtm_shuqi_android_v10.6.3.58_145_release_android24_3015_noad_Build180105164429.apk	(revision 5517)
+
+Property changes on: vendor/customer/apps/shuqi/3298_rtm_shuqi_android_v10.6.3.58_145_release_android24_3015_noad_Build180105164429.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

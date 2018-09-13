@@ -1,0 +1,89 @@
+Index: packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintSettings.java	(revision 4932)
++++ packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintSettings.java	(revision 4933)
+@@ -841,14 +841,20 @@
+                                             if (DEBUG) {
+                                                 Log.v(TAG, "rename " + name + " to " + newName);
+                                             }
+-                                            MetricsLogger.action(getContext(),
+-                                                    MetricsEvent.ACTION_FINGERPRINT_RENAME,
+-                                                    mFp.getFingerId());
+                                             FingerprintSettingsFragment parent
+                                                     = (FingerprintSettingsFragment)
+                                                     getTargetFragment();
+-                                            parent.renameFingerPrint(mFp.getFingerId(),
+-                                                    newName);
++                                            if (parent.haveSameFingerprint(newName)) {
++                                                Toast.makeText(parent.getActivity(),
++                                                    R.string.fingerprint_cannot_be_repeated,
++                                                    Toast.LENGTH_SHORT).show();
++                                            } else {
++                                                MetricsLogger.action(getContext(),
++                                                        MetricsEvent.ACTION_FINGERPRINT_RENAME,
++                                                        mFp.getFingerId());
++                                                parent.renameFingerPrint(mFp.getFingerId(),
++                                                        newName);
++                                            }
+                                         }
+                                         dialog.dismiss();
+                                     }
+@@ -919,6 +925,18 @@
+             }
+         }
+ 
++        private boolean haveSameFingerprint(CharSequence name) {
++            final List<Fingerprint> items = mFingerprintManager.getEnrolledFingerprints(mUserId);
++            final int fingerprintCount = items.size();
++            for (int i = 0; i < fingerprintCount; i++) {
++                final Fingerprint item = items.get(i);
++                if (item.getName() != null && item.getName().equals(name)) {
++                    return true;
++                }
++            }
++            return false;
++        }
++
+         public static class ConfirmLastDeleteDialog extends DialogFragment {
+ 
+             private Fingerprint mFp;
+Index: packages/apps/Settings/res/values-zh-rHK/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 4932)
++++ packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 4933)
+@@ -3338,4 +3338,5 @@
+     <string name="button_remove">"移除"</string>
+     <string name="button_cancel">取消</string>
+     <string name="sound_modecategory_title">模式</string>
++    <string name="fingerprint_cannot_be_repeated">指纹，名唔重复</string>
+ </resources>
+Index: packages/apps/Settings/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 4932)
++++ packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 4933)
+@@ -3445,4 +3445,5 @@
+     <string name="sound_modecategory_title">模式</string>
+ 
+     <string name="battery_low_to_reset">电量小于30%，不能恢复出厂设置。</string>
++    <string name="fingerprint_cannot_be_repeated">指纹名称不能重复</string>
+ </resources>
+Index: packages/apps/Settings/res/values-zh-rTW/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 4932)
++++ packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 4933)
+@@ -3335,4 +3335,5 @@
+     <string name="button_remove">"移除"</string>
+     <string name="button_cancel">取消</string>
+     <string name="sound_modecategory_title">模式</string>
++    <string name="fingerprint_cannot_be_repeated">指紋名稱不能重複</string>
+ </resources>
+Index: packages/apps/Settings/res/values/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values/strings.xml	(revision 4932)
++++ packages/apps/Settings/res/values/strings.xml	(revision 4933)
+@@ -8112,4 +8112,5 @@
+ 	<string name="battery_low_summary">Light up automatically at 15% battery.</string>
+ 
+     <string name="battery_low_to_reset">Can not do factory data reset when battery is less than 30%.</string>
++    <string name="fingerprint_cannot_be_repeated">The name of the fingerprint cannot be repeated.</string>
+ </resources>

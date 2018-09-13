@@ -1,0 +1,62 @@
+Index: frameworks/base/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java
+===================================================================
+--- frameworks/base/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java	(revision 2329)
++++ frameworks/base/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java	(revision 2330)
+@@ -2398,6 +2398,10 @@
+ 
+             // Set default hearing aid
+             loadSetting(stmt, Settings.System.HEARING_AID, 0);
++            loadIntegerSetting(stmt, Settings.System.FACE_UNLOCK_STATE_ENABLED,
++                    R.integer.face_unlokc_state_enabled);
++            loadStringSetting(stmt, Settings.System.FACE_STATE_ENABLED,
++                    R.string.def_face_state_enabled);
+ 
+             // Set default tty mode
+             loadSetting(stmt, Settings.System.TTY_MODE, 0);
+Index: frameworks/base/packages/SettingsProvider/res/values/mtk_defaults.xml
+===================================================================
+--- frameworks/base/packages/SettingsProvider/res/values/mtk_defaults.xml	(revision 2329)
++++ frameworks/base/packages/SettingsProvider/res/values/mtk_defaults.xml	(revision 2330)
+@@ -55,4 +55,6 @@
+     <!-- M: Add for AOD settings -->
+     <integer name="def_doze_mode">0</integer>
+     <!-- M: Add for AOD settings -->
++    <integer name="face_unlokc_state_enabled">0</integer>
++    <string name="def_face_state_enabled" translatable="false">0</string>
+ </resources>
+Index: frameworks/base/packages
+===================================================================
+--- frameworks/base/packages	(revision 2329)
++++ frameworks/base/packages	(revision 2330)
+
+Property changes on: frameworks/base/packages
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base/packages:r2201-2202
+Index: frameworks/base
+===================================================================
+--- frameworks/base	(revision 2329)
++++ frameworks/base	(revision 2330)
+
+Property changes on: frameworks/base
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base:r2201-2202
+Index: frameworks
+===================================================================
+--- frameworks	(revision 2329)
++++ frameworks	(revision 2330)
+
+Property changes on: frameworks
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks:r2201-2202
+Index: .
+===================================================================
+--- .	(revision 2329)
++++ .	(revision 2330)
+
+Property changes on: .
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE:r2201-2202

@@ -1,0 +1,13 @@
+Index: packages/providers/CalendarProvider/src/com/mediatek/providers/calendar/extension/PCSyncAccountExt.java
+===================================================================
+--- packages/providers/CalendarProvider/src/com/mediatek/providers/calendar/extension/PCSyncAccountExt.java	(revision 4037)
++++ packages/providers/CalendarProvider/src/com/mediatek/providers/calendar/extension/PCSyncAccountExt.java	(revision 4038)
+@@ -5,7 +5,7 @@
+ 
+ public class PCSyncAccountExt implements ITableExt {
+ 
+-    private static final String PC_SYNC_ACCOUNT_COLOR = "-9215145";
++    private static final String PC_SYNC_ACCOUNT_COLOR = "-16749646";//"-9215145"; -16749646(#006BB2) lance modify for bug 115183
+     private static final String PC_SYNC_ACCOUNT_NAME = "PC Sync";
+     private static final String PC_SYNC_ACCOUNT_DISPLAY_NAME = "PC Sync";
+     private static final String PC_SYNC_ACCOUNT_OWNER_ACCOUNT = "PC Sync";

@@ -1,0 +1,20 @@
+Index: packages/apps/Settings/src/com/android/settings/faceunlock/FaceUnlockMainActivity.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/faceunlock/FaceUnlockMainActivity.java	(revision 4676)
++++ packages/apps/Settings/src/com/android/settings/faceunlock/FaceUnlockMainActivity.java	(revision 4677)
+@@ -72,6 +72,7 @@
+     private static final int FACE_NEW_REQUEST = 300;
+     private static final int FACE_REPLACE_REQUEST = 301;
+     private static final int FACE_REMOVE_REQUEST = 302;
++    private static final int FROM_SETTING = 400;
+ 
+     private static final int REFLASUH_UI_ENTRY_FACEDATA_NUM = 11;
+ 	private int isPrivacyMode = 0;  //added by iuv luyang
+@@ -534,6 +535,7 @@
+         Intent intent = new Intent();
+         intent.setClassName("com.android.systemui", "com.face.scanner.FaceActivity");//
+ 		intent.putExtra("requestType",request);
++		intent.putExtra("source",FROM_SETTING);
+         startActivityForResult(intent,request);
+     }
+ 

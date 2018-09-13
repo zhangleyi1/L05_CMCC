@@ -1,0 +1,33 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java	(revision 2355)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java	(revision 2356)
+@@ -1087,11 +1087,17 @@
+         /// M: Code analyze 041, Add exception handling for starting activity.@{
+         if (null != intent && null != intent.getData()
+                 && intent.getData().getScheme().equals("mailto")) {
++                MmsLog.e("fakerrequestCode:",requestCode+"");                  
+             try {
+-                super.startActivityForResult(intent, requestCode);
++                MmsLog.e("fakerrequestCode2:",requestCode+"");
++                //super.startActivityForResult(intent, requestCode);
++                Intent mIntent = new Intent();
++                ComponentName mComp = new ComponentName("com.android.email","com.android.email.activity.Welcome");
++                mIntent.setComponent(mComp);
++                startActivity(mIntent);
+             } catch (ActivityNotFoundException e) {
+                 MmsLog.e(TAG,
+-                        "[ActivityNotFoundException] Failed to startActivityForResult: " + intent);
++                        "[ActivityNotFoundExcept222ion] Failed to startActivityForResult: " + intent);
+                 Intent mchooserIntent = Intent.createChooser(intent, null);
+                 super.startActivityForResult(mchooserIntent, requestCode);
+             } catch (Exception e) {
+@@ -4903,7 +4909,7 @@
+                 mInputMethodManager)) {
+             return true;
+         }
+-
++        MmsLog.d(TAG, "item.getItemId() faker:"+item.getItemId());
+         switch (item.getItemId()) {
+             case MENU_ADD_SUBJECT:
+                 showSubjectEditor(true);

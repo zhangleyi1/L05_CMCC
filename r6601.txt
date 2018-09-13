@@ -1,0 +1,348 @@
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java	(revision 6600)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java	(revision 6601)
+@@ -16,7 +16,7 @@
+ import android.view.animation.AlphaAnimation;
+ import android.widget.Button;
+ import android.widget.ImageView;
+-import android.widget.RelativeLayout; //lance add for Diagnostic
++import android.widget.LinearLayout;
+ import android.content.IntentFilter; 
+ import java.util.List;
+ import android.content.pm.ResolveInfo;
+@@ -31,15 +31,6 @@
+ import java.lang.reflect.Method;
+ import android.view.View.OnClickListener;
+ import android.util.Log;
+-//lance add for Diagnostic @{
+-import android.widget.CheckBox;
+-import android.widget.CompoundButton;
+-import android.text.SpannableString;
+-import android.text.Spanned;
+-import android.text.TextPaint;
+-import android.text.method.LinkMovementMethod;
+-import android.text.style.ClickableSpan;
+-// @}
+ //import butterknife.BindView;
+ //import butterknife.OnClick;
+ 
+@@ -62,31 +53,8 @@
+   
+     ImageView ivWelcomeText;
+ 
+-	//lance add for Diagnostic @{
+-    private CheckBox cbInformedConsent;
+-    private CheckBox cbInformedConsentLoc;
+-    private View.OnClickListener termsListener = new View.OnClickListener() {
+-        @Override
+-        public void onClick(View v) {
+-            Intent intent = new Intent(Intent.ACTION_MAIN);
+-            ComponentName componentName = new ComponentName("com.tct.diagnostics", "com.tct.diagnostics.ui.TermsAndConditionActivity");
+-            intent.setComponent(componentName);
+-            startActivity(intent);
+-        }
+-    };
+-
+-    private View.OnClickListener privacyListener = new View.OnClickListener() {
+-        @Override
+-        public void onClick(View v) {
+-            Intent intent = new Intent(Intent.ACTION_MAIN);
+-            ComponentName componentName = new ComponentName("com.tct.diagnostics", "com.tct.diagnostics.ui.PrivacyPolicyActivity");
+-            intent.setComponent(componentName);
+-            startActivity(intent);
+-        }
+-    };
+    
+-    RelativeLayout rootView;
+-	// @}
++    LinearLayout rootView;
+     /**
+      * Determine whether it is the last page,default is false.
+      * see {@link Navigator#navigateToWelcomeActivity(BaseActivity, boolean)}
+@@ -116,11 +84,11 @@
+     protected void initData(Bundle savedInstanceState) {
+ //        Settings.System.putString(getContentResolver(),"show_navigation_bar","false");
+ 
+-        rootView = (RelativeLayout) findViewById(R.id.root);//lance add for Diagnostic
+-		ivWelcomeText = (ImageView) findViewById(R.id.iv_welcome_text);
+-		ivWelcome = (ImageView) findViewById(R.id.iv_welcome_image);
+-		btnStart = (Button) findViewById(R.id.btn_start);
+-		findViewById(R.id.btn_start).setOnClickListener(this);
++          rootView = (LinearLayout) findViewById(R.id.root);
++		 ivWelcomeText = (ImageView) findViewById(R.id.iv_welcome_text);
++		 ivWelcome = (ImageView) findViewById(R.id.iv_welcome_image);
++		 btnStart = (Button) findViewById(R.id.btn_start);
++		 findViewById(R.id.btn_start).setOnClickListener(this);
+ 		showStartButton();
+ 		
+         callFirewallIntent = new Intent(this, CallFirewallService.class);
+@@ -139,36 +107,6 @@
+ 		    btnStart.setText(getString(R.string.start_launch));
+ 		    findViewById(R.id.tv_tips_finish).setVisibility(View.VISIBLE);
+ 		    findViewById(R.id.tv_tips_welcome).setVisibility(View.GONE);
+-            //lance add for Diagnostic @{
+-            if(getResources().getBoolean(R.bool.def_show_diagnostics)) {
+-                cbInformedConsent = (CheckBox) findViewById(R.id.cb_informed_consent);
+-                cbInformedConsent.setVisibility(View.VISIBLE);
+-                SpannableString ss = new SpannableString(cbInformedConsent.getText());
+-                String privacy = getString(R.string.privacy_policy);
+-                String terms = getString(R.string.terms);
+-                int privacyStart = cbInformedConsent.getText().toString().indexOf(privacy);
+-                int termsStart = cbInformedConsent.getText().toString().indexOf(terms);
+-                ss.setSpan(new Clickable(privacyListener), privacyStart, privacyStart + privacy.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+-                ss.setSpan(new Clickable(termsListener), termsStart, termsStart + terms.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+-                cbInformedConsent.setText(ss);
+-                cbInformedConsent.setMovementMethod(LinkMovementMethod.getInstance());
+-                cbInformedConsent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+-                    @Override
+-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+-                        Settings.Global.putInt(getContentResolver(), "def.diagnostic.on", isChecked ? 1:0);
+-                    }
+-                });
+-                cbInformedConsent.setChecked(getResources().getBoolean(R.bool.def_auto_open_Diagnostics));
+-                cbInformedConsentLoc = (CheckBox) findViewById(R.id.cb_informed_consent_location);
+-                cbInformedConsentLoc.setVisibility(View.VISIBLE);
+-                cbInformedConsentLoc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+-                    @Override
+-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+-                        Settings.Global.putInt(getContentResolver(), "def.share.location.on", isChecked ? 1:0);
+-                    }
+-                });
+-            }
+-			// @}
+ 		}else{
+ 			findViewById(R.id.tv_tips_finish).setVisibility(View.GONE);
+ 		    findViewById(R.id.tv_tips_welcome).setVisibility(View.VISIBLE);
+@@ -453,24 +391,4 @@
+         intentAction2.setAction("hide_navigationbar");
+         sendBroadcast(intentAction2);
+     }
+-
+-	//lance add for Diagnostic @{
+-    class Clickable extends ClickableSpan {
+-        private final View.OnClickListener mListener;
+-
+-        Clickable(View.OnClickListener mListener) {
+-            this.mListener = mListener;
+-        }
+-
+-        @Override
+-        public void onClick(View view) {
+-            mListener.onClick(view);
+-        }
+-
+-        @Override
+-        public void updateDrawState(TextPaint ds) {
+-            ds.setColor(getResources().getColor(R.color.colorWelcomeText));
+-        }
+-    }
+-	// @}
+ }
+\ No newline at end of file
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/activity_welcome.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/activity_welcome.xml	(revision 6600)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/activity_welcome.xml	(revision 6601)
+@@ -1,62 +1,52 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:id="@+id/root"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    android:fitsSystemWindows="false">
++    android:fitsSystemWindows="false"
++    android:gravity="center_horizontal"
++    android:orientation="vertical">
+ 
+-    <FrameLayout
+-        android:id="@+id/fl_tips"
++    <TextView
++        android:id="@+id/tv_tips_welcome"
++        style="@style/AppTextAppearance.MainText"
+         android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
++        android:layout_height="500dp"
++        android:layout_marginLeft="50dp"
++	android:textSize="40px"
++        android:layout_marginRight="50dp"
++	android:lineSpacingExtra="3dp"
++        android:lineSpacingMultiplier="1.5"
++	android:layout_centerVertical="true"
+         android:layout_marginStart="20dp"
+-        android:layout_marginEnd="20dp"
+-        
+-        android:layout_centerInParent="true">
+-        <TextView
+-            android:id="@+id/tv_tips_welcome"
+-            style="@style/WelcomeActivityTextStyle"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:text="@string/guide_welcome"
+-            />
++	android:textColor="@drawable/btn_gome_button_text_color"
++        android:layout_marginTop="24dp"
++        android:text="@string/guide_welcome"
++         />
+ 		
+-	    <TextView
+-            android:id="@+id/tv_tips_finish"
+-            style="@style/WelcomeActivityTextStyle"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:text="@string/guide_finish"
+-           />
+-    </FrameLayout>
+-
+-    <CheckBox
+-        android:id="@+id/cb_informed_consent"
+-        android:layout_below="@id/fl_tips"
++	<TextView
++        android:id="@+id/tv_tips_finish"
++        style="@style/AppTextAppearance.MainText"
+         android:layout_width="wrap_content"
+-	    android:layout_height="wrap_content"
+-        style="@style/WelcomeActivityCBStyle"
+-        android:layout_marginTop="20dp"
+-        android:text="@string/informed_consent_text"
+-        />
++        android:layout_height="500dp"
++	android:textColor="@drawable/btn_gome_button_text_color"
++	android:textSize="40px"
++        android:layout_marginEnd="20dp"
++	android:lineSpacingExtra="3dp"
++        android:lineSpacingMultiplier="1.5"
++        android:layout_marginLeft="50dp"
++        android:layout_marginRight="50dp"
++	android:layout_centerVertical="true"
++        android:layout_marginStart="20dp"
++        android:layout_marginTop="24dp"
++        android:text="@string/guide_finish"
++         />
+ 
+-    <CheckBox
+-        android:id="@+id/cb_informed_consent_location"
+-        android:layout_below="@id/cb_informed_consent"
+-        android:layout_width="wrap_content"
+-	    android:layout_height="wrap_content"
+-        style="@style/WelcomeActivityCBStyle"
+-        android:text="@string/informed_consent_location"
+-        />
+-
+     <Button
+         android:id="@+id/btn_start"
+         style="@style/Widget.GOME.Light.Button"
+-        android:layout_alignParentBottom="true"
+-        android:layout_centerHorizontal="true"
+-        android:layout_marginBottom="20dp"
+-        android:layout_width="100dp"
++        android:layout_width="101dp"
+         android:layout_height="48dp"
+         android:text="@string/start"
+         android:textSize="16sp" />
+-</RelativeLayout>
+\ No newline at end of file
++</LinearLayout>
+\ No newline at end of file
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/bools.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/bools.xml	(revision 6600)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/bools.xml	(revision 6601)
+@@ -1,22 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<!-- Copyright (C) 2009 The Android Open Source Project
+-
+-     Licensed under the Apache License, Version 2.0 (the "License");
+-     you may not use this file except in compliance with the License.
+-     You may obtain a copy of the License at
+-
+-          http://www.apache.org/licenses/LICENSE-2.0
+-
+-     Unless required by applicable law or agreed to in writing, software
+-     distributed under the License is distributed on an "AS IS" BASIS,
+-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-     See the License for the specific language governing permissions and
+-     limitations under the License.
+--->
+-
+-<resources>
+-
+-    <bool name="def_show_diagnostics">true</bool>
+-    <bool name="def_auto_open_Diagnostics">true</bool>
+-
+-</resources>
+\ No newline at end of file
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/styles.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/styles.xml	(revision 6600)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/styles.xml	(revision 6601)
+@@ -103,18 +103,4 @@
+         <item name="android:activityCloseExitAnimation">@anim/gome_activity_close_exit</item>
+     </style>
+ 
+-    <style name="WelcomeActivityTextStyle">
+-        <item name="android:textSize">@dimen/welcome_text_size</item>
+-        <item name="android:textColor">@color/colorWelcomeText</item>
+-        <item name="android:lineSpacingExtra">3dp</item>
+-        <item name="android:lineSpacingMultiplier">1.5</item>
+-    </style>
+-
+-        <style name="WelcomeActivityCBStyle">
+-        <item name="android:layout_marginStart">20dp</item>
+-        <item name="android:layout_marginEnd">20dp</item>
+-        <item name="android:visibility">gone</item>
+-        <item name="android:checked">false</item>
+-    </style>
+-
+ </resources>
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/strings.xml	(revision 6600)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/strings.xml	(revision 6601)
+@@ -75,8 +75,4 @@
+     <string name="dialog_title_no_network">No network connection, please check the network settings!</string>
+     <string name="txt_set_network">set network</string>
+     <string name="txt_set_network_cancel">cancel</string>
+-    <string name="informed_consent_text">通过发送匿名诊断和使用数据帮助改进您的设备。通过选择此复选框，您同意我们的隐私政策和服务条款</string>
+-    <string name="informed_consent_location">位置信息</string> 
+-    <string name="privacy_policy">隐私政策</string>
+-    <string name="terms">服务条款</string>
+ </resources>
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/dimens.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/dimens.xml	(revision 6600)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/dimens.xml	(revision 6601)
+@@ -7,5 +7,4 @@
+     <dimen name="btn_gome_text_size">13sp</dimen>
+     <dimen name="btn_gome_shape_radius">40dp</dimen>
+     <dimen name="btn_gome_shape_border_width">1px</dimen>
+-    <dimen name="welcome_text_size">20sp</dimen>
+ </resources>
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/colors.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/colors.xml	(revision 6600)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/colors.xml	(revision 6601)
+@@ -12,8 +12,6 @@
+     <color name="colorTextSelected">@color/colorAccent</color>
+     <color name="colorTextUnSelected">#E6000000</color>
+ 
+-    <color name="colorWelcomeText">#FF2E76FC</color>
+-
+     <!--button colors-->
+     <color name="btn_gome_shape_press_color">#FFF2F2F2</color>
+     <color name="btn_gome_shape_unpress_color">#FFFCFCFC</color>
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/values-en/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/values-en/strings.xml	(revision 6600)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/values-en/strings.xml	(revision 6601)
+@@ -69,8 +69,4 @@
+     <string name="welcome_image">welcome image</string>
+     <string name="safe_lock">Unlock the screen</string>
+     <string name="safe_lock_detail">Allow face recognition and unlock the screen</string>
+-    <string name="informed_consent_text">Help improve your device by sending anonymous diagnostics and usage data.By selecting this checkbox you agree to our Privacy policy and Terms of Service</string>
+-    <string name="informed_consent_location">Include my location</string> 
+-    <string name="privacy_policy">Privacy policy</string>
+-    <string name="terms">Terms</string>
+ </resources>
+\ No newline at end of file

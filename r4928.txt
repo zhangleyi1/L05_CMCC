@@ -1,0 +1,15 @@
+Index: frameworks/base/packages/Keyguard/res/values/dimens.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values/dimens.xml	(revision 4927)
++++ frameworks/base/packages/Keyguard/res/values/dimens.xml	(revision 4928)
+@@ -42,7 +42,9 @@
+     <dimen name="bottom_text_spacing_digital">-1dp</dimen>
+     <dimen name="widget_label_font_size">17sp</dimen><!--default size 14sp modify by dongdongli for 112176 -->
+     <dimen name="widget_big_font_size">78dp</dimen>
+-	<dimen name="widget_big_font_customer_size">76dp</dimen>
++	<!-- Qj modify for BugId 116734 by zhangle at 2018/01/03 start-->
++	<dimen name="widget_big_font_customer_size">50dp</dimen>
++	<!-- Qj modify for BugId 116734 by zhangle at 2018/01/03 end-->
+ 
+     <!-- The y translation to apply at the start in appear animations. -->
+     <dimen name="appear_y_translation_start">32dp</dimen>

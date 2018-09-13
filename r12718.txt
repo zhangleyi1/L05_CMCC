@@ -1,0 +1,21 @@
+Index: frameworks/base/services/core/java/com/android/server/lights/LightsService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/lights/LightsService.java	(revision 12717)
++++ frameworks/base/services/core/java/com/android/server/lights/LightsService.java	(revision 12718)
+@@ -120,7 +120,7 @@
+ 
+         private void setLightLocked(int color, int mode, int onMS, int offMS, int brightnessMode) {
+             if (!mLocked && (color != mColor || mode != mMode || onMS != mOnMS || offMS != mOffMS ||
+-                    mBrightnessMode != brightnessMode)) {
++                    mBrightnessMode != brightnessMode|| mId == LightsManager.LIGHT_ID_NOTIFICATIONS)) {
+                 if (DEBUG) Slog.v(TAG, "setLight #" + mId + ": color=#"
+                         + Integer.toHexString(color) + ": brightnessMode=" + brightnessMode);
+                 mLastColor = mColor;
+
+Property changes on: frameworks/base/services/core/java/com/android/server/lights/LightsService.java
+___________________________________________________________________
+Added: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base/services/core/java/com/android/server/lights/LightsService.java:r2195-2198,2271-2272,2850-2851
+   Merged /mtk_release_version/MT6739/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base/services/core/java/com/android/server/lights/LightsService.java:r1965-1973,2148-2260
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-OF.P53_K39V1_INHOUSE/frameworks/base/services/core/java/com/android/server/lights/LightsService.java:r472,634,707,825,827,899
+   Merged /L05A/TA_Version/5058I_ALWE/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base/services/core/java/com/android/server/lights/LightsService.java:r12709

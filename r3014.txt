@@ -1,0 +1,14 @@
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tracability/Tracability.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tracability/Tracability.java	(revision 3013)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tracability/Tracability.java	(revision 3014)
+@@ -164,8 +164,7 @@
+ 		agent = NvRAMAgent.Stub.asInterface(binder);
+ 		try {
+ 		//	product_info = agent.readFile(PRODUCT_INFO_NVRAM_LID);
+-		//	product_info = agent.readFileByName(PRODUCT_INFO_NVRAM_PATH);
+-		agent.writeFileByName(PRODUCT_INFO_NVRAM_PATH, product_info);
++			product_info = agent.readFileByName(PRODUCT_INFO_NVRAM_PATH);
+ 		} catch (Exception e) {
+ 			e.printStackTrace();
+ 		}

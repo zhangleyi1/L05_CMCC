@@ -1,0 +1,1231 @@
+Index: build/target/product/languages_full.mk
+===================================================================
+--- build/target/product/languages_full.mk	(revision 1710)
++++ build/target/product/languages_full.mk	(revision 1711)
+@@ -21,4 +21,4 @@
+ 
+ # These are all the locales that have translations and are displayable
+ # by TextView in this branch.
+-PRODUCT_LOCALES := en_US en_AU en_IN fr_FR it_IT es_ES et_EE de_DE nl_NL cs_CZ pl_PL ja_JP zh_TW zh_CN zh_HK ru_RU ko_KR nb_NO es_US da_DK el_GR tr_TR pt_PT pt_BR sv_SE bg_BG ca_ES en_GB fi_FI hi_IN hr_HR hu_HU in_ID iw_IL lt_LT lv_LV ro_RO sk_SK sl_SI sr_RS uk_UA vi_VN tl_PH ar_EG fa_IR th_TH sw_TZ ms_MY af_ZA zu_ZA am_ET en_XA ar_XB fr_CA km_KH lo_LA ne_NP si_LK mn_MN hy_AM az_AZ ka_GE my_MM mr_IN ml_IN is_IS mk_MK ky_KG eu_ES gl_ES bn_BD ta_IN kn_IN te_IN uz_UZ ur_PK kk_KZ sq_AL gu_IN pa_IN be_BY bs_BA
++PRODUCT_LOCALES := zh_CN en_US en_GB zh_HK zh_TW
+Index: build/target/product/full_base.mk
+===================================================================
+--- build/target/product/full_base.mk	(revision 1710)
++++ build/target/product/full_base.mk	(revision 1711)
+@@ -45,12 +45,12 @@
+ 
+ # Additional settings used in all AOSP builds
+ PRODUCT_PROPERTY_OVERRIDES := \
+-    ro.config.ringtone=Fresh.ogg \
++    ro.config.ringtone=Fresh.mp3 \
+     ro.config.alarm_alert=Galactic.mp3\
+     ro.config.notification_sound=Success.mp3
+ 
+ # Put en_US first in the list, so make it default.
+-PRODUCT_LOCALES := en_US
++PRODUCT_LOCALES := zh_CN en_US en_GB zh_HK zh_TW
+ 
+ # Get some sounds
+ $(call inherit-product-if-exists, frameworks/base/data/sounds/AllAudio.mk)
+Index: build/target/product/languages_small.mk
+===================================================================
+--- build/target/product/languages_small.mk	(revision 1710)
++++ build/target/product/languages_small.mk	(revision 1711)
+@@ -21,4 +21,4 @@
+ 
+ # This is the list of languages that originally shipped on ADP1
+ 
+-PRODUCT_LOCALES := en_US en_GB fr_FR it_IT de_DE es_ES
++PRODUCT_LOCALES := zh_CN en_US en_GB zh_HK zh_TW
+Index: build/target/product/locales_full.mk
+===================================================================
+--- build/target/product/locales_full.mk	(revision 1710)
++++ build/target/product/locales_full.mk	(revision 1711)
+@@ -1,3 +1 @@
+-PRODUCT_LOCALES := en_US cs_CZ da_DK de_AT de_CH de_DE de_LI el_GR en_AU en_CA en_GB en_NZ en_SG eo_EU es_ES fr_CA fr_CH fr_BE fr_FR it_CH it_IT ja_JP ko_KR nb_NO nl_BE nl_NL pl_PL pt_PT ru_RU sv_SE tr_TR zh_CN zh_HK zh_TW am_ET hi_IN
+-
+-$(call inherit-product, build/target/product/languages_full.mk)
++PRODUCT_LOCALES := zh_CN en_US en_GB zh_HK zh_TW
+\ No newline at end of file
+Index: build/target/product/core.mk
+===================================================================
+--- build/target/product/core.mk	(revision 1710)
++++ build/target/product/core.mk	(revision 1711)
+@@ -57,7 +57,6 @@
+     TeleService \
+     VpnDialogs \
+     MmsService \
+-    ChromeCustomizations \
+     NfcTest
+     libnfc-nci \
+ 	libnfc_nci_jni \
+Index: device/ausshine/aus6739_66_n1/BoardConfig.mk
+===================================================================
+--- device/ausshine/aus6739_66_n1/BoardConfig.mk	(revision 1710)
++++ device/ausshine/aus6739_66_n1/BoardConfig.mk	(revision 1711)
+@@ -1,5 +1,5 @@
+ # Use the non-open-source part, if present
+--include vendor/ausshine/aus6739_66_n1/BoardConfigVendor.mk
++-include vendor/ausshine/aus6739_36_n1/BoardConfigVendor.mk
+ 
+ # Use the 6739 common part
+ include device/mediatek/mt6739/BoardConfig.mk
+@@ -22,4 +22,4 @@
+ else
+ BOARD_KERNEL_CMDLINE = bootopt=64S3,32N2,64N2
+ endif
+-BOARD_MTK_SYSTEM_SIZE_KB := 6000000
++BOARD_MTK_SYSTEM_SIZE_KB := 4342880
+Index: device/ausshine/aus6739_66_n1/ProjectConfig.mk
+===================================================================
+--- device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 1710)
++++ device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 1711)
+@@ -10,7 +10,7 @@
+ BUILD_PRELOADER = yes
+ BUILD_UBOOT = no
+ CUSTOM_BUILD_VERNO =
+-CUSTOM_CONFIG_MAX_DRAM_SIZE = 0x80000000
++CUSTOM_CONFIG_MAX_DRAM_SIZE = 0xC0000000
+ CUSTOM_HAL_ANT = mt6739_ant_m1
+ CUSTOM_HAL_AUDIOFLINGER = audio
+ CUSTOM_HAL_BLUETOOTH = bluetooth
+@@ -26,7 +26,7 @@
+ CUSTOM_HAL_MAIN_BACKUP_LENS =
+ CUSTOM_HAL_MAIN_IMGSENSOR = s5k3l8_mipi_raw s5k3l9_mipi_raw
+ CUSTOM_HAL_MAIN_LENS = dw9714af
+-CUSTOM_HAL_MSENSORLIB = mmc328x akm8975 ami304 yamaha530 mag3110 akmd8963 bmm050 mc6420 mmc3416x s62xd lsm303md qmc5983 akmd09911 mc64xx bmm056 mc41xx akmd09918 memsicd3680x
++CUSTOM_HAL_MSENSORLIB = mmc328x akm8975 ami304 yamaha530 mag3110 akmd8963 bmm050 mc6420 mmc3416x s62xd lsm303md qmc5983 akmd09911 mc64xx bmm056 mc41xx akmd09912 akmd09918 memsicd3680x
+ CUSTOM_HAL_SENSORS = sensor
+ CUSTOM_HAL_SUB_BACKUP_IMGSENSOR =
+ CUSTOM_HAL_SUB_BACKUP_LENS =
+@@ -56,7 +56,7 @@
+ CUSTOM_KERNEL_KPD = kpd
+ CUSTOM_KERNEL_LEDS = mt65xx
+ CUSTOM_KERNEL_LENS = dw9714af dummy_lens
+-CUSTOM_KERNEL_MAGNETOMETER = yes
++CUSTOM_KERNEL_MAGNETOMETER = no
+ CUSTOM_KERNEL_MAIN2_BACKUP_IMGSENSOR = gc5034_mipi_raw
+ CUSTOM_KERNEL_MAIN2_IMGSENSOR = gc5025_mipi_raw
+ CUSTOM_KERNEL_MAIN_BACKUP_IMGSENSOR =
+@@ -716,3 +716,4 @@
+ WIFI_WEP_KEY_ID_SET = no
+ #CREATE_PROJECT_INFO=20171102102954
+ DMNR_COMPLEX_ARCH_SUPPORT = yes
++MTK_BOOT_WIZARD = yes
+\ No newline at end of file
+Index: device/ausshine/aus6739_66_n1/system.prop
+===================================================================
+--- device/ausshine/aus6739_66_n1/system.prop	(revision 1710)
++++ device/ausshine/aus6739_66_n1/system.prop	(revision 1711)
+@@ -75,4 +75,15 @@
+ # disable ipo for development
+ sys.ipo.disable=1
+ 
++
++
++
++persist.operator.optr=CUST
++
++ro.customer.commercial.name=980CN1
++ro.product.hardware.id=Proto
++ro.tct.curef=980CN-2*ALOP1
++ro.def.software.version=010 01
++ro.mtk_default_ime=com.iflytek.inputmethod
++
+ ro.mtk_gemini_support = 1
+Index: device/mediatek/common/custom.conf
+===================================================================
+--- device/mediatek/common/custom.conf	(revision 1710)
++++ device/mediatek/common/custom.conf	(revision 1711)
+@@ -13,10 +13,10 @@
+ # CR/LF used as only delimiter of each configuaration items, both LINUX/MAC/DOS format supported
+ # character set: ASCII, encoding type: UTF8
+ 
+-#browser.UserAgent = Athens15_TD/V2 Linux/3.0.13 Android/4.0 Release/02.15.2012 Browser/AppleWebKit534.30 Mobile Safari/534.30 System/Android 4.0.1;
+-browser.UAProfileURL = http://218.249.47.94/Xianghe/MTK_Phone_KK_UAprofile.xml
+-mms.UserAgent = Android-Mms/0.1
+-mms.UAProfileURL = http://www.google.com/oha/rdf/ua-profile-kila.xml 
++browser.UserAgent = Mozilla/5.0 (Linux; Android 7.1.1;zh-cn;980CN1 Build/N6F26Q) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/59.0.3071.125 Mobile Safari/537.36 Hawk/TurboBrowser/v2.0.0.1.0177.0_0818;
++browser.UAProfileURL = http://www-ccpp.tcl-ta.com/files/980cn1.xml
++mms.UserAgent = 980CN1-MMS/2.0
++mms.UAProfileURL = http://www-ccpp.tcl-ta.com/files/980cn1.xml
+ http_streaming.UserAgent = stagefright/1.2 (Linux;Android @ro.build.version.release )
+ rtsp_streaming.UserAgent = stagefright/1.2 (Linux;Android @ro.build.version.release )
+ #http_streaming.UAProfileURL = http://218.249.47.94/Xianghe/MTK_Athens15_UAProfile.xml
+Index: device/mediatek/common/device.mk
+===================================================================
+--- device/mediatek/common/device.mk	(revision 1710)
++++ device/mediatek/common/device.mk	(revision 1711)
+@@ -150,7 +150,6 @@
+     ifneq ($(strip $(MTK_BSP_PACKAGE)), yes)
+         PRODUCT_PACKAGES += MtkCalendar
+         PRODUCT_PACKAGES += MtkBrowser
+-        PRODUCT_PACKAGES += MtkQuickSearchBox
+         PRODUCT_PACKAGES += MtkWebView
+     endif
+ endif
+Index: device/mediatek/mt6739/device.mk
+===================================================================
+--- device/mediatek/mt6739/device.mk	(revision 1710)
++++ device/mediatek/mt6739/device.mk	(revision 1711)
+@@ -112,7 +112,6 @@
+ PRODUCT_PACKAGES += DeskClock
+ PRODUCT_PACKAGES += AlarmProvider
+ PRODUCT_PACKAGES += Bluetooth
+-PRODUCT_PACKAGES += Calculator
+ PRODUCT_PACKAGES += Calendar
+ PRODUCT_PACKAGES += CertInstaller
+ PRODUCT_PACKAGES += DrmProvider
+@@ -441,7 +440,6 @@
+ PRODUCT_PACKAGES += perfservscntbl.txt
+ PRODUCT_PACKAGES += perfservboosttbl.txt
+ PRODUCT_PACKAGES += perfcontable.txt
+-PRODUCT_PACKAGES += Videos
+ PRODUCT_PACKAGES += sn
+ PRODUCT_PACKAGES += lcdc_screen_cap
+ PRODUCT_PACKAGES += libJniAtvService
+@@ -1512,4 +1510,5 @@
+ endif
+ 
+ #For fingerprint function
+-PRODUCT_PACKAGES += fingerprintd
+\ No newline at end of file
++PRODUCT_PACKAGES += fingerprintd
++PRODUCT_PACKAGES += BootWizard
+\ No newline at end of file
+Index: packages/apps/Provision/src/com/android/provision/DefaultActivity.java
+===================================================================
+--- packages/apps/Provision/src/com/android/provision/DefaultActivity.java	(revision 1710)
++++ packages/apps/Provision/src/com/android/provision/DefaultActivity.java	(revision 1711)
+@@ -60,8 +60,8 @@
+         // remove this activity from the package manager.  
+         PackageManager pm = this.getPackageManager();  
+   
+-        String examplePackageName = "com.tct.launcher"; //package name
+-        String exampleActivityName = "com.tct.launcher.Launcher"; //name
++        String examplePackageName = "com.tcl.mibc.launcherpro"; //package name
++        String exampleActivityName = "com.tcl.launcherpro.LauncherActivity"; //name
+   
+         ComponentName defaultLauncher = null;  
+   
+Index: packages/apps/Settings/res/xml/sound_settings.xml
+===================================================================
+--- packages/apps/Settings/res/xml/sound_settings.xml	(revision 1710)
++++ packages/apps/Settings/res/xml/sound_settings.xml	(revision 1711)
+@@ -114,10 +114,11 @@
+                 settings:keywords="@string/keywords_sounds_and_notifications_interruptions"
+                 android:fragment="com.android.settings.notification.ZenModeSettings" />
+         <!-- Cast -->
+-        <PreferenceScreen
++        <!--<PreferenceScreen
+                 android:key="wifi_display"
+                 android:title="@string/wifi_display_settings_title"
+                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
++		-->
+ 
+         <!-- M: Sound Enhancement -->
+         <PreferenceScreen
+Index: packages/apps/Settings/res/values-sw400dp/dimens.xml
+===================================================================
+--- packages/apps/Settings/res/values-sw400dp/dimens.xml	(revision 1710)
++++ packages/apps/Settings/res/values-sw400dp/dimens.xml	(revision 1711)
+@@ -16,13 +16,12 @@
+   -->
+ 
+ <resources>
+-    <dimen name="fingerprint_ring_radius">106dp</dimen>
+-    <dimen name="fingerprint_animation_size">100dp</dimen>
++    <dimen name="fingerprint_ring_radius">78dp</dimen>
++    <dimen name="fingerprint_animation_size">80dp</dimen>
+     <dimen name="fingerprint_progress_bar_size">220dp</dimen>
+     <dimen name="fingerprint_enrolling_content_margin_top">56dp</dimen>
+     <dimen name="fingerprint_in_app_indicator_size">176dp</dimen>
+     <dimen name="fingerprint_find_sensor_graphic_size">240dp</dimen>
+-
+     <dimen name="setup_fingerprint_ring_radius">92dp</dimen>
+     <dimen name="setup_fingerprint_progress_bar_size">192dp</dimen>
+ </resources>
+Index: packages/apps/Settings/res/values/bools.xml
+===================================================================
+--- packages/apps/Settings/res/values/bools.xml	(revision 1710)
++++ packages/apps/Settings/res/values/bools.xml	(revision 1711)
+@@ -47,5 +47,8 @@
+     <!--Whether help links are defined. -->
+     <bool name="config_has_help">false</bool>
+ 	
+-	<bool name="config_remove_wifi_calling">false</bool>
++	<!-- remove sound settings cast -->
++	<bool name="remove_sound_settings_cast">true</bool>
++	
++	<bool name="config_remove_wifi_calling">true</bool>
+ </resources>
+Index: packages/apps/Settings/res/layout/user_dictionary_add_word_fullscreen.xml
+===================================================================
+--- packages/apps/Settings/res/layout/user_dictionary_add_word_fullscreen.xml	(revision 1710)
++++ packages/apps/Settings/res/layout/user_dictionary_add_word_fullscreen.xml	(revision 1711)
+@@ -24,9 +24,9 @@
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_gravity="fill_horizontal|center_vertical"
+-        android:layout_marginBottom="8dip"
+-        android:layout_marginStart="8dip"
+-        android:layout_marginTop="8dip"
++        android:layout_marginBottom="4dip"
++        android:layout_marginStart="4dip"
++        android:layout_marginTop="4dip"
+         android:hint="@string/user_dict_settings_add_word_hint"
+         android:imeOptions="flagNoFullscreen"
+         android:inputType="textNoSuggestions"
+@@ -40,8 +40,8 @@
+         android:id="@+id/user_dictionary_add_word_grid"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+-        android:layout_marginEnd="8dip"
+-        android:layout_marginStart="8dip"
++        android:layout_marginEnd="4dip"
++        android:layout_marginStart="4dip"
+         android:columnCount="2" >
+ 
+         <TextView
+@@ -55,10 +55,11 @@
+         <EditText
+             android:id="@+id/user_dictionary_add_shortcut"
+             android:layout_width="wrap_content"
++			android:layout_height="wrap_content"
+             android:layout_gravity="fill_horizontal|center_vertical"
+-            android:layout_marginBottom="8dip"
+-            android:layout_marginStart="8dip"
+-            android:layout_marginTop="8dip"
++            android:layout_marginBottom="4dip"
++            android:layout_marginStart="4dip"
++            android:layout_marginTop="4dip"
+             android:hint="@string/user_dict_settings_add_shortcut_hint"
+             android:imeOptions="flagNoFullscreen"
+             android:inputType="textNoSuggestions"
+Index: packages/apps/Dialer/InCallUI/src/com/android/incallui/CallButtonFragment.java
+===================================================================
+--- packages/apps/Dialer/InCallUI/src/com/android/incallui/CallButtonFragment.java	(revision 1710)
++++ packages/apps/Dialer/InCallUI/src/com/android/incallui/CallButtonFragment.java	(revision 1711)
+@@ -628,8 +628,10 @@
+ 
+     private void addToOverflowMenu(int id, View button, PopupMenu menu) {
+         button.setVisibility(View.GONE);
+-        menu.getMenu().add(Menu.NONE, id, Menu.NONE, button.getContentDescription());
+-        mButtonVisibilityMap.put(id, BUTTON_MENU);
++		if(id!=Buttons.BUTTON_SET_ECT){
++			menu.getMenu().add(Menu.NONE, id, Menu.NONE, button.getContentDescription());
++        	mButtonVisibilityMap.put(id, BUTTON_MENU);
++		}
+     }
+ 
+     private PopupMenu getPopupMenu() {
+Index: kernel-4.4/arch/arm64/configs/aus6739_66_n1_defconfig
+===================================================================
+--- kernel-4.4/arch/arm64/configs/aus6739_66_n1_defconfig	(revision 1710)
++++ kernel-4.4/arch/arm64/configs/aus6739_66_n1_defconfig	(revision 1711)
+@@ -235,9 +235,9 @@
+ # CONFIG_MTK_ITG1010_NEW=y
+ # CONFIG_MTK_ICM20608DGY=y
+ CONFIG_MTK_HWMON=y
+-CONFIG_CUSTOM_KERNEL_MAGNETOMETER=y
+-# CONFIG_MTK_AKM09918_NEW=y
+-CONFIG_MTK_MMC3630X=y
++# CONFIG_CUSTOM_KERNEL_MAGNETOMETER is not set
++# CONFIG_MTK_AKM09918_NEW is not set
++# CONFIG_MTK_MMC3630X is not set
+ # CONFIG_MTK_HALL_SUPPORT is not set
+ CONFIG_MTK_BTIF=y
+ CONFIG_MTK_MD1_SUPPORT=12
+@@ -536,8 +536,8 @@
+ CONFIG_CRYPTO_AES_ARM64_CE_BLK=y
+ CONFIG_LIBCRC32C=y
+ CONFIG_MTK_CDFINGER=y
+-CONFIG_DTV_FC8180=y
++# CONFIG_DTV_FC8180 is not set
+ CONFIG_MTK_EMMC_SUPPORT_OTP=y
+ CONFIG_MTK_WAPI_SUPPORT=y
+-
+ CONFIG_MICROTRUST_TEE_SUPPORT=y
++CONFIG_MTK_TEE_SUPPORT=y
+\ No newline at end of file
+Index: kernel-4.4/arch/arm64/configs/aus6739_66_n1_debug_defconfig
+===================================================================
+--- kernel-4.4/arch/arm64/configs/aus6739_66_n1_debug_defconfig	(revision 1710)
++++ kernel-4.4/arch/arm64/configs/aus6739_66_n1_debug_defconfig	(revision 1711)
+@@ -240,9 +240,9 @@
+ # CONFIG_MTK_ITG1010_NEW=y
+ # CONFIG_MTK_ICM20608DGY=y
+ CONFIG_MTK_HWMON=y
+-CONFIG_CUSTOM_KERNEL_MAGNETOMETER=y
+-# CONFIG_MTK_AKM09918_NEW=y
+-CONFIG_MTK_MMC3630X=y
++# CONFIG_CUSTOM_KERNEL_MAGNETOMETER is not set
++# CONFIG_MTK_AKM09918_NEW is not set
++# CONFIG_MTK_MMC3630X is not set
+ # CONFIG_MTK_HALL_SUPPORT is not set
+ CONFIG_MTK_BTIF=y
+ CONFIG_MTK_MD1_SUPPORT=12
+@@ -556,8 +556,8 @@
+ CONFIG_CRYPTO_AES_ARM64_CE_BLK=y
+ CONFIG_LIBCRC32C=y
+ CONFIG_MTK_CDFINGER=y
+-CONFIG_DTV_FC8180=y
++# CONFIG_DTV_FC8180 is not set
+ CONFIG_MTK_EMMC_SUPPORT_OTP=y
+ CONFIG_MTK_WAPI_SUPPORT=y
+-
+ CONFIG_MICROTRUST_TEE_SUPPORT=y
++CONFIG_MTK_TEE_SUPPORT=y
+\ No newline at end of file
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 1710)
++++ vendor/customer/custom.mk	(revision 1711)
+@@ -1,37 +1,30 @@
+ # Add Custom Apps and Services
+ PRODUCT_PACKAGES += Activate \
+-                    AppCloud \
+                     Apps \
+                     BrowserTcl \
+                     BrowserOverlay \
+-                    DisneyMagicKingdom \
+-                    DragonMania \
+                     Elabel \
+-                    EnjoyNow \
+                     FileManagerTcl \
+                     Fota \
+-                    LittleBigCity2 \
+-                    Officesuit \
+                     PhoneGuard \
+-                    SetupWizardTcl \
+-                    SimpleLauncher \
+-                    SingleLogin \
+-                    SpidermanUltimatePower \
+-                    UserCare \
+                     Weather \
+-                    WhatsApp \
+-                    JoyLauncherOverlay \
+-                    JoyLauncher \
+-                    ThemeCenter \
+-                    Twitter \
+-                    SmartManager \
++                    CameraTcl \
+                     Gallery_Global \
+-                    CameraTcl \
+                     Selife \
+-                    Facebook
++                    BaiDuMap \
++                    Games \
++                    WPSoffice \
++                    WX \
++                    HiLauncher \
++                    HiLauncherOverlay \
++                    iReader \
++                    TencentNews \
++                    TencentVideo \
++                    SogouInput \
++                    MainApp
+ 
+ # Overrides
+ PRODUCT_PROPERTY_OVERRIDES +=
+ 
+-# add facebook config file use in TCL project
+-PRODUCT_COPY_FILES += vendor/customer/appmanager.conf:system/etc/appmanager.conf
+\ No newline at end of file
++$(call inherit-product-if-exists, vendor/customer/apps/BaiDuMap/BaiDuMap.mk)
++$(call inherit-product-if-exists, vendor/customer/apps/MainApp/MainApp.mk)
+\ No newline at end of file
+Index: vendor/customer/Customer_res/boot/bootaudio.mp3
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/Customer_res/boot/shutaudio.mp3
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/Customer_res/boot/bootanimation.zip
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/Customer_res/boot/shutanimation.zip
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/bootable/bootloader/lk/dev/logo/hdplus/hdplus_kernel.bmp
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/bootable/bootloader/lk/dev/logo/hdplus/hdplus_uboot.bmp
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/bootable/bootloader/preloader/custom/aus6739_66_n1/aus6739_66_n1.mk
+===================================================================
+--- vendor/mediatek/proprietary/bootable/bootloader/preloader/custom/aus6739_66_n1/aus6739_66_n1.mk	(revision 1710)
++++ vendor/mediatek/proprietary/bootable/bootloader/preloader/custom/aus6739_66_n1/aus6739_66_n1.mk	(revision 1711)
+@@ -26,6 +26,6 @@
+ TRUSTONIC_TEE_SUPPORT = no
+ MICROTRUST_TEE_SUPPORT = yes
+ MTK_GOOGLE_TRUSTY_SUPPORT = no
+-CUSTOM_CONFIG_MAX_DRAM_SIZE=0x80000000
++CUSTOM_CONFIG_MAX_DRAM_SIZE=0xC0000000
+ MTK_TEST_TMODE = no
+ export MTK_PLATFORM MTK_MT6333_SUPPORT MTK_FAN5405_SUPPORT MTK_EMMC_SUPPORT MTK_8193_SUPPORT MTK_SECURITY_SW_SUPPORT MTK_SEC_CHIP_SUPPORT MTK_SEC_USBDL MTK_SEC_BOOT MTK_SEC_MODEM_AUTH MTK_SEC_SECRO_AC_SUPPORT CUSTOM_SEC_AUTH_SUPPORT MTK_KERNEL_POWER_OFF_CHARGING MTK_EMMC_SUPPORT_OTP MTK_COMBO_NAND_SUPPORT MTK_DISABLE_POWER_ON_OFF_VOLTAGE_LIMITATION MTK_BQ24160_SUPPORT MTK_SEC_VIDEO_PATH_SUPPORT MTK_FACTORY_LOCK_SUPPORT MTK_TINYSYS_SSPM_SUPPORT MTK_TEE_SUPPORT TRUSTONIC_TEE_SUPPORT MICROTRUST_TEE_SUPPORT MTK_GOOGLE_TRUSTY_SUPPORT MTK_TEST_TMODE
+Index: vendor/mediatek/proprietary/packages/apps/BrowserOverlay/res/values/isdm_BrowserRes_defaults.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BrowserOverlay/res/values/isdm_BrowserRes_defaults.xml	(revision 1710)
++++ vendor/mediatek/proprietary/packages/apps/BrowserOverlay/res/values/isdm_BrowserRes_defaults.xml	(revision 1711)
+@@ -26,4 +26,5 @@
+     <string name="def_browser_homepage_base">"http://www.alcatel-mobile.com"</string>
+     <string name="def_browser_bookmark1_name">"Alcatel Portal"</string>
+     <string name="def_browser_bookmark1_url">"http://3g.my-alcatel.com"</string>
++    <string name="def_uaProfUrl_forBrowser">"http://www-ccpp.tcl-ta.com/files/980cn1.xml"</string>
+ </resources>
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 1710)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 1711)
+@@ -175,7 +175,7 @@
+ 			TESTITEM_ACCESSORY, 
+ 			TESTITEM_CHARGER, 
+ 			TESTITEM_USB,
+-			TESTITEM_COMPASS,
++//			TESTITEM_COMPASS,
+ 			TESTITEM_GSENSOR, 
+ //			TESTITEM_GYRO,
+ 			TESTITEM_LIGHT_SENSOR, 
+@@ -190,9 +190,9 @@
+ 			
+   			TESTITEM_CALLING,
+ 			TESTITEM_FACTORY_RESET,
+-			TESTITEM_BATTERY_LEVERl,
++			TESTITEM_BATTERY_LEVERl
+   		//	TESTITEM_HALL,
+-			TESTITEM_NFC
++  		//	TESTITEM_NFC,
+   		//	TESTITEM_TPRAWDATA,
+ 		
+ //			TESTITEM_TATOL 
+@@ -224,7 +224,7 @@
+ //		TESTITEM_FMRADIO,
+ 		TESTITEM_CHARGER, 
+ 		TESTITEM_USB,
+-		TESTITEM_COMPASS,
++//		TESTITEM_COMPASS,
+ 		TESTITEM_GSENSOR,
+ //		TESTITEM_GYRO,
+ 		TESTITEM_LIGHT_SENSOR, 
+@@ -237,10 +237,10 @@
+ 		TESTITEM_GPS, 
+ 		TESTITEM_FINGER,
+   		TESTITEM_CALLING,
+- // 	TESTITEM_GYRO
+- // 	TESTITEM_HALL,
+-  		TESTITEM_NFC,
+- // 	TESTITEM_TPRAWDATA,
++//  	TESTITEM_GYRO
++//	 	TESTITEM_HALL,
++//	 	TESTITEM_NFC,
++//  	TESTITEM_TPRAWDATA,
+ //		TESTITEM_FACTORY_RESET,
+ //		TESTITEM_TATOL 
+ 			};
+Index: vendor/mediatek/proprietary/packages/apps/Mms/res/xml/mms_config.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/res/xml/mms_config.xml	(revision 1710)
++++ vendor/mediatek/proprietary/packages/apps/Mms/res/xml/mms_config.xml	(revision 1711)
+@@ -51,7 +51,7 @@
+     <int name="maxMessageCountPerThread">10000</int>
+ 
+     <!-- UAProf URL -->
+-    <string name="uaProfUrl">http://www.google.com/oha/rdf/ua-profile-kila.xml</string>
++    <string name="uaProfUrl">http://www-ccpp.tcl-ta.com/files/980cn1.xml</string>
+ 
+     <!-- Maximum number of recipients allowed per message. Use a value of -1
+          to indicate no limit. -->
+@@ -77,9 +77,7 @@
+ 
+     <!-- User-Agent parameter used in MMS http request -->
+     <!-- this is default to "Android-Mms/0.1". Override if necessary. Optional -->
+-    <!--
+-    <string name="userAgent">Android-Mms/0.1</string>
+-    -->
++    <string name="userAgent">980CN1-MMS/2.0</string>
+ 
+     <!-- UAProf parameter tag name -->
+     <!-- this is default to "x-wap-profile". Override if necessary. Optional -->
+Index: vendor/mediatek/proprietary/frameworks/base/custom/custom.conf
+===================================================================
+--- vendor/mediatek/proprietary/frameworks/base/custom/custom.conf	(revision 1710)
++++ vendor/mediatek/proprietary/frameworks/base/custom/custom.conf	(revision 1711)
+@@ -13,21 +13,22 @@
+ # CR/LF used as only delimiter of each configuaration items, both LINUX/MAC/DOS format supported
+ # character set: ASCII, encoding type: UTF8
+ 
+-#browser.UserAgent = Athens15_TD/V2 Linux/3.0.13 Android/4.0 Release/02.15.2012 Browser/AppleWebKit534.30 Mobile Safari/534.30 System/Android 4.0.1;
+-browser.UAProfileURL = http://218.249.47.94/Xianghe/MTK_Phone_KK_UAprofile.xml
+-mms.UserAgent = Android-Mms/0.1
+-mms.UAProfileURL = http://www.google.com/oha/rdf/ua-profile-kila.xml 
++browser.UserAgent = Mozilla/5.0 (Linux; Android 7.1.1;zh-cn;980CN1 Build/N6F26Q) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/59.0.3071.125 Mobile Safari/537.36 Hawk/TurboBrowser/v2.0.0.1.0177.0_0818;
++browser.UAProfileURL = http://www-ccpp.tcl-ta.com/files/980cn1.xml
++mms.UserAgent = 980CN1-MMS/2.0
++mms.UAProfileURL = http://www-ccpp.tcl-ta.com/files/980cn1.xml
+ http_streaming.UserAgent = stagefright/1.2 (Linux;Android @ro.build.version.release )
+ rtsp_streaming.UserAgent = stagefright/1.2 (Linux;Android @ro.build.version.release )
+ #http_streaming.UAProfileURL = http://218.249.47.94/Xianghe/MTK_Athens15_UAProfile.xml
+ #rtsp_streaming.UAProfileURL = http://218.249.47.94/Xianghe/MTK_Athens15_UAProfile.xml
+-dm.Manufacturer = MTK1
+-dm.Model = MTK
+-bluetooth.HostName = ANDROID BT
+-fmtransmitter.RDSValue = Mediatek
+-wlan.SSID = AndroidAP
++dm.Manufacturer = TCL
++dm.Model = V760
++bluetooth.HostName = TCL 
++fmtransmitter.RDSValue = TCL V760
++wlan.SSID = TCL V760
++Setting.Model=@ro.product.model@
++Setting.SWVerno= 01001
+ 
+ 
+ 
+ 
+-
+Index: vendor/branch/980CN1/vendor/mediatek/proprietary/frameworks/base/custom/custom.conf
+===================================================================
+--- vendor/branch/980CN1/vendor/mediatek/proprietary/frameworks/base/custom/custom.conf	(revision 1710)
++++ vendor/branch/980CN1/vendor/mediatek/proprietary/frameworks/base/custom/custom.conf	(revision 1711)
+@@ -22,8 +22,8 @@
+ #http_streaming.UAProfileURL = http://218.249.47.94/Xianghe/MTK_Athens15_UAProfile.xml
+ #rtsp_streaming.UAProfileURL = http://218.249.47.94/Xianghe/MTK_Athens15_UAProfile.xml
+ dm.Manufacturer = TCL
+-dm.Model = 980CN1
+-bluetooth.HostName = TCL 980CN1
++dm.Model = V760
++bluetooth.HostName = TCL 
+ fmtransmitter.RDSValue = TCL 980CN1
+ wlan.SSID = TCL 980CN1
+ Setting.Model=@ro.product.model@
+Index: vendor/branch/980CN1/device/ausshine/aus6739_66_n1/system.prop
+===================================================================
+--- vendor/branch/980CN1/device/ausshine/aus6739_66_n1/system.prop	(revision 1710)
++++ vendor/branch/980CN1/device/ausshine/aus6739_66_n1/system.prop	(revision 1711)
+@@ -77,7 +77,7 @@
+ 
+ # shutdown audio
+ ro.operator.optr=CUST
+-# shutdown animation
++
+ persist.operator.optr=CUST
+ 
+ ro.customer.commercial.name=980CN1
+Index: frameworks/base/core/java/com/android/internal/app/ResolverActivity.java
+===================================================================
+--- frameworks/base/core/java/com/android/internal/app/ResolverActivity.java	(revision 1710)
++++ frameworks/base/core/java/com/android/internal/app/ResolverActivity.java	(revision 1711)
+@@ -1950,7 +1950,7 @@
+         if (!TextUtils.isEmpty(first)) {
+             return;
+         }
+-        int position = mAdapter.getDefaultHomePosition("com.tct.launcher");
++        int position = mAdapter.getDefaultHomePosition("com.tcl.mibc.launcherpro");
+         if (position == -1) {
+             if (DEBUG)
+             Log.w(TAG,"not find default Home");
+Index: frameworks/base/core/res/res/values-zh-rCN/strings.xml
+===================================================================
+--- frameworks/base/core/res/res/values-zh-rCN/strings.xml	(revision 1710)
++++ frameworks/base/core/res/res/values-zh-rCN/strings.xml	(revision 1711)
+@@ -1681,6 +1681,7 @@
+ 	<string name="reboot">重新启动</string>
+ 	<string name="reboot_confirm">您的手机将会重新启动。</string>
+ 	<string name="battery_countdown">您的手机将在十五秒后关机。</string>
++	<string name="global_action_enforce_restart">提示: 长按电源键10秒以上，可强制重启</string>
+     <!-- no translation found for suspended_widget_accessibility (6712143096475264190) -->
+     <skip />
+ 
+Index: frameworks/base/core/res/res/values/locale_config.xml
+===================================================================
+--- frameworks/base/core/res/res/values/locale_config.xml	(revision 1710)
++++ frameworks/base/core/res/res/values/locale_config.xml	(revision 1711)
+@@ -15,492 +15,11 @@
+ -->
+ 
+ <resources>
+-
+     <string-array translatable="false" name="supported_locales">
+-        <item>af-NA</item> <!-- Afrikaans (Namibia) -->
+-        <item>af-ZA</item> <!-- Afrikaans (South Africa) -->
+-        <item>agq-CM</item> <!-- Aghem (Cameroon) -->
+-        <item>ak-GH</item> <!-- Akan (Ghana) -->
+-        <item>am-ET</item> <!-- Amharic (Ethiopia) -->
+-        <item>ar-AE</item> <!-- Arabic (United Arab Emirates) -->
+-        <item>ar-BH</item> <!-- Arabic (Bahrain) -->
+-        <item>ar-DJ</item> <!-- Arabic (Djibouti) -->
+-        <item>ar-DZ</item> <!-- Arabic (Algeria) -->
+-        <item>ar-EG</item> <!-- Arabic (Egypt) -->
+-        <item>ar-EH</item> <!-- Arabic (Western Sahara) -->
+-        <item>ar-ER</item> <!-- Arabic (Eritrea) -->
+-        <item>ar-IL</item> <!-- Arabic (Israel) -->
+-        <item>ar-IQ</item> <!-- Arabic (Iraq) -->
+-        <item>ar-JO</item> <!-- Arabic (Jordan) -->
+-        <item>ar-KM</item> <!-- Arabic (Comoros) -->
+-        <item>ar-KW</item> <!-- Arabic (Kuwait) -->
+-        <item>ar-LB</item> <!-- Arabic (Lebanon) -->
+-        <item>ar-LY</item> <!-- Arabic (Libya) -->
+-        <item>ar-MA</item> <!-- Arabic (Morocco) -->
+-        <item>ar-MR</item> <!-- Arabic (Mauritania) -->
+-        <item>ar-OM</item> <!-- Arabic (Oman) -->
+-        <item>ar-PS</item> <!-- Arabic (Palestine) -->
+-        <item>ar-QA</item> <!-- Arabic (Qatar) -->
+-        <item>ar-SA</item> <!-- Arabic (Saudi Arabia) -->
+-        <item>ar-SD</item> <!-- Arabic (Sudan) -->
+-        <item>ar-SO</item> <!-- Arabic (Somalia) -->
+-        <item>ar-SS</item> <!-- Arabic (South Sudan) -->
+-        <item>ar-SY</item> <!-- Arabic (Syria) -->
+-        <item>ar-TD</item> <!-- Arabic (Chad) -->
+-        <item>ar-TN</item> <!-- Arabic (Tunisia) -->
+-        <item>ar-XB</item> <!-- Right-to-left pseudolocale -->
+-        <item>ar-YE</item> <!-- Arabic (Yemen) -->
+-        <item>as-IN</item> <!-- Assamese (India) -->
+-        <item>asa-TZ</item> <!-- Asu (Tanzania) -->
+-        <item>az-Cyrl-AZ</item> <!-- Azerbaijani (Cyrillic,Azerbaijan) -->
+-        <item>az-Latn-AZ</item> <!-- Azerbaijani (Latin,Azerbaijan) -->
+-        <item>bas-CM</item> <!-- Basaa (Cameroon) -->
+-        <item>be-BY</item> <!-- Belarusian (Belarus) -->
+-        <item>bem-ZM</item> <!-- Bemba (Zambia) -->
+-        <item>bez-TZ</item> <!-- Bena (Tanzania) -->
+-        <item>bg-BG</item> <!-- Bulgarian (Bulgaria) -->
+-        <item>bm-ML</item> <!-- Bambara (Mali) -->
+-        <item>bn-BD</item> <!-- Bengali (Bangladesh) -->
+-        <item>bn-IN</item> <!-- Bengali (India) -->
+-        <item>bo-CN</item> <!-- Tibetan (China) -->
+-        <item>bo-IN</item> <!-- Tibetan (India) -->
+-        <item>br-FR</item> <!-- Breton (France) -->
+-        <item>brx-IN</item> <!-- Bodo (India) -->
+-        <item>bs-Cyrl-BA</item> <!-- Bosnian (Cyrillic,Bosnia & Herzegovina) -->
+-        <item>bs-Latn-BA</item> <!-- Bosnian (Latin,Bosnia & Herzegovina) -->
+-        <item>ca-AD</item> <!-- Catalan (Andorra) -->
+-        <item>ca-ES</item> <!-- Catalan (Spain) -->
+-        <item>ca-FR</item> <!-- Catalan (France) -->
+-        <item>ca-IT</item> <!-- Catalan (Italy) -->
+-        <item>ce-RU</item> <!-- Chechen (Russia) -->
+-        <item>cgg-UG</item> <!-- Chiga (Uganda) -->
+-        <item>chr-US</item> <!-- Cherokee (United States) -->
+-        <item>cs-CZ</item> <!-- Czech (Czech Republic) -->
+-        <item>cy-GB</item> <!-- Welsh (United Kingdom) -->
+-        <item>da-DK</item> <!-- Danish (Denmark) -->
+-        <item>da-GL</item> <!-- Danish (Greenland) -->
+-        <item>dav-KE</item> <!-- Taita (Kenya) -->
+-        <item>de-AT</item> <!-- German (Austria) -->
+-        <item>de-BE</item> <!-- German (Belgium) -->
+-        <item>de-CH</item> <!-- German (Switzerland) -->
+-        <item>de-DE</item> <!-- German (Germany) -->
+-        <item>de-LI</item> <!-- German (Liechtenstein) -->
+-        <item>de-LU</item> <!-- German (Luxembourg) -->
+-        <item>dje-NE</item> <!-- Zarma (Niger) -->
+-        <item>doi-IN</item> <!-- Dogri (India) -->
+-        <item>dsb-DE</item> <!-- Lower Sorbian (Germany) -->
+-        <item>dua-CM</item> <!-- Duala (Cameroon) -->
+-        <item>dyo-SN</item> <!-- Jola-Fonyi (Senegal) -->
+-        <item>dz-BT</item> <!-- Dzongkha (Bhutan) -->
+-        <item>ebu-KE</item> <!-- Embu (Kenya) -->
+-        <item>ee-GH</item> <!-- Ewe (Ghana) -->
+-        <item>ee-TG</item> <!-- Ewe (Togo) -->
+-        <item>el-CY</item> <!-- Greek (Cyprus) -->
+-        <item>el-GR</item> <!-- Greek (Greece) -->
+-        <item>en-AG</item> <!-- English (Antigua & Barbuda) -->
+-        <item>en-AI</item> <!-- English (Anguilla) -->
+-        <item>en-AS</item> <!-- English (American Samoa) -->
+-        <item>en-AT</item> <!-- English (Austria) -->
+-        <item>en-AU</item> <!-- English (Australia) -->
+-        <item>en-BB</item> <!-- English (Barbados) -->
+-        <item>en-BE</item> <!-- English (Belgium) -->
+-        <item>en-BI</item> <!-- English (Burundi) -->
+-        <item>en-BM</item> <!-- English (Bermuda) -->
+-        <item>en-BS</item> <!-- English (Bahamas) -->
+-        <item>en-BW</item> <!-- English (Botswana) -->
+-        <item>en-BZ</item> <!-- English (Belize) -->
+-        <item>en-CA</item> <!-- English (Canada) -->
+-        <item>en-CC</item> <!-- English (Cocos (Keeling) Islands) -->
+-        <item>en-CH</item> <!-- English (Switzerland) -->
+-        <item>en-CK</item> <!-- English (Cook Islands) -->
+-        <item>en-CM</item> <!-- English (Cameroon) -->
+-        <item>en-CX</item> <!-- English (Christmas Island) -->
+-        <item>en-CY</item> <!-- English (Cyprus) -->
+-        <item>en-DE</item> <!-- English (Germany) -->
+-        <item>en-DG</item> <!-- English (Diego Garcia) -->
+-        <item>en-DK</item> <!-- English (Denmark) -->
+-        <item>en-DM</item> <!-- English (Dominica) -->
+-        <item>en-ER</item> <!-- English (Eritrea) -->
+-        <item>en-FI</item> <!-- English (Finland) -->
+-        <item>en-FJ</item> <!-- English (Fiji) -->
+-        <item>en-FK</item> <!-- English (Falkland Islands (Islas Malvinas)) -->
+-        <item>en-FM</item> <!-- English (Micronesia) -->
+-        <item>en-GB</item> <!-- English (United Kingdom) -->
+-        <item>en-GD</item> <!-- English (Grenada) -->
+-        <item>en-GG</item> <!-- English (Guernsey) -->
+-        <item>en-GH</item> <!-- English (Ghana) -->
+-        <item>en-GI</item> <!-- English (Gibraltar) -->
+-        <item>en-GM</item> <!-- English (Gambia) -->
+-        <item>en-GU</item> <!-- English (Guam) -->
+-        <item>en-GY</item> <!-- English (Guyana) -->
+-        <item>en-HK</item> <!-- English (Hong Kong) -->
+-        <item>en-IE</item> <!-- English (Ireland) -->
+-        <item>en-IL</item> <!-- English (Israel) -->
+-        <item>en-IM</item> <!-- English (Isle of Man) -->
+-        <item>en-IN</item> <!-- English (India) -->
+-        <item>en-IO</item> <!-- English (British Indian Ocean Territory) -->
+-        <item>en-JE</item> <!-- English (Jersey) -->
+-        <item>en-JM</item> <!-- English (Jamaica) -->
+-        <item>en-KE</item> <!-- English (Kenya) -->
+-        <item>en-KI</item> <!-- English (Kiribati) -->
+-        <item>en-KN</item> <!-- English (St. Kitts & Nevis) -->
+-        <item>en-KY</item> <!-- English (Cayman Islands) -->
+-        <item>en-LC</item> <!-- English (St. Lucia) -->
+-        <item>en-LR</item> <!-- English (Liberia) -->
+-        <item>en-LS</item> <!-- English (Lesotho) -->
+-        <item>en-MG</item> <!-- English (Madagascar) -->
+-        <item>en-MH</item> <!-- English (Marshall Islands) -->
+-        <item>en-MO</item> <!-- English (Macau) -->
+-        <item>en-MP</item> <!-- English (Northern Mariana Islands) -->
+-        <item>en-MS</item> <!-- English (Montserrat) -->
+-        <item>en-MT</item> <!-- English (Malta) -->
+-        <item>en-MU</item> <!-- English (Mauritius) -->
+-        <item>en-MW</item> <!-- English (Malawi) -->
+-        <item>en-MY</item> <!-- English (Malaysia) -->
+-        <item>en-NA</item> <!-- English (Namibia) -->
+-        <item>en-NF</item> <!-- English (Norfolk Island) -->
+-        <item>en-NG</item> <!-- English (Nigeria) -->
+-        <item>en-NL</item> <!-- English (Netherlands) -->
+-        <item>en-NR</item> <!-- English (Nauru) -->
+-        <item>en-NU</item> <!-- English (Niue) -->
+-        <item>en-NZ</item> <!-- English (New Zealand) -->
+-        <item>en-PG</item> <!-- English (Papua New Guinea) -->
+-        <item>en-PH</item> <!-- English (Philippines) -->
+-        <item>en-PK</item> <!-- English (Pakistan) -->
+-        <item>en-PN</item> <!-- English (Pitcairn Islands) -->
+-        <item>en-PR</item> <!-- English (Puerto Rico) -->
+-        <item>en-PW</item> <!-- English (Palau) -->
+-        <item>en-RW</item> <!-- English (Rwanda) -->
+-        <item>en-SB</item> <!-- English (Solomon Islands) -->
+-        <item>en-SC</item> <!-- English (Seychelles) -->
+-        <item>en-SD</item> <!-- English (Sudan) -->
+-        <item>en-SE</item> <!-- English (Sweden) -->
+-        <item>en-SG</item> <!-- English (Singapore) -->
+-        <item>en-SH</item> <!-- English (St. Helena) -->
+-        <item>en-SI</item> <!-- English (Slovenia) -->
+-        <item>en-SL</item> <!-- English (Sierra Leone) -->
+-        <item>en-SS</item> <!-- English (South Sudan) -->
+-        <item>en-SX</item> <!-- English (Sint Maarten) -->
+-        <item>en-SZ</item> <!-- English (Swaziland) -->
+-        <item>en-TC</item> <!-- English (Turks & Caicos Islands) -->
+-        <item>en-TK</item> <!-- English (Tokelau) -->
+-        <item>en-TO</item> <!-- English (Tonga) -->
+-        <item>en-TT</item> <!-- English (Trinidad & Tobago) -->
+-        <item>en-TV</item> <!-- English (Tuvalu) -->
+-        <item>en-TZ</item> <!-- English (Tanzania) -->
+-        <item>en-UG</item> <!-- English (Uganda) -->
+-        <item>en-UM</item> <!-- English (U.S. Outlying Islands) -->
+-        <item>en-US</item> <!-- English (United States) -->
+-        <item>en-VC</item> <!-- English (St. Vincent & Grenadines) -->
+-        <item>en-VG</item> <!-- English (British Virgin Islands) -->
+-        <item>en-VI</item> <!-- English (U.S. Virgin Islands) -->
+-        <item>en-VU</item> <!-- English (Vanuatu) -->
+-        <item>en-WS</item> <!-- English (Samoa) -->
+-        <item>en-XA</item> <!-- Left-to-right pseudolocale -->
+-        <item>en-ZA</item> <!-- English (South Africa) -->
+-        <item>en-ZM</item> <!-- English (Zambia) -->
+-        <item>en-ZW</item> <!-- English (Zimbabwe) -->
+-        <item>es-AR</item> <!-- Spanish (Argentina) -->
+-        <item>es-BO</item> <!-- Spanish (Bolivia) -->
+-        <item>es-CL</item> <!-- Spanish (Chile) -->
+-        <item>es-CO</item> <!-- Spanish (Colombia) -->
+-        <item>es-CR</item> <!-- Spanish (Costa Rica) -->
+-        <item>es-CU</item> <!-- Spanish (Cuba) -->
+-        <item>es-DO</item> <!-- Spanish (Dominican Republic) -->
+-        <item>es-EA</item> <!-- Spanish (Ceuta & Melilla) -->
+-        <item>es-EC</item> <!-- Spanish (Ecuador) -->
+-        <item>es-ES</item> <!-- Spanish (Spain) -->
+-        <item>es-GQ</item> <!-- Spanish (Equatorial Guinea) -->
+-        <item>es-GT</item> <!-- Spanish (Guatemala) -->
+-        <item>es-HN</item> <!-- Spanish (Honduras) -->
+-        <item>es-IC</item> <!-- Spanish (Canary Islands) -->
+-        <item>es-MX</item> <!-- Spanish (Mexico) -->
+-        <item>es-NI</item> <!-- Spanish (Nicaragua) -->
+-        <item>es-PA</item> <!-- Spanish (Panama) -->
+-        <item>es-PE</item> <!-- Spanish (Peru) -->
+-        <item>es-PH</item> <!-- Spanish (Philippines) -->
+-        <item>es-PR</item> <!-- Spanish (Puerto Rico) -->
+-        <item>es-PY</item> <!-- Spanish (Paraguay) -->
+-        <item>es-SV</item> <!-- Spanish (El Salvador) -->
+-        <item>es-US</item> <!-- Spanish (United States) -->
+-        <item>es-UY</item> <!-- Spanish (Uruguay) -->
+-        <item>es-VE</item> <!-- Spanish (Venezuela) -->
+-        <item>et-EE</item> <!-- Estonian (Estonia) -->
+-        <item>eu-ES</item> <!-- Basque (Spain) -->
+-        <item>ewo-CM</item> <!-- Ewondo (Cameroon) -->
+-        <item>fa-AF</item> <!-- Persian (Afghanistan) -->
+-        <item>fa-IR</item> <!-- Persian (Iran) -->
+-        <item>ff-CM</item> <!-- Fulah (Cameroon) -->
+-        <item>ff-GN</item> <!-- Fulah (Guinea) -->
+-        <item>ff-MR</item> <!-- Fulah (Mauritania) -->
+-        <item>ff-SN</item> <!-- Fulah (Senegal) -->
+-        <item>fi-FI</item> <!-- Finnish (Finland) -->
+-        <item>fil-PH</item> <!-- Filipino (Philippines) -->
+-        <item>fo-DK</item> <!-- Faroese (Denmark) -->
+-        <item>fo-FO</item> <!-- Faroese (Faroe Islands) -->
+-        <item>fr-BE</item> <!-- French (Belgium) -->
+-        <item>fr-BF</item> <!-- French (Burkina Faso) -->
+-        <item>fr-BI</item> <!-- French (Burundi) -->
+-        <item>fr-BJ</item> <!-- French (Benin) -->
+-        <item>fr-BL</item> <!-- French (St. Barthélemy) -->
+-        <item>fr-CA</item> <!-- French (Canada) -->
+-        <item>fr-CD</item> <!-- French (Congo (DRC)) -->
+-        <item>fr-CF</item> <!-- French (Central African Republic) -->
+-        <item>fr-CG</item> <!-- French (Congo (Republic)) -->
+-        <item>fr-CH</item> <!-- French (Switzerland) -->
+-        <item>fr-CI</item> <!-- French (Côte d’Ivoire) -->
+-        <item>fr-CM</item> <!-- French (Cameroon) -->
+-        <item>fr-DJ</item> <!-- French (Djibouti) -->
+-        <item>fr-DZ</item> <!-- French (Algeria) -->
+-        <item>fr-FR</item> <!-- French (France) -->
+-        <item>fr-GA</item> <!-- French (Gabon) -->
+-        <item>fr-GF</item> <!-- French (French Guiana) -->
+-        <item>fr-GN</item> <!-- French (Guinea) -->
+-        <item>fr-GP</item> <!-- French (Guadeloupe) -->
+-        <item>fr-GQ</item> <!-- French (Equatorial Guinea) -->
+-        <item>fr-HT</item> <!-- French (Haiti) -->
+-        <item>fr-KM</item> <!-- French (Comoros) -->
+-        <item>fr-LU</item> <!-- French (Luxembourg) -->
+-        <item>fr-MA</item> <!-- French (Morocco) -->
+-        <item>fr-MC</item> <!-- French (Monaco) -->
+-        <item>fr-MF</item> <!-- French (St. Martin) -->
+-        <item>fr-MG</item> <!-- French (Madagascar) -->
+-        <item>fr-ML</item> <!-- French (Mali) -->
+-        <item>fr-MQ</item> <!-- French (Martinique) -->
+-        <item>fr-MR</item> <!-- French (Mauritania) -->
+-        <item>fr-MU</item> <!-- French (Mauritius) -->
+-        <item>fr-NC</item> <!-- French (New Caledonia) -->
+-        <item>fr-NE</item> <!-- French (Niger) -->
+-        <item>fr-PF</item> <!-- French (French Polynesia) -->
+-        <item>fr-PM</item> <!-- French (St. Pierre & Miquelon) -->
+-        <item>fr-RE</item> <!-- French (Réunion) -->
+-        <item>fr-RW</item> <!-- French (Rwanda) -->
+-        <item>fr-SC</item> <!-- French (Seychelles) -->
+-        <item>fr-SN</item> <!-- French (Senegal) -->
+-        <item>fr-SY</item> <!-- French (Syria) -->
+-        <item>fr-TD</item> <!-- French (Chad) -->
+-        <item>fr-TG</item> <!-- French (Togo) -->
+-        <item>fr-TN</item> <!-- French (Tunisia) -->
+-        <item>fr-VU</item> <!-- French (Vanuatu) -->
+-        <item>fr-WF</item> <!-- French (Wallis & Futuna) -->
+-        <item>fr-YT</item> <!-- French (Mayotte) -->
+-        <item>fur-IT</item> <!-- Friulian (Italy) -->
+-        <item>fy-NL</item> <!-- Western Frisian (Netherlands) -->
+-        <item>ga-IE</item> <!-- Irish (Ireland) -->
+-        <item>gd-GB</item> <!-- Scottish Gaelic (United Kingdom) -->
+-        <item>gl-ES</item> <!-- Galician (Spain) -->
+-        <item>gsw-CH</item> <!-- Swiss German (Switzerland) -->
+-        <item>gsw-FR</item> <!-- Swiss German (France) -->
+-        <item>gsw-LI</item> <!-- Swiss German (Liechtenstein) -->
+-        <item>gu-IN</item> <!-- Gujarati (India) -->
+-        <item>guz-KE</item> <!-- Gusii (Kenya) -->
+-        <item>gv-IM</item> <!-- Manx (Isle of Man) -->
+-        <item>ha-GH</item> <!-- Hausa (Ghana) -->
+-        <item>ha-NE</item> <!-- Hausa (Niger) -->
+-        <item>ha-NG</item> <!-- Hausa (Nigeria) -->
+-        <item>haw-US</item> <!-- Hawaiian (United States) -->
+-        <item>iw-IL</item> <!-- Hebrew (Israel) -->
+-        <item>hi-IN</item> <!-- Hindi (India) -->
+-        <item>hr-BA</item> <!-- Croatian (Bosnia & Herzegovina) -->
+-        <item>hr-HR</item> <!-- Croatian (Croatia) -->
+-        <item>hsb-DE</item> <!-- Upper Sorbian (Germany) -->
+-        <item>hu-HU</item> <!-- Hungarian (Hungary) -->
+-        <item>hy-AM</item> <!-- Armenian (Armenia) -->
+-        <item>in-ID</item> <!-- Indonesian (Indonesia) -->
+-        <item>ig-NG</item> <!-- Igbo (Nigeria) -->
+-        <item>ii-CN</item> <!-- Sichuan Yi (China) -->
+-        <item>is-IS</item> <!-- Icelandic (Iceland) -->
+-        <item>it-CH</item> <!-- Italian (Switzerland) -->
+-        <item>it-IT</item> <!-- Italian (Italy) -->
+-        <item>it-SM</item> <!-- Italian (San Marino) -->
+-        <item>ja-JP</item> <!-- Japanese (Japan) -->
+-        <item>jgo-CM</item> <!-- Ngomba (Cameroon) -->
+-        <item>jmc-TZ</item> <!-- Machame (Tanzania) -->
+-        <item>ka-GE</item> <!-- Georgian (Georgia) -->
+-        <item>kab-DZ</item> <!-- Kabyle (Algeria) -->
+-        <item>kam-KE</item> <!-- Kamba (Kenya) -->
+-        <item>kde-TZ</item> <!-- Makonde (Tanzania) -->
+-        <item>kea-CV</item> <!-- Kabuverdianu (Cape Verde) -->
+-        <item>khq-ML</item> <!-- Koyra Chiini (Mali) -->
+-        <item>ki-KE</item> <!-- Kikuyu (Kenya) -->
+-        <item>kk-KZ</item> <!-- Kazakh (Kazakhstan) -->
+-        <item>kkj-CM</item> <!-- Kako (Cameroon) -->
+-        <item>kl-GL</item> <!-- Kalaallisut (Greenland) -->
+-        <item>kln-KE</item> <!-- Kalenjin (Kenya) -->
+-        <item>km-KH</item> <!-- Khmer (Cambodia) -->
+-        <item>kn-IN</item> <!-- Kannada (India) -->
+-        <item>ko-KP</item> <!-- Korean (North Korea) -->
+-        <item>ko-KR</item> <!-- Korean (South Korea) -->
+-        <item>kok-IN</item> <!-- Konkani (India) -->
+-        <item>ks-IN</item> <!-- Kashmiri (India) -->
+-        <item>ksb-TZ</item> <!-- Shambala (Tanzania) -->
+-        <item>ksf-CM</item> <!-- Bafia (Cameroon) -->
+-        <item>ksh-DE</item> <!-- Colognian (Germany) -->
+-        <item>kw-GB</item> <!-- Cornish (United Kingdom) -->
+-        <item>ky-KG</item> <!-- Kyrgyz (Kyrgyzstan) -->
+-        <item>lag-TZ</item> <!-- Langi (Tanzania) -->
+-        <item>lb-LU</item> <!-- Luxembourgish (Luxembourg) -->
+-        <item>lg-UG</item> <!-- Ganda (Uganda) -->
+-        <item>lkt-US</item> <!-- Lakota (United States) -->
+-        <item>ln-AO</item> <!-- Lingala (Angola) -->
+-        <item>ln-CD</item> <!-- Lingala (Congo (DRC)) -->
+-        <item>ln-CF</item> <!-- Lingala (Central African Republic) -->
+-        <item>ln-CG</item> <!-- Lingala (Congo (Republic)) -->
+-        <item>lo-LA</item> <!-- Lao (Laos) -->
+-        <item>lt-LT</item> <!-- Lithuanian (Lithuania) -->
+-        <item>lu-CD</item> <!-- Luba-Katanga (Congo (DRC)) -->
+-        <item>luo-KE</item> <!-- Luo (Kenya) -->
+-        <item>luy-KE</item> <!-- Luyia (Kenya) -->
+-        <item>lv-LV</item> <!-- Latvian (Latvia) -->
+-        <item>mai-IN</item> <!-- Maithili (India) -->
+-        <item>mas-KE</item> <!-- Masai (Kenya) -->
+-        <item>mas-TZ</item> <!-- Masai (Tanzania) -->
+-        <item>mer-KE</item> <!-- Meru (Kenya) -->
+-        <item>mfe-MU</item> <!-- Morisyen (Mauritius) -->
+-        <item>mg-MG</item> <!-- Malagasy (Madagascar) -->
+-        <item>mgh-MZ</item> <!-- Makhuwa-Meetto (Mozambique) -->
+-        <item>mgo-CM</item> <!-- Metaʼ (Cameroon) -->
+-        <item>mk-MK</item> <!-- Macedonian (Macedonia (FYROM)) -->
+-        <item>ml-IN</item> <!-- Malayalam (India) -->
+-        <item>mn-MN</item> <!-- Mongolian (Mongolia) -->
+-        <item>mni-IN</item> <!-- Manipuri (India) -->
+-        <item>mr-IN</item> <!-- Marathi (India) -->
+-        <item>ms-BN</item> <!-- Malay (Brunei) -->
+-        <item>ms-MY</item> <!-- Malay (Malaysia) -->
+-        <item>ms-SG</item> <!-- Malay (Singapore) -->
+-        <item>mt-MT</item> <!-- Maltese (Malta) -->
+-        <item>my-MM</item> <!-- Burmese (Myanmar (Burma)) -->
+-        <item>mzn-IR</item> <!-- Mazanderani (Iran) -->
+-        <item>naq-NA</item> <!-- Nama (Namibia) -->
+-        <item>nb-NO</item> <!-- Norwegian Bokmål (Norway) -->
+-        <item>nb-SJ</item> <!-- Norwegian Bokmål (Svalbard & Jan Mayen) -->
+-        <item>nd-ZW</item> <!-- North Ndebele (Zimbabwe) -->
+-        <item>ne-IN</item> <!-- Nepali (India) -->
+-        <item>ne-NP</item> <!-- Nepali (Nepal) -->
+-        <item>nl-AW</item> <!-- Dutch (Aruba) -->
+-        <item>nl-BE</item> <!-- Dutch (Belgium) -->
+-        <item>nl-BQ</item> <!-- Dutch (Caribbean Netherlands) -->
+-        <item>nl-CW</item> <!-- Dutch (Curaçao) -->
+-        <item>nl-NL</item> <!-- Dutch (Netherlands) -->
+-        <item>nl-SR</item> <!-- Dutch (Suriname) -->
+-        <item>nl-SX</item> <!-- Dutch (Sint Maarten) -->
+-        <item>nmg-CM</item> <!-- Kwasio (Cameroon) -->
+-        <item>nn-NO</item> <!-- Norwegian Nynorsk (Norway) -->
+-        <item>nnh-CM</item> <!-- Ngiemboon (Cameroon) -->
+-        <item>nus-SS</item> <!-- Nuer (South Sudan) -->
+-        <item>nyn-UG</item> <!-- Nyankole (Uganda) -->
+-        <item>om-ET</item> <!-- Oromo (Ethiopia) -->
+-        <item>om-KE</item> <!-- Oromo (Kenya) -->
+-        <item>or-IN</item> <!-- Oriya (India) -->
+-        <item>os-GE</item> <!-- Ossetic (Georgia) -->
+-        <item>os-RU</item> <!-- Ossetic (Russia) -->
+-        <item>pa-Arab-PK</item> <!-- Punjabi (Arabic,Pakistan) -->
+-        <item>pa-Guru-IN</item> <!-- Punjabi (Gurmukhi,India) -->
+-        <item>pl-PL</item> <!-- Polish (Poland) -->
+-        <item>ps-AF</item> <!-- Pashto (Afghanistan) -->
+-        <item>pt-AO</item> <!-- Portuguese (Angola) -->
+-        <item>pt-BR</item> <!-- Portuguese (Brazil) -->
+-        <item>pt-CV</item> <!-- Portuguese (Cape Verde) -->
+-        <item>pt-GW</item> <!-- Portuguese (Guinea-Bissau) -->
+-        <item>pt-MO</item> <!-- Portuguese (Macau) -->
+-        <item>pt-MZ</item> <!-- Portuguese (Mozambique) -->
+-        <item>pt-PT</item> <!-- Portuguese (Portugal) -->
+-        <item>pt-ST</item> <!-- Portuguese (São Tomé & Príncipe) -->
+-        <item>pt-TL</item> <!-- Portuguese (Timor-Leste) -->
+-        <item>qu-BO</item> <!-- Quechua (Bolivia) -->
+-        <item>qu-EC</item> <!-- Quechua (Ecuador) -->
+-        <item>qu-PE</item> <!-- Quechua (Peru) -->
+-        <item>rm-CH</item> <!-- Romansh (Switzerland) -->
+-        <item>rn-BI</item> <!-- Rundi (Burundi) -->
+-        <item>ro-MD</item> <!-- Romanian (Moldova) -->
+-        <item>ro-RO</item> <!-- Romanian (Romania) -->
+-        <item>rof-TZ</item> <!-- Rombo (Tanzania) -->
+-        <item>ru-BY</item> <!-- Russian (Belarus) -->
+-        <item>ru-KG</item> <!-- Russian (Kyrgyzstan) -->
+-        <item>ru-KZ</item> <!-- Russian (Kazakhstan) -->
+-        <item>ru-MD</item> <!-- Russian (Moldova) -->
+-        <item>ru-RU</item> <!-- Russian (Russia) -->
+-        <item>ru-UA</item> <!-- Russian (Ukraine) -->
+-        <item>rw-RW</item> <!-- Kinyarwanda (Rwanda) -->
+-        <item>rwk-TZ</item> <!-- Rwa (Tanzania) -->
+-        <item>sa-IN</item> <!-- Sanskrit (India) -->
+-        <item>sah-RU</item> <!-- Sakha (Russia) -->
+-        <item>saq-KE</item> <!-- Samburu (Kenya) -->
+-        <item>sat-IN</item> <!-- Santali (India) -->
+-        <item>sbp-TZ</item> <!-- Sangu (Tanzania) -->
+-        <item>sd-IN</item> <!--  Sindhi (India) -->
+-        <item>sdi-IN</item> <!-- Sindhi Devanagri (India) -->
+-        <item>se-FI</item> <!-- Northern Sami (Finland) -->
+-        <item>se-NO</item> <!-- Northern Sami (Norway) -->
+-        <item>se-SE</item> <!-- Northern Sami (Sweden) -->
+-        <item>seh-MZ</item> <!-- Sena (Mozambique) -->
+-        <item>ses-ML</item> <!-- Koyraboro Senni (Mali) -->
+-        <item>sg-CF</item> <!-- Sango (Central African Republic) -->
+-        <item>si-LK</item> <!-- Sinhala (Sri Lanka) -->
+-        <item>sk-SK</item> <!-- Slovak (Slovakia) -->
+-        <item>sl-SI</item> <!-- Slovenian (Slovenia) -->
+-        <item>smn-FI</item> <!-- Inari Sami (Finland) -->
+-        <item>sn-ZW</item> <!-- Shona (Zimbabwe) -->
+-        <item>so-DJ</item> <!-- Somali (Djibouti) -->
+-        <item>so-ET</item> <!-- Somali (Ethiopia) -->
+-        <item>so-KE</item> <!-- Somali (Kenya) -->
+-        <item>so-SO</item> <!-- Somali (Somalia) -->
+-        <item>sq-AL</item> <!-- Albanian (Albania) -->
+-        <item>sq-MK</item> <!-- Albanian (Macedonia (FYROM)) -->
+-        <item>sq-XK</item> <!-- Albanian (Kosovo) -->
+-        <item>sr-Cyrl-BA</item> <!-- Serbian (Cyrillic,Bosnia & Herzegovina) -->
+-        <item>sr-Cyrl-ME</item> <!-- Serbian (Cyrillic,Montenegro) -->
+-        <item>sr-Cyrl-RS</item> <!-- Serbian (Cyrillic,Serbia) -->
+-        <item>sr-Cyrl-XK</item> <!-- Serbian (Cyrillic,Kosovo) -->
+-        <item>sr-Latn-BA</item> <!-- Serbian (Latin,Bosnia & Herzegovina) -->
+-        <item>sr-Latn-ME</item> <!-- Serbian (Latin,Montenegro) -->
+-        <item>sr-Latn-RS</item> <!-- Serbian (Latin,Serbia) -->
+-        <item>sr-Latn-XK</item> <!-- Serbian (Latin,Kosovo) -->
+-        <item>sv-AX</item> <!-- Swedish (Åland Islands) -->
+-        <item>sv-FI</item> <!-- Swedish (Finland) -->
+-        <item>sv-SE</item> <!-- Swedish (Sweden) -->
+-        <item>sw-CD</item> <!-- Swahili (Congo (DRC)) -->
+-        <item>sw-KE</item> <!-- Swahili (Kenya) -->
+-        <item>sw-TZ</item> <!-- Swahili (Tanzania) -->
+-        <item>sw-UG</item> <!-- Swahili (Uganda) -->
+-        <item>ta-IN</item> <!-- Tamil (India) -->
+-        <item>ta-LK</item> <!-- Tamil (Sri Lanka) -->
+-        <item>ta-MY</item> <!-- Tamil (Malaysia) -->
+-        <item>ta-SG</item> <!-- Tamil (Singapore) -->
+-        <item>te-IN</item> <!-- Telugu (India) -->
+-        <item>teo-KE</item> <!-- Teso (Kenya) -->
+-        <item>teo-UG</item> <!-- Teso (Uganda) -->
+-        <item>th-TH</item> <!-- Thai (Thailand) -->
+-        <item>ti-ER</item> <!-- Tigrinya (Eritrea) -->
+-        <item>ti-ET</item> <!-- Tigrinya (Ethiopia) -->
+-        <item>to-TO</item> <!-- Tongan (Tonga) -->
+-        <item>tr-CY</item> <!-- Turkish (Cyprus) -->
+-        <item>tr-TR</item> <!-- Turkish (Turkey) -->
+-        <item>twq-NE</item> <!-- Tasawaq (Niger) -->
+-        <item>tzm-MA</item> <!-- Central Atlas Tamazight (Morocco) -->
+-        <item>ug-CN</item> <!-- Uyghur (China) -->
+-        <item>uk-UA</item> <!-- Ukrainian (Ukraine) -->
+-        <item>ur-IN</item> <!-- Urdu (India) -->
+-        <item>ur-PK</item> <!-- Urdu (Pakistan) -->
+-        <item>uz-Arab-AF</item> <!-- Uzbek (Arabic,Afghanistan) -->
+-        <item>uz-Cyrl-UZ</item> <!-- Uzbek (Cyrillic,Uzbekistan) -->
+-        <item>uz-Latn-UZ</item> <!-- Uzbek (Latin,Uzbekistan) -->
+-        <item>vi-VN</item> <!-- Vietnamese (Vietnam) -->
+-        <item>vun-TZ</item> <!-- Vunjo (Tanzania) -->
+-        <item>wae-CH</item> <!-- Walser (Switzerland) -->
+-        <item>xog-UG</item> <!-- Soga (Uganda) -->
+-        <item>yav-CM</item> <!-- Yangben (Cameroon) -->
+-        <item>yo-BJ</item> <!-- Yoruba (Benin) -->
+-        <item>yo-NG</item> <!-- Yoruba (Nigeria) -->
+-        <item>zgh-MA</item> <!-- Standard Moroccan Tamazight (Morocco) -->
+         <item>zh-Hans-CN</item> <!-- Chinese (Simplified Han,China) -->
+-        <item>zh-Hans-HK</item> <!-- Chinese (Simplified Han,Hong Kong) -->
+-        <item>zh-Hans-MO</item> <!-- Chinese (Simplified Han,Macau) -->
+-        <item>zh-Hans-SG</item> <!-- Chinese (Simplified Han,Singapore) -->
+-        <item>zh-Hant-HK</item> <!-- Chinese (Traditional Han,Hong Kong) -->
+-        <item>zh-Hant-MO</item> <!-- Chinese (Traditional Han,Macau) -->
+-        <item>zh-Hant-TW</item> <!-- Chinese (Traditional Han,Taiwan) -->
+-        <item>zu-ZA</item> <!-- Zulu (South Africa) -->
++    	<item>en-US</item> <!-- English (United States) -->
++    	<item>en-GB</item> <!-- English (United Kingdom) -->
++    	<item>zh-Hant-HK</item> <!-- Chinese (Traditional Han,Hong Kong) -->
++    	<item>zh-Hant-TW</item> <!-- Chinese (Traditional Han,Taiwan) -->        
+     </string-array>
+-
+ </resources>
+Index: frameworks/base/core/res/res/values/strings.xml
+===================================================================
+--- frameworks/base/core/res/res/values/strings.xml	(revision 1710)
++++ frameworks/base/core/res/res/values/strings.xml	(revision 1711)
+@@ -4527,4 +4527,5 @@
+   <string name="reboot">Reboot</string>
+   <string name="reboot_confirm">Your phone will reboot</string>
+   <string name="battery_countdown">Your phone will shut down after 15 seconds.</string>
++  <string name="global_action_enforce_restart">Tip: Press and hold power key for 10s or more to forcibly reboot.</string>
+ </resources>
+Index: frameworks/base/core/res/res/values/config.xml
+===================================================================
+--- frameworks/base/core/res/res/values/config.xml	(revision 1710)
++++ frameworks/base/core/res/res/values/config.xml	(revision 1711)
+@@ -1580,10 +1580,10 @@
+     <bool name="config_mms_content_disposition_support">true</bool>
+ 
+     <!-- MMS user agent string -->
+-    <string name="config_mms_user_agent" translatable="false">Android-Mms/0.1</string>
++    <string name="config_mms_user_agent" translatable="false">980CN1-MMS/2.0</string>
+ 
+     <!-- MMS user agent prolfile url -->
+-    <string name="config_mms_user_agent_profile_url" translatable="false">http://www.google.com/oha/rdf/ua-profile-kila.xml</string>
++    <string name="config_mms_user_agent_profile_url" translatable="false">http://www-ccpp.tcl-ta.com/files/980cn1.xml</string>
+ 
+     <!-- National Language Identifier codes for the following two config items.
+          (from 3GPP TS 23.038 V9.1.1 Table 6.2.1.2.4.1):
+Index: frameworks/base/packages/SettingsProvider/res/values/defaults.xml
+===================================================================
+--- frameworks/base/packages/SettingsProvider/res/values/defaults.xml	(revision 1710)
++++ frameworks/base/packages/SettingsProvider/res/values/defaults.xml	(revision 1711)
+@@ -33,7 +33,7 @@
+     <bool name="def_accelerometer_rotation">true</bool>
+     <!-- Default screen brightness, from 0 to 255.  102 is 40%. -->
+     <integer name="def_screen_brightness">102</integer>
+-    <bool name="def_screen_brightness_automatic_mode">false</bool>
++    <bool name="def_screen_brightness_automatic_mode">true</bool>
+     <fraction name="def_window_animation_scale">100%</fraction>
+     <fraction name="def_window_transition_scale">100%</fraction>
+     <bool name="def_haptic_feedback">true</bool>
+@@ -224,12 +224,14 @@
+     <integer name="def_navigation_bar_layout">0</integer>
+     <integer name="def_navigation_bar_background_index">0</integer>
+     <integer name="def_navigation_bar_background_color">0x00000000</integer>
++	
++	<string name="enabled_input_methods" translatable="false">com.sohu.inputmethod.sogou/.SogouIME</string>
++	<string name="def_input_method">com.sohu.inputmethod.sogou/.SogouIME</string>
++	
++	
+     <!-- ADD-E By Justin.Shen for Hide/Show navigation-bar -->
+ 	
+ 	<!-- Add for unlock device by touch fingerprint sensor start -->
+ 	<integer name="def_fingerprint_unlock_device">1</integer>
+ 	<!-- Add for unlock device by touch fingerprint sensor end -->
+-	
+-	<string name="enabled_input_methods" translatable="false">com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME</string>
+-	<string name="def_input_method">com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME</string>
+ </resources>
+Index: frameworks/base/packages/Keyguard/res/layout/keyguard_status_view.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/layout/keyguard_status_view.xml	(revision 1710)
++++ frameworks/base/packages/Keyguard/res/layout/keyguard_status_view.xml	(revision 1711)
+@@ -42,7 +42,7 @@
+             android:layout_gravity="center_horizontal"
+             android:textColor="@color/clock_white"
+             android:singleLine="true"
+-            style="@style/widget_big_thin_customer"
++            style="@style/widget_big_thin"
+             android:format12Hour="@string/keyguard_widget_12_hours_format"
+             android:format24Hour="@string/keyguard_widget_24_hours_format"
+             android:layout_marginBottom="@dimen/bottom_text_spacing_digital" />
+Index: frameworks/opt/net/wifi/service/java/com/android/server/wifi/p2p/WifiP2pServiceImpl.java
+===================================================================
+--- frameworks/opt/net/wifi/service/java/com/android/server/wifi/p2p/WifiP2pServiceImpl.java	(revision 1710)
++++ frameworks/opt/net/wifi/service/java/com/android/server/wifi/p2p/WifiP2pServiceImpl.java	(revision 1711)
+@@ -3947,7 +3947,7 @@
+              * default that has low likelihood of collision with a peer */
+             String id = Settings.Secure.getString(mContext.getContentResolver(),
+                     Settings.Secure.ANDROID_ID);
+-            return "TCL V760" + id.substring(0,4);
++            return "TCL V760";
+         }
+         return deviceName;
+     }

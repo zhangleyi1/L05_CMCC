@@ -1,0 +1,30 @@
+Index: frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 8599)
++++ frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 8600)
+@@ -6274,7 +6274,7 @@
+         String runningActivity=activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
+         return runningActivity;
+     }
+-
++	/*
+     private BroadcastReceiver mSimPINKeyguardReceiver = new BroadcastReceiver() { 
+     	@Override        
+ 		public void onReceive(Context context, Intent intent) {
+@@ -6286,6 +6286,7 @@
+ 			}        
+ 		}    
+ 	};
++	*/
+ 	private BroadcastReceiver mUnbindFaceServiceReceiver = new BroadcastReceiver() { 
+     	@Override        
+ 		public void onReceive(Context context, Intent intent) {
+@@ -7199,7 +7200,7 @@
+             return;
+         }
+         Log.d(TAG,"startFaceVerify():keyguardOn()="+keyguardOn() + " : simsecure=" + mKeyguardDelegate.isSimSecure());
+-        if (keyguardOn() && mKeyguardDelegate.isSimSecure()) {
++        if (mKeyguardDelegate.isSimSecure()) {
+             //in sim lock state, so do not continue FaceVerify
+             if (mAwake) {
+                 Log.d(TAG,"startFaceVerify(), return cause sim lock state.");

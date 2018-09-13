@@ -1,0 +1,12 @@
+Index: device/mediatek/mt6739/device.mk
+===================================================================
+--- device/mediatek/mt6739/device.mk	(revision 1772)
++++ device/mediatek/mt6739/device.mk	(revision 1773)
+@@ -113,6 +113,7 @@
+ PRODUCT_PACKAGES += AlarmProvider
+ PRODUCT_PACKAGES += Bluetooth
+ PRODUCT_PACKAGES += Calendar
++PRODUCT_PACKAGES += Calculator
+ PRODUCT_PACKAGES += CertInstaller
+ PRODUCT_PACKAGES += DrmProvider
+ PRODUCT_PACKAGES += Email

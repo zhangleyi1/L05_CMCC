@@ -1,0 +1,15 @@
+Index: device/mediatek/mt6739/init.mt6739.rc
+===================================================================
+--- device/mediatek/mt6739/init.mt6739.rc	(revision 2438)
++++ device/mediatek/mt6739/init.mt6739.rc	(revision 2439)
+@@ -1005,6 +1005,10 @@
+ start atci_service
+ start atcid-daemon-u
+ 
++on property:persist.sys.curef=*
++    setprop ro.tct.curef $persist.sys.curef
++
++
+ service audio-daemon /vendor/bin/audiocmdservice_atci
+     class main
+     socket atci-audio stream 660 root system

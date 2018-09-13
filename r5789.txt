@@ -1,0 +1,17 @@
+Index: frameworks/base/telephony/java/android/telephony/SignalStrength.java
+===================================================================
+--- frameworks/base/telephony/java/android/telephony/SignalStrength.java	(revision 5788)
++++ frameworks/base/telephony/java/android/telephony/SignalStrength.java	(revision 5789)
+@@ -675,10 +675,9 @@
+         if(isGsm()) {
+             dBm = getLteDbm();
+             if (dBm == INVALID) {
+-                if (getTdScdmaLevel() == SIGNAL_STRENGTH_NONE_OR_UNKNOWN) {
++                dBm = getTdScdmaDbm();
++                if (INVALID == dBm) {
+                     dBm = getGsmDbm();
+-                } else {
+-                    dBm = getTdScdmaDbm();
+                 }
+             }
+         } else {

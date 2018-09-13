@@ -1,0 +1,60 @@
+Index: frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 8322)
++++ frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 8323)
+@@ -1798,7 +1798,10 @@
+ 		simPinKeyguardfilter.addAction(SIM_PIN_KEYGUARD_START);
+ 		simPinKeyguardfilter.addAction(SIM_PIN_KEYGUARD_STOP);
+ 		context.registerReceiver(mSimPINKeyguardReceiver, simPinKeyguardfilter);
+-		
++		// register for unbind_stop_face_service
++		IntentFilter unbindFaceServiceFilter = new IntentFilter();
++		unbindFaceServiceFilter.addAction(UNBIND_STOP_FACE_SERVICE);
++		context.registerReceiver(mUnbindFaceServiceReceiver, unbindFaceServiceFilter);
+         // monitor for system gestures
+         mSystemGestures = new SystemGesturesPointerEventListener(context,
+                 new SystemGesturesPointerEventListener.Callbacks() {
+@@ -6281,6 +6284,22 @@
+ 			}        
+ 		}    
+ 	};
++	private BroadcastReceiver mUnbindFaceServiceReceiver = new BroadcastReceiver() { 
++    	@Override        
++		public void onReceive(Context context, Intent intent) {
++            String action = intent.getAction();
++			Log.e("yujunjie","PhoneWindowManager:onReceive()...action = "+action);
++            if(action == UNBIND_STOP_FACE_SERVICE){
++				if ( mFaceVerifyConn!= null){
++					 Log.d(TAG,"*camera stop face service ** stopFaceIdentify start");
++					 exitFaceVerify();
++					 Log.d(TAG,"*Double click stop face service ** stopFaceIdentify end");
++				} else {
++					 Log.e(TAG,"errror when Double click stop face service **");
++				}
++			}
++        }         
++	};
+ 	/** {@inheritDoc} */
+ 	@Override
+     public int interceptKeyBeforeQueueing(KeyEvent event, int policyFlags) {
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java	(revision 8322)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java	(revision 8323)
+@@ -215,6 +215,7 @@
+ 	private static final String MUSIC="com.alcatel.music5";
+ 	private static final String TORCH="com.google.torch";
+ 	private static final String FUNC_SETTINGS="com.android.settings";
++	private final static String UNBIND_STOP_FACE_SERVICE = "unbind_stop_face_service";
+ 	
+ 	private int	mTorchIndex=-1;
+ 	private Camera.Parameters p ;
+@@ -1117,6 +1118,8 @@
+ 						}else{
+ 							startApp(mContext,packagerName);															
+ 						}
++						Intent intent =new Intent(UNBIND_STOP_FACE_SERVICE);
++						mContext.sendBroadcast(intent);
+                     }
+                 }
+             }

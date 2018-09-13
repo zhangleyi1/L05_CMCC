@@ -1,0 +1,12 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 8004)
++++ vendor/customer/custom.mk	(revision 8005)
+@@ -20,7 +20,6 @@
+                     SogouInput \
+                     MainApp \
+                     10086android \
+-                    mmnes \
+                     139mail \
+                     Baidu
+ 

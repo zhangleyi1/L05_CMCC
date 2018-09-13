@@ -1,0 +1,39 @@
+Index: frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 3978)
++++ frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 3979)
+@@ -9285,7 +9285,7 @@
+ 				Log.i(TAG, "mKeyReceiver:" + keycode);
+ 				switch(keycode) { 
+ 					case KeyEvent.KEYCODE_SYSRQ:
+-						m3PTouchScreenshot = Secure.getInt(context.getContentResolver(), Secure.THREE_FINGER_SHOTSCREEN_ENABLED, 0)==1;
++						m3PTouchScreenshot = Secure.getInt(context.getContentResolver(), Secure.THREE_FINGER_SHOTSCREEN_ENABLED, 1)==1;
+ 						Log.i(TAG, "m3PTouchScreenshot:" + m3PTouchScreenshot);
+ 						if(m3PTouchScreenshot){
+ 							Handler handler=new Handler();
+Index: packages/apps/Settings/src/com/android/settings/gestures/GestureSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/gestures/GestureSettings.java	(revision 3978)
++++ packages/apps/Settings/src/com/android/settings/gestures/GestureSettings.java	(revision 3979)
+@@ -117,7 +117,7 @@
+         }
+ 		//add by wqq start{
+ 		int threeFingerShotscreenEnabled = Secure.getInt(
+-                    getContentResolver(), Secure.THREE_FINGER_SHOTSCREEN_ENABLED, 0);
++                    getContentResolver(), Secure.THREE_FINGER_SHOTSCREEN_ENABLED, 1);
+ 		addPreference(THREE_FINGER_SHOTSCREEN, threeFingerShotscreenEnabled != 0);
+ 		
+ 		int filpToMuteEnabled = Secure.getInt(
+Index: packages/apps/Settings/res/values/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values/strings.xml	(revision 3978)
++++ packages/apps/Settings/res/values/strings.xml	(revision 3979)
+@@ -8027,7 +8027,7 @@
+ 	<string name="double_tap_prefrence_title">Double tap screen</string>
+ 	<string name="double_tap_prefrence_summary">When screen is off, double tap to light up. </string>
+ 	<string name="three_finger_screenshot_title">Three fingers screenshot</string>
+-	<string name="three_finger_screenshot_summary">Slide 3 fingers simultaneously in a downwards motion on screen to make screenshot.</string>
++	<string name="three_finger_screenshot_summary">Swipe down with 3 fingers simultaneously to make a screenshot.</string>
+ 	<!--add for tcl gesture end-->
+ 
+     <string name="reset_attention">Erase all data and reset to factory defaults? Your device will restart to perform a factory reset. This action can not be undone.</string>

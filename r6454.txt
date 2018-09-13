@@ -1,0 +1,36 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AppUtils.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AppUtils.java	(revision 6453)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AppUtils.java	(revision 6454)
+@@ -23,6 +23,7 @@
+ import com.android.systemui.db.AppDB;
+ 
+ import java.util.ArrayList;
++import java.util.Arrays;
+ import java.util.HashSet;
+ import java.util.List;
+ import java.util.Set;
+@@ -57,6 +58,12 @@
+     private static int defaultNum=0;
+     private static List<AppInfo> list;
+     public static AppDB db;
++    private static final List<String> HIDE_PACKAGES = Arrays.asList(
++            "com.mediatek.op01.plugin",
++            "com.tcl.mibc.launcherpro",
++            "com.android.stk",
++            "com.tcl.ota.cn"
++    );
+     public static void startMusicApp(Context mContext){     
+         String packagerName="com.android.music";
+         String activityPath="com.android.music.MusicBrowserActivity";
+@@ -200,7 +207,9 @@
+                     }
+                     app.setPackerName(info.packageName);
+                     app.setIndex(APPS_LIST);
+-                    list.add(app);
++                    if (!HIDE_PACKAGES.contains(info.packageName)) {
++                        list.add(app);
++                    }
+                 }
+                 if(list.size()>0){
+                     list= getAppInfo(activity,list);

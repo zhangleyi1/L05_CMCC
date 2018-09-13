@@ -1,0 +1,17 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/setting/SubSelectActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/setting/SubSelectActivity.java	(revision 8621)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/setting/SubSelectActivity.java	(revision 8622)
+@@ -323,6 +323,12 @@
+                                     EditorInfo.TYPE_CLASS_TEXT | EditorInfo.TYPE_CLASS_PHONE);
+                             mNumberText.computeScroll();
+                             mNumberText.setText(scNumber);
++                            //Dj add for 114719 by zhangle at 2018/02/27 start
++                            android.text.Editable edit = mNumberText.getText();
++                            if ( edit != null ) {
++                                mNumberText.setSelection(edit.length());
++                            }
++                            //Dj add for 114719 by zhangle at 2018/02/27 end
+                             mNumberTextDialog = dialog.setIcon(
+                                     R.drawable.ic_dialog_info_holo_light).setTitle(
+                                     R.string.sms_service_center).setView(mNumberText)

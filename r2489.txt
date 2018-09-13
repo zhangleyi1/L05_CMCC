@@ -1,0 +1,26 @@
+Index: frameworks/native/data/etc/handheld_core_hardware.xml
+===================================================================
+--- frameworks/native/data/etc/handheld_core_hardware.xml	(revision 2488)
++++ frameworks/native/data/etc/handheld_core_hardware.xml	(revision 2489)
+@@ -27,7 +27,7 @@
+     <feature name="android.hardware.camera" />
+     <feature name="android.hardware.location" />
+     <feature name="android.hardware.location.network" />
+-    <feature name="android.hardware.sensor.compass" />
++    <!--<feature name="android.hardware.sensor.compass" />-->
+     <feature name="android.hardware.sensor.accelerometer" />
+     <feature name="android.hardware.bluetooth" />
+     <feature name="android.hardware.touchscreen" />
+Index: frameworks/native/data/etc/tablet_core_hardware.xml
+===================================================================
+--- frameworks/native/data/etc/tablet_core_hardware.xml	(revision 2488)
++++ frameworks/native/data/etc/tablet_core_hardware.xml	(revision 2489)
+@@ -26,7 +26,7 @@
+     <feature name="android.hardware.audio.output" />
+     <feature name="android.hardware.location" />
+     <feature name="android.hardware.location.network" />
+-    <feature name="android.hardware.sensor.compass" />
++    <!--<feature name="android.hardware.sensor.compass" />-->
+     <feature name="android.hardware.sensor.accelerometer" />
+     <feature name="android.hardware.bluetooth" />
+     <feature name="android.hardware.touchscreen" />

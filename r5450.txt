@@ -1,0 +1,26 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/mediatek/music/ext/Op01MusicTrackBrowserExtension.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/mediatek/music/ext/Op01MusicTrackBrowserExtension.java	(revision 5449)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/mediatek/music/ext/Op01MusicTrackBrowserExtension.java	(revision 5450)
+@@ -64,6 +64,10 @@
+     private static final int REQUEST_TO_ADD_SONG_TO_PLAYLIST
+                              = PluginUtils.ACTIVITY_REQUEST_CODE_BASE_ID;
+     private static final String SELECT_FILE_FROM_FILEMANAGER = "com.mediatek.filemanager.ADD_FILE";
++    private static final String EXTERNAL_STORAGE
++            = "content://com.jrdcom.filemanager.fileProvider/external_storage/";
++    private static final String STORAGE
++            = "content://com.jrdcom.filemanager.fileProvider/path/storage/";
+ 
+     /**
+      * Constructor.
+@@ -178,8 +182,8 @@
+             return;
+         }
+ 
+-        data = data.replaceAll("'", "''");
+-        data = data.replaceFirst("file://", "");
++        data = data.replace(EXTERNAL_STORAGE, "");
++        data = data.replace(STORAGE, "");
+ 
+         String where = MediaStore.Audio.Media.DATA + " LIKE '%" + data + "'";
+         Cursor cursor =

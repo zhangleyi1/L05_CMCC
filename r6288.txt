@@ -1,0 +1,13 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java	(revision 6287)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java	(revision 6288)
+@@ -3080,7 +3080,7 @@
+         // add for op plugin
+         mOpComposeExt = OpMessageUtils.getOpMessagePlugin().getOpComposeExt();
+ 
+-        mMessageSubId = (int) Settings.System.getLong(getContentReslver(),
++        mMessageSubId = (int) Settings.System.getLong(getContentResolver(),
+                 Settings.System.SMS_SIM_SETTING, Settings.System.DEFAULT_SIM_NOT_SET);
+ 
+         mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

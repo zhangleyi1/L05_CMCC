@@ -1,0 +1,32 @@
+Index: vendor/customer/apps/mmnes/mmnes1.3.0_release_online_5410232117_20180129.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mmnes/Android.mk
+===================================================================
+--- vendor/customer/apps/mmnes/Android.mk	(revision 7822)
++++ vendor/customer/apps/mmnes/Android.mk	(revision 7823)
+@@ -3,7 +3,7 @@
+ include $(CLEAR_VARS)
+ LOCAL_MODULE := mmnes
+ LOCAL_MODULE_TAGS := optional
+-LOCAL_SRC_FILES := mmnes1.3.0_release_online_5410232117_20180129.apk
++LOCAL_SRC_FILES := mmnes1.3.0_release_online_5410232117.apk
+ LOCAL_MODULE_CLASS := APPS
+ LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+ LOCAL_CERTIFICATE := PRESIGNED
+Index: vendor/customer/apps/mmnes/mmnes1.3.0_release_online_5410232117.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mmnes/mmnes1.3.0_release_online_5410232117.apk
+===================================================================
+--- vendor/customer/apps/mmnes/mmnes1.3.0_release_online_5410232117.apk	(revision 0)
++++ vendor/customer/apps/mmnes/mmnes1.3.0_release_online_5410232117.apk	(revision 7823)
+
+Property changes on: vendor/customer/apps/mmnes/mmnes1.3.0_release_online_5410232117.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

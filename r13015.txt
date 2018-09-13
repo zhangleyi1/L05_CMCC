@@ -1,0 +1,14 @@
+Index: packages/apps/ContactsCommon/src/com/android/contacts/common/vcard/NotificationImportExportListener.java
+===================================================================
+--- packages/apps/ContactsCommon/src/com/android/contacts/common/vcard/NotificationImportExportListener.java	(revision 13014)
++++ packages/apps/ContactsCommon/src/com/android/contacts/common/vcard/NotificationImportExportListener.java	(revision 13015)
+@@ -118,7 +118,8 @@
+         /// M: ALPS03308908, can't display finished notification
+         // @{
+         int percentage = (int )(((double )currentCount)/totalCount * 100);
+-        if (percentage == mPercentage) {
++
++        if (percentage == mPercentage || percentage%5 != 0) {
+             return;
+         }
+         mPercentage = percentage;

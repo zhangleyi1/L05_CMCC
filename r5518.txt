@@ -1,0 +1,30 @@
+Index: vendor/customer/apps/MobileWallet/MobileWallet7145201712221943signed1003sec.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/MobileWallet/MobileWallet7145201712221943signed1003sec.apk
+===================================================================
+--- vendor/customer/apps/MobileWallet/MobileWallet7145201712221943signed1003sec.apk	(revision 0)
++++ vendor/customer/apps/MobileWallet/MobileWallet7145201712221943signed1003sec.apk	(revision 5518)
+
+Property changes on: vendor/customer/apps/MobileWallet/MobileWallet7145201712221943signed1003sec.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/NewsArticle/NewsArticle_yd2017_tcl_v760_v6.1.7_10b3cc9_2018-01-05_23-56-49.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/NewsArticle/NewsArticle_yd2017_tcl_v760_v6.1.7_10b3cc9_2018-01-05_23-56-49.apk
+===================================================================
+--- vendor/customer/apps/NewsArticle/NewsArticle_yd2017_tcl_v760_v6.1.7_10b3cc9_2018-01-05_23-56-49.apk	(revision 0)
++++ vendor/customer/apps/NewsArticle/NewsArticle_yd2017_tcl_v760_v6.1.7_10b3cc9_2018-01-05_23-56-49.apk	(revision 5518)
+
+Property changes on: vendor/customer/apps/NewsArticle/NewsArticle_yd2017_tcl_v760_v6.1.7_10b3cc9_2018-01-05_23-56-49.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

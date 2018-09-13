@@ -1,0 +1,10 @@
+Index: vendor/mediatek/proprietary/packages/apps/BrowserOverlay/res/values/isdm_BrowserRes_defaults.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BrowserOverlay/res/values/isdm_BrowserRes_defaults.xml	(revision 9795)
++++ vendor/mediatek/proprietary/packages/apps/BrowserOverlay/res/values/isdm_BrowserRes_defaults.xml	(revision 9796)
+@@ -32,4 +32,5 @@
+     <string name="def_uaProfUrl_forBrowser">"http://www-ccpp.tcl-ta.com/files/980cn1.xml"</string>
+     <string name="def_browser_useragent">"Mozilla/5.0 (Linux; Android 7.1.1;zh-cn;980CN1 Build/N6F26Q) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/59.0.3071.125 Mobile Safari/537.36"</string>
+     <bool name="def_browser_ua_appVersion_on">false</bool>
++    <string name="def_ua_language_is_customized">"1"</string>
+ </resources>

@@ -1,0 +1,15 @@
+Index: vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FMMediaButtonIntentReceiver.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FMMediaButtonIntentReceiver.java	(revision 2454)
++++ vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FMMediaButtonIntentReceiver.java	(revision 2455)
+@@ -79,6 +79,10 @@
+                 default:
+                     break;
+             }
++            
++            }
++          }
++          
+ 
+     public static void sendToStartService() {
+         Intent i = new Intent(mContext, FmService.class);

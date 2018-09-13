@@ -1,0 +1,12 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 16791)
++++ vendor/customer/custom.mk	(revision 16792)
+@@ -13,7 +13,6 @@
+                     CameraOverlay \
+                     Gallery_Global \
+                     BaiDuMap \
+-                    Games \
+                     WPSoffice \
+                     HiLauncher \
+                     HiLauncherOverlay \

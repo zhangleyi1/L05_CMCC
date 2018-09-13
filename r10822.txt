@@ -1,0 +1,17 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarPolicy.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarPolicy.java	(revision 10821)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarPolicy.java	(revision 10822)
+@@ -285,10 +285,10 @@
+             volumeDescription = mContext.getString(R.string.accessibility_ringer_vibrate);
+         }
+ 
+-        if (zenVisible) {
++        if (zenVisible  && !isDial) {
+             mIconController.setIcon(mSlotZen, zenIconId, zenDescription);
+         }
+-        if (zenVisible != mZenVisible) {
++        if (zenVisible != mZenVisible  && !isDial) {
+             mIconController.setIconVisibility(mSlotZen, zenVisible);
+             mZenVisible = zenVisible;
+         }

@@ -1,0 +1,29 @@
+Index: packages/apps/Settings/src/com/android/settings/wifi/p2p/WifiP2pSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/wifi/p2p/WifiP2pSettings.java	(revision 1842)
++++ packages/apps/Settings/src/com/android/settings/wifi/p2p/WifiP2pSettings.java	(revision 1843)
+@@ -497,7 +497,7 @@
+                 public void afterTextChanged(Editable s) {
+                     if (null != mDialog) {
+                         String name = mDeviceNameText.getText().toString();
+-                        if ((null == name) || name.isEmpty()) {
++                        if ((null == name) || name.trim().isEmpty()) {
+                             mDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                         } else {
+                             mDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+Index: packages/apps/Settings/src/com/mediatek/wifi/WifiConfigControllerExt.java
+===================================================================
+--- packages/apps/Settings/src/com/mediatek/wifi/WifiConfigControllerExt.java	(revision 1842)
++++ packages/apps/Settings/src/com/mediatek/wifi/WifiConfigControllerExt.java	(revision 1843)
+@@ -113,9 +113,9 @@
+         }
+         int keyLength = password.length();
+         /// M: ALPS03001760, confirmed by wap_supplicant, we don't support WEP-152 AP
+-        if (((keyLength == 10 || keyLength == 26) && password
++        if ((/*(keyLength == 10 || keyLength == 26)&& */ password
+                 .matches("[0-9A-Fa-f]*"))
+-                || (keyLength == 5 || keyLength == 13)) {
++                /*|| (keyLength == 5 || keyLength == 13)*/ && keyLength > 7) {
+             return true;
+         }
+         return false;

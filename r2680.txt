@@ -1,0 +1,26 @@
+Index: vendor/mediatek/proprietary/packages/apps/FMRadio/res/values-en-rGB/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/FMRadio/res/values-en-rGB/strings.xml	(revision 2679)
++++ vendor/mediatek/proprietary/packages/apps/FMRadio/res/values-en-rGB/strings.xml	(revision 2680)
+@@ -17,7 +17,7 @@
+ 
+ <resources xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="app_name" msgid="6295623783273502721">"FM Radio"</string>
++    <string name="app_name" msgid="6295623783273502721">"Radio"</string>
+     <string name="toast_station_searched" msgid="4804871039582320419">"Available stations found:"</string>
+     <string name="toast_cannot_search" msgid="8816492120732683772">"Cannot find available station."</string>
+     <string name="optmenu_speaker" msgid="3726411287495057671">"Speaker"</string>
+Index: vendor/mediatek/proprietary/packages/apps/FMRadio/res/values/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/FMRadio/res/values/strings.xml	(revision 2679)
++++ vendor/mediatek/proprietary/packages/apps/FMRadio/res/values/strings.xml	(revision 2680)
+@@ -17,7 +17,7 @@
+ 
+ <resources>
+     <!-- Application name shown in Launcher [CHAR LIMIT=20] -->
+-    <string name="app_name">FM Radio</string>
++    <string name="app_name">Radio</string>
+     <!-- Toast message shown after we refresh radio stations successfully [CHAR LIMIT=50] -->
+     <string name="toast_station_searched">Searched out available stations:</string>
+     <!-- Toast message shown after we refresh radio stations failed [CHAR LIMIT=50] -->

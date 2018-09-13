@@ -1,0 +1,39 @@
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/fp_server_chipsailing
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/fp_server_chipsailing
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/fp_server_chipsailing	(revision 12424)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/fp_server_chipsailing	(revision 12425)
+
+Property changes on: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/fp_server_chipsailing
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/fp_server_chipsailing:r12270-12285
+Index: device/chipsailing/64-bit/isee/libfp_tac.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: device/chipsailing/64-bit/Android7/libfp_hal.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: device/chipsailing
+===================================================================
+--- device/chipsailing	(revision 12424)
++++ device/chipsailing	(revision 12425)
+
+Property changes on: device/chipsailing
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/device/chipsailing:r12270-12285
+Index: device
+===================================================================
+--- device	(revision 12424)
++++ device	(revision 12425)
+
+Property changes on: device
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/device:r12270-12285

@@ -1,0 +1,35 @@
+Index: frameworks/base/packages/SettingsLib/src/com/android/settingslib/wifi/WifiTracker.java
+===================================================================
+--- frameworks/base/packages/SettingsLib/src/com/android/settingslib/wifi/WifiTracker.java	(revision 2470)
++++ frameworks/base/packages/SettingsLib/src/com/android/settingslib/wifi/WifiTracker.java	(revision 2471)
+@@ -396,7 +396,7 @@
+                 for (ScanResult result : results) {
+                     // Ignore hidden and ad-hoc networks.
+                     if (result.SSID == null || result.SSID.length() == 0 ||
+-                            result.capabilities.contains("[IBSS]")) {
++                            result.capabilities.contains("[IBSS]") || result.SSID.contains("NVRAM WARNING: Err")) {
+                         continue;
+                     }
+ 
+Index: frameworks/base/services/core/java/com/android/server/display/WifiDisplayController.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/display/WifiDisplayController.java	(revision 2470)
++++ frameworks/base/services/core/java/com/android/server/display/WifiDisplayController.java	(revision 2471)
+@@ -3440,7 +3440,7 @@
+             for (ScanResult result : results) {
+                 // Ignore hidden and ad-hoc networks.
+                 if (result.SSID == null || result.SSID.length() == 0 ||
+-                    result.capabilities.contains("[IBSS]")) {
++                    result.capabilities.contains("[IBSS]") || result.SSID.contains("NVRAM WARNING: Err")) {
+                     continue;
+                 }
+ 
+@@ -5212,7 +5212,7 @@
+                             ",BSSID:" + result.BSSID);
+                 // Ignore hidden and ad-hoc networks.
+                 if (result.SSID == null || result.SSID.length() == 0 ||
+-                    result.capabilities.contains("[IBSS]")) {
++                    result.capabilities.contains("[IBSS]") || result.SSID.contains("NVRAM WARNING: Err")) {
+                     continue;
+                 }
+ 

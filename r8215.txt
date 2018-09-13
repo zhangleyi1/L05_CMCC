@@ -1,0 +1,14 @@
+Index: vendor/mediatek/proprietary/frameworks/opt/fullscreenswitchservice/src/com/mediatek/fullscreenswitch/FullscreenDataHelper.java
+===================================================================
+--- vendor/mediatek/proprietary/frameworks/opt/fullscreenswitchservice/src/com/mediatek/fullscreenswitch/FullscreenDataHelper.java	(revision 8214)
++++ vendor/mediatek/proprietary/frameworks/opt/fullscreenswitchservice/src/com/mediatek/fullscreenswitch/FullscreenDataHelper.java	(revision 8215)
+@@ -239,7 +239,8 @@
+         "com.android.tradefed.utils.wifi",
+         "android.server.app",
+         "android.displaysize.app",
+-        "com.mediatek.mobileportal"
++        "com.mediatek.mobileportal",
++        "com.sohu.inputmethod.sogou"
+     };
+     
+     private boolean isWhiteList(String pkgName) {

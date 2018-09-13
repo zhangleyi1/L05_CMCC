@@ -1,0 +1,14 @@
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 4398)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 4399)
+@@ -353,7 +353,8 @@
+ 			}
+ 			if (currenttestitem == autotestitem.length) {
+ 				saveTestReport();
+-				if (!allTestSeccuss) {
++				getTestReport();
++				if (hasFailItem) {
+ 					goToAutoTestResultView();
+ 					Tracability.setMMITestResult((byte)0);
+ 				}else{

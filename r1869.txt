@@ -1,0 +1,13 @@
+Index: device/ausshine/aus6739_66_n1/system.prop
+===================================================================
+--- device/ausshine/aus6739_66_n1/system.prop	(revision 1868)
++++ device/ausshine/aus6739_66_n1/system.prop	(revision 1869)
+@@ -82,7 +82,7 @@
+ 
+ ro.customer.commercial.name=980CN1
+ ro.product.hardware.id=Proto
+-ro.tct.curef=980CN1-2*LECN1
++ro.tct.curef=980CN-2*ALOP1
+ ro.def.software.version=010 01
+ ro.mtk_default_ime=com.iflytek.inputmethod
+ 

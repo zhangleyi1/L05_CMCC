@@ -1,0 +1,94 @@
+Index: packages/apps/Settings/src/com/android/settings/applications/NotificationApps.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/applications/NotificationApps.java	(revision 5063)
++++ packages/apps/Settings/src/com/android/settings/applications/NotificationApps.java	(revision 5064)
+@@ -20,7 +20,12 @@
+ import com.android.settings.R;
+ import com.android.settings.dashboard.SummaryLoader;
+ import com.android.settings.notification.NotificationBackend;
++import com.android.settings.search.BaseSearchIndexProvider;
++import com.android.settings.search.SearchIndexableRaw;
+ 
++import java.util.ArrayList;
++import java.util.List;
++
+ /**
+  * Extension of ManageApplications with no changes other than having its own
+  * SummaryProvider.
+@@ -75,4 +80,21 @@
+             return new SummaryProvider(activity, summaryLoader);
+         }
+     };
++
++    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
++            new BaseSearchIndexProvider() {
++
++        @Override
++        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
++            final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
++            String screenTitle = context.getResources().getString(R.string.app_notifications_title);
++
++            SearchIndexableRaw data = new SearchIndexableRaw(context);
++            data.screenTitle = screenTitle;
++            data.title = screenTitle;
++            result.add(data);
++
++            return result;
++        }
++    };
+ }
+Index: packages/apps/Settings/src/com/android/settings/search/Ranking.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/search/Ranking.java	(revision 5063)
++++ packages/apps/Settings/src/com/android/settings/search/Ranking.java	(revision 5064)
+@@ -31,6 +31,7 @@
+ import com.android.settings.accounts.AccountSettings;
+ import com.android.settings.applications.AdvancedAppSettings;
+ import com.android.settings.applications.ManageApplications;
++import com.android.settings.applications.NotificationApps;
+ import com.android.settings.applications.SpecialAccessSettings;
+ import com.android.settings.bluetooth.BluetoothSettings;
+ import com.android.settings.datausage.DataUsageMeteredSettings;
+@@ -139,6 +140,7 @@
+         sRankMap.put(ZenModePrioritySettings.class.getName(), RANK_NOTIFICATIONS);
+         sRankMap.put(ZenModeAutomationSettings.class.getName(), RANK_NOTIFICATIONS);
+         sRankMap.put(ZenModeVisualInterruptionSettings.class.getName(), RANK_NOTIFICATIONS);
++        sRankMap.put(NotificationApps.class.getName(), RANK_NOTIFICATIONS);
+ 
+         // Storage
+         sRankMap.put(StorageSettings.class.getName(), RANK_STORAGE);
+Index: packages/apps/Settings/src/com/android/settings/search/SearchIndexableResources.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/search/SearchIndexableResources.java	(revision 5063)
++++ packages/apps/Settings/src/com/android/settings/search/SearchIndexableResources.java	(revision 5064)
+@@ -32,6 +32,7 @@
+ import com.android.settings.accounts.AccountSettings;
+ import com.android.settings.applications.AdvancedAppSettings;
+ import com.android.settings.applications.ManageApplications;
++import com.android.settings.applications.NotificationApps;
+ import com.android.settings.applications.SpecialAccessSettings;
+ import com.android.settings.bluetooth.BluetoothSettings;
+ import com.android.settings.datausage.DataUsageMeteredSettings;
+@@ -182,6 +183,13 @@
+                         R.drawable.ic_settings_sound));
+         /// @}
+ 
++        sResMap.put(NotificationApps.class.getName(),
++                new SearchIndexableResource(
++                        Ranking.getRankForClassName(NotificationApps.class.getName()),
++                        NO_DATA_RES_ID,
++                        NotificationApps.class.getName(),
++                        R.drawable.ic_settings_notifications));
++
+         sResMap.put(ZenModeSettings.class.getName(),
+                 new SearchIndexableResource(
+                         Ranking.getRankForClassName(ZenModeSettings.class.getName()),
+@@ -273,7 +281,7 @@
+                         "android.settings.RegulatorySaftySettings",
+                         R.drawable.ic_settings_regulatory_safety));
+ 
+-		sResMap.put(LockScreenSettings.class.getName(),
++		sResMap.put(ProcessStatsSummary.class.getName(),
+                 new SearchIndexableResource(
+                         Ranking.getRankForClassName(ProcessStatsSummary.class.getName()),
+                         R.xml.process_stats_summary,

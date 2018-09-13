@@ -1,0 +1,22 @@
+Index: frameworks/base/services/core/java/com/android/server/pm/PackageInstallerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/pm/PackageInstallerService.java	(revision 7614)
++++ frameworks/base/services/core/java/com/android/server/pm/PackageInstallerService.java	(revision 7615)
+@@ -754,7 +754,7 @@
+     public IPackageInstallerSession openSession(int sessionId) {
+         try {
+             /// M: eight core fully run when app is being installed @{
+-            try {
++            /*try {
+                 Slog.d(TAG, "send starting installation intent");
+                 IActivityManager am = ActivityManagerNative.getDefault();
+                 Intent startIntent = new Intent("mediatek.intent.action.PACKAGE_INSTALL_BEGIN");
+@@ -763,7 +763,7 @@
+             } catch (RemoteException e) {
+                 // shouldn't happen
+                 Slog.w(TAG, "Unable to send starting installation intent", e);
+-            }
++            }*/
+             /// @}
+             return openSessionInternal(sessionId);
+         } catch (IOException e) {

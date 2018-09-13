@@ -1,0 +1,16 @@
+Index: build/tools/buildinfo.sh
+===================================================================
+--- build/tools/buildinfo.sh	(revision 10715)
++++ build/tools/buildinfo.sh	(revision 10716)
+@@ -6,9 +6,9 @@
+ echo "ro.build.id=$BUILD_ID"
+ echo "ro.build.display.id=980CN1_LECN_V1.3_171220"
+ echo "ro.build.version.custintid=980CN1_LECN_V3.1_180316"
+-echo "ro.build.version.incremental=980CN1_L055_M01_CMCC_S29_180316"
++echo "ro.build.version.incremental=980CN1_L055_M01_CMCC_S30A_180317"
+ echo "ro.tct.sys.ver=OCN1LE16"
+-echo "ro.build.display.factoryid=Plat:CN_980CN1_L055_M01_CMCC_S29_180316Outer:980CN1_LECN_V3.1_180316End"
++echo "ro.build.display.factoryid=Plat:CN_980CN1_L055_M01_CMCC_S30A_180317Outer:980CN1_LECN_V3.1_180316End"
+ echo "ro.build.hardware.version=V1"
+ echo "ro.build.release.time=2017-12-20"
+ echo "ro.build.version.sdk=$PLATFORM_SDK_VERSION"

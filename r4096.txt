@@ -1,0 +1,33 @@
+Index: device/ausshine/aus6739_66_n1/system.prop
+===================================================================
+--- device/ausshine/aus6739_66_n1/system.prop	(revision 4095)
++++ device/ausshine/aus6739_66_n1/system.prop	(revision 4096)
+@@ -88,7 +88,4 @@
+ 
+ ro.business.name=TCL V760
+ ro.mtk_gemini_support = 1
+-persist.sys.timezone = Asia/Shanghai
+-
+-ro.com.google.rlzbrandcode=TCTB
+-ro.com.google.rlz_ap_whitelist=YG
+\ No newline at end of file
++persist.sys.timezone = Asia/Shanghai
+\ No newline at end of file
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 4095)
++++ vendor/customer/custom.mk	(revision 4096)
+@@ -17,11 +17,11 @@
+                     HiLauncherOverlay \
+                     TencentNews \
+                     TencentVideo \
++					SogouInput \
+                     MainApp \
+                     10086android \
+                     mmnes \
+-                    iReader \
+-                    Gboard
++                    iReader
+ 
+ # Overrides
+ PRODUCT_PROPERTY_OVERRIDES +=

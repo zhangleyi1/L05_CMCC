@@ -1,0 +1,13 @@
+Index: frameworks/base/services/core/java/com/android/server/notification/NotificationManagerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/notification/NotificationManagerService.java	(revision 5373)
++++ frameworks/base/services/core/java/com/android/server/notification/NotificationManagerService.java	(revision 5374)
+@@ -323,7 +323,7 @@
+     private long mLastOverRateLogTime;
+     private float mMaxPackageEnqueueRate = DEFAULT_MAX_NOTIFICATION_ENQUEUE_RATE;
+     private String mSystemNotificationSound;
+-
++	private static final String KEY_LEDEVENT = "led_event";
+     private static class Archive {
+         final int mBufferSize;
+         final ArrayDeque<StatusBarNotification> mBuffer;

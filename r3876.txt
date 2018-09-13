@@ -1,0 +1,47 @@
+Index: frameworks/base/packages/SettingsLib/src/com/android/settingslib/wifi/WifiTracker.java
+===================================================================
+--- frameworks/base/packages/SettingsLib/src/com/android/settingslib/wifi/WifiTracker.java	(revision 3875)
++++ frameworks/base/packages/SettingsLib/src/com/android/settingslib/wifi/WifiTracker.java	(revision 3876)
+@@ -486,7 +486,7 @@
+         return new AccessPoint(mContext, config);
+     }
+ 
+-    private void updateNetworkInfo(NetworkInfo networkInfo) {
++    public void updateNetworkInfo(NetworkInfo networkInfo) {
+         /* sticky broadcasts can call this when wifi is disabled */
+         if (!mWifiManager.isWifiEnabled()) {
+             mMainHandler.sendEmptyMessage(MainHandler.MSG_PAUSE_SCANNING);
+@@ -626,7 +626,7 @@
+                     break;
+             }
+         }
+-    }
++    } 
+ 
+     private final class WorkHandler extends Handler {
+         private static final int MSG_UPDATE_ACCESS_POINTS = 0;
+Index: packages/apps/Settings/src/com/android/settings/wifi/WifiSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/wifi/WifiSettings.java	(revision 3875)
++++ packages/apps/Settings/src/com/android/settings/wifi/WifiSettings.java	(revision 3876)
+@@ -332,6 +332,12 @@
+             mOpenSsid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
+             onAccessPointsChanged();
+         }
++		if(mWifiTracker != null && getActivity().isInMultiWindowMode()){
++			final ConnectivityManager connectivity = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
++			NetworkInfo info = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
++			//Log.d(TAG, "javen onActivityCreated isInMultiWindowMode info = " + info);
++			mWifiTracker.updateNetworkInfo(info);
++		}
+     }
+ 
+     @Override
+@@ -704,6 +710,7 @@
+                 cacheRemoveAllPrefs(getPreferenceScreen());
+                 for (AccessPoint accessPoint : accessPoints) {
+                     // Ignore access points that are out of range.
++					//Log.d(TAG, "javen onAccessPointsChanged accessPoint = " + accessPoint);
+                     if (accessPoint.getLevel() != -1) {
+                         String key = accessPoint.getBssid();
+                         if (TextUtils.isEmpty(key)) {

@@ -1,0 +1,49 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/FuncSettings.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/FuncSettings.java	(revision 3770)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/FuncSettings.java	(revision 3771)
+@@ -27,6 +27,7 @@
+ import android.content.pm.PackageManager;
+ import android.content.pm.PackageInfo;
+ import android.content.Context;
++import android.view.MenuItem;
+ 
+ /**
+  * Func Setting List
+@@ -52,6 +53,7 @@
+         initView();
+         initListener();
+         initData();
++		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+     }
+ 
+     private void initData() {
+@@ -181,5 +183,14 @@
+         }
+     }
+ 
+-
++	@Override
++    public boolean onOptionsItemSelected(MenuItem item) {
++        switch (item.getItemId()) {
++            case android.R.id.home:
++                finish();
++                return true;
++        }
++        return super.onOptionsItemSelected(item);
++    }
++	
+ }
+Index: frameworks/base/packages/SystemUI/res/values/strings.xml
+===================================================================
+--- frameworks/base/packages/SystemUI/res/values/strings.xml	(revision 3770)
++++ frameworks/base/packages/SystemUI/res/values/strings.xml	(revision 3771)
+@@ -1693,7 +1693,7 @@
+ 	<string name="func_add_exist_app">"The app you want to add already exists in the default list."</string>
+ 	<string name="func_add_app">"Add app shortcuts"</string>
+ 	<string name="torch_text">"Torch"</string>
+-	<string name="default_apps_title">"Shortcut on lock screen"</string>
++	<string name="default_apps_title">"Shortcuts on lock screen"</string>
+ 	<string name="apps_title">"Alternative shortcuts"</string>
+ 	<string name="func_dialog_button">"GOT IT"</string>
+ 	<string name="func_notice">"Add shortcuts from the list below."</string>

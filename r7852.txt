@@ -1,0 +1,22 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/FuncListAdapter.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/FuncListAdapter.java	(revision 7851)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/FuncListAdapter.java	(revision 7852)
+@@ -100,6 +100,7 @@
+             } else if (viewType == AppUtils.APPS) {
+                 holder.right_icon.setImageResource(R.drawable.func_add);
+             }
++/*
+ 			if (viewType == AppUtils.DEFAULT_APPS) {
+ 				if(info.getPackerName().equals(AppUtils.CONTACTS)){
+                     holder.edit_icon.setVisibility(View.VISIBLE);
+@@ -109,6 +110,9 @@
+ 					holder.edit_icon.setVisibility(View.INVISIBLE);
+ 				}
+ 			}
++*/
++            holder.edit_icon.setVisibility(View.INVISIBLE);
++
+             holder.right_icon.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {

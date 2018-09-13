@@ -1,0 +1,95 @@
+Index: frameworks/base/Android.mk
+===================================================================
+--- frameworks/base/Android.mk	(revision 3000)
++++ frameworks/base/Android.mk	(revision 3001)
+@@ -47,6 +47,11 @@
+ # FRAMEWORKS_BASE_SUBDIRS comes from build/core/pathmap.mk
+ LOCAL_SRC_FILES := $(call find-other-java-files,$(FRAMEWORKS_BASE_SUBDIRS))
+ 
++ifeq ($(strip $(MICROTRUST_IFAA_SUPPORT)),yes)
++IFAA_SRC_PATH := ifaa_fw/src
++LOCAL_SRC_FILES += $(call all-java-files-under,$(IFAA_SRC_PATH))
++LOCAL_STATIC_JAVA_LIBRARIES += ifaamanager
++endif
+ # EventLogTags files.
+ LOCAL_SRC_FILES += \
+        core/java/android/app/admin/SecurityLogTags.logtags \
+Index: frameworks/base
+===================================================================
+--- frameworks/base	(revision 3000)
++++ frameworks/base	(revision 3001)
+
+Property changes on: frameworks/base
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base:r2854
+Index: frameworks
+===================================================================
+--- frameworks	(revision 3000)
++++ frameworks	(revision 3001)
+
+Property changes on: frameworks
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks:r2854
+Index: device/chipsailing/64-bit/isee/libfp_tac.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: device/chipsailing/64-bit/isee/libfp_tac.so
+===================================================================
+--- device/chipsailing/64-bit/isee/libfp_tac.so	(revision 0)
++++ device/chipsailing/64-bit/isee/libfp_tac.so	(revision 3001)
+
+Property changes on: device/chipsailing/64-bit/isee/libfp_tac.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: device/ausshine/aus6739_66_n1/full_aus6739_66_n1.mk
+===================================================================
+--- device/ausshine/aus6739_66_n1/full_aus6739_66_n1.mk	(revision 3000)
++++ device/ausshine/aus6739_66_n1/full_aus6739_66_n1.mk	(revision 3001)
+@@ -50,4 +50,5 @@
+ PRELOADER_TARGET_PRODUCT ?= aus6739_66_n1
+ LK_PROJECT ?= aus6739_66_n1
+ TRUSTY_PROJECT ?= aus6739_66_n1
+-$(call inherit-product, device/cdfinger/cdfinger_product_64bit.mk)
+\ No newline at end of file
++$(call inherit-product, device/cdfinger/cdfinger_product_64bit.mk)
++$(call inherit-product, device/chipsailing/csfinger_product_64bit.mk)
+\ No newline at end of file
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/soter.raw
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/soter.raw
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/soter.raw	(revision 0)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/soter.raw	(revision 3001)
+
+Property changes on: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/soter.raw
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor
+===================================================================
+--- vendor	(revision 3000)
++++ vendor	(revision 3001)
+
+Property changes on: vendor
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/vendor:r2854
+Index: .
+===================================================================
+--- .	(revision 3000)
++++ .	(revision 3001)
+
+Property changes on: .
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE:r2854

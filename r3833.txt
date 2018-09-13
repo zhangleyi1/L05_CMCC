@@ -1,0 +1,28 @@
+Index: packages/apps/Settings/res/layout/choose_lock_pattern_multiwin.xml
+===================================================================
+--- packages/apps/Settings/res/layout/choose_lock_pattern_multiwin.xml	(revision 3832)
++++ packages/apps/Settings/res/layout/choose_lock_pattern_multiwin.xml	(revision 3833)
+@@ -33,10 +33,13 @@
+         android:layout_height="match_parent">
+ 
+         <!-- left side: instructions and messages -->
++		<ScrollView 
++			android:layout_width="0dip"
++			android:layout_weight="1.0"
++            android:layout_height="match_parent">
+         <LinearLayout
+-            android:layout_width="0dip"
++            android:layout_width="match_parent"
+             android:layout_height="match_parent"
+-            android:layout_weight="1.0"
+             android:layout_marginStart="?attr/suwMarginSides"
+             android:layout_marginBottom="@dimen/suw_content_frame_padding_bottom"
+             android:orientation="vertical">
+@@ -121,6 +124,7 @@
+             </RelativeLayout>
+ 
+         </LinearLayout>
++		</ScrollView>
+ 
+         <!-- right side: lock pattern -->
+         <FrameLayout

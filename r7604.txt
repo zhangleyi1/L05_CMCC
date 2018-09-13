@@ -1,0 +1,15 @@
+Index: vendor/customer/apps/MM/MM6.4_Android_Release_Build05.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/MM/MM6.4_Android_Release_Build05.apk
+===================================================================
+--- vendor/customer/apps/MM/MM6.4_Android_Release_Build05.apk	(revision 0)
++++ vendor/customer/apps/MM/MM6.4_Android_Release_Build05.apk	(revision 7604)
+
+Property changes on: vendor/customer/apps/MM/MM6.4_Android_Release_Build05.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

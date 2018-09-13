@@ -1,0 +1,46 @@
+Index: packages/apps/Contacts/src/com/android/contacts/ContactSaveService.java
+===================================================================
+--- packages/apps/Contacts/src/com/android/contacts/ContactSaveService.java	(revision 6221)
++++ packages/apps/Contacts/src/com/android/contacts/ContactSaveService.java	(revision 6222)
+@@ -1205,10 +1205,41 @@
+             Log.e(TAG, "Invalid arguments for deleteMultipleContacts request");
+             return;
+         }
++        long beginTime = android.os.SystemClock.elapsedRealtime();
++        /*
+         for (long contactId : contactIds) {
+             final Uri contactUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, contactId);
+             getContentResolver().delete(contactUri, null, null);
+         }
++        */
++
++        int index = 0;
++        ArrayList<ContentProviderOperation> ops = new ArrayList<>();
++        for (long contactId : contactIds) {
++            final Uri contactUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, contactId);
++            if (index < MAX_CONTACTS_PROVIDER_BATCH_SIZE) {
++                ops.add(ContentProviderOperation.newDelete(contactUri).build());
++            } else {
++                try {
++                    getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
++                } catch (Exception e) {
++                    throw new RuntimeException("Failed to delete contacts", e);
++                }
++                index = index - MAX_CONTACTS_PROVIDER_BATCH_SIZE;
++                ops.clear();
++            }
++            index++;
++        }
++        if (ops.size() > 0) {
++            try {
++                getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
++            } catch (Exception e) {
++                throw new RuntimeException("Failed to delete contacts", e);
++            }
++        }
++        long endTime = android.os.SystemClock.elapsedRealtime();
++        Log.e("Test","total:" + contactIds.length + " time:" + (endTime - beginTime));
++
+         final String deleteToastMessage = getResources().getQuantityString(R.plurals
+                 .contacts_deleted_toast, contactIds.length);
+         mMainHandler.post(new Runnable() {

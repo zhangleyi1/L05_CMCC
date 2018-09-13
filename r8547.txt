@@ -1,0 +1,76 @@
+Index: packages/apps/Contacts/src/com/android/contacts/ContactSaveService.java
+===================================================================
+--- packages/apps/Contacts/src/com/android/contacts/ContactSaveService.java	(revision 8546)
++++ packages/apps/Contacts/src/com/android/contacts/ContactSaveService.java	(revision 8547)
+@@ -80,6 +80,10 @@
+ import java.util.List;
+ import java.util.concurrent.CopyOnWriteArrayList;
+ 
++import android.app.ActivityManager;
++import android.app.ActivityManager.MemoryInfo;
++import android.text.format.Formatter;
++
+ /**
+  * A service responsible for saving changes to the content provider.
+  */
+@@ -248,6 +252,16 @@
+         return getApplicationContext().getSystemService(name);
+     }
+ 
++    private boolean isLowMemory() {
++        ActivityManager am = (ActivityManager) getApplicationContext().getSystemService(  
++                Context.ACTIVITY_SERVICE);
++        MemoryInfo mi = new MemoryInfo();
++        am.getMemoryInfo(mi);
++        Log.e(TAG,"availMem:" + Formatter.formatFileSize(getApplicationContext(),  
++                mi.availMem) + ",lowmemory:" + mi.lowMemory);
++        return mi.lowMemory;
++    }
++
+     @Override
+     protected void onHandleIntent(Intent intent) {
+         if (intent == null) {
+@@ -283,6 +297,21 @@
+                     Log.w(TAG, "[onHandleIntent] IllegalStateException: callbackIntent == NULL!");
+                 }
+                 /// @}
++            } catch (android.database.sqlite.SQLiteException e) {
++                Log.w(TAG, "[onHandleIntent] SQLiteException:" + e.toString());
++                Intent callbackIntent = intent.getParcelableExtra(EXTRA_CALLBACK_INTENT);
++                if (callbackIntent != null) {
++                    callbackIntent.putExtra(EXTRA_SAVE_SUCCEEDED, false);
++                    callbackIntent.setData(null);
++                    deliverCallback(callbackIntent);
++                } else {
++                    Log.w(TAG, "[onHandleIntent] SQLiteException: callbackIntent == NULL!");
++                }
++                if (isLowMemory()) {
++                    showToast(R.string.fail_reason_low_memory_during_save);
++                } else {
++                    showToast(R.string.contactSavedErrorToast);
++                }
+             }
+ 
+         } else if (ACTION_CREATE_GROUP.equals(action)) {
+Index: packages/apps/Contacts/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Contacts/res/values-zh-rCN/strings.xml	(revision 8546)
++++ packages/apps/Contacts/res/values-zh-rCN/strings.xml	(revision 8547)
+@@ -329,4 +329,6 @@
+     <string name="locale_change_in_progress" msgid="1124266507671178413">"正在更新联系人列表，以反映语言的变更。\n\n请稍候..."</string>
+     <string name="menu_blocked_numbers" msgid="5272951629083025995">"已屏蔽的号码"</string>
+     <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
++
++    <string name="fail_reason_low_memory_during_save">内存不足，无法保存联系人.</string>
+ </resources>
+Index: packages/apps/Contacts/res/values/strings.xml
+===================================================================
+--- packages/apps/Contacts/res/values/strings.xml	(revision 8546)
++++ packages/apps/Contacts/res/values/strings.xml	(revision 8547)
+@@ -916,4 +916,6 @@
+ 
+     <!-- The menu item to open blocked numbers activity [CHAR LIMIT=60]-->
+     <string name="menu_blocked_numbers">Blocked numbers</string>
++
++    <string name="fail_reason_low_memory_during_save">Not enough memory. Couldn\'t save contact changes.</string>
+ </resources>

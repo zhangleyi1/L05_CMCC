@@ -1,0 +1,47 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java	(revision 4626)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java	(revision 4627)
+@@ -1640,8 +1640,10 @@
+ 
+                 /// M: Code analyze 022, Add bookmark. Maybe exist multi URL address @{
+                 if (msgItem.isSms() && mURLs.size() <= 0) {
+-                    //menu.add(0, MENU_ADD_TO_BOOKMARK, 0, R.string.menu_add_to_bookmark)
+-                    //.setOnMenuItemClickListener(l);
++                    menu.add(0, MENU_ADD_TO_BOOKMARK, 0, R.string.menu_add_to_bookmark)
++                            .setOnMenuItemClickListener(l);
++                    menu.add(0, MENU_OPEN_WITH_BROWSER, 0, R.string.menu_goto_browser)
++                            .setOnMenuItemClickListener(l);
+                 }
+                 /// @}
+ 
+@@ -2227,6 +2229,20 @@
+                     return true;
+                 }
+ 
++                case MENU_OPEN_WITH_BROWSER:
++                    if (mURLs.size() == 1) {
++                        Browser.open(ComposeMessageActivity.this, mURLs.get(0));
++                    } else if (mURLs.size() > 1) {
++                        CharSequence items[] = mURLs.toArray(new CharSequence[mURLs.size()]);
++                        new AlertDialog.Builder(ComposeMessageActivity.this)
++                                .setTitle(R.string.menu_goto_browser)
++                                .setIcon(MessageResource.drawable.ic_dialog_menu_generic)
++                                .setItems(items, (dialog, which) -> Browser.open(
++                                        ComposeMessageActivity.this, mURLs.get(which)))
++                                .show();
++                    }
++                    return true;
++
+                 /// M: Code analyze 007, Get information from Sub or save message to Sub. @{
+                 case MENU_SAVE_MESSAGE_TO_SUB: {
+                     mSaveMsgThread = new SaveMsgThread(mMsgItem.mType, mMsgItem.mMsgId);
+@@ -8362,6 +8378,8 @@
+      private ArrayList<String> mURLs = new ArrayList<String>();
+      /// @}
+ 
++    private static final int MENU_OPEN_WITH_BROWSER = 37;
++
+      /// M: Code analyze 007, Get information from Sub or save message to Sub. @{
+      private static final int MENU_SAVE_MESSAGE_TO_SUB     = 32;
+      private static final int SUB_SELECT_FOR_SEND_MSG                     = 1;

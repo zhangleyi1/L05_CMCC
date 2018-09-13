@@ -1,0 +1,46 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/res/layout/message_list_item_recv.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/res/layout/message_list_item_recv.xml	(revision 7751)
++++ vendor/mediatek/proprietary/packages/apps/Mms/res/layout/message_list_item_recv.xml	(revision 7752)
+@@ -37,7 +37,10 @@
+         android:layout_height="match_parent" >
+     </LinearLayout>
+ 
+-
++<LinearLayout
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:orientation="vertical">
+ <include android:id="@+id/sim_divider"
+     layout="@layout/sim_divider_item" />
+ <include android:id="@+id/time_divider"
+@@ -255,5 +258,6 @@
+ </LinearLayout>
+ <include android:id="@+id/on_line_divider"
+     layout="@layout/on_line_divider_item" />
++</LinearLayout>
+     </FrameLayout>
+ </LinearLayout>
+Index: vendor/mediatek/proprietary/packages/apps/Mms/res/layout/message_list_item_send.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/res/layout/message_list_item_send.xml	(revision 7751)
++++ vendor/mediatek/proprietary/packages/apps/Mms/res/layout/message_list_item_send.xml	(revision 7752)
+@@ -36,7 +36,10 @@
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" >
+         </LinearLayout>
+-
++<LinearLayout
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:orientation="vertical">
+ <include android:id="@+id/sim_divider"
+     layout="@layout/sim_divider_item" />
+ <include android:id="@+id/time_divider"
+@@ -197,5 +200,6 @@
+ </LinearLayout>
+ <include android:id="@+id/on_line_divider"
+     layout="@layout/on_line_divider_item" />
++</LinearLayout>
+     </FrameLayout>
+ </LinearLayout>

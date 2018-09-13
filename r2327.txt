@@ -1,0 +1,172 @@
+Index: vendor/mediatek/proprietary/packages/apps/FMRadio/AndroidManifest.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/FMRadio/AndroidManifest.xml	(revision 2326)
++++ vendor/mediatek/proprietary/packages/apps/FMRadio/AndroidManifest.xml	(revision 2327)
+@@ -107,6 +107,12 @@
+ 					android:name="com.android.fmradio.MMIFMRadioTest"/>  
+ 			</intent-filter>  
+ 		</receiver> 
++
++        <receiver android:name="com.android.fmradio.FMMediaButtonIntentReceiver">
++            <intent-filter>
++                <action android:name="android.intent.action.MEDIA_BUTTON" />
++            </intent-filter>
++        </receiver>
+     </application>
+ 
+ </manifest>
+Index: vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FMMediaButtonIntentReceiver.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FMMediaButtonIntentReceiver.java	(revision 0)
++++ vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FMMediaButtonIntentReceiver.java	(revision 2327)
+@@ -0,0 +1,66 @@
++package com.android.fmradio;
++
++import android.content.BroadcastReceiver;
++import android.content.Context;
++import android.content.Intent;
++import android.media.AudioManager;
++import android.os.Handler;
++import android.os.Message;
++import android.view.KeyEvent;
++import android.util.Log;
++import android.app.ActivityManager;
++import android.app.ActivityManager.RunningServiceInfo;
++import java.util.List;
++
++public class FMMediaButtonIntentReceiver extends BroadcastReceiver {
++  public static final String TAG = "FM/Receiver";
++    @Override
++    public void onReceive(Context context, Intent intent) {
++        Log.d(TAG, " 23333mFMMediaButtonIntentReceiver onReceive");
++         String Iaction = intent.getAction();
++            if (Intent.ACTION_MEDIA_BUTTON.equals(Iaction)) {
++              Log.d(TAG, " 23333mFMMediaButtonIntentReceiver onReceive ACTION_MEDIA_BUTTON");
++              KeyEvent event = (KeyEvent)intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
++              if (event == null) {
++                  return; }
++             int keycode = event.getKeyCode();
++             int action = event.getAction();
++             long eventtime = event.getEventTime();
++             Log.d(TAG, "2333onReceive keycode="+keycode+",action="+action);
++             
++             String command = null;
++             switch (keycode) {
++                 case KeyEvent.KEYCODE_MEDIA_STOP:
++                     break;
++                 case KeyEvent.KEYCODE_HEADSETHOOK:
++                 case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
++                    command = FmService.CMDTOGGLEPAUSE;
++                     break;
++                 case KeyEvent.KEYCODE_MEDIA_NEXT:     
++                     break;
++                 case KeyEvent.KEYCODE_MEDIA_PREVIOUS:                  
++                     break;
++                 case KeyEvent.KEYCODE_MEDIA_PAUSE:
++                     break;
++                 case KeyEvent.KEYCODE_MEDIA_PLAY:
++                     break;
++                 /// M: AVRCP and Android Music AP supports the FF/REWIND @{
++                 case KeyEvent.KEYCODE_MEDIA_FAST_FORWARD:
++                     break;
++                 case KeyEvent.KEYCODE_MEDIA_REWIND:
++                     break;
++                 default:
++                     break;
++                }
++                 if (command != null) {
++                  if ((action == KeyEvent.ACTION_DOWN) && (event.getRepeatCount() == 0)) {
++                          sendToStartService(context, command);} 
++                  if (isOrderedBroadcast()) {
++                     abortBroadcast();}
++                 }}  }
++
++      public void sendToStartService(Context context, String command) {
++          Intent i = new Intent(context, FmService.class);
++          i.putExtra(FmService.CMD, command);
++          context.startService(i);    }
++}
+\ No newline at end of file
+Index: vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmService.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmService.java	(revision 2326)
++++ vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmService.java	(revision 2327)
+@@ -67,6 +67,8 @@
+ import java.util.HashMap;
+ import java.util.Iterator;
+ 
++import android.content.ComponentName;// lance add for MediaButtonReceiver
++
+ /**
+  * Background service to control FM or do background tasks.
+  */
+@@ -73,6 +75,12 @@
+ public class FmService extends Service implements FmRecorder.OnRecorderStateChangedListener {
+     // Logging
+     private static final String TAG = "FmService";
++    // lance add for MediaButtonReceiver @{
++    public static final String CMDTOGGLEPAUSE = "togglepause";
++    public static final String CMD= "command";
++    public static final String CMDNEXT = "cmdnext"; 
++    private ComponentName mFMMediaButtonIntentReceiver = null;
++    // @}
+ 
+     // Broadcast messages from other sounder APP to FM service
+     private static final String SOUND_POWER_DOWN_MSG = "com.android.music.musicservicecommand";
+@@ -1466,7 +1474,7 @@
+         registerFmBroadcastReceiver();
+         registerSdcardReceiver();
+         registerAudioPortUpdateListener();
+-
++        registerMediaButtonEventReceiver(); // lance add for MediaButtonReceiver
+         HandlerThread handlerThread = new HandlerThread("FmRadioServiceThread");
+         handlerThread.start();
+         mFmServiceHandler = new FmRadioServiceHandler(handlerThread.getLooper());
+@@ -1479,6 +1487,20 @@
+         createRenderThread();
+     }
+ 
++    // lance add for MediaButtonReceiver @{
++    private void registerMediaButtonEventReceiver() {
++        Log.d(TAG, "registerMediaButtonEventReceiver.mFMMediaButtonIntentReceiver" );
++        mFMMediaButtonIntentReceiver = new ComponentName(getPackageName(),
++                FMMediaButtonIntentReceiver.class.getName());
++        mAudioManager.registerMediaButtonEventReceiver(mFMMediaButtonIntentReceiver);
++    }
++
++    private void unregisterMediaButtonEventReceiver() {
++        Log.d(TAG, "unregisterMediaButtonEventReceiver.mFMMediaButtonIntentReceiver" );
++        mAudioManager.unregisterMediaButtonEventReceiver(mFMMediaButtonIntentReceiver);  
++    }
++    // @}
++
+     private void registerAudioPortUpdateListener() {
+             Log.d(TAG, "registerAudioPortUpdateListener, list = " + mAudioPortUpdateListener);
+         if (mAudioPortUpdateListener == null) {
+@@ -1954,6 +1976,7 @@
+         unregisterFmBroadcastReceiver();
+         unregisterSdcardListener();
+         abandonAudioFocus();
++        unregisterMediaButtonEventReceiver();// lance add for MediaButtonReceive
+         exitFm();
+         if (null != mFmRecorder) {
+             mFmRecorder = null;
+@@ -2024,7 +2047,17 @@
+     @Override
+     public int onStartCommand(Intent intent, int flags, int startId) {
+         int ret = super.onStartCommand(intent, flags, startId);
+-
++        // lance add for MediaButtonReceive @{
++        String cmd = intent.getStringExtra("command");
++        Log.d(TAG, ">>> FmRadioService.onStartCommand command: " + cmd);
++        if( CMDTOGGLEPAUSE.equals(cmd) ){
++        Log.d(TAG, "onStartCommand:CMDTOGGLEPAUSE" );
++            if(mPowerStatus == POWER_DOWN){
++            powerUpAsync(FmUtils.computeFrequency(getFrequency()));}
++        else{
++            powerDownAsync();}  
++        }
++        // @}
+         if (intent != null) {
+             String action = intent.getAction();
+             if (FM_SEEK_PREVIOUS.equals(action)) {

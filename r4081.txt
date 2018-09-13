@@ -1,0 +1,33 @@
+Index: frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml	(revision 4080)
++++ frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml	(revision 4081)
+@@ -134,4 +134,6 @@
+     <string name="fingerprint_not_recognized" msgid="2690661881608146617">"未能辨別"</string>
+     <string name="add_fingerprint_message_secturity">"請先設置安全密碼"</string>
+     <string name="ok">"確定"</string>
++    <string name="ic_default_move_face_center">"將臉部移到識別窗口的中間"</string>
++    <string name="ic_default_sacn_face_description_info">"請將手機放在離臉部20-50厘米的地方。將面部放置在屏幕上的圓圈上"</string>
+ </resources>
+Index: frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml	(revision 4080)
++++ frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml	(revision 4081)
+@@ -134,4 +134,6 @@
+     <string name="fingerprint_not_recognized" msgid="2690661881608146617">"無法識別"</string>
+      <string name="add_fingerprint_message_secturity">"請先設置安全密碼"</string>
+     <string name="ok">"確定"</string>
++    <string name="ic_default_move_face_center">"將臉部移到識別窗口的中間"</string>
++    <string name="ic_default_sacn_face_description_info">"請將手機放在離臉部20-50厘米的地方。將面部放置在屏幕上的圓圈上"</string>
+ </resources>
+Index: frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml	(revision 4080)
++++ frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml	(revision 4081)
+@@ -134,4 +134,6 @@
+     <string name="fingerprint_not_recognized" msgid="2690661881608146617">"无法识别"</string>
+     <string name="add_fingerprint_message_secturity">"请先设置安全密码"</string>
+     <string name="ok">"确定"</string>
++    <string name="ic_default_move_face_center">"将脸部移到识别窗口的中间"</string>
++    <string name="ic_default_sacn_face_description_info">"请将手机放在离脸部20-50厘米的地方。将面部放置在屏幕上的圆圈上"</string>
+ </resources>

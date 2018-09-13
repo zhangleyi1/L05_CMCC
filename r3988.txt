@@ -1,0 +1,13 @@
+Index: bootable/recovery/mt_recovery.cpp
+===================================================================
+--- bootable/recovery/mt_recovery.cpp	(revision 3987)
++++ bootable/recovery/mt_recovery.cpp	(revision 3988)
+@@ -1023,7 +1023,7 @@
+       fprintf(stdout, "write result : JRDFOTA_RESULT_FILE\n");
+ 	    write_result_file(JRDFOTA_RESULT_FILE, status);
+ 	   //added by xuanfeng.ye for Task3615106 end
+-          write_result_file(MOTA_RESULT_FILE, status);
++     //write_result_file(MOTA_RESULT_FILE, status);
+       }
+   return 0;
+ }

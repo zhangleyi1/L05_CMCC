@@ -1,0 +1,30 @@
+Index: frameworks/base/services/core/java/com/android/server/pm/DefaultPermissionGrantPolicy.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/pm/DefaultPermissionGrantPolicy.java	(revision 7586)
++++ frameworks/base/services/core/java/com/android/server/pm/DefaultPermissionGrantPolicy.java	(revision 7587)
+@@ -89,6 +89,7 @@
+     private static final String ATTR_PACKAGE = "package";
+     private static final String ATTR_NAME = "name";
+     private static final String ATTR_FIXED = "fixed";
++	private static final String HI_LAUNCHER = "com.tcl.mibc.launcherpro";
+ 
+     private static final Set<String> PHONE_PERMISSIONS = new ArraySet<>();
+     static {
+@@ -544,7 +545,16 @@
+                 grantRuntimePermissionsLPw(emailPackage, CONTACTS_PERMISSIONS, userId);
+                 grantRuntimePermissionsLPw(emailPackage, CALENDAR_PERMISSIONS, userId);
+             }
+-
++			
++			//HiLauncher
++			PackageParser.Package hiLauncherPackage = getSystemPackageLPr(HI_LAUNCHER);
++            if (hiLauncherPackage != null
++                    && doesPackageSupportRuntimePermissions(hiLauncherPackage)) {
++                grantRuntimePermissionsLPw(hiLauncherPackage, STORAGE_PERMISSIONS, userId);
++                grantRuntimePermissionsLPw(hiLauncherPackage, SMS_PERMISSIONS, userId);
++                grantRuntimePermissionsLPw(hiLauncherPackage, PHONE_PERMISSIONS, userId);
++            }
++			
+             // Browser
+             PackageParser.Package browserPackage = null;
+             String defaultBrowserPackage = mService.getDefaultBrowserPackageName(userId);

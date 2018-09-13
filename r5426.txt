@@ -1,0 +1,69 @@
+Index: packages/apps/Email/UnifiedEmail/src/com/android/mail/utils/NotificationUtils.java
+===================================================================
+--- packages/apps/Email/UnifiedEmail/src/com/android/mail/utils/NotificationUtils.java	(revision 5425)
++++ packages/apps/Email/UnifiedEmail/src/com/android/mail/utils/NotificationUtils.java	(revision 5426)
+@@ -35,11 +35,13 @@
+ import android.support.v4.app.NotificationManagerCompat;
+ import android.support.v4.text.BidiFormatter;
+ import android.support.v4.util.ArrayMap;
++import android.telephony.TelephonyManager;
+ import android.text.SpannableString;
+ import android.text.SpannableStringBuilder;
+ import android.text.TextUtils;
+ import android.text.style.CharacterStyle;
+ import android.text.style.TextAppearanceSpan;
++import android.util.Log;
+ import android.util.Pair;
+ import android.util.SparseArray;
+ 
+@@ -816,7 +818,8 @@
+                         defaults |= Notification.DEFAULT_VIBRATE;
+                     }
+ 
+-                    notification.setSound(TextUtils.isEmpty(ringtoneUri) ? null
++                    Log.d(LOG_TAG, "isCalling = " + isCalling(context));
++                    notification.setSound(TextUtils.isEmpty(ringtoneUri) || isCalling(context) ? null
+                             : Uri.parse(ringtoneUri));
+                     LogUtils.i(LOG_TAG, "New email in %s vibrateWhen: %s, playing notification: %s",
+                             LogUtils.sanitizeName(LOG_TAG, account.getEmailAddress()), vibrate,
+@@ -885,6 +888,17 @@
+         }
+     }
+ 
++    public static boolean isCalling(Context context) {
++        boolean calling = false;
++        TelephonyManager telephonyManager =
++                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
++        if (TelephonyManager.CALL_STATE_OFFHOOK == telephonyManager.getCallState()
++                || TelephonyManager.CALL_STATE_RINGING == telephonyManager.getCallState()) {
++            calling = true;
++        }
++        return calling;
++    }
++
+     /**
+      * Build and return a redacted form of a notification using the given information. This redacted
+      * form is shown above the lock screen and is devoid of sensitive information.
+Index: packages/apps/Email/UnifiedEmail/src/com/android/mail/utils/VipNotificationUtils.java
+===================================================================
+--- packages/apps/Email/UnifiedEmail/src/com/android/mail/utils/VipNotificationUtils.java	(revision 5425)
++++ packages/apps/Email/UnifiedEmail/src/com/android/mail/utils/VipNotificationUtils.java	(revision 5426)
+@@ -16,6 +16,7 @@
+ import android.support.v4.app.NotificationCompat;
+ import android.support.v4.app.NotificationManagerCompat;
+ import android.support.v4.util.ArrayMap;
++import android.util.Log;
+ 
+ import com.android.mail.R;
+ import com.android.emailcommon.provider.Mailbox;
+@@ -364,7 +365,9 @@
+                     defaults |= Notification.DEFAULT_VIBRATE;
+                 }
+ 
+-                notification.setSound(TextUtils.isEmpty(ringtoneUri) ? null
++                Log.d(LOG_TAG, "isCalling = " + NotificationUtils.isCalling(context));
++                notification.setSound(TextUtils.isEmpty(ringtoneUri)
++                        || NotificationUtils.isCalling(context) ? null
+                         : Uri.parse(ringtoneUri));
+                 LogUtils.i(LOG_TAG, "New email in %s vibrateWhen: %s, playing notification: %s",
+                         LogUtils.sanitizeName(LOG_TAG, account.getDisplayName()), vibrate, ringtoneUri);

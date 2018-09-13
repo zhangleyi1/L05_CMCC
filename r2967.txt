@@ -1,0 +1,38 @@
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 2966)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 2967)
+@@ -293,6 +293,7 @@
+ 			if (hasFailItem) {
+ 				goToAutoTestResultView();
+ 			}else{
++				Tracability.setMMITestResult((byte)0);
+ 				startAutoTest();
+ 			}
+ 			break;
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tracability/Tracability.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tracability/Tracability.java	(revision 2966)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tracability/Tracability.java	(revision 2967)
+@@ -164,7 +164,8 @@
+ 		agent = NvRAMAgent.Stub.asInterface(binder);
+ 		try {
+ 		//	product_info = agent.readFile(PRODUCT_INFO_NVRAM_LID);
+-			product_info = agent.readFileByName(PRODUCT_INFO_NVRAM_PATH);
++		//	product_info = agent.readFileByName(PRODUCT_INFO_NVRAM_PATH);
++		agent.writeFileByName(PRODUCT_INFO_NVRAM_PATH, product_info);
+ 		} catch (Exception e) {
+ 			e.printStackTrace();
+ 		}
+@@ -171,7 +172,10 @@
+ 	}
+ 
+ 	public static void setMMITestResult(byte result) {
+-		product_info[MMI] = result;
++		//product_info[MMI] = result;
++		if(null!=product_info){
++			product_info[MMI] = result;
++		}
+ 		try 
+ 		{
+ 			agent.writeFile(PRODUCT_INFO_NVRAM_LID, product_info);

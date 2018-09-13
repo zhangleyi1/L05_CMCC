@@ -1,0 +1,65 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 13690)
++++ vendor/customer/custom.mk	(revision 13691)
+@@ -24,7 +24,8 @@
+                     10086android \
+                     mmnes \
+                     139mail \
+-                    Baidu
++                    Baidu  \
++		    FingerprintEneoll_7.0
+ 
+ # Overrides
+ PRODUCT_PROPERTY_OVERRIDES +=
+Index: vendor/customer/apps/FingerprintEneoll_7.0/FingerprintEneoll_7.0.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/FingerprintEneoll_7.0/FingerprintEneoll_7.0.apk
+===================================================================
+--- vendor/customer/apps/FingerprintEneoll_7.0/FingerprintEneoll_7.0.apk	(revision 0)
++++ vendor/customer/apps/FingerprintEneoll_7.0/FingerprintEneoll_7.0.apk	(revision 13691)
+
+Property changes on: vendor/customer/apps/FingerprintEneoll_7.0/FingerprintEneoll_7.0.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/FingerprintEneoll_7.0/Android.mk
+===================================================================
+--- vendor/customer/apps/FingerprintEneoll_7.0/Android.mk	(revision 0)
++++ vendor/customer/apps/FingerprintEneoll_7.0/Android.mk	(revision 13691)
+@@ -0,0 +1,19 @@
++LOCAL_PATH := $(call my-dir)
++
++include $(CLEAR_VARS)
++
++# Module name should match apk name to be installed
++
++LOCAL_MODULE := FingerprintEneoll_7.0
++
++LOCAL_MODULE_TAGS := optional
++
++LOCAL_SRC_FILES := $(LOCAL_MODULE).apk
++
++LOCAL_MODULE_CLASS := APPS
++
++LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
++
++LOCAL_CERTIFICATE := platform
++
++include $(BUILD_PREBUILT) 
+\ No newline at end of file
+Index: vendor/customer
+===================================================================
+--- vendor/customer	(revision 13690)
++++ vendor/customer	(revision 13691)
+
+Property changes on: vendor/customer
+___________________________________________________________________
+Added: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/vendor/customer:r1989,2001,2271-2272,2850-2851,2854,3750-3752,3877,13638
+   Merged /mtk_release_version/MT6739/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/vendor/customer:r1010-2762
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-OF.P53_K39V1_INHOUSE/vendor/customer:r514,535,635,733,779,859-861

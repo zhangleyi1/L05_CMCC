@@ -1,0 +1,13 @@
+Index: build/target/product/core.mk
+===================================================================
+--- build/target/product/core.mk	(revision 1776)
++++ build/target/product/core.mk	(revision 1777)
+@@ -57,7 +57,7 @@
+     TeleService \
+     VpnDialogs \
+     MmsService \
+-    NfcTest
++    NfcTest    \
+     libnfc-nci \
+ 	libnfc_nci_jni \
+ 	nfc_nci.pn54x.default \

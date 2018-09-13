@@ -1,0 +1,63 @@
+Index: frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml	(revision 4151)
++++ frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml	(revision 4152)
+@@ -136,4 +136,6 @@
+     <string name="ok">"确定"</string>
+     <string name="ic_default_move_face_center">"将脸部移到识别窗口的中间"</string>
+     <string name="ic_default_sacn_face_description_info">"请将手机放在离脸部20-50厘米的地方。将面部放置在屏幕上的圆圈上"</string>
++    <string name="ic_default_no_face_data_info">没有检测到脸部,请重新在明亮的地方识别</string>
++    <string name="face_face_get">识别失败</string>
+ </resources>
+Index: frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml	(revision 4151)
++++ frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml	(revision 4152)
+@@ -136,4 +136,6 @@
+     <string name="ok">"確定"</string>
+     <string name="ic_default_move_face_center">"將臉部移到識別窗口的中間"</string>
+     <string name="ic_default_sacn_face_description_info">"請將手機放在離臉部20-50厘米的地方。將面部放置在屏幕上的圓圈上"</string>
++    <string name="ic_default_no_face_data_info">沒有檢測到臉部，請重新在明亮的地方識別</string>
++    <string name="face_face_get">識別失敗</string>
+ </resources>
+Index: frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml	(revision 4151)
++++ frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml	(revision 4152)
+@@ -136,4 +136,6 @@
+     <string name="ok">"確定"</string>
+     <string name="ic_default_move_face_center">"將臉部移到識別窗口的中間"</string>
+     <string name="ic_default_sacn_face_description_info">"請將手機放在離臉部20-50厘米的地方。將面部放置在屏幕上的圓圈上"</string>
++    <string name="ic_default_no_face_data_info">沒有檢測到臉部，請重新在明亮的地方識別</string>
++    <string name="face_face_get">識別失敗</string>
+ </resources>
+Index: packages/apps/Settings/res/values-zh-rTW/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 4151)
++++ packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 4152)
+@@ -3320,4 +3320,5 @@
+     <string name="navigationbar_button_layout_type_hide">"隱藏導航欄"</string>
+     <string name="navigationbar_background_color_title">"背景色"</string>
+     <string name="navigationbar_background_color_summary">"改變導航欄的背景色，但不一定適用於所有的應用。"</string>
++    <string name="add_fingerprint_message_secturity">"請先設置安全密碼"</string>
+ </resources>
+Index: packages/apps/Settings/res/values-zh-rHK/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 4151)
++++ packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 4152)
+@@ -3323,4 +3323,5 @@
+     <string name="navigationbar_button_layout_type_hide">"隱藏導航欄"</string>
+     <string name="navigationbar_background_color_title">"背景色"</string>
+     <string name="navigationbar_background_color_summary">"改變導航欄的背景色，但不一定適用於所有的應用。"</string>
++    <string name="add_fingerprint_message_secturity">"請先設置安全密碼"</string>
+ </resources>
+Index: packages/apps/Settings/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 4151)
++++ packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 4152)
+@@ -3421,4 +3421,5 @@
+     <string name="title_face_remove">删除人脸</string>
+     <string name="when_this_option_is_turned_off_face_scanning_will_be_performed_in_the_background_and_the_interface_will_not_be_displayed">当此选项关闭时，面部扫描将在后台进行，界面将不显示</string>
+     <string name="face_use_guide">人脸用户指南</string>
++    <string name="add_fingerprint_message_secturity">请先设置安全密码</string>
+ </resources>

@@ -1,0 +1,15 @@
+Index: frameworks/base/telephony/java/android/telephony/CarrierConfigManager.java
+===================================================================
+--- frameworks/base/telephony/java/android/telephony/CarrierConfigManager.java	(revision 7739)
++++ frameworks/base/telephony/java/android/telephony/CarrierConfigManager.java	(revision 7740)
+@@ -1365,8 +1365,9 @@
+         /// M: VILTE enable not dependent on data enable for some operators
+         sDefaults.putBoolean(KEY_VILTE_ENABLE_NOT_DEPENDENT_ON_DATA_ENABLE_BOOL, false);
+ 
++        //modified by ruyi.guo for hiding enable data dialog when doing SS
+         /// M: config whether show enable data dialog when doing SS
+-        sDefaults.putBoolean(KEY_SHOW_OPEN_MOBILE_DATA_DIALOG_BOOL, true);
++        sDefaults.putBoolean(KEY_SHOW_OPEN_MOBILE_DATA_DIALOG_BOOL, /*true*/false);
+ 
+         /// M: config whether remove toast when maximum participants are reached in conferece call
+         sDefaults.putBoolean(KEY_REMOVE_CONFERENCE_TOAST_BOOL, false);

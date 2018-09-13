@@ -1,0 +1,13 @@
+Index: packages/apps/Settings/src/com/android/settings/users/UserSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/users/UserSettings.java	(revision 3586)
++++ packages/apps/Settings/src/com/android/settings/users/UserSettings.java	(revision 3587)
+@@ -1027,7 +1027,7 @@
+     }
+ 
+     private boolean isInitialized(UserInfo user) {
+-        return (user.flags & UserInfo.FLAG_INITIALIZED) != 0;
++        return (user != null) && ((user.flags & UserInfo.FLAG_INITIALIZED) != 0);
+     }
+ 
+     private Drawable encircle(Bitmap icon) {

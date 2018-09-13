@@ -1,0 +1,22 @@
+Index: packages/apps/Settings/src/com/android/settings/DevelopmentSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/DevelopmentSettings.java	(revision 12744)
++++ packages/apps/Settings/src/com/android/settings/DevelopmentSettings.java	(revision 12745)
+@@ -456,7 +456,7 @@
+         mUsbConfiguration = addListPreference(USB_CONFIGURATION_KEY);
+         mWebViewProvider = addListPreference(WEBVIEW_PROVIDER_KEY);
+         mWebViewMultiprocess = findAndInitSwitchPref(WEBVIEW_MULTIPROCESS_KEY);
+-        removePreference(mWebViewMultiprocess);
++        //removePreference(mWebViewMultiprocess);
+         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
+ 
+         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
+Index: packages/apps/Settings
+===================================================================
+--- packages/apps/Settings	(revision 12744)
++++ packages/apps/Settings	(revision 12745)
+
+Property changes on: packages/apps/Settings
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/packages/apps/Settings:r11702,12734

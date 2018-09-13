@@ -1,0 +1,12 @@
+Index: frameworks/base/packages/SettingsLib/res/xml/timezones.xml
+===================================================================
+--- frameworks/base/packages/SettingsLib/res/xml/timezones.xml	(revision 2192)
++++ frameworks/base/packages/SettingsLib/res/xml/timezones.xml	(revision 2193)
+@@ -66,6 +66,7 @@
+     <timezone id="Asia/Krasnoyarsk"></timezone>
+     <timezone id="Asia/Bangkok"></timezone>
+     <timezone id="Asia/Jakarta"></timezone>
++	<timezone id="Asia/Chongqing"></timezone>
+     <timezone id="Asia/Shanghai"></timezone>
+     <timezone id="Asia/Hong_Kong"></timezone>
+     <timezone id="Asia/Irkutsk"></timezone>

@@ -1,0 +1,24 @@
+Index: frameworks/base/core/res/res/values/config.xml
+===================================================================
+--- frameworks/base/core/res/res/values/config.xml	(revision 2356)
++++ frameworks/base/core/res/res/values/config.xml	(revision 2357)
+@@ -1075,8 +1075,8 @@
+          when adapting to brighter or darker environments.  This parameter controls how quickly
+          brightness changes occur in response to an observed change in light level that exceeds the
+          hysteresis threshold. -->
+-    <integer name="config_autoBrightnessBrighteningLightDebounce">4000</integer>
+-    <integer name="config_autoBrightnessDarkeningLightDebounce">8000</integer>
++    <integer name="config_autoBrightnessBrighteningLightDebounce">2000</integer>
++    <integer name="config_autoBrightnessDarkeningLightDebounce">2000</integer>
+ 
+     <!-- Light sensor event rate in milliseconds for automatic brightness control. -->
+     <integer name="config_autoBrightnessLightSensorRate">250</integer>
+Index: frameworks/base/core
+===================================================================
+--- frameworks/base/core	(revision 2356)
++++ frameworks/base/core	(revision 2357)
+
+Property changes on: frameworks/base/core
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base/core:r1984

@@ -1,0 +1,17 @@
+Index: device/mediatek/mt6739/device.mk
+===================================================================
+--- device/mediatek/mt6739/device.mk	(revision 5632)
++++ device/mediatek/mt6739/device.mk	(revision 5633)
+@@ -1394,7 +1394,7 @@
+ PRODUCT_COPY_FILES += 	vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/fp_server_cdfinger:$(TARGET_COPY_OUT_VENDOR)/thh/fp_server_cdfinger:mtk
+ PRODUCT_COPY_FILES += 	vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/uTAgent:$(TARGET_COPY_OUT_VENDOR)/thh/uTAgent:mtk
+ PRODUCT_COPY_FILES += 	vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/alipayapp:$(TARGET_COPY_OUT_VENDOR)/thh/alipayapp:mtk
+-PRODUCT_COPY_FILES += 	vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/init_thh:$(TARGET_COPY_OUT_VENDOR)/bin/init_thh:mtk
++#PRODUCT_COPY_FILES += 	vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/init_thh:$(TARGET_COPY_OUT_VENDOR)/bin/init_thh:mtk
+ 
+ PRODUCT_PACKAGES   += 	keystore.mt6739
+ PRODUCT_PACKAGES   += 	gatekeeper.mt6739
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/init_thh
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream

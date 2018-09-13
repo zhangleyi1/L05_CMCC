@@ -1,0 +1,30 @@
+Index: frameworks/base/core/res/res/values-zh-rCN/strings.xml
+===================================================================
+--- frameworks/base/core/res/res/values-zh-rCN/strings.xml	(revision 7749)
++++ frameworks/base/core/res/res/values-zh-rCN/strings.xml	(revision 7750)
+@@ -1704,4 +1704,5 @@
+     <!-- Qj add for show toast message when usb otg unmounted for 115675 by zhangle at 2018/01/10 start -->
+     <string name="otgusb_device_unmount"><xliff:g id="deviceName">%1$5s</xliff:g>已移除</string>
+     <!-- Qj add for show toast message when usb otg unmounted for 115675 by zhangle at 2018/01/10 end -->
++	
+     </resources>
+Index: frameworks/base/core/res/res/values-zh-rHK/strings.xml
+===================================================================
+--- frameworks/base/core/res/res/values-zh-rHK/strings.xml	(revision 7749)
++++ frameworks/base/core/res/res/values-zh-rHK/strings.xml	(revision 7750)
+@@ -1682,4 +1682,5 @@
+     <!-- Qj add for show toast message when usb otg unmounted for 115675 by zhangle at 2018/01/10 start -->
+     <string name="otgusb_device_unmount"><xliff:g id="deviceName">%1$5s</xliff:g>已移除</string>
+     <!-- Qj add for show toast message when usb otg unmounted for 115675 by zhangle at 2018/01/10 end -->
++	<string name="global_action_enforce_restart">提示: 長按電源鍵8秒以上，可強制重啟。</string>
+ </resources>
+Index: frameworks/base/core/res/res/values-zh-rTW/strings.xml
+===================================================================
+--- frameworks/base/core/res/res/values-zh-rTW/strings.xml	(revision 7749)
++++ frameworks/base/core/res/res/values-zh-rTW/strings.xml	(revision 7750)
+@@ -1682,4 +1682,5 @@
+     <!-- Qj add for show toast message when usb otg unmounted for 115675 by zhangle at 2018/01/10 start -->
+     <string name="otgusb_device_unmount"><xliff:g id="deviceName">%1$5s</xliff:g>已移除</string>
+     <!-- Qj add for show toast message when usb otg unmounted for 115675 by zhangle at 2018/01/10 end -->
++	<string name="global_action_enforce_restart">提示: 長按電源鍵8秒以上，可強制重啟。</string>
+ </resources>

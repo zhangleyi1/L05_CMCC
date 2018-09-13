@@ -1,0 +1,53 @@
+Index: packages/apps/Dialer/src/com/android/dialer/SpecialCharSequenceMgr.java
+===================================================================
+--- packages/apps/Dialer/src/com/android/dialer/SpecialCharSequenceMgr.java	(revision 3729)
++++ packages/apps/Dialer/src/com/android/dialer/SpecialCharSequenceMgr.java	(revision 3730)
+@@ -491,7 +491,7 @@
+ 					for(int slot = 0; slot < telephonyManager.getPhoneCount(); slot++){
+ 						if (!TextUtils.isEmpty(vers)) {
+ 					 	 	String vers1="IMEISV"+(slot+1)+":"+vers;
+-                         	deviceIds.add(vers1);
++                         	//deviceIds.add(vers1);
+                      	}
+ 					}
+                 } else {
+@@ -503,7 +503,7 @@
+ 					}
+ 					if (!TextUtils.isEmpty(vers)) {
+ 					 	vers="IMEISV:"+vers;
+-                        deviceIds.add(vers);
++                        //deviceIds.add(vers);
+                     }
+                 }
+ 				deviceIds.add(svnver); 
+@@ -1028,7 +1028,7 @@
+         	}
+ 			for (int i = 0; i < phoneCount; i++) {
+ 				String vers1="IMEISV"+(i+1)+":"+vers;
+-            	list.add(vers1);
++            	//list.add(vers1);
+         	}
+ 		}else{
+ 			String deviceId = telephonyManager.getDeviceId(0);
+@@ -1039,7 +1039,7 @@
+ 			}
+ 			if (!TextUtils.isEmpty(vers)) {
+ 				vers="IMEISV:"+vers;
+-                list.add(vers);
++               // list.add(vers);
+             }
+ 			if (TextUtils.isEmpty(meid)) {
+                 meid = TelephonyManagerEx.getDefault().getMeid(0);
+Index: packages/apps/Dialer/src/com/mediatek/dialer/util/DialerFeatureOptions.java
+===================================================================
+--- packages/apps/Dialer/src/com/mediatek/dialer/util/DialerFeatureOptions.java	(revision 3729)
++++ packages/apps/Dialer/src/com/mediatek/dialer/util/DialerFeatureOptions.java	(revision 3730)
+@@ -148,7 +148,7 @@
+      * @return true if the Light cust supported
+      */
+     public static boolean isOpLightCustSupport() {
+-        return SystemProperties.get("ro.cmcc_light_cust_support").equals("1") &&
++        return SystemProperties.get("ro.cmcc_light_cust_support","1").equals("1") &&
+                 SystemProperties.get("ro.mtk_c2k_support").equals("1");
+     }
+ 

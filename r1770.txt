@@ -1,0 +1,13 @@
+Index: device/ausshine/aus6739_66_n1/ProjectConfig.mk
+===================================================================
+--- device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 1769)
++++ device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 1770)
+@@ -515,7 +515,7 @@
+ MTK_NFC_ADDON_SUPPORT = no
+ MTK_NFC_GSMA_SUPPORT = no
+ MTK_NFC_HCE_SUPPORT = no
+-MTK_NFC_OMAAC_SUPPORT = no
++MTK_NFC_OMAAC_SUPPORT = yes
+ #MTK_NFC_PACKAGE = MTK
+ #MTK_NFC_SE_NUM = 7
+ MTK_NFC_SUPPORT = no

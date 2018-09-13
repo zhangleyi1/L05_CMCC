@@ -1,0 +1,61 @@
+Index: vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmService.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmService.java	(revision 2635)
++++ vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmService.java	(revision 2636)
+@@ -1474,7 +1474,6 @@
+         registerFmBroadcastReceiver();
+         registerSdcardReceiver();
+         registerAudioPortUpdateListener();
+-        registerMediaButtonEventReceiver(); // lance add for MediaButtonReceiver
+         HandlerThread handlerThread = new HandlerThread("FmRadioServiceThread");
+         handlerThread.start();
+         mFmServiceHandler = new FmRadioServiceHandler(handlerThread.getLooper());
+@@ -1488,15 +1487,15 @@
+     }
+ 
+     // lance add for MediaButtonReceiver @{
+-    private void registerMediaButtonEventReceiver() {
+-        Log.d(TAG, "registerMediaButtonEventReceiver.mFMMediaButtonIntentReceiver" );
++    public void registerMediaButtonEventReceiver() {
++        Log.d("FM/Receiver", "registerMediaButtonEventReceiver.mFMMediaButtonIntentReceiver" );
+         mFMMediaButtonIntentReceiver = new ComponentName(getPackageName(),
+                 FMMediaButtonIntentReceiver.class.getName());
+         mAudioManager.registerMediaButtonEventReceiver(mFMMediaButtonIntentReceiver);
+     }
+ 
+-    private void unregisterMediaButtonEventReceiver() {
+-        Log.d(TAG, "unregisterMediaButtonEventReceiver.mFMMediaButtonIntentReceiver" );
++    public void unregisterMediaButtonEventReceiver() {
++        Log.d("FM/Receiver", "unregisterMediaButtonEventReceiver.mFMMediaButtonIntentReceiver" );
+         mAudioManager.unregisterMediaButtonEventReceiver(mFMMediaButtonIntentReceiver);  
+     }
+     // @}
+@@ -1976,7 +1975,6 @@
+         unregisterFmBroadcastReceiver();
+         unregisterSdcardListener();
+         abandonAudioFocus();
+-        unregisterMediaButtonEventReceiver();// lance add for MediaButtonReceive
+         exitFm();
+         if (null != mFmRecorder) {
+             mFmRecorder = null;
+Index: vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmMainActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmMainActivity.java	(revision 2635)
++++ vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmMainActivity.java	(revision 2636)
+@@ -407,7 +407,7 @@
+                 finish();
+                 return;
+             }
+-
++            mService.registerMediaButtonEventReceiver();// lance add for MediaButtonReceiver
+             mService.registerFmRadioListener(mFmRadioListener);
+             mService.setFmMainActivityForeground(mIsActivityForeground);
+             if (FmRecorder.STATE_RECORDING != mService.getRecorderState()) {
+@@ -828,6 +828,7 @@
+         mHandler.removeCallbacksAndMessages(null);
+         if (mService != null) {
+             mService.unregisterFmRadioListener(mFmRadioListener);
++            mService.unregisterMediaButtonEventReceiver();// lance add for MediaButtonReceiver
+         }
+         if (mIsServiceBinded) {
+             unbindService(mServiceConnection);

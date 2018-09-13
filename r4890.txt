@@ -1,0 +1,13 @@
+Index: packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintSettings.java	(revision 4889)
++++ packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintSettings.java	(revision 4890)
+@@ -860,7 +860,7 @@
+                                 new DialogInterface.OnClickListener() {
+                                     @Override
+                                     public void onClick(DialogInterface dialog, int which) {
+-                                        onDeleteClick(dialog);
++                                        dialog.dismiss();
+                                     }
+                                 })
+                         .create();

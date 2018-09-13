@@ -1,0 +1,59 @@
+Index: packages/apps/Settings/src/com/android/settings/DeviceAdminSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/DeviceAdminSettings.java	(revision 5685)
++++ packages/apps/Settings/src/com/android/settings/DeviceAdminSettings.java	(revision 5686)
+@@ -87,10 +87,10 @@
+      */
+     private final ArrayList<DeviceAdminListItem>
+             mAdmins = new ArrayList<DeviceAdminListItem>();
+-
++	/*
+ 	private final ArrayList<DeviceAdminListItem>
+             mAdminss = new ArrayList<DeviceAdminListItem>();
+-			
++	*/		
+     private String mDeviceOwnerPkg;
+     private SparseArray<ComponentName> mProfileOwnerComponents = new SparseArray<ComponentName>();
+ 
+@@ -157,14 +157,14 @@
+      * Update the internal collection of available admins for all profiles associated with the
+      * current user.
+      */
++	/*
+ 	public Object getObject(int position) {
+ 		return ((DeviceAdminListItem) (mAdmins.get(position))).info;
+ 	}
+-	
++	*/
+     void updateList() {
+         mAdmins.clear();
+-		mAdminss.clear();
+-
++		//mAdminss.clear();
+         final List<UserHandle> profiles = mUm.getUserProfiles();
+         final int profilesSize = profiles.size();
+         for (int i = 0; i < profilesSize; ++i) {
+@@ -171,12 +171,12 @@
+             final int profileId = profiles.get(i).getIdentifier();
+             updateAvailableAdminsForProfile(profileId);
+         }		
+-		
++		/*
+ 		boolean flag;
+ 		for(int i = mAdmins.size() - 1; i >= 0; i--) {
+ 			flag = false;
+ 			for(int j = i - 1; j >= 0; j--) {				
+-				if((((DeviceAdminInfo)getObject(i)).getPackageName()).equals(((DeviceAdminInfo)getObject(j)).getPackageName()) && !(((DeviceAdminInfo)getObject(j)).getPackageName()).equals("android.deviceadmin.cts")) {					
++				if((((DeviceAdminInfo)getObject(i)).getPackageName()).equals("com.tcl.mibc.launcherpro")) {					
+ 					flag = true;
+ 				}
+ 			}
+@@ -190,7 +190,7 @@
+ 		for(int i = 0 ; i < mAdminss.size(); i++) {
+ 			mAdmins.add(mAdminss.get(i));
+ 		}
+-		
++		*/
+ 		Collections.sort(mAdmins);
+         getListView().setAdapter(new PolicyListAdapter());
+     }

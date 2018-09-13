@@ -1,0 +1,40 @@
+Index: frameworks/base/core/java/android/hardware/Camera.java
+===================================================================
+--- frameworks/base/core/java/android/hardware/Camera.java	(revision 4597)
++++ frameworks/base/core/java/android/hardware/Camera.java	(revision 4598)
+@@ -388,7 +388,9 @@
+     public static int getNumberOfCameras() {
+          int cameraNum = _getNumberOfCameras();
+          String packageName = ActivityThread.currentOpPackageName();
+-         if (packageName != null  && packageName.contains(".tct.") || packageName.contains(".mediatek.")) {
++         if (packageName != null  && packageName.contains(".tct.") 
++			 || packageName.contains(".mediatek.") 
++			 || packageName.equals("com.android.mmi")) {
+              return 3;
+          } 
+          return cameraNum;
+@@ -396,7 +398,10 @@
+ 	
+ 	public static boolean isTclCamera() {
+          String packageName = ActivityThread.currentOpPackageName();
+-         if (packageName != null  && packageName.contains(".tct.") || packageName.equals("com.mediatek.hz.camera")) {
++         if (packageName != null  && packageName.contains(".tct.") 
++			 || packageName.equals("com.mediatek.hz.camera") 
++		     || packageName.equals("com.android.mmi") 
++			 || packageName.equals("com.mediatek.emcamera")) {
+              return true;
+          }else{
+ 			 return false; 
+Index: kernel-4.4/drivers/misc/mediatek/imgsensor/src/common/v1/imgsensor.c
+===================================================================
+--- kernel-4.4/drivers/misc/mediatek/imgsensor/src/common/v1/imgsensor.c	(revision 4597)
++++ kernel-4.4/drivers/misc/mediatek/imgsensor/src/common/v1/imgsensor.c	(revision 4598)
+@@ -205,7 +205,7 @@
+ 			ccu_set_sensor_info(sensor_idx, &ccuSensorInfo);
+ #endif
+ 		}
+-		if(psensor->inst.sensor_idx == 2)
++		if(psensor->inst.sensor_idx == 0)
+ 		snprintf(my_cam_name, sizeof(my_cam_name), "%sMAIN_OTP:%d;MAIN2_OTP:%d;",
+ 												my_cam_name,MAIN_OTP,MAIN2_OTP);
+ 		imgsensor_mutex_unlock(psensor_inst);

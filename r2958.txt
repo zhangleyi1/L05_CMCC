@@ -1,0 +1,361 @@
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/dialog_view.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/dialog_view.xml	(revision 0)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/dialog_view.xml	(revision 2958)
+@@ -0,0 +1,54 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="#ffffff"
++    android:orientation="vertical" >
++    <TextView
++        android:id="@+id/title"
++        android:layout_width="fill_parent"
++        android:layout_height="wrap_content"
++        android:gravity="center"
++        android:textColor="#000000"
++        android:layout_marginTop="10dip"
++        android:text="@string/title"
++        android:textSize="20sp" />
++
++    <ScrollView
++        android:layout_width="fill_parent"
++        android:layout_height="wrap_content"
++        android:layout_above="@+id/confirm"
++        android:layout_below="@id/title"
++        android:orientation="vertical" >
++
++        <TextView
++            android:id="@+id/statement"
++            android:textColor="#000000"
++            android:padding="20dp"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="@string/privacy_statement"
++            android:textSize="16sp" />
++    </ScrollView>
++
++    <Button
++        android:layout_marginLeft="20dp"
++        android:layout_marginRight="20dp"
++        android:layout_marginBottom="20dp"
++        android:id="@+id/confirm"
++        android:layout_width="fill_parent"
++        android:layout_height="wrap_content"
++        android:layout_alignParentBottom="true"
++        android:layout_marginTop="10dp"
++        android:focusable="true"
++        android:paddingLeft="20dp"
++        android:paddingRight="20dp"
++        android:paddingBottom="10dp"
++        android:paddingTop="10dp"
++        android:background="@drawable/button_background"
++        android:text="@string/confirm"
++        android:textSize="18sp" >
++    </Button>
++    
++
++</LinearLayout>
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/policy_activity.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/policy_activity.xml	(revision 0)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/policy_activity.xml	(revision 2958)
+@@ -0,0 +1,43 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="fill_parent"
++    android:layout_height="fill_parent"
++    android:orientation="vertical" 
++    android:background="#00ffffff"
++    >
++
++ <!--   <TextView
++        android:id="@+id/title"
++        android:layout_width="fill_parent"
++        android:layout_height="wrap_content"
++        android:gravity="center"
++        android:layout_marginTop="10dip"
++        android:text="@string/title"
++        android:textSize="20sp" />
++
++    <ScrollView
++        android:layout_width="fill_parent"
++        android:layout_height="fill_parent"
++        android:layout_above="@+id/confirm"
++        android:layout_below="@id/title"
++        android:orientation="vertical" >
++
++        <TextView
++            android:id="@+id/statement"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="@string/privacy_statement"
++            android:textSize="16sp" />
++    </ScrollView>
++
++    <Button
++        android:id="@+id/confirm"
++        android:layout_width="fill_parent"
++        android:layout_height="wrap_content"
++        android:layout_alignParentBottom="true"
++        android:focusable="true"
++        android:text="@string/confirm"
++        android:textSize="18sp" >
++    </Button>
++	 --> 
++</RelativeLayout>
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/values-zh-rTW/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/values-zh-rTW/strings.xml	(revision 2957)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/values-zh-rTW/strings.xml	(revision 2958)
+@@ -58,4 +58,8 @@
+     <string name="iris_finish">虹膜錄入成功</string>
+     <string name="gome_finish">國美賬戶登錄成功</string>
+     <string name="start_launch">完成</string>
++    <string name="title">聲明</string>
++    <string name="confirm">確認</string>
++    <string name="privacy_statement">為了給您提供更好的服務,您的設備可能會通過WLAN或數據網絡給選定的服務運營商定時發送您以及本設備的相關信息。運營商承諾僅將相關信息以分析方式,用於改進服務質量或提供自定義服務或技術,不會以任何可識別您個人身份的形式向外界披露相關信息。</string>
++
+ </resources>
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/strings.xml	(revision 2957)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/values/strings.xml	(revision 2958)
+@@ -66,6 +66,9 @@
+     <string name="gome_finish">国美账户登录成功</string>
+     <string name="start_launch">完成</string>
+     <string name="welcome_image_text">welcome image text</string>
++    <string name="title">声明</string>
++    <string name="confirm">确认</string>
++    <string name="privacy_statement">为了给您提供更好的服务,您的设备可能会通过WLAN或数据网络给选定的服务运营商定时发送您以及本设备的相关信息。运营商承诺仅将相关信息以分析方式,用于改进服务质量或提供自定义服务或技术,不会以任何可识别您个人身份的形式向外界披露相关信息。</string>
+ 
+     <string name="dialog_title_no_network">No network connection, please check the network settings!</string>
+     <string name="txt_set_network">set network</string>
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/values-en/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/values-en/strings.xml	(revision 2957)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/values-en/strings.xml	(revision 2958)
+@@ -8,6 +8,10 @@
+     <string name="app_lock_detail_in_face_code">Can use face code to access applications protected by app lock.</string>
+     <string name="app_lock_in_iris_detail">Allows the use of iris lock access application and application being accessed</string>
+     <string name="back">Previous</string>
++    <string name="title">Statement</string>
++    <string name="confirm">Confirm</string>
++    <string name="privacy_statement">In order to provide you with better service, your device may send you and the information about the device to the selected service provider via WLAN or data network. The operator undertakes to analyze the information only for the purpose of improving the quality of service or providing a customized service or technology and will not disclose the information to the outside world in any form that identifies you personally.</string>
++
+     <string name="check_gome_account">Verify gome account</string>
+     <string name="check_gome_account_detail">Allows the use of the fingerprint verification gome account</string>
+     <string name="complex_password">Complex Passwords</string>
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/drawable-hdpi/button_background.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/drawable-hdpi/button_background.xml	(revision 0)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/drawable-hdpi/button_background.xml	(revision 2958)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="utf-8"?>
++<shape xmlns:android="http://schemas.android.com/apk/res/android" >
++    <corners android:radius="5dip"/>
++    <stroke android:color="#8e8e8e" android:width="1dp"/>
++
++</shape>
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/AndroidManifest.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/AndroidManifest.xml	(revision 2957)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/AndroidManifest.xml	(revision 2958)
+@@ -59,7 +59,15 @@
+             android:exported="true"
+             android:excludeFromRecents="true"
+             android:screenOrientation="portrait" />
++			
++	 <activity
++            android:name=".activity.PolicyForCMCC"
++            android:launchMode="singleTask"
++            android:exported="true"
++            android:excludeFromRecents="true"
++            android:screenOrientation="portrait" />
+ 
++
+         <activity
+             android:name=".activity.UserAgreementActivity"
+             android:launchMode="singleTask"
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java	(revision 2957)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java	(revision 2958)
+@@ -215,8 +215,8 @@
+     public void onBackPressed() {
+ 		if(mIsLastPage)
+ 		{
+-			Intent mIntent = new Intent(WelcomeActivity.this,FingerPrintActivity.class);
+-			mIntent.putExtra("isToAddFinger", true);
++			Intent mIntent = new Intent(WelcomeActivity.this,PolicyForCMCC.class);
++			//mIntent.putExtra("isToAddFinger", true);
+ 			startActivity(mIntent);
+ 			overridePendingTransition(R.anim.gome_activity_close_enter,R.anim.gome_activity_close_exit);
+ 			finish();
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/PolicyForCMCC.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/PolicyForCMCC.java	(revision 0)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/PolicyForCMCC.java	(revision 2958)
+@@ -0,0 +1,145 @@
++/*
++ * Copyright (C) 2008 The Android Open Source Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++package com.gome.bootwizard.activity;
++
++import android.app.Activity;
++import android.app.AlertDialog;
++import android.app.Dialog;
++import android.content.ComponentName;
++import android.content.DialogInterface;
++import android.content.pm.PackageManager;
++import android.os.Bundle;
++import android.os.SystemProperties;
++import com.gome.bootwizard.R;
++import android.view.KeyEvent;
++import android.view.View;
++import android.view.View.OnClickListener;
++import android.view.Window;
++import android.widget.Button;
++import android.content.Intent;
++import android.util.Log;
++import com.gome.bootwizard.navigation.Navigator;
++import static com.gome.bootwizard.navigation.Navigator.LAST_PAGE;
++
++
++//import android.app.IrisManager;
++//import android.app.facecode.FacecodeManager;
++import android.content.Context;
++import android.content.Intent;
++
++//import android.hardware.fingerprint.FingerprintManager;
++import android.net.Uri;
++import android.os.Bundle;
++
++
++
++
++
++
++import com.gome.bootwizard.service.ScreenOffService;
++import com.gome.bootwizard.timer.MybTimeTask;
++import com.gome.bootwizard.util.HasRequest;
++
++//import com.google.android.gms.appindexing.Action;
++//import com.google.android.gms.appindexing.AppIndex;
++//import com.google.android.gms.appindexing.Thing;
++//import com.google.android.gms.common.api.GoogleApiClient;
++
++//import butterknife.BindView;
++//import butterknife.OnClick;
++
++
++/**
++ * Application that sets the provisioned bit, like SetupWizard does.
++ */
++public class PolicyForCMCC extends BaseActivity  {
++    protected Button mStatementButton;
++	boolean isCancel =true;
++	@Override
++    protected int getLayoutResID() {
++        return R.layout.policy_activity;
++    }
++    @Override
++    protected void onCreate(Bundle icicle) {
++        super.onCreate(icicle);
++       
++        
++    }
++    private void ShowDialog() {
++		// TODO Auto-generated method stub
++
++    	AlertDialog dialog = new AlertDialog.Builder(PolicyForCMCC.this)
++                .setTitle(R.string.title).setMessage(R.string.privacy_statement)
++                
++                .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {                		
++						@Override
++						public void onClick(DialogInterface dialog, int which) {
++							// TODO Auto-generated method stub
++							isCancel =false;
++						}
++
++                    }
++                )
++				.setOnDismissListener(new DialogInterface.OnDismissListener() {
++				@Override
++				public void onDismiss(DialogInterface dialog) {
++					
++			
++					diaplg_click();
++				}
++				})
++				.create();
++    	dialog.show();		
++	}
++
++    @Override
++    public void onBackPressed() {		
++        return;
++}
++	private void diaplg_click(){
++		if(isCancel){
++			Intent mIntent = new Intent(PolicyForCMCC.this,FingerPrintActivity.class);
++				mIntent.putExtra("isToAddFinger", true);
++				startActivity(mIntent);
++				overridePendingTransition(R.anim.gome_activity_close_enter,R.anim.gome_activity_close_exit);
++				finish();
++			}else{
++				Intent mIntent = new Intent(PolicyForCMCC.this,WelcomeActivity.class);
++				mIntent.putExtra(LAST_PAGE, true);
++				startActivity(mIntent);
++				overridePendingTransition(R.anim.gome_activity_open_enter,R.anim.gome_activity_open_exit);
++				finish();
++			}
++	}
++
++    @Override
++    public boolean dispatchKeyEvent(KeyEvent event) {
++        switch (event.getKeyCode()) {
++        case KeyEvent.KEYCODE_CALL:
++            return true;
++        default:
++            break;
++        }
++        return super.dispatchKeyEvent(event);
++    }
++	
++	 @Override
++    protected void onResume() {
++        super.onResume();
++		ShowDialog();
++	}
++}
+\ No newline at end of file
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/FingerPrintActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/FingerPrintActivity.java	(revision 2957)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/FingerPrintActivity.java	(revision 2958)
+@@ -214,8 +214,8 @@
+ 			   //finish();
+ 		}else {
+ 				
+-			Intent mIntent = new Intent(FingerPrintActivity.this,WelcomeActivity.class);
+-			mIntent.putExtra(LAST_PAGE, true);
++			Intent mIntent = new Intent(FingerPrintActivity.this,PolicyForCMCC.class);
++			//mIntent.putExtra(LAST_PAGE, true);
+ 			startActivity(mIntent);
+ 			overridePendingTransition(R.anim.gome_activity_open_enter,R.anim.gome_activity_open_exit);
+ 			finish();

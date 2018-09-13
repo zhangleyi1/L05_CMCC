@@ -1,0 +1,39 @@
+Index: packages/apps/Settings/res/layout/wifi_dialog.xml
+===================================================================
+--- packages/apps/Settings/res/layout/wifi_dialog.xml	(revision 2017)
++++ packages/apps/Settings/res/layout/wifi_dialog.xml	(revision 2018)
+@@ -300,6 +300,7 @@
+                         android:layout_height="wrap_content"
+                         style="@style/wifi_item_edit_content"
+                         android:singleLine="true"
++						android:maxLength="64" 
+                         android:textDirection="locale"
+                         android:password="true" />
+             </LinearLayout>
+Index: packages/apps/Settings
+===================================================================
+--- packages/apps/Settings	(revision 2017)
++++ packages/apps/Settings	(revision 2018)
+
+Property changes on: packages/apps/Settings
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/packages/apps/Settings:r1955-1959
+Index: packages/apps
+===================================================================
+--- packages/apps	(revision 2017)
++++ packages/apps	(revision 2018)
+
+Property changes on: packages/apps
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/packages/apps:r1752,1757,1955-1959
+Index: packages
+===================================================================
+--- packages	(revision 2017)
++++ packages	(revision 2018)
+
+Property changes on: packages
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/packages:r1752,1757,1955-1959

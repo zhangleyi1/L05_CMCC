@@ -1,0 +1,52 @@
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/fingerprint/Fingerprint.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/fingerprint/Fingerprint.java	(revision 4617)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/fingerprint/Fingerprint.java	(revision 4618)
+@@ -8,7 +8,7 @@
+ import android.view.WindowManager;
+ import android.widget.Button;
+ import android.widget.TextView;
+-
++import android.view.Window;
+ import android.view.View.OnClickListener;
+ import com.android.mmi.MMITestDevice;
+ import com.android.mmi.R;
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tprawdata/TpRawData.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tprawdata/TpRawData.java	(revision 4617)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tprawdata/TpRawData.java	(revision 4618)
+@@ -8,7 +8,7 @@
+ import android.view.WindowManager;
+ import android.widget.Button;
+ import android.widget.TextView;
+-
++import android.view.Window;
+ import android.view.View.OnClickListener;
+ import com.android.mmi.MMITestDevice;
+ import com.android.mmi.R;
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/compass/Compass.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/compass/Compass.java	(revision 4617)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/compass/Compass.java	(revision 4618)
+@@ -8,7 +8,7 @@
+ import android.view.WindowManager;
+ import android.widget.Button;
+ import android.widget.TextView;
+-
++import android.view.Window;
+ import android.view.View.OnClickListener;
+ import com.android.mmi.MMITestDevice;
+ import com.android.mmi.R;
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tplock/TpLock.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tplock/TpLock.java	(revision 4617)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tplock/TpLock.java	(revision 4618)
+@@ -8,7 +8,7 @@
+ import android.view.WindowManager;
+ import android.widget.Button;
+ import android.widget.TextView;
+-
++import android.view.Window;
+ import android.view.View.OnClickListener;
+ import com.android.mmi.MMITestDevice;
+ import com.android.mmi.R;

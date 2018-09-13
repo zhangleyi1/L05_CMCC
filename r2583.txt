@@ -1,0 +1,13 @@
+Index: vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmFavoriteActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmFavoriteActivity.java	(revision 2582)
++++ vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmFavoriteActivity.java	(revision 2583)
+@@ -238,7 +238,7 @@
+ 
+     private Cursor getData() {
+         Cursor cursor = mContext.getContentResolver().query(Station.CONTENT_URI,
+-                FmStation.COLUMNS, null, null, FmStation.Station.FREQUENCY);
++                FmStation.COLUMNS, null, null, FmStation.Station.IS_FAVORITE + " desc," + FmStation.Station.FREQUENCY); // lance modify for bug 114548
+         return cursor;
+     }
+ 

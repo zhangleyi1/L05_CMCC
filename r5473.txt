@@ -1,0 +1,47 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 5472)
++++ vendor/customer/custom.mk	(revision 5473)
+@@ -34,4 +34,9 @@
+ vendor/customer/apps/mCloud/mCloud_3.7.5_508-000.apk:system/vendor/operator/app/mCloud/mCloud.apk \
+ vendor/customer/apps/migu_video/resigned_4.0.0.10_71_20171205094744_sec_signed.apk:system/vendor/operator/app/migu_video/migu_video.apk \
+ vendor/customer/apps/HeFition/HeFition_V6.1.0330_2017121815_PROD_release.apk:system/vendor/operator/app/HeFition/HeFition.apk \
+-vendor/customer/apps/migu_reader/CMREADBC_Android_WH_V7.30_specprein_te_171214_signed.apk:system/vendor/operator/app/migu_reader/CMREADBC_Android_WH_V7.30_specprein_te_171214_signed.apk 
+\ No newline at end of file
++vendor/customer/apps/migu_reader/CMREADBC_Android_WH_V7.30_specprein_te_171214_signed.apk:system/vendor/operator/app/migu_reader/CMREADBC_Android_WH_V7.30_specprein_te_171214_signed.apk \
++vendor/customer/apps/UCBrowser/UCBrowser_V11.7.2.954_android_pf145.apk:system/vendor/operator/app/UCBrowser/UCBrowser_V11.7.2.954_android_pf145.apk \
++vendor/customer/apps/UCBrowser/uconfig.ini:system/etc/uconfig.ini \
++vendor/customer/apps/shuqi/3298_rtm_shuqi_android_v10.6.3.58_145_release_android24_3015_noad_Build180105164429.apk:system/vendor/operator/app/shuqi/3298_rtm_shuqi_android_v10.6.3.58_145_release_android24_3015_noad_Build180105164429.apk \
++vendor/customer/apps/MobileWallet/MobileWallet7145201712221943signed1003sec.apk:system/vendor/operator/app/MobileWallet/MobileWallet7145201712221943signed1003sec.apk \
++vendor/customer/apps/NewsArticle/NewsArticle_yd2017_tcl_v760_v6.1.7_10b3cc9_2018-01-05_23-56-49.apk:system/vendor/operator/app/NewsArticle/NewsArticle_yd2017_tcl_v760_v6.1.7_10b3cc9_2018-01-05_23-56-49.apk
+\ No newline at end of file
+Index: vendor/customer/apps/UCBrowser/uconfig.ini
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/UCBrowser/uconfig.ini
+===================================================================
+--- vendor/customer/apps/UCBrowser/uconfig.ini	(revision 0)
++++ vendor/customer/apps/UCBrowser/uconfig.ini	(revision 5473)
+
+Property changes on: vendor/customer/apps/UCBrowser/uconfig.ini
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/UCBrowser/UCBrowser_V11.7.2.954_android_pf145.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/UCBrowser/UCBrowser_V11.7.2.954_android_pf145.apk
+===================================================================
+--- vendor/customer/apps/UCBrowser/UCBrowser_V11.7.2.954_android_pf145.apk	(revision 0)
++++ vendor/customer/apps/UCBrowser/UCBrowser_V11.7.2.954_android_pf145.apk	(revision 5473)
+
+Property changes on: vendor/customer/apps/UCBrowser/UCBrowser_V11.7.2.954_android_pf145.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

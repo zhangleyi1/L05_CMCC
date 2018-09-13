@@ -1,0 +1,82 @@
+Index: frameworks/base/services/usb/java/com/android/server/usb/UsbDeviceManager.java
+===================================================================
+--- frameworks/base/services/usb/java/com/android/server/usb/UsbDeviceManager.java	(revision 4594)
++++ frameworks/base/services/usb/java/com/android/server/usb/UsbDeviceManager.java	(revision 4595)
+@@ -443,6 +443,10 @@
+                     if (intent.getAction().equals("com.mediatek.action.USB_ACTIVATION")) {
+                         mIsUsbSimSecurityCheck = true;
+                         Slog.d(TAG, "USB SIM Check Unlock!!");
++						if(checkCmccCard()){// && !checkCmccCard(1)
++							SystemProperties.set("persist.sys.usb.activation", "yes");
++							mCurrentFunctions = getDefaultFunctions();//UsbManager.USB_FUNCTION_MTP;
++						}
+                         setEnabledFunctions(mCurrentFunctions, true);
+                     }
+                 }
+@@ -1506,24 +1510,38 @@
+         public UsbAccessory getCurrentAccessory() {
+             return mCurrentAccessory;
+         }
+-		private boolean checkCmccCard(int simId) {
+-            boolean isCmccCard = false;
+-			Slog.d(TAG, "javen checkCmccCard simId = " + simId);
+-			TelephonyManager telMgr = (TelephonyManager)mContext.getSystemService(Context.TELEPHONY_SERVICE);
+-			int simState = telMgr.getSimState();
+-			boolean result = true;
+-			Slog.d(TAG, "javen checkCmccCard simState = " + simState);
+-			switch (simState) {
+-				case TelephonyManager.SIM_STATE_READY:
+-					isCmccCard = true;
+-					break;
+-				default:
+-					isCmccCard = false;
+-					break;
+-			}
+-            return isCmccCard;
++		private boolean checkCmccCard() {
++            int simNumber = 0; 
++			//try {
++				TelephonyManager telephonyManager = TelephonyManager.getDefault();
++				if (telephonyManager == null) {
++					Slog.d(TAG, "TelephonyManagerEx is null");
++					return false;
++				}
++
++				simNumber = telephonyManager.getSimCount();
++				for (int i = 0 ; i <  simNumber ; i++) {
++					if (telephonyManager.hasIccCard(i)) {
++						Slog.d(TAG, "Slot(" + i + ") has iccCard");
++						return true;
++					}
++				}
++
++			//} catch (NullPointerException e) {
++			//    Slog.e(TAG, "TelephonyManagerEx NullPointerException: " + e);
++			//    return false;
++			//}
++			Slog.d(TAG, "No card plug ined: " + simNumber);
++			return false;
++
+         }
+         private void updateUsbNotification() {
++			if(checkCmccCard() && !mIsUsbSimSecurityCheck){// && !mIsUsbSimSecurityCheck
++				mIsUsbSimSecurityCheck = true;
++				SystemProperties.set("persist.sys.usb.activation", "yes");
++				setEnabledFunctions(getDefaultFunctions(), true);//UsbManager.USB_FUNCTION_MTP
++			}	
++			
+             if (mNotificationManager == null || !mUseUsbNotification
+                     || ("0".equals(SystemProperties.get("persist.charging.notify")))) return;
+ 
+@@ -1531,10 +1549,7 @@
+                 if (!mIsUsbSimSecurityCheck) {
+                     String value = SystemProperties.get("persist.sys.usb.activation", "no");
+                     if (value.equals("no")){
+-						if(!checkCmccCard(0)){// && !checkCmccCard(1)
+-							return;
+-						}
+-						mIsUsbSimSecurityCheck = true;
++						return;
+ 					}
+                 }
+             }

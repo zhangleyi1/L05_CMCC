@@ -1,0 +1,30 @@
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/lib/arm64-v8a/libinit_thh.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/lib/arm64-v8a/libinit_thh.so
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/lib/arm64-v8a/libinit_thh.so	(revision 0)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/lib/arm64-v8a/libinit_thh.so	(revision 5292)
+
+Property changes on: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/lib/arm64-v8a/libinit_thh.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/lib/armeabi/libinit_thh.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/lib/armeabi/libinit_thh.so
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/lib/armeabi/libinit_thh.so	(revision 0)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/lib/armeabi/libinit_thh.so	(revision 5292)
+
+Property changes on: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/lib/armeabi/libinit_thh.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

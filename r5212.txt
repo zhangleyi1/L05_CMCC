@@ -1,0 +1,24 @@
+Index: packages/providers/DownloadProvider/src/com/android/providers/downloads/DownloadNotifier.java
+===================================================================
+--- packages/providers/DownloadProvider/src/com/android/providers/downloads/DownloadNotifier.java	(revision 5211)
++++ packages/providers/DownloadProvider/src/com/android/providers/downloads/DownloadNotifier.java	(revision 5212)
+@@ -362,7 +362,8 @@
+                     } else {
+                         builder.setContentText(remainingText);
+                     }
+-                    builder.setContentInfo(percentText);
++                    //builder.setContentInfo(percentText);setContentInfo api 24 was abandoned, no longer show, with setSubText instead
++					builder.setSubText(percentText);
+ 
+                 } else if (type == TYPE_WAITING) {
+                     builder.setContentText(
+@@ -408,7 +409,8 @@
+                     builder.setContentTitle(res.getQuantityString(
+                             R.plurals.notif_summary_active, cluster.size(), cluster.size()));
+                     builder.setContentText(remainingText);
+-                    builder.setContentInfo(percentText);
++                    //builder.setContentInfo(percentText);setContentInfo api 24 was abandoned, no longer show, with setSubText instead
++					builder.setSubText(percentText);
+                     inboxStyle.setSummaryText(remainingText);
+ 
+                 } else if (type == TYPE_WAITING) {

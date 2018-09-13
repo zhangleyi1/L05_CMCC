@@ -1,0 +1,59 @@
+Index: frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 4391)
++++ frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 4392)
+@@ -584,8 +584,8 @@
+     private boolean mNoLowPowerBluetoothEnabled;
+     private int mNoLowPowerVibrateRingerSetting;
+     private int mNoLowPowerVibrateNotificationSetting;
+-    private NfcAdapter mNfcAdapter;
+-    private boolean mNfcEnabled;
++    //private NfcAdapter mNfcAdapter;
++    //private boolean mNfcEnabled;
+ 
+     public PowerManagerService(Context context) {
+         super(context);
+@@ -661,7 +661,7 @@
+             mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);//����������
+             BluetoothManager bluetoothManager = (BluetoothManager)mContext.getSystemService(Context.BLUETOOTH_SERVICE);//����
+             mBluetoothAdapter = bluetoothManager.getAdapter();
+-            mNfcAdapter = NfcAdapter.getDefaultAdapter(mContext);//NFC
++            //mNfcAdapter = NfcAdapter.getDefaultAdapter(mContext);//NFC
+ 
+             mScreenBrightnessSettingMinimum = pm.getMinimumScreenBrightnessSetting();
+             mScreenBrightnessSettingMaximum = pm.getMaximumScreenBrightnessSetting();
+@@ -1065,7 +1065,7 @@
+         mNoLowPowerBluetoothEnabled = mBluetoothAdapter.isEnabled();//����״̬
+ //        mNoLowPowerVibrateRingerSetting = mAudioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER);//������
+ //        mNoLowPowerVibrateNotificationSetting= mAudioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION);//֪ͨ��
+-        mNfcEnabled = mNfcAdapter.isNdefPushEnabled();//NFC״̬
++        //mNfcEnabled = mNfcAdapter.isNdefPushEnabled();//NFC״̬
+ 
+         Settings.System.putInt(resolver, Settings.System.SCREEN_OFF_TIMEOUT, 30000);//������Ļ˯��ʱ��15��
+ //        Settings.System.putInt(resolver, Settings.System.SCREEN_BRIGHTNESS, 10);//������Ļ����Ϊ10
+@@ -1077,9 +1077,9 @@
+         mBluetoothAdapter.disable();//�ر�����
+ //        mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_OFF);//�ر�������
+ //        mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION, AudioManager.VIBRATE_SETTING_OFF);//�ر�֪ͨ��
+-        if (mNfcEnabled==true){
+-            mNfcAdapter.disableNdefPush();
+-        }
++        //if (mNfcEnabled==true){
++        //    mNfcAdapter.disableNdefPush();
++        //}
+     } else {//����ǵ͹���ģʽ�رպ�һϵ�еĻָ�����
+         Settings.System.putInt(resolver, Settings.System.SCREEN_OFF_TIMEOUT, mNoLowPowerScreenoffTimeout);//�ָ���Ļ˯��ʱ��
+ //        Settings.System.putInt(resolver, Settings.System.SCREEN_BRIGHTNESS, mNoLowPowerScreenBrightness);//�ָ���Ļ����
+@@ -1093,9 +1093,9 @@
+         if (mNoLowPowerWifiState == WifiManager.WIFI_STATE_ENABLED) {//����WiFi
+             mWifiManager.setWifiEnabled(true);
+         }
+-        if (mNfcEnabled==true){
+-            mNfcAdapter.enableNdefPush();
+-        }
++        //if (mNfcEnabled==true){
++          //  mNfcAdapter.enableNdefPush();
++        //}
+         mTelephonyManager.setDataEnabled(mNoLowPowerDataEnabled);//������������
+         if (mNoLowPowerBluetoothEnabled) {
+             mBluetoothAdapter.enable();//������

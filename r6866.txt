@@ -1,0 +1,106 @@
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libikirface.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libIrisking.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libcvface_api.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libjni_cvface_api.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libMegviiUnlock-jni-1.2.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libMegviiUnlock-jni-1.2.so
+===================================================================
+--- frameworks/base/packages/SystemUI/libs/arm64-v8a/libMegviiUnlock-jni-1.2.so	(revision 0)
++++ frameworks/base/packages/SystemUI/libs/arm64-v8a/libMegviiUnlock-jni-1.2.so	(revision 6866)
+
+Property changes on: frameworks/base/packages/SystemUI/libs/arm64-v8a/libMegviiUnlock-jni-1.2.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libmeglive.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libmeglive.so
+===================================================================
+--- frameworks/base/packages/SystemUI/libs/arm64-v8a/libmeglive.so	(revision 0)
++++ frameworks/base/packages/SystemUI/libs/arm64-v8a/libmeglive.so	(revision 6866)
+
+Property changes on: frameworks/base/packages/SystemUI/libs/arm64-v8a/libmeglive.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libFaceDetectCA.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libFaceDetectCA.so
+===================================================================
+--- frameworks/base/packages/SystemUI/libs/arm64-v8a/libFaceDetectCA.so	(revision 0)
++++ frameworks/base/packages/SystemUI/libs/arm64-v8a/libFaceDetectCA.so	(revision 6866)
+
+Property changes on: frameworks/base/packages/SystemUI/libs/arm64-v8a/libFaceDetectCA.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libMegviiUnlock.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libMegviiUnlock.so
+===================================================================
+--- frameworks/base/packages/SystemUI/libs/arm64-v8a/libMegviiUnlock.so	(revision 0)
++++ frameworks/base/packages/SystemUI/libs/arm64-v8a/libMegviiUnlock.so	(revision 6866)
+
+Property changes on: frameworks/base/packages/SystemUI/libs/arm64-v8a/libMegviiUnlock.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libunlockmegcv.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libunlockmegcv.so
+===================================================================
+--- frameworks/base/packages/SystemUI/libs/arm64-v8a/libunlockmegcv.so	(revision 0)
++++ frameworks/base/packages/SystemUI/libs/arm64-v8a/libunlockmegcv.so	(revision 6866)
+
+Property changes on: frameworks/base/packages/SystemUI/libs/arm64-v8a/libunlockmegcv.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libmegface.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libmegface.so
+===================================================================
+--- frameworks/base/packages/SystemUI/libs/arm64-v8a/libmegface.so	(revision 0)
++++ frameworks/base/packages/SystemUI/libs/arm64-v8a/libmegface.so	(revision 6866)
+
+Property changes on: frameworks/base/packages/SystemUI/libs/arm64-v8a/libmegface.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

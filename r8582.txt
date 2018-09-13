@@ -1,0 +1,51 @@
+Index: frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 8581)
++++ frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 8582)
+@@ -2146,14 +2146,16 @@
+                     mUserActivitySummary = USER_ACTIVITY_SCREEN_DREAM;
+                     nextTimeout = -1;
+                 }
+-				if(mScreenOffTimeoutSetting !=0){
+-                if (mUserActivitySummary != 0 && nextTimeout >= 0) {
+-                    Message msg = mHandler.obtainMessage(MSG_USER_ACTIVITY_TIMEOUT);
+-                    msg.setAsynchronous(true);
+-                    mHandler.sendMessageAtTime(msg, nextTimeout);
+-                    }	
+-				}else{
+-					mUserActivitySummary |= USER_ACTIVITY_SCREEN_BRIGHT; 
++
++                if (mScreenOffTimeoutSetting != 0 || (mScreenOffTimeoutSetting == 0
++                                && mUserActivityTimeoutOverrideFromWindowManager > 0)) {
++                    if (mUserActivitySummary != 0 && nextTimeout >= 0) {
++                        Message msg = mHandler.obtainMessage(MSG_USER_ACTIVITY_TIMEOUT);
++                        msg.setAsynchronous(true);
++                        mHandler.sendMessageAtTime(msg, nextTimeout);
++                    }
++                } else {
++		    mUserActivitySummary |= USER_ACTIVITY_SCREEN_BRIGHT; 
+                 }
+             } else {
+                 mUserActivitySummary = 0;
+@@ -2201,7 +2203,11 @@
+             timeout = Math.min(timeout, mMaximumScreenOffTimeoutFromDeviceAdmin);
+         }
+         if (mUserActivityTimeoutOverrideFromWindowManager >= 0) {
+-            timeout = (int)Math.min(timeout, mUserActivityTimeoutOverrideFromWindowManager);
++            if (mScreenOffTimeoutSetting <= 0) {
++                timeout = (int)mUserActivityTimeoutOverrideFromWindowManager;
++            } else {
++                timeout = (int)Math.min(timeout, mUserActivityTimeoutOverrideFromWindowManager);
++            }
+         }
+         if (sleepTimeout >= 0) {
+             timeout = Math.min(timeout, sleepTimeout);
+@@ -2209,7 +2215,7 @@
+         if (mUserActivityTimeoutMin) {
+             timeout = (int)Math.min(timeout, mUserActivityTimeoutOverrideFromCMD);
+         }
+-        return Math.max(timeout, mMinimumScreenOffTimeoutConfig);
++        return Math.max(timeout, mMinimumScreenOffTimeoutConfig); 
+     }
+ 
+     private int getScreenDimDurationLocked(int screenOffTimeout) {

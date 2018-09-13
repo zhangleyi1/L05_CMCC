@@ -1,0 +1,15 @@
+Index: packages/apps/DeskClock/res/values/dimens.xml
+===================================================================
+--- packages/apps/DeskClock/res/values/dimens.xml	(revision 5017)
++++ packages/apps/DeskClock/res/values/dimens.xml	(revision 5018)
+@@ -36,8 +36,8 @@
+     <dimen name="alert_dialog_title_height">64dip</dimen>
+     <dimen name="bottom_text_spacing_digital">-8dp</dimen>
+     <dimen name="top_text_spacing_digital">4dp</dimen>
+-    <dimen name="bottom_text_spacing_analog">14dp</dimen>
+-    <dimen name="bottom_text_spacing_analog_small">6dp</dimen>
++    <dimen name="bottom_text_spacing_analog">1dp</dimen>
++    <dimen name="bottom_text_spacing_analog_small">1dp</dimen>
+ 
+     <dimen name="alarm_side_padding">12dip</dimen>
+     <dimen name="clock_side_padding">12dip</dimen>

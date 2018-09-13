@@ -1,0 +1,40 @@
+Index: frameworks/base/core/res/res/values-zh-rCN/strings.xml
+===================================================================
+--- frameworks/base/core/res/res/values-zh-rCN/strings.xml	(revision 3895)
++++ frameworks/base/core/res/res/values-zh-rCN/strings.xml	(revision 3896)
+@@ -1686,6 +1686,7 @@
+     <skip />
+ 	<string name="fingerprint_acquired_duplicate_finger">重复手指。请更换手指</string>
+     <string name="fingerprint_acquired_duplicate_area">重复区域。请重试。</string>
+-	
++	<string name="face_verify_fail_tip">验证失败 </string>
++    <string name="face_verify_timeout_tip">没有检测到人脸</string>
+ 	<string name="shutdown_poweroff">"确定"</string>
+     </resources>
+Index: packages/apps/Settings/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 3895)
++++ packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 3896)
+@@ -3403,4 +3403,22 @@
+ 	<string name="keywords_turn_off_at">关闭</string>
+ 	<string name="setting_time_error">设置时间错误</string>
+ 	<string name="auto_time_night_mode">22:00 to 7:00</string>
++	<string name="ic_default_face_unlock_entry_failed">进入失败</string>
++    <string name="ic_default_face_unlock_name">人脸识别</string>
++    <string name="ic_default_remove_face_unlock">删除人脸数据</string>
++    <string name="ic_default_face_unlock_manager_title">人脸管理</string>
++    <string name="ic_default_face_scan_settings_title">人脸识别设置</string>
++    <string name="ic_default_face_scan_private_summary">可以隐藏通知、电话、信息</string>
++    <string name="ic_default_face_scan_demonstration_title">手机解锁</string>
++    <string name="ic_default_start_entry_face_btn">开始</string>
++    <string name="ic_default_sacn_face_description_info">请将脸部与手机保持在20-50厘米，并把脸部放在屏幕上的圆圈上 </string>
++    <string name="into_the_security_system">进入安全系统</string>
++    <string name="face_use_to_title">人脸识别可用于</string>
++    <string name="look_the_encrypted_content">查看加密内容</string>
++    <string name="settings_app_lock_title">设置应用程序锁</string>
++    <string name="please_input_password">请输入密码</string>
++    <string name="displays_face_scan_mask">显示脸部扫描遮罩</string>
++    <string name="title_face_remove">删除人脸</string>
++    <string name="when_this_option_is_turned_off_face_scanning_will_be_performed_in_the_background_and_the_interface_will_not_be_displayed">当此选项关闭时，面部扫描将在后台进行，界面将不显示</string>
++    <string name="face_use_guide">人脸用户指南</string>
+ </resources>

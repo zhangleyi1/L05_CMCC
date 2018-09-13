@@ -1,0 +1,30 @@
+Index: packages/apps/Settings/res/layout/choose_lock_pattern_multiwin.xml
+===================================================================
+--- packages/apps/Settings/res/layout/choose_lock_pattern_multiwin.xml	(revision 4671)
++++ packages/apps/Settings/res/layout/choose_lock_pattern_multiwin.xml	(revision 4672)
+@@ -42,6 +42,7 @@
+             android:layout_height="match_parent"
+             android:layout_marginStart="?attr/suwMarginSides"
+             android:layout_marginBottom="@dimen/suw_content_frame_padding_bottom"
++			android:layout_marginRight="10dp"
+             android:orientation="vertical">
+ 
+             <LinearLayout
+@@ -93,7 +94,7 @@
+                     <!-- left / top button: skip, or re-try -->
+                     <Button android:id="@+id/footerLeftButton"
+                         style="@style/SetupWizardButton.Negative"
+-                        android:layout_width="wrap_content"
++                        android:layout_width="80dp"
+                         android:layout_height="wrap_content"
+                         android:text="@string/lockpattern_restart_button_text" />
+ 
+@@ -105,7 +106,7 @@
+                     <!-- right / bottom button: confirm or ok -->
+                     <Button android:id="@+id/footerRightButton"
+                         style="@style/SetupWizardButton.Positive"
+-                        android:layout_width="wrap_content"
++                        android:layout_width="80dp"
+                         android:layout_height="wrap_content"
+                         android:text="@string/lockpattern_confirm_button_text" />
+ 

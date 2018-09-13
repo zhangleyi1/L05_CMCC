@@ -1,0 +1,13 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 4764)
++++ vendor/customer/custom.mk	(revision 4765)
+@@ -24,8 +24,6 @@
+                     iReader \
+                     Diagnostics \
+                     139mail \
+-                    mCloud \
+-                    migu_video \
+                     HeFition
+ 
+ # Overrides

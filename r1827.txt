@@ -1,0 +1,13 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/ctm/src/com/dmyk/android/telephony/DmykTelephonyManager.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/ctm/src/com/dmyk/android/telephony/DmykTelephonyManager.java	(revision 1826)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/ctm/src/com/dmyk/android/telephony/DmykTelephonyManager.java	(revision 1827)
+@@ -240,7 +240,7 @@
+ 
+     @Override
+     public String getDeviceSoftwareVersion() {
+-    	  String result ="";
++    	  String result ="980CN1_LECN_V1.0_171121";
+     	  /*String result = CustomProperties.getString(
+                             CustomProperties.MODULE_DM,
+                             "SoftwareVersion",

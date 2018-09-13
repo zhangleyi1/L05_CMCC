@@ -1,0 +1,22 @@
+Index: packages/apps/Settings/AndroidManifest.xml
+===================================================================
+--- packages/apps/Settings/AndroidManifest.xml	(revision 2305)
++++ packages/apps/Settings/AndroidManifest.xml	(revision 2306)
+@@ -3456,7 +3456,7 @@
+        </receiver>
+         <!-- M: @} -->
+ 		<!--add by wqq for RegulatorySafty-->
+-		<activity android:name="Settings$RegulatorySaftySettingsActivity"
++		<!--<activity android:name="Settings$RegulatorySaftySettingsActivity"
+ 			android:label="@string/regulartory_safety_title"
+             android:icon="@drawable/ic_settings_regulatory_safety"
+             android:taskAffinity="com.android.settings"
+@@ -3480,7 +3480,7 @@
+                 android:value="android.settings.RegulatorySaftySettings" />
+             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                 android:value="true" />
+-        </activity>
++        </activity>-->
+ 		<receiver android:name="com.android.settings.SettingsActivity$ResetReceiver"
+ 			  android:enabled="true"
+ 			  exported = "true">

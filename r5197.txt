@@ -1,0 +1,13 @@
+Index: packages/apps/Settings/res/values/arrays.xml
+===================================================================
+--- packages/apps/Settings/res/values/arrays.xml	(revision 5196)
++++ packages/apps/Settings/res/values/arrays.xml	(revision 5197)
+@@ -728,7 +728,7 @@
+ 
+     <!-- Values for the list of long press timeout options. -->
+     <string-array name="long_press_timeout_selector_values" translatable="false">
+-        <item>500</item>
++        <item>400</item>
+         <item>1000</item>
+         <item>1500</item>
+     </string-array>

@@ -1,0 +1,4 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/res/drawable-hdpi/app_music.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream

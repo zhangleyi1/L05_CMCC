@@ -1,0 +1,118 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/settings/BrightnessController.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/settings/BrightnessController.java	(revision 3746)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/settings/BrightnessController.java	(revision 3747)
+@@ -104,7 +104,6 @@
+         @Override
+         public void onChange(boolean selfChange, Uri uri) {
+             if (selfChange) return;
+-            Log.e("faker",":"+"onChange");
+ 
+             if (BRIGHTNESS_MODE_URI.equals(uri)) {
+                 mBackgroundHandler.post(mUpdateModeRunnable);
+@@ -123,7 +122,6 @@
+         }
+ 
+         public void startObserving() {
+-            Log.e("faker",":"+"startObserving");
+             final ContentResolver cr = mContext.getContentResolver();
+             cr.unregisterContentObserver(this);
+             cr.registerContentObserver(
+@@ -147,7 +145,6 @@
+     private final Runnable mStartListeningRunnable = new Runnable() {
+         @Override
+         public void run() {
+-            Log.e("faker",":"+"mStartListeningRunnable");   
+             mBrightnessObserver.startObserving();
+             mUserTracker.startTracking();
+ 
+@@ -163,7 +160,6 @@
+     private final Runnable mStopListeningRunnable = new Runnable() {
+         @Override
+         public void run() {
+-            Log.e("faker",":"+"mStopListeningRunnable");
+             mBrightnessObserver.stopObserving();
+             mUserTracker.stopTracking();
+ 
+@@ -178,7 +174,6 @@
+     private final Runnable mUpdateModeRunnable = new Runnable() {
+         @Override
+         public void run() {
+-            Log.e("faker",":"+"mUpdateModeRunnable");
+             if (mAutomaticAvailable) {
+                 int automatic;
+                 automatic = Settings.System.getIntForUser(mContext.getContentResolver(),
+@@ -201,7 +196,6 @@
+     private final Runnable mUpdateSliderRunnable = new Runnable() {
+         @Override
+         public void run() {
+-            Log.e("faker",":"+"mUpdateSliderRunnable");
+             if (mAutomatic) {
+                 float value = Settings.System.getFloatForUser(mContext.getContentResolver(),
+                         Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0,
+@@ -226,7 +220,6 @@
+             try {
+                 switch (msg.what) {
+                     case MSG_UPDATE_ICON:
+-                        Log.e("faker",":"+"MSG_UPDATE_ICON");
+                         //updateIcon(msg.arg1 != 0);
+                         boolean automatic = Settings.System.getIntForUser(mContext.getContentResolver(),
+                         Settings.System.SCREEN_BRIGHTNESS_MODE,
+@@ -262,7 +255,6 @@
+     };
+ 
+     public BrightnessController(Context context, ImageView icon, ToggleSlider control) {
+-        Log.e("faker",":"+"BrightnessController");
+         mContext = context;
+         mIcon = icon;
+         mControl = control;
+@@ -270,7 +262,6 @@
+         mUserTracker = new CurrentUserTracker(mContext) {
+             @Override
+             public void onUserSwitched(int newUserId) {
+-                Log.e("faker",":"+"onUserSwitched");
+                 mBackgroundHandler.post(mUpdateModeRunnable);
+                 mBackgroundHandler.post(mUpdateSliderRunnable);
+             }
+@@ -334,7 +325,6 @@
+ 
+     /** Unregister all call backs, both to and from the controller */
+     public void unregisterCallbacks() {
+-        Log.e("faker",":"+"unregisterCallbacks");
+         if (!mListening) {
+             return;
+         }
+@@ -346,7 +336,6 @@
+     @Override
+     public void onChanged(ToggleSlider view, boolean tracking, boolean automatic, int value,
+             boolean stopTracking) {
+-                Log.e("faker",":"+"onChanged(ToggleSlider view, bool");
+         updateIcon(mAutomatic);
+         if (mExternalChange) return;
+ 
+@@ -395,7 +384,6 @@
+ 
+     private void setBrightness(int brightness) {
+         try {
+-            Log.e("faker",":"+"setBrightness");
+             mPower.setTemporaryScreenBrightnessSettingOverride(brightness);
+         } catch (RemoteException ex) {
+         }
+@@ -403,7 +391,6 @@
+ 
+     private void setBrightnessAdj(float adj) {
+         try {
+-            Log.e("faker",":"+"setBrightnessAdj");
+             mPower.setTemporaryScreenAutoBrightnessAdjustmentSettingOverride(adj);
+         } catch (RemoteException ex) {
+         }
+@@ -410,9 +397,7 @@
+     }
+ 
+     private void updateIcon(boolean automatic) {
+-        Log.e("faker",":"+automatic);
+         if (mIcon != null) {
+-            Log.e("faker",":"+"updateIcon");
+             mIcon.setImageResource(automatic && SHOW_AUTOMATIC_ICON ?
+                     com.android.systemui.R.drawable.ic_qs_brightness_auto_on :
+                     com.android.systemui.R.drawable.ic_qs_brightness_auto_off);

@@ -1,0 +1,13 @@
+Index: frameworks/base/core/java/com/android/internal/os/RuntimeInit.java
+===================================================================
+--- frameworks/base/core/java/com/android/internal/os/RuntimeInit.java	(revision 2927)
++++ frameworks/base/core/java/com/android/internal/os/RuntimeInit.java	(revision 2928)
+@@ -207,7 +207,7 @@
+ 
+         // add the model for the release build
+         if ("REL".equals(Build.VERSION.CODENAME)) {
+-            String model = Build.MODEL;
++            String model = "980CN1";
+             if (model.length() > 0) {
+                 result.append("; ");
+                 result.append(model);

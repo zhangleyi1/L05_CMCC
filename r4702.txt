@@ -1,0 +1,29 @@
+Index: frameworks/base/services/core/java/com/android/server/policy/keyguard/KeyguardServiceDelegate.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/policy/keyguard/KeyguardServiceDelegate.java	(revision 4701)
++++ frameworks/base/services/core/java/com/android/server/policy/keyguard/KeyguardServiceDelegate.java	(revision 4702)
+@@ -51,6 +51,7 @@
+     private final KeyguardState mKeyguardState = new KeyguardState();
+     private DrawnListener mDrawnListenerWhenConnect;
+     private final OnShowingStateChangedCallback mShowingStateChangedCallback;
++    private boolean firstHide = false;
+ 
+     private static final class KeyguardState {
+         KeyguardState() {
+@@ -409,6 +410,16 @@
+         mScrimHandler.post(new Runnable() {
+             @Override
+             public void run() {
++            	
++            	try{
++                  int delaytime=0;
++                 if(!firstHide){
++                    delaytime=1000; 
++                    firstHide=true;
++                }
++              Thread.sleep(delaytime);
++              }
++              catch(Exception e){}
+                 mScrim.setVisibility(View.GONE);
+             }
+         });

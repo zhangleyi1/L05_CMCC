@@ -1,0 +1,54 @@
+Index: device/mediatek/common/sepolicy/basic/untrusted_app.te
+===================================================================
+--- device/mediatek/common/sepolicy/basic/untrusted_app.te	(revision 1778)
++++ device/mediatek/common/sepolicy/basic/untrusted_app.te	(revision 1779)
+@@ -19,4 +19,6 @@
+ # Purpose : for CTS verifier "Camera Video" binder fail
+ allow untrusted_app cameraserver:fifo_file read;
+ allow untrusted_app cameraserver:fifo_file write;
+-allow untrusted_app cameraserver:fifo_file getattr;
+\ No newline at end of file
++allow untrusted_app cameraserver:fifo_file getattr;
++
++allow untrusted_app system_data_file:file {read getattr open};
+Index: device/mediatek/common/sepolicy/full/untrusted_app.te
+===================================================================
+--- device/mediatek/common/sepolicy/full/untrusted_app.te	(revision 1778)
++++ device/mediatek/common/sepolicy/full/untrusted_app.te	(revision 1779)
+@@ -83,4 +83,6 @@
+ # Purpose : for CTS verifier "Camera Video" binder fail
+ allow untrusted_app cameraserver:fifo_file read;
+ allow untrusted_app cameraserver:fifo_file write;
+-allow untrusted_app cameraserver:fifo_file getattr;
+\ No newline at end of file
++allow untrusted_app cameraserver:fifo_file getattr;
++
++allow untrusted_app system_data_file:file {read getattr open};
+Index: device/mediatek/common/sepolicy/bsp/untrusted_app.te
+===================================================================
+--- device/mediatek/common/sepolicy/bsp/untrusted_app.te	(revision 1778)
++++ device/mediatek/common/sepolicy/bsp/untrusted_app.te	(revision 1779)
+@@ -49,4 +49,6 @@
+ # Purpose : for CTS verifier "Camera Video" binder fail
+ allow untrusted_app cameraserver:fifo_file read;
+ allow untrusted_app cameraserver:fifo_file write;
+-allow untrusted_app cameraserver:fifo_file getattr;
+\ No newline at end of file
++allow untrusted_app cameraserver:fifo_file getattr;
++
++allow untrusted_app system_data_file:file {read getattr open};
+Index: vendor/customer/Android.mk
+===================================================================
+--- vendor/customer/Android.mk	(revision 1778)
++++ vendor/customer/Android.mk	(revision 1779)
+@@ -1046,9 +1046,8 @@
+ LOCAL_SRC_FILES := apps/iReader/iReader_V5310_tcl_109916_20161104_SIGNED.apk
+ LOCAL_MODULE_CLASS := APPS
+ LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+-LOCAL_CERTIFICATE := platform
++LOCAL_CERTIFICATE := PRESIGNED
+ LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app
+-LOCAL_DEX_PREOPT := true
+ LOCAL_TARGET_CPU_ABI := armeabi
+ LOCAL_PREBUILT_JNI_LIBS := apps/iReader/lib/$(LOCAL_TARGET_CPU_ABI)/libcocklogic.so \
+                            apps/iReader/lib/$(LOCAL_TARGET_CPU_ABI)/libDexHelper.so \

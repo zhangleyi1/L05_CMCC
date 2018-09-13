@@ -1,0 +1,24 @@
+Index: frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 7954)
++++ frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 7955)
+@@ -7200,7 +7200,7 @@
+     @Override
+     public void screenTurnedOff() {
+         if (DEBUG_WAKEUP) Slog.i(TAG, "Screen turned off...");
+-		Log.d("zxp","exitFaceVerify when screenTurnedOff ");
++		Log.d("TAG","exitFaceVerify when screenTurnedOff ");
+ 		exitFaceVerify();
+         updateScreenOffSleepToken(true);
+         synchronized (mLock) {
+@@ -7221,8 +7221,9 @@
+     @Override
+     public void screenTurningOn(final ScreenOnListener screenOnListener) {
+         if (DEBUG_WAKEUP) Slog.i(TAG, "Screen turning on...");
+-
++		Log.d(TAG,"exitFaceVerify when screenTurnedon ");
+         updateScreenOffSleepToken(false);
++		startFaceVerify();
+         synchronized (mLock) {
+             mScreenOnEarly = true;
+             mScreenOnFully = false;

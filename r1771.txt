@@ -1,0 +1,13 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/MobilePortal/src/com/mediatek/mobileportal/MobilePortal.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/MobilePortal/src/com/mediatek/mobileportal/MobilePortal.java	(revision 1770)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/MobilePortal/src/com/mediatek/mobileportal/MobilePortal.java	(revision 1771)
+@@ -50,7 +50,7 @@
+        super.onCreate(savedInstanceState);
+        Uri uri = Uri.parse(URL);
+        Intent i = new Intent(Intent.ACTION_VIEW, uri);
+-       i.setClassName("com.android.browser", "com.android.browser.BrowserActivity");
++       i.setClassName("com.hawk.android.browser", "com.hawk.android.browser.BrowserActivity");
+        startActivity(i);
+        finish();
+    }

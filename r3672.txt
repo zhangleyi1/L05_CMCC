@@ -1,0 +1,26 @@
+Index: packages/apps/Settings/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 3671)
++++ packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 3672)
+@@ -3325,7 +3325,7 @@
+ 	<string name="alarm_soonz_prefrence_title">翻转手机休眠闹铃</string>
+ 	<string name="screen_gesture_category_title">屏幕手势</string>
+ 	<string name="double_tap_prefrence_title">双击屏幕</string>
+-	<string name="double_tap_prefrence_summary">当屏幕关闭时，双击点亮。 并在主屏幕上双击空闲空间以关闭屏幕。</string>
++	<string name="double_tap_prefrence_summary">当屏幕关闭时，双击点亮。 </string>
+ 	<string name="three_finger_screenshot_title">三个手指截图</string>
+ 	<string name="three_finger_screenshot_summary">同时在屏幕上向下滑动3个手指来制作屏幕截图。</string>
+ 	<!--add for tcl gesture end-->
+Index: packages/apps/Settings/res/values/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values/strings.xml	(revision 3671)
++++ packages/apps/Settings/res/values/strings.xml	(revision 3672)
+@@ -8025,7 +8025,7 @@
+ 	<string name="alarm_soonz_prefrence_title">Turn over to activite snooze</string>
+ 	<string name="screen_gesture_category_title">Screen gesture</string>
+ 	<string name="double_tap_prefrence_title">Double tap screen</string>
+-	<string name="double_tap_prefrence_summary">When screen is off, double tap to light up. And double tap idle space on Home screens to turn screen off.</string>
++	<string name="double_tap_prefrence_summary">When screen is off, double tap to light up. </string>
+ 	<string name="three_finger_screenshot_title">Three fingers screenshot</string>
+ 	<string name="three_finger_screenshot_summary">Slide 3 fingers simultaneously in a downwards motion on screen to make screenshot.</string>
+ 	<!--add for tcl gesture end-->

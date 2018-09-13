@@ -1,0 +1,17 @@
+Index: packages/apps/Contacts/SimProcessor/src/com/mediatek/simprocessor/SimProcessorService.java
+===================================================================
+--- packages/apps/Contacts/SimProcessor/src/com/mediatek/simprocessor/SimProcessorService.java	(revision 6231)
++++ packages/apps/Contacts/SimProcessor/src/com/mediatek/simprocessor/SimProcessorService.java	(revision 6232)
+@@ -84,9 +84,9 @@
+         ExtensionManager.registerApplicationContext(getApplication());
+         mProcessorManager = new SimProcessorManager(this, mListener);
+ 
+-        Notification notification = new Notification(android.R.drawable.ic_dialog_alert,
+-                ONGOING_NOTIFICATION, System.currentTimeMillis());
+-        startForeground(ONGOING_NOTIFICATION_ID, notification);
++        //Notification notification = new Notification(android.R.drawable.ic_dialog_alert,
++        //        ONGOING_NOTIFICATION, System.currentTimeMillis());
++        //startForeground(ONGOING_NOTIFICATION_ID, notification);
+     }
+ 
+     @Override

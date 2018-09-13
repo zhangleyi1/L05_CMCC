@@ -1,0 +1,42 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 6277)
++++ vendor/customer/custom.mk	(revision 6278)
+@@ -43,4 +43,6 @@
+ vendor/customer/apps/iFlyIME/TCL_V760_20180108_iFlyIME_v7.1.4885.01432540.apk:system/vendor/operator/app/iFlyIME/TCL_V760_20180108_iFlyIME_v7.1.4885.01432540.apk \
+ vendor/customer/apps/meituan/aimeituan-cmcctcl_m-signed-aligned-20180110171117.apk:system/vendor/operator/app/meituan/aimeituan-cmcctcl_m-signed-aligned-20180110171117.apk \
+ vendor/customer/apps/IReader/R2D2_com.chaozh.iReader_release_Tcl_731_109916_formal_signed_2018.01.11-16.17.apk:system/vendor/operator/app/iReader/iReader.apk \
+-vendor/customer/apps/meituan/mtconfig.ini:/system/etc/mtconfig.ini
++vendor/customer/apps/meituan/mtconfig.ini:/system/etc/mtconfig.ini \
++vendor/customer/apps/MM/MM6.4_Android_Release_Build04.apk:system/vendor/operator/app/MM/MM6.4_Android_Release_Build04.apk \
++vendor/customer/apps/MMPlug/MMPlugKvSafeCenter6.4.0.1_Android_Release_Build002.apk:system/vendor/operator/app/MMPlug/MMPlugKvSafeCenter6.4.0.1_Android_Release_Build002.apk
+Index: vendor/customer/apps/MMPlug/MMPlugKvSafeCenter6.4.0.1_Android_Release_Build002.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/MMPlug/MMPlugKvSafeCenter6.4.0.1_Android_Release_Build002.apk
+===================================================================
+--- vendor/customer/apps/MMPlug/MMPlugKvSafeCenter6.4.0.1_Android_Release_Build002.apk	(revision 0)
++++ vendor/customer/apps/MMPlug/MMPlugKvSafeCenter6.4.0.1_Android_Release_Build002.apk	(revision 6278)
+
+Property changes on: vendor/customer/apps/MMPlug/MMPlugKvSafeCenter6.4.0.1_Android_Release_Build002.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/MM/MM6.4_Android_Release_Build04.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/MM/MM6.4_Android_Release_Build04.apk
+===================================================================
+--- vendor/customer/apps/MM/MM6.4_Android_Release_Build04.apk	(revision 0)
++++ vendor/customer/apps/MM/MM6.4_Android_Release_Build04.apk	(revision 6278)
+
+Property changes on: vendor/customer/apps/MM/MM6.4_Android_Release_Build04.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

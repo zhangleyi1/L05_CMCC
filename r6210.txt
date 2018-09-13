@@ -1,0 +1,22 @@
+Index: packages/apps/Settings/src/com/android/settings/bluetooth/DeviceProfilesSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/bluetooth/DeviceProfilesSettings.java	(revision 6209)
++++ packages/apps/Settings/src/com/android/settings/bluetooth/DeviceProfilesSettings.java	(revision 6210)
+@@ -187,7 +187,7 @@
+         super.onResume();
+         Log.d(TAG, "onResume");
+ 
+-        mManager.setForegroundActivity(getActivity());
++        //mManager.setForegroundActivity(getActivity());
+         if (mCachedDevice != null) {
+             mCachedDevice.registerCallback(this);
+             Log.d(TAG, "onResume, registerCallback");
+@@ -210,7 +210,7 @@
+             Log.d(TAG, "onPause, unregisterCallback");
+         }
+ 
+-        mManager.setForegroundActivity(null);
++        //mManager.setForegroundActivity(null);
+     }
+ 
+     private void addPreferencesForProfiles() {

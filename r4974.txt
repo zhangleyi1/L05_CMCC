@@ -1,0 +1,93 @@
+Index: packages/apps/Settings/res/values-zh-rHK/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 4973)
++++ packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 4974)
+@@ -1654,9 +1654,9 @@
+     <string name="user_dict_settings_empty_text" msgid="1971969756133074922">"您的用戶字典中沒有任何字詞。如要新增字詞，請輕按 [新增] ( + ) 按鈕。"</string>
+     <string name="user_dict_settings_all_languages" msgid="6742000040975959247">"所有語言"</string>
+     <string name="user_dict_settings_more_languages" msgid="7316375944684977910">"更多語言..."</string>
+-    <string name="testing" msgid="6584352735303604146">"測試"</string>
+-    <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"平板電腦資訊"</string>
+-    <string name="testing_phone_info" product="default" msgid="8656693364332840056">"手機資訊"</string>
++    <!--<string name="testing" msgid="6584352735303604146">"測試"</string>-->
++    <!--<string name="testing_phone_info" product="tablet" msgid="193561832258534798">"平板電腦資訊"</string>-->
++    <!--<string name="testing_phone_info" product="default" msgid="8656693364332840056">"手機資訊"</string>-->
+     <string name="input_methods_settings_title" msgid="6800066636850553887">"文字輸入"</string>
+     <string name="input_method" msgid="5434026103176856164">"輸入法"</string>
+     <string name="current_input_method" msgid="2636466029213488159">"目前的鍵盤輸入法"</string>
+@@ -1687,7 +1687,7 @@
+     <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g> 小時 <xliff:g id="MINUTES">%2$d</xliff:g> 分鐘"</string>
+     <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g> 分鐘"</string>
+     <string name="usage_stats_label" msgid="5890846333487083609">"用量統計資料"</string>
+-    <string name="testing_usage_stats" msgid="7823048598893937339">"用量統計資料"</string>
++    <!--<string name="testing_usage_stats" msgid="7823048598893937339">"用量統計資料"</string>-->
+     <string name="display_order_text" msgid="8592776965827565271">"排序依據："</string>
+     <string name="app_name_label" msgid="5440362857006046193">"應用程式"</string>
+     <string name="last_time_used_label" msgid="8459441968795479307">"上次使用時間"</string>
+Index: packages/apps/Settings/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 4973)
++++ packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 4974)
+@@ -1671,7 +1671,7 @@
+     <string name="user_dict_settings_all_languages" msgid="6742000040975959247">"所有语言"</string>
+     <string name="user_dict_settings_more_languages" msgid="7316375944684977910">"更多语言..."</string>
+     <!--<string name="testing" msgid="6584352735303604146">"测试"</string>-->
+-    <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"平板电脑信息"</string>
++    <!--<string name="testing_phone_info" product="tablet" msgid="193561832258534798">"平板电脑信息"</string>-->
+     <!--<string name="testing_phone_info" product="default" msgid="8656693364332840056">"手机信息"</string>-->
+     <string name="input_methods_settings_title" msgid="6800066636850553887">"文字输入"</string>
+     <string name="input_method" msgid="5434026103176856164">"输入法"</string>
+@@ -3428,11 +3428,11 @@
+ 	<string name="fingerprint_manager_back_to_home_summary">在任意界面触摸指纹传感器返回主界面。</string>
+ 	<string name="led_indicator_title">指示灯</string>
+     <string name="led_event_title">事件</string>
+-	<string name="led_event_summary">未接电话，未读信息及短信等。</string>
++	<string name="led_event_summary">未接电话，未读信息，收到电子邮件等。</string>
+ 	<string name="battery_charge_title">充电</string>
+-	<string name="battery_charge_summary">充电时打开灯</string>
++	<string name="battery_charge_summary">充电时指示灯打开</string>
+ 	<string name="battery_low_title">低电量</string>
+-	<string name="battery_low_summary">电量低于15%自动开启灯</string>
++	<string name="battery_low_summary">低于15%电量时指示灯打开</string>
+     <string name="title_activity_face_entry_settings">人脸科技</string>
+     <string name="remove_face_dialog_info_remove">"删除人脸数据 ?"</string>
+     <string name="delete_success">删除成功</string>
+Index: packages/apps/Settings/res/values/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values/strings.xml	(revision 4973)
++++ packages/apps/Settings/res/values/strings.xml	(revision 4974)
+@@ -8103,7 +8103,7 @@
+ 	
+ 	<string name="fingerprint_manager_back_to_home_title">Back to home screen</string>
+ 	<string name="fingerprint_manager_back_to_home_summary">Touch the fingerprint sensor to go back to home screen.</string>
+-	<string name="led_indicator_title">Led Indicator</string>
++	<string name="led_indicator_title">LED indicator</string>
+ 	<string name="led_event_title">Events</string>
+ 	<string name="led_event_summary">Missed Call,received message,received email,etc.</string>
+ 	<string name="battery_charge_title">Charging</string>
+Index: packages/apps/Settings/res/values-zh-rTW/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 4973)
++++ packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 4974)
+@@ -1653,9 +1653,9 @@
+     <string name="user_dict_settings_empty_text" msgid="1971969756133074922">"使用者字典中沒有任何字詞。如要新增字詞，請輕觸「新增」(+) 按鈕。"</string>
+     <string name="user_dict_settings_all_languages" msgid="6742000040975959247">"所有語言"</string>
+     <string name="user_dict_settings_more_languages" msgid="7316375944684977910">"更多語言…"</string>
+-    <string name="testing" msgid="6584352735303604146">"測試中"</string>
+-    <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"平板電腦資訊"</string>
+-    <string name="testing_phone_info" product="default" msgid="8656693364332840056">"手機資訊"</string>
++    <!--<string name="testing" msgid="6584352735303604146">"測試中"</string>-->
++    <!--<string name="testing_phone_info" product="tablet" msgid="193561832258534798">"平板電腦資訊"</string>-->
++    <!--<string name="testing_phone_info" product="default" msgid="8656693364332840056">"手機資訊"</string>-->
+     <string name="input_methods_settings_title" msgid="6800066636850553887">"文字輸入法"</string>
+     <string name="input_method" msgid="5434026103176856164">"輸入法"</string>
+     <string name="current_input_method" msgid="2636466029213488159">"目前的鍵盤輸入法"</string>
+@@ -1686,7 +1686,7 @@
+     <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g> 小時 <xliff:g id="MINUTES">%2$d</xliff:g> 分鐘"</string>
+     <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g> 分鐘"</string>
+     <string name="usage_stats_label" msgid="5890846333487083609">"使用情形統計資料"</string>
+-    <string name="testing_usage_stats" msgid="7823048598893937339">"使用情形統計資料"</string>
++    <!--<string name="testing_usage_stats" msgid="7823048598893937339">"使用情形統計資料"</string>-->
+     <string name="display_order_text" msgid="8592776965827565271">"排序依據："</string>
+     <string name="app_name_label" msgid="5440362857006046193">"應用程式"</string>
+     <string name="last_time_used_label" msgid="8459441968795479307">"上次使用時間"</string>

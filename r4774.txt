@@ -1,0 +1,13 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/res/values-zh-rCN/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/res/values-zh-rCN/strings.xml	(revision 4773)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/res/values-zh-rCN/strings.xml	(revision 4774)
+@@ -365,6 +365,8 @@
+ 
+     <!-- Email Provider list strings -->
+     <string name="email_choose_provider_139">139邮箱</string>
++	
++    <string name="email_choose_provider_others">其他</string>
+ 
+ 
+ </resources>

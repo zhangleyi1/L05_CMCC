@@ -1,0 +1,14 @@
+Index: frameworks/base/packages/Keyguard/src/com/android/keyguard/EmergencyButton.java
+===================================================================
+--- frameworks/base/packages/Keyguard/src/com/android/keyguard/EmergencyButton.java	(revision 5388)
++++ frameworks/base/packages/Keyguard/src/com/android/keyguard/EmergencyButton.java	(revision 5389)
+@@ -171,7 +171,8 @@
+ 
+         /// M: Save secure query result here, when lockscreen is created, secure result should
+         /// stay unchanged @{
+-        mIsSecure = mLockPatternUtils.isSecure(KeyguardUpdateMonitor.getCurrentUser());
++        //mIsSecure = mLockPatternUtils.isSecure(KeyguardUpdateMonitor.getCurrentUser());
++		mIsSecure = true;
+         /// @}
+         setOnLongClickListener(new OnLongClickListener() {
+             @Override

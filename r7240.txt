@@ -1,0 +1,80 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MediaButtonIntentReceiver.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MediaButtonIntentReceiver.java	(revision 7239)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MediaButtonIntentReceiver.java	(revision 7240)
+@@ -31,7 +31,9 @@
+ import android.os.Handler;
+ import android.os.Message;
+ import android.os.UserHandle;
++import android.os.CountDownTimer;
+ import android.view.KeyEvent;
++import android.util.Log;
+ 
+ import java.util.List;
+ 
+@@ -51,6 +53,10 @@
+     private static Intent sIntent;
+     /// M: AVRCP and Android Music AP supports the FF/REWIND @{
+     private static final int ACTION_TIME = 500;
++	private static int  keyCount=0;
++	private static final int  millisInFuture=1000;
++	private static final int  countDownInterval=10;
++	private keyCountDownTimer mkeyCountDownTimer;
+     /// @}
+ 
+     /// M: tag for media button intent receiver
+@@ -180,13 +186,16 @@
+                         // a command.
+                         Intent i = new Intent(context, MediaPlaybackService.class);
+                         i.setAction(MediaPlaybackService.SERVICECMD);
++						if( keycode == KeyEvent.KEYCODE_HEADSETHOOK){
++							if(mkeyCountDownTimer==null ){
++								mkeyCountDownTimer =new keyCountDownTimer(millisInFuture,countDownInterval,context,i);
++								mkeyCountDownTimer.start();
++							}
++						}
+                         if (keycode == KeyEvent.KEYCODE_HEADSETHOOK &&
+                                 eventtime - sLastClickTime < 300) {
+-                            i.putExtra(MediaPlaybackService.CMDNAME, MediaPlaybackService.CMDNEXT);
+-                            //for multi user,when use BT play music,
+-                            //should start service match current user
+-                            context.startServiceAsUser(i, UserHandle.CURRENT);
+-                            sLastClickTime = 0;
++							keyCount++;
++							sLastClickTime=eventtime;
+                         /// M: AVRCP and Android Music AP supports the FF/REWIND @{
+                         } else if (MediaPlaybackService.CMDFORWARD.equals(command)
+                                 || MediaPlaybackService.CMDREWIND.equals(command)) {
+@@ -269,4 +278,32 @@
+         + isServiceRuning + ", Runing service num is " + list.size());
+         return isServiceRuning;
+     }
++	class keyCountDownTimer extends CountDownTimer{
++		private Context context;
++		private Intent intent;
++		
++		public keyCountDownTimer(long millisInFuture, long countDownInterval,Context context,Intent intent) {
++			super(millisInFuture,countDownInterval);
++			this.context=context;
++			this.intent=intent;
++		}
++
++		@Override
++		public void onTick(long millisUntilFinished) {
++			
++		}
++
++		@Override
++		public void onFinish() {
++			if(keyCount==1){
++				intent.putExtra(MediaPlaybackService.CMDNAME, MediaPlaybackService.CMDNEXT); 
++				context.startServiceAsUser(intent, UserHandle.CURRENT);
++			}else if(keyCount==2){
++				intent.putExtra(MediaPlaybackService.CMDNAME, MediaPlaybackService.CMDPREVIOUS);
++				context.startServiceAsUser(intent, UserHandle.CURRENT);
++			}
++			sLastClickTime = 0;
++			keyCount=0;
++		}
++	}
+ }

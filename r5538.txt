@@ -1,0 +1,69 @@
+Index: device/mediatek/mt6739/init.microtrust.rc
+===================================================================
+--- device/mediatek/mt6739/init.microtrust.rc	(revision 5537)
++++ device/mediatek/mt6739/init.microtrust.rc	(revision 5538)
+@@ -104,6 +104,9 @@
+     start init_thh_service
+     start ifaad
+ 
++on property:soter.teei.thh.init=INIT_END
++    start check_ifaa_service
++
+ service init_thh_service /vendor/bin/init_thh startload
+     class core
+     user system
+@@ -125,3 +128,11 @@
+     user system
+     group system shell
+     disabled
++
++# check ifaa key
++service check_ifaa_service /vendor/bin/init_thh export -t tee1 -p pubkey
++    class core
++    user system
++    group system
++    disabled
++    oneshot
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/Android.mk
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/Android.mk	(revision 5537)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/Android.mk	(revision 5538)
+@@ -3,6 +3,7 @@
+ include $(CLEAR_VARS)
+ 
+ LOCAL_MODULE := libut_client_api_daemon
++LOCAL_MULTILIB := 32
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_CFLAGS := -Wall -Wextra -Werror -Wunused
+ 
+@@ -22,6 +23,7 @@
+ include $(CLEAR_VARS)
+ 
+ LOCAL_MODULE := init_thh
++LOCAL_MULTILIB := 32
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_CFLAGS := -Wall -Wextra -Werror -Wunused
+ 
+@@ -45,6 +47,7 @@
+ include $(CLEAR_VARS)
+ 
+ LOCAL_MODULE := ut_clientd
++LOCAL_MULTILIB := 32
+ #LOCAL_MODULE_TAGS := optional
+ LOCAL_CFLAGS := -Wall -Wextra -Werror -Wunused
+ 
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/Android.mk
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/Android.mk	(revision 5537)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/Android.mk	(revision 5538)
+@@ -6,5 +6,5 @@
+ LOCAL_SRC_FILES_arm := lib/armeabi/libinit_thh.so
+ LOCAL_SRC_FILES_arm64 := lib/arm64-v8a/libinit_thh.so
+ LOCAL_MODULE_SUFFIX := .so
+-LOCAL_MULTILIB := both
++LOCAL_MULTILIB := 32
+ include $(BUILD_PREBUILT)
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/lib/armeabi/libinit_thh.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream

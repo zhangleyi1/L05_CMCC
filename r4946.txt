@@ -1,0 +1,107 @@
+Index: packages/services/Telephony/src/com/android/phone/settings/fdn/EditFdnContactScreen.java
+===================================================================
+--- packages/services/Telephony/src/com/android/phone/settings/fdn/EditFdnContactScreen.java	(revision 4945)
++++ packages/services/Telephony/src/com/android/phone/settings/fdn/EditFdnContactScreen.java	(revision 4946)
+@@ -53,6 +53,7 @@
+ import com.android.phone.SubscriptionInfoHelper;
+ import com.android.internal.telephony.PhoneFactory;
+ import com.mediatek.settings.TelephonyUtils;
++import com.android.internal.telephony.IccProvider;
+ 
+ /**
+  * Activity to let the user add or edit an FDN contact.
+@@ -396,8 +397,8 @@
+         }
+     }
+ 
+-    private void handleResult(boolean success, boolean invalidNumber) {
+-        if (success) {
++    private void handleResult(int result, boolean invalidNumber) {
++        if (result > 0) {
+             if (DBG) log("handleResult: success!");
+             showStatus(getResources().getText(mAddContact ?
+                     R.string.fdn_contact_added : R.string.fdn_contact_updated));
+@@ -411,9 +412,13 @@
+                 } else if (mSubscriptionInfoHelper.getPhone().getIccCard().getIccPuk2Blocked()) {
+                     showStatus(getResources().getText(R.string.puk2_blocked));
+                 } else {
+-                    // There's no way to know whether the failure is due to incorrect PIN2 or
+-                    // an inappropriate phone number.
+-                    showStatus(getResources().getText(R.string.pin2_or_fdn_invalid));
++                    if (result == IccProvider.ERROR_ICC_PROVIDER_STORAGE_FULL) {
++                        showStatus(getResources().getText(R.string.fdn_storage_full));
++                    } else {
++                        // There's no way to know whether the failure is due to incorrect PIN2 or
++                        // an inappropriate phone number.
++                        showStatus(getResources().getText(R.string.pin2_or_fdn_invalid));
++                    }
+                 }
+             }
+         }
+@@ -486,7 +491,7 @@
+             /** [MTK_FDN] Remove Google default action, follow MTK own framework result. @{
+             handleResult(uri != null, false);
+              @} **/
+-            handleResult(getInsertResult(uri) > 0, false);
++            handleResult(getInsertResult(uri), false);
+         }
+ 
+         @Override
+@@ -493,7 +498,7 @@
+         protected void onUpdateComplete(int token, Object cookie, int result) {
+             if (DBG) log("onUpdateComplete");
+             displayProgress(false);
+-            handleResult(result > 0, false);
++            handleResult(result, false);
+         }
+ 
+         @Override
+Index: packages/services/Telephony/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/services/Telephony/res/values-zh-rCN/strings.xml	(revision 4945)
++++ packages/services/Telephony/res/values-zh-rCN/strings.xml	(revision 4946)
+@@ -381,6 +381,7 @@
+     <string name="delete_fdn_contact" msgid="6668958073074151717">"删除固定拨号联系人"</string>
+     <string name="deleting_fdn_contact" msgid="5669163206349319969">"正在删除固定拨号联系人..."</string>
+     <string name="fdn_contact_deleted" msgid="7154162327112259569">"已删除固定拨号联系人。"</string>
++    <string name="fdn_storage_full">固定拨号未更新，因为固定拨号存储已满。</string>
+     <string name="pin2_invalid" msgid="5470854099230755944">"固定拨号未更新，因为输入的 PIN2 码有误。"</string>
+     <string name="fdn_invalid_number" msgid="1494755047900009147">"固定拨号未更新，因为号码不能超过 20 位。"</string>
+     <string name="pin2_or_fdn_invalid" msgid="6025144083384701197">"固定拨号未更新。PIN2 码有误，或电话号码遭拒。"</string>
+Index: packages/services/Telephony/res/values/strings.xml
+===================================================================
+--- packages/services/Telephony/res/values/strings.xml	(revision 4945)
++++ packages/services/Telephony/res/values/strings.xml	(revision 4946)
+@@ -834,6 +834,8 @@
+     <!-- "Delete FDN Contact" screen: status message displayed in a popup (toast) -->
+     <string name="fdn_contact_deleted">Fixed dialing number deleted.</string>
+     <!-- FDN settings: error message displayed in a popup (toast) -->
++    <string name="fdn_storage_full">FDN wasn\'t updated because FDN storage is full.</string>
++    <!-- FDN settings: error message displayed in a popup (toast) -->
+     <string name="pin2_invalid">FDN wasn\'t updated because you typed an incorrect PIN2.</string>
+     <!-- FDN settings: error message displayed in a popup (toast) -->
+     <string name="fdn_invalid_number">FDN wasn\'t updated because the number can\'t exceed 20 digits.</string>
+Index: packages/services/Telephony/res/values-zh-rHK/strings.xml
+===================================================================
+--- packages/services/Telephony/res/values-zh-rHK/strings.xml	(revision 4945)
++++ packages/services/Telephony/res/values-zh-rHK/strings.xml	(revision 4946)
+@@ -387,6 +387,7 @@
+     <string name="delete_fdn_contact" msgid="6668958073074151717">"刪除固定撥號"</string>
+     <string name="deleting_fdn_contact" msgid="5669163206349319969">"正在刪除固定撥號…"</string>
+     <string name="fdn_contact_deleted" msgid="7154162327112259569">"固定撥號已刪除。"</string>
++    <string name="fdn_storage_full">"FDN存儲已滿，FDN未更新。"</string>
+     <string name="pin2_invalid" msgid="5470854099230755944">"您所輸入的 PIN2 碼不正確，FDN 未更新。"</string>
+     <string name="fdn_invalid_number" msgid="1494755047900009147">"號碼超過 20 位數上限，FDN 未更新。"</string>
+     <string name="pin2_or_fdn_invalid" msgid="6025144083384701197">"FDN 無法更新。PIN2 碼不正確或電話號碼被拒。"</string>
+Index: packages/services/Telephony/res/values-zh-rTW/strings.xml
+===================================================================
+--- packages/services/Telephony/res/values-zh-rTW/strings.xml	(revision 4945)
++++ packages/services/Telephony/res/values-zh-rTW/strings.xml	(revision 4946)
+@@ -387,6 +387,7 @@
+     <string name="delete_fdn_contact" msgid="6668958073074151717">"刪除固定撥號"</string>
+     <string name="deleting_fdn_contact" msgid="5669163206349319969">"正在刪除固定撥號…"</string>
+     <string name="fdn_contact_deleted" msgid="7154162327112259569">"已刪除固定撥號。"</string>
++    <string name="fdn_storage_full">"FDN存儲已滿，因此未更新FDN。"</string>
+     <string name="pin2_invalid" msgid="5470854099230755944">"您所輸入的 PIN2 不正確，因此未更新 FDN。"</string>
+     <string name="fdn_invalid_number" msgid="1494755047900009147">"號碼超過 20 位數的上限，因此未更新 FDN。"</string>
+     <string name="pin2_or_fdn_invalid" msgid="6025144083384701197">"未更新 FDN。可能是因為 PIN2 碼不正確或電話號碼遭拒。"</string>

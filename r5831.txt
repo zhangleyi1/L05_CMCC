@@ -1,0 +1,53 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 5830)
++++ vendor/customer/custom.mk	(revision 5831)
+@@ -39,4 +39,9 @@
+ vendor/customer/apps/UCBrowser/uconfig.ini:system/etc/uconfig.ini \
+ vendor/customer/apps/shuqi/3298_rtm_shuqi_android_v10.6.3.58_145_release_android24_3015_noad_Build180105164429.apk:system/vendor/operator/app/shuqi/3298_rtm_shuqi_android_v10.6.3.58_145_release_android24_3015_noad_Build180105164429.apk \
+ vendor/customer/apps/MobileWallet/MobileWallet7145201712221943signed1003sec.apk:system/vendor/operator/app/MobileWallet/MobileWallet7145201712221943signed1003sec.apk \
+-vendor/customer/apps/NewsArticle/NewsArticle_yd2017_tcl_v760_v6.1.7_10b3cc9_2018-01-05_23-56-49.apk:system/vendor/operator/app/NewsArticle/NewsArticle_yd2017_tcl_v760_v6.1.7_10b3cc9_2018-01-05_23-56-49.apk
+\ No newline at end of file
++vendor/customer/apps/NewsArticle/NewsArticle_yd2017_tcl_v760_v6.1.7_10b3cc9_2018-01-05_23-56-49.apk:system/vendor/operator/app/NewsArticle/NewsArticle_yd2017_tcl_v760_v6.1.7_10b3cc9_2018-01-05_23-56-49.apk \
++vendor/customer/apps/iFlyIME/TCL_V760_20180108_iFlyIME_v7.1.4885.01432540.apk:system/vendor/operator/app/iFlyIME/TCL_V760_20180108_iFlyIME_v7.1.4885.01432540.apk \
++vendor/customer/apps/meituan/aimeituan-cmcctcl_m-signed-aligned-20180110171117.apk:system/vendor/operator/app/meituan/aimeituan-cmcctcl_m-signed-aligned-20180110171117.apk \
++vendor/customer/apps/meituan/mtconfig.ini:/system/etc/mtconfig.ini \
++vendor/customer/apps/BaiduSearch/baidusearch_Android_9-2-0-79_1020409k.apk:system/priv-app/BaiduSearch/baidusearch_Android_9-2-0-79_1020409k.apk \
++vendor/customer/apps/BaiduSearch/libBDoeminfo_baidusearch.so:system/lib/libBDoeminfo_baidusearch.so
+Index: vendor/customer/apps/iFlyIME/TCL_V760_20180108_iFlyIME_v7.1.4885.01432540.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/iFlyIME/TCL_V760_20180108_iFlyIME_v7.1.4885.01432540.apk
+===================================================================
+--- vendor/customer/apps/iFlyIME/TCL_V760_20180108_iFlyIME_v7.1.4885.01432540.apk	(revision 0)
++++ vendor/customer/apps/iFlyIME/TCL_V760_20180108_iFlyIME_v7.1.4885.01432540.apk	(revision 5831)
+
+Property changes on: vendor/customer/apps/iFlyIME/TCL_V760_20180108_iFlyIME_v7.1.4885.01432540.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/meituan/mtconfig.ini
+===================================================================
+--- vendor/customer/apps/meituan/mtconfig.ini	(revision 0)
++++ vendor/customer/apps/meituan/mtconfig.ini	(revision 5831)
+@@ -0,0 +1 @@
++{"mtchannel":"cmcctcl_m"}
+\ No newline at end of file
+Index: vendor/customer/apps/meituan/aimeituan-cmcctcl_m-signed-aligned-20180110171117.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/meituan/aimeituan-cmcctcl_m-signed-aligned-20180110171117.apk
+===================================================================
+--- vendor/customer/apps/meituan/aimeituan-cmcctcl_m-signed-aligned-20180110171117.apk	(revision 0)
++++ vendor/customer/apps/meituan/aimeituan-cmcctcl_m-signed-aligned-20180110171117.apk	(revision 5831)
+
+Property changes on: vendor/customer/apps/meituan/aimeituan-cmcctcl_m-signed-aligned-20180110171117.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

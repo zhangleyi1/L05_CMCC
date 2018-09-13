@@ -1,0 +1,12 @@
+Index: packages/apps/Calculator/AndroidManifest.xml
+===================================================================
+--- packages/apps/Calculator/AndroidManifest.xml	(revision 4497)
++++ packages/apps/Calculator/AndroidManifest.xml	(revision 4498)
+@@ -29,7 +29,6 @@
+         <activity
+             android:name=".Calculator"
+             android:label="@string/app_name"
+-			android:resizeableActivity="false"
+             android:windowSoftInputMode="stateAlwaysHidden">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />

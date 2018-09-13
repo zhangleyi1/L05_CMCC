@@ -1,0 +1,12 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 5831)
++++ vendor/customer/custom.mk	(revision 5832)
+@@ -42,6 +42,4 @@
+ vendor/customer/apps/NewsArticle/NewsArticle_yd2017_tcl_v760_v6.1.7_10b3cc9_2018-01-05_23-56-49.apk:system/vendor/operator/app/NewsArticle/NewsArticle_yd2017_tcl_v760_v6.1.7_10b3cc9_2018-01-05_23-56-49.apk \
+ vendor/customer/apps/iFlyIME/TCL_V760_20180108_iFlyIME_v7.1.4885.01432540.apk:system/vendor/operator/app/iFlyIME/TCL_V760_20180108_iFlyIME_v7.1.4885.01432540.apk \
+ vendor/customer/apps/meituan/aimeituan-cmcctcl_m-signed-aligned-20180110171117.apk:system/vendor/operator/app/meituan/aimeituan-cmcctcl_m-signed-aligned-20180110171117.apk \
+-vendor/customer/apps/meituan/mtconfig.ini:/system/etc/mtconfig.ini \
+-vendor/customer/apps/BaiduSearch/baidusearch_Android_9-2-0-79_1020409k.apk:system/priv-app/BaiduSearch/baidusearch_Android_9-2-0-79_1020409k.apk \
+-vendor/customer/apps/BaiduSearch/libBDoeminfo_baidusearch.so:system/lib/libBDoeminfo_baidusearch.so
++vendor/customer/apps/meituan/mtconfig.ini:/system/etc/mtconfig.ini

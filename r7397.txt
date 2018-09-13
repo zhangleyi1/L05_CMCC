@@ -1,0 +1,22 @@
+Index: device/ausshine/aus6739_66_n1/ProjectConfig.mk
+===================================================================
+--- device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 7396)
++++ device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 7397)
+@@ -401,7 +401,7 @@
+ MTK_GAUGE_VERSION = 30
+ MTK_GLOBAL_PQ_SUPPORT = no
+ MTK_GMO_RAM_OPTIMIZE = no
+-MTK_GMO_ROM_OPTIMIZE = yes
++MTK_GMO_ROM_OPTIMIZE = no
+ MTK_GOOGLEOTA_SUPPORT = no
+ MTK_GOOGLE_TRUSTY_SUPPORT = no
+ MTK_GPS_CHIP = MTK_GPS_MT6631
+@@ -579,7 +579,7 @@
+ MTK_ROTATION_OFFSET_SUPPORT = no
+ MTK_RSDM_APP = no
+ MTK_RTP_OVER_RTSP_SUPPORT = yes
+-MTK_RUNNING_BOOSTER_DEFAULT_ON = no
++MTK_RUNNING_BOOSTER_DEFAULT_ON = yes
+ MTK_RUNNING_BOOSTER_SUPPORT = yes
+ MTK_RUNNING_BOOSTER_UPGRADE = yes
+ MTK_RUNTIME_PERMISSION_SUPPORT = no

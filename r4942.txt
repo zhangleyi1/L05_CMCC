@@ -1,0 +1,52 @@
+Index: packages/apps/ContactsCommon/res_ext/values-zh-rHK/mtk_strings.xml
+===================================================================
+--- packages/apps/ContactsCommon/res_ext/values-zh-rHK/mtk_strings.xml	(revision 4941)
++++ packages/apps/ContactsCommon/res_ext/values-zh-rHK/mtk_strings.xml	(revision 4942)
+@@ -64,7 +64,7 @@
+     <string name="has_double_phone_number">不能保存相同類型的編號兩次，請檢查。</string>
+     <string name="phone_book_busy">電話簿現在正忙，請稍後再試。</string>
+     <string name="sim_invalid">當卡無效時，不能保存聯絡人。</string>
+-    <string name="cannot_insert_null_number">不能保存聯絡人，數目為空。</string>
++    <string name="cannot_insert_null_number">請輸入名字或至少一個電話號碼。</string>
+     <string name="AirPlane_mode_on">當飛機模式處於打開狀態時，不能保存聯絡人。</string>
+     <string name="FDNEnabled">固定撥號啟用時，不能保存聯繫人。</string>
+     <string name="sim_invalid_number">不能保存無效的號碼。</string>
+Index: packages/apps/ContactsCommon/res_ext/values-zh-rTW/mtk_strings.xml
+===================================================================
+--- packages/apps/ContactsCommon/res_ext/values-zh-rTW/mtk_strings.xml	(revision 4941)
++++ packages/apps/ContactsCommon/res_ext/values-zh-rTW/mtk_strings.xml	(revision 4942)
+@@ -84,7 +84,7 @@
+     <string name="has_double_phone_number">無法重複儲存相同的類型號碼，請檢查。 </string>
+     <string name="phone_book_busy">電話簿繁忙中，請稍候再試。</string>
+     <string name="sim_invalid">卡錯誤時無法儲存聯絡人。</string>
+-    <string name="cannot_insert_null_number">電話號碼空白時無法儲存聯絡人。</string>
++    <string name="cannot_insert_null_number">請輸入名字或至少一個電話號碼。</string>
+     <string name="AirPlane_mode_on">"飛航模式開啟時，無法儲存聯絡人。"</string>
+     <string name="FDNEnabled">"固定撥號啟用時不能儲存聯絡人。"</string>
+     <string name="sim_invalid_number">無法儲存有誤的號碼。</string>
+Index: packages/apps/ContactsCommon/res_ext/values-en-rGB/mtk_strings.xml
+===================================================================
+--- packages/apps/ContactsCommon/res_ext/values-en-rGB/mtk_strings.xml	(revision 4941)
++++ packages/apps/ContactsCommon/res_ext/values-en-rGB/mtk_strings.xml	(revision 4942)
+@@ -85,7 +85,7 @@
+     <string name="has_double_phone_number">Cannot save same type number twice, please check it.</string>
+     <string name="phone_book_busy">Phone book is busy now,please try later.</string>
+     <string name="sim_invalid">Cannot save contact when card is invalid.</string>
+-    <string name="cannot_insert_null_number">Cannot save contact whose number is empty.</string>
++    <string name="cannot_insert_null_number">Please enter a name or one phone number at least.</string>
+     <string name="AirPlane_mode_on">Cannot save contact when Aeroplane mode is on.</string>
+     <string name="FDNEnabled">Cannot save contact when FDN Enabled.</string>
+     <string name="sim_invalid_number">Cannot save invalid number.</string>
+Index: packages/apps/ContactsCommon/res_ext/values/mtk_strings.xml
+===================================================================
+--- packages/apps/ContactsCommon/res_ext/values/mtk_strings.xml	(revision 4941)
++++ packages/apps/ContactsCommon/res_ext/values/mtk_strings.xml	(revision 4942)
+@@ -86,7 +86,7 @@
+     <string name="has_double_phone_number">Cannot save same type number twice, please check it.</string>
+     <string name="phone_book_busy">Phone book is busy now, please try later.</string>
+     <string name="sim_invalid">Cannot save contact when card is invalid.</string>
+-    <string name="cannot_insert_null_number">Cannot save contact whose number is empty.</string>
++    <string name="cannot_insert_null_number">Please enter a name or one phone number at least.</string>
+     <string name="AirPlane_mode_on">Cannot save contact when Airplane mode is on.</string>
+     <string name="FDNEnabled">Cannot save contact when FDN Enabled.</string>
+     <string name="sim_invalid_number">Cannot save invalid number.</string>

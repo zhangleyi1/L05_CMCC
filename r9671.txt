@@ -1,0 +1,15 @@
+Index: frameworks/base/packages/SettingsProvider/res/values/defaults.xml
+===================================================================
+--- frameworks/base/packages/SettingsProvider/res/values/defaults.xml	(revision 9670)
++++ frameworks/base/packages/SettingsProvider/res/values/defaults.xml	(revision 9671)
+@@ -225,8 +225,8 @@
+     <integer name="def_navigation_bar_background_index">0</integer>
+     <integer name="def_navigation_bar_background_color">0x00000000</integer>
+ 	
+-	<string name="enabled_input_methods" translatable="false">com.sohu.inputmethod.sogou/.SogouIME:com.android.inputmethod.latin/.LatinIME</string>
+-	<string name="def_input_method">com.sohu.inputmethod.sogou/.SogouIME</string>
++	<string name="enabled_input_methods" translatable="false">com.iflytek.inputmethod/.FlyIME:com.android.inputmethod.latin/.LatinIME</string>
++	<string name="def_input_method">com.iflytek.inputmethod/.FlyIME</string>
+ 	
+ 	
+     <!-- ADD-E By Justin.Shen for Hide/Show navigation-bar -->

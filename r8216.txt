@@ -1,0 +1,161 @@
+Index: frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml	(revision 8215)
++++ frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml	(revision 8216)
+@@ -165,7 +165,6 @@
+     <string name="txt_camera_success_down">人脸角度：低头</string>
+     <string name="txt_unlock">请面朝屏幕解锁</string>
+     <string name="txt_name">请输入用户名</string>
+-    <string name="unlock_count">解锁次数：%1$d</string>
+     <string name="unlock_failed_liveness">未检测到人脸</string>
+     <string name="unlock_failed_warning">检测中</string>
+     <string name="unlock_failed_argument">传入参数错误</string>
+@@ -172,7 +171,6 @@
+     <string name="unlock_failed_face_blur">人脸模糊</string>
+     <string name="unlock_failed_face_multi">多张人脸</string>
+     <string name="unlock_failed_face_not_complete">人脸不完整</string>
+-    <string name="unlock_failed_handle">handle不合法</string>
+     <string name="unlock_failed">内部错误</string>
+     <string name="unlock_failed_quality">人脸不完整</string>
+     <string name="unlock_failed_face_not_found">检测中</string>
+@@ -186,7 +184,6 @@
+     <string name="unlock_failed_offset_top">脸偏上</string>
+     <string name="unlock_failed_offset_bottom">脸偏下</string>
+     <string name="unlock_camera_steady">请保持不要动</string>
+-    <string name="fail_report">解锁失败\n活体攻击：%1$d 次\n比对分值过低：%2$d 次</string>
+     <string name="feature_count_limit">Feature数量超出限制</string>
+     <string name="attr_blur">画面太模糊</string>
+     <string name="attr_eye_occlusion">眼睛有遮挡</string>
+@@ -195,7 +192,6 @@
+     <string name="title_activity_settings">设置</string>
+     <string name="first_frame_threshold">第一帧阈值</string>
+     <string name="compare_threshold">对比阈值</string>
+-    <string name="liveness_threshold">活体阈值</string>
+     <string name="model_version">活体版本号</string>
+     <string name="detect_version">人脸检测版本号</string>
+     <string name="preview">预览</string>
+Index: frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml	(revision 8215)
++++ frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml	(revision 8216)
+@@ -140,4 +140,58 @@
+     <string name="face_face_get">識別失敗</string>
+ 	<string name="ic_default_start_entry_face_btn">開始錄入</string>
+     <string name="ic_default_entry_face_data_error_info">無法進入，面部識別不成功，請保持前監視器清潔，然後再試一次.</string>
++	
++	
++	<string name="cancel_face_entering">取消人臉識別入口</string>
++	<string name="exit_prompt_wording">再按一次退出</string>
++    <string name="btn_ok">確定</string>
++    <string name="btn_cancel">取消</string>
++    <string name="btn_camera">錄入人臉</string>
++    <string name="btn_unlock">體驗解鎖過程</string>
++    <string name="btn_again">再試一次</string>
++    <string name="btn_back">返回</string>
++    <string name="msg_noface">抱歉，系統沒有錄入人臉，請先錄入人臉。</string>
++    <string name="msg_nodetect">抱歉，系統無法識別您的面部。</string>
++    <string name="msg_nocamera">抱歉，系統無法獲取照相機許可權，請先打開許可權。</string>
++    <string name="msg_success">解鎖成功！</string>
++    <string name="unlock_failed_compare">對比失敗</string>
++    <string name="txt_camera">請將面部移入人臉區域並拍照</string>
++    <string name="txt_camera_success">錄入人臉成功。人臉角度：正面</string>
++    <string name="txt_camera_success_left">人臉角度：左側</string>
++    <string name="txt_camera_success_right">人臉角度：右側</string>
++    <string name="txt_camera_success_top">人臉角度：抬頭</string>
++    <string name="txt_camera_success_down">人臉角度：低頭</string>
++    <string name="txt_unlock">請面朝荧幕解鎖</string>
++    <string name="txt_name">請輸入用戶名</string>
++    <string name="unlock_failed_liveness">未檢測到人臉</string>
++    <string name="unlock_failed_warning">檢測中</string>
++    <string name="unlock_failed_argument">傳入參數錯誤</string>
++    <string name="unlock_failed_face_blur">人臉模糊</string>
++    <string name="unlock_failed_face_multi">多張人臉</string>
++    <string name="unlock_failed_face_not_complete">人臉不完整</string>
++    <string name="unlock_failed">內部錯誤</string>
++    <string name="unlock_failed_quality">人臉不完整</string>
++    <string name="unlock_failed_face_not_found">檢測中</string>
++    <string name="attr_light_dark">面部光線太暗</string>
++    <string name="attr_light_high">面部光線太亮</string>
++    <string name="attr_light_shadow">面部光線太差</string>
++    <string name="unlock_failed_face_small">臉太小</string>
++    <string name="unlock_failed_face_large">臉太大</string>
++    <string name="unlock_failed_offset_left">脸偏左</string>
++    <string name="unlock_failed_offset_right">臉偏右</string>
++    <string name="unlock_failed_offset_top">臉偏上</string>
++    <string name="unlock_failed_offset_bottom">臉偏下</string>
++    <string name="unlock_camera_steady">請保持不要動</string>
++    <string name="attr_blur">畫面太模糊</string>
++    <string name="attr_eye_occlusion">眼睛有遮擋</string>
++    <string name="attr_eye_close">請不要閉眼</string>
++    <string name="attr_mouth_occlusion">嘴部有遮擋</string>
++    <string name="title_activity_settings">設定</string>
++    <string name="first_frame_threshold">第一幀閾值</string>
++    <string name="compare_threshold">對比閾值</string>
++    <string name="model_version">活體版本號</string>
++    <string name="detect_version">人臉檢測版本號</string>
++    <string name="preview">預覽</string>
++    <string name="strick_mode">嚴格模式</string>
++    <string name="bad_light">光線差</string>
+ </resources>
+Index: frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml	(revision 8215)
++++ frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml	(revision 8216)
+@@ -140,4 +140,57 @@
+     <string name="face_face_get">識別失敗</string>
+ 	<string name="ic_default_start_entry_face_btn">開始錄入</string>
+     <string name="ic_default_entry_face_data_error_info">無法進入，面部識別不成功，請保持前監視器清潔，然後再試一次.</string>
++	
++	<string name="cancel_face_entering">取消人臉識別入口</string>
++	<string name="exit_prompt_wording">再按一次退出</string>
++    <string name="btn_ok">確定</string>
++    <string name="btn_cancel">取消</string>
++    <string name="btn_camera">錄入人臉</string>
++    <string name="btn_unlock">體驗解鎖過程</string>
++    <string name="btn_again">再試一次</string>
++    <string name="btn_back">返回</string>
++    <string name="msg_noface">抱歉，系統沒有錄入人臉，請先錄入人臉。</string>
++    <string name="msg_nodetect">抱歉，系統無法識別您的面部。</string>
++    <string name="msg_nocamera">抱歉，系統無法獲取照相機許可權，請先打開許可權。</string>
++    <string name="msg_success">解鎖成功！</string>
++    <string name="unlock_failed_compare">對比失敗</string>
++    <string name="txt_camera">請將面部移入人臉區域並拍照</string>
++    <string name="txt_camera_success">錄入人臉成功。人臉角度：正面</string>
++    <string name="txt_camera_success_left">人臉角度：左側</string>
++    <string name="txt_camera_success_right">人臉角度：右側</string>
++    <string name="txt_camera_success_top">人臉角度：抬頭</string>
++    <string name="txt_camera_success_down">人臉角度：低頭</string>
++    <string name="txt_unlock">請面朝荧幕解鎖</string>
++    <string name="txt_name">請輸入用戶名</string>
++    <string name="unlock_failed_liveness">未檢測到人臉</string>
++    <string name="unlock_failed_warning">檢測中</string>
++    <string name="unlock_failed_argument">傳入參數錯誤</string>
++    <string name="unlock_failed_face_blur">人臉模糊</string>
++    <string name="unlock_failed_face_multi">多張人臉</string>
++    <string name="unlock_failed_face_not_complete">人臉不完整</string>
++    <string name="unlock_failed">內部錯誤</string>
++    <string name="unlock_failed_quality">人臉不完整</string>
++    <string name="unlock_failed_face_not_found">檢測中</string>
++    <string name="attr_light_dark">面部光線太暗</string>
++    <string name="attr_light_high">面部光線太亮</string>
++    <string name="attr_light_shadow">面部光線太差</string>
++    <string name="unlock_failed_face_small">臉太小</string>
++    <string name="unlock_failed_face_large">臉太大</string>
++    <string name="unlock_failed_offset_left">脸偏左</string>
++    <string name="unlock_failed_offset_right">臉偏右</string>
++    <string name="unlock_failed_offset_top">臉偏上</string>
++    <string name="unlock_failed_offset_bottom">臉偏下</string>
++    <string name="unlock_camera_steady">請保持不要動</string>
++    <string name="attr_blur">畫面太模糊</string>
++    <string name="attr_eye_occlusion">眼睛有遮擋</string>
++    <string name="attr_eye_close">請不要閉眼</string>
++    <string name="attr_mouth_occlusion">嘴部有遮擋</string>
++    <string name="title_activity_settings">設定</string>
++    <string name="first_frame_threshold">第一幀閾值</string>
++    <string name="compare_threshold">對比閾值</string>
++    <string name="model_version">活體版本號</string>
++    <string name="detect_version">人臉檢測版本號</string>
++    <string name="preview">預覽</string>
++    <string name="strick_mode">嚴格模式</string>
++    <string name="bad_light">光線差</string>
+ </resources>

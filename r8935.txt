@@ -1,0 +1,26 @@
+Index: build/tools/buildinfo.sh
+===================================================================
+--- build/tools/buildinfo.sh	(revision 8934)
++++ build/tools/buildinfo.sh	(revision 8935)
+@@ -6,9 +6,9 @@
+ echo "ro.build.id=$BUILD_ID"
+ echo "ro.build.display.id=980CN1_LECN_V1.3_171220"
+ echo "ro.build.version.custintid=980CN1_LECN_V2.6_180211"
+-echo "ro.build.version.incremental=980CN1_L055_M01_CMCC_S23_180211"
+-echo "ro.tct.sys.ver=OCN1LE11"
+-echo "ro.build.display.factoryid=Plat:CN_980CN1_L055_M01_CMCC_S23_180211Outer:980CN1_LECN_V2.6_180211End"
++echo "ro.build.version.incremental=980CN1_L055_M01_CMCC_S24_180301"
++echo "ro.tct.sys.ver=OCN1LE12"
++echo "ro.build.display.factoryid=Plat:CN_980CN1_L055_M01_CMCC_S24_180301Outer:980CN1_LECN_V2.7_180301End"
+ echo "ro.build.hardware.version=V1"
+ echo "ro.build.release.time=2017-12-20"
+ echo "ro.build.version.sdk=$PLATFORM_SDK_VERSION"
+@@ -62,7 +62,7 @@
+ echo "# Do not try to parse description, fingerprint, or thumbprint"
+ echo "ro.build.description=$PRIVATE_BUILD_DESC"
+ #echo "ro.build.fingerprint=$BUILD_FINGERPRINT"
+-echo "ro.build.fingerprint=TCL/980CN1/A3A_PLUS:7.1.1/N6F26Q/980CN1_LECN_V2.6_180211:user/release-keys"
++echo "ro.build.fingerprint=TCL/980CN1/A3A_PLUS:7.1.1/N6F26Q/980CN1_LECN_V2.7_180301:user/release-keys"
+ if [ -n "$BUILD_THUMBPRINT" ] ; then
+   echo "ro.build.thumbprint=$BUILD_THUMBPRINT"
+ fi

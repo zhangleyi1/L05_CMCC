@@ -1,0 +1,510 @@
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/LanguageActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/LanguageActivity.java	(revision 11566)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/LanguageActivity.java	(revision 11567)
+@@ -24,7 +24,7 @@
+ import android.view.View.OnClickListener;
+ //import butterknife.BindView;
+ //import butterknife.OnClick;
+-
++import android.provider.Settings;
+ import static com.gome.bootwizard.navigation.Navigator.LAST_PAGE;
+ 
+ /**
+@@ -116,8 +116,9 @@
+ 			     if (mIndex != DEFAULT_LANGUAGE) {//language has been changed
+ //                    mNavigator.navigateToWelcomeActivity(this, false);
+                     Intent intent = new Intent(LanguageActivity.this,WelcomeActivity.class);
+-                    intent.putExtra(LAST_PAGE, false);
+-                    intent.putExtra("fromlanguage", true);
++					Settings.Global.putInt(getContentResolver(),LAST_PAGE, 0);
++                    //intent.putExtra(LAST_PAGE, false);
++                    
+                     startActivity(intent);
+                     overridePendingTransition(R.anim.gome_activity_close_enter,R.anim.gome_activity_close_exit);
+                 }
+@@ -139,25 +140,6 @@
+                 break;
+         }
+ 	}
+- /*   @Override
+-    public void onWindowFocusChanged(boolean hasFocus) {
+-        super.onWindowFocusChanged(hasFocus);
+-        if (SIMPLIFIED_CHINESE == mIndex && hasLanguange){
+-            Log.d("BootWizard_welcomekk","LanguageActivity"+mIndex);
+-//            Locale newLocale = new Locale("zh","Hans","CN");
+-            Locale newLocale = Locale.SIMPLIFIED_CHINESE;
+-            List<LocalePicker.LocaleInfo> allAssetLocales = LocalePicker.getAllAssetLocales(this, false);
+-            for (int i = 0; i < allAssetLocales.size(); i++) {
+-                LocalePicker.LocaleInfo localeInfo = allAssetLocales.get(i);
+-                Locale locale = localeInfo.getLocale();
+-                System.out.println("系统支持语言=="+localeInfo+"local"+locale);
+-            }
+-//            Locale newLocale = new Locale("zh","CN","Hans");
+-            LocaleList localeListChinese = new LocaleList(newLocale);
+-            changeSystemLanguage(localeListChinese);
+-            hasLanguange = false;
+-        }
+-    }*/
+ 
+     @Override
+     protected void onStart() {
+@@ -191,40 +173,7 @@
+                 break;
+         }
+     }
+-/*
+-    @OnClick({R.id.tv_simplified_chinese, R.id.tv_traditional_chinese, R.id.tv_english})
+-    void selectLanguage(View v) {
+-        if (!v.isSelected()) {
+-            unSelectAllTextView();
+ 
+-            switch (v.getId()) {
+-                case R.id.tv_simplified_chinese:
+-                    tvSimplifiedChinese.setSelected(true);
+-//                    Locale newLocale = new Locale("zh", "CN");
+-                    Locale newLocale = Locale.SIMPLIFIED_CHINESE;
+-                    final LocaleList localeList = new LocaleList(newLocale);
+-                    changeSystemLanguage(localeList);
+-                    break;
+-                case R.id.tv_traditional_chinese:
+-                   tvTraditionalChinese.setSelected(true);
+-                    Locale newLocaleTW = new Locale("zh", "TW");
+-                    final LocaleList localeListTW = new LocaleList(newLocaleTW);
+-                    changeSystemLanguage(localeListTW);
+-                    break;
+-                case R.id.tv_english:
+-
+-                    tvEnglish.setSelected(true);
+-
+-                    Locale newLocaleEN = Locale.US;
+-//                    Locale newLocaleEN = new Locale("en");
+-                    final LocaleList localeListEN = new LocaleList(newLocaleEN);
+-                    changeSystemLanguage(localeListEN);
+-                    break;
+-            }
+-
+-        }
+-    }
+-*/
+     private void unSelectAllTextView() {
+         tvSimplifiedChinese.setSelected(false);
+         tvTraditionalChinese.setSelected(false);
+@@ -236,8 +185,8 @@
+ 		 if (mIndex != DEFAULT_LANGUAGE) {//language has been changed
+ //                    mNavigator.navigateToWelcomeActivity(this, false);
+             Intent intent = new Intent(LanguageActivity.this,WelcomeActivity.class);
+-            intent.putExtra(LAST_PAGE, false);
+-            intent.putExtra("fromlanguage", true);
++			Settings.Global.putInt(getContentResolver(),LAST_PAGE, 0);
++            
+             startActivity(intent);
+             overridePendingTransition(R.anim.gome_activity_close_enter,R.anim.gome_activity_close_exit);
+         }
+@@ -272,39 +221,6 @@
+         }
+     }
+ 
+-
+-/*
+-    @OnClick({R.id.btn_previous, R.id.btn_next})
+-    void navigate(View v) {
+-        switch (v.getId()) {
+-            case R.id.btn_previous:
+-                if (mIndex != DEFAULT_LANGUAGE) {//language has been changed
+-//                    mNavigator.navigateToWelcomeActivity(this, false);
+-                    Intent intent = new Intent(LanguageActivity.this,WelcomeActivity.class);
+-                    intent.putExtra(LAST_PAGE, false);
+-                    intent.putExtra("fromlanguage", true);
+-                    startActivity(intent);
+-                    overridePendingTransition(R.anim.gome_activity_close_enter,R.anim.gome_activity_close_exit);
+-                }
+-                finish();
+-                hasLanguange = false;
+-                break;
+-            case R.id.btn_next:
+-                if (SIMCardUtils.isSIMCardReady(this)&&WifiUtils.isMobileEnabled(this)) {
+-                    // hhh mNavigator.navigateToWLANSettings(this, REQUEST_WLAN_CODE);
+-//                    mNavigator.navigateToProtocolActivity(this);
+-                    MoveToWlan();
+-                    overridePendingTransition(R.anim.gome_activity_open_enter,R.anim.gome_activity_open_exit);
+-                } else {
+-                    mNavigator.navigateToSIMCardActivity(this);
+-                    overridePendingTransition(R.anim.gome_activity_open_enter,R.anim.gome_activity_open_exit);
+-                }
+-                finish();
+-                hasLanguange = false;
+-                break;
+-        }
+-    }
+-	*/
+     private void MoveToWlan(){
+ 
+         final boolean mBooleanConnect = WifiUtils.isConnect(LanguageActivity.this);
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/FingerPrintActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/FingerPrintActivity.java	(revision 11566)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/FingerPrintActivity.java	(revision 11567)
+@@ -1,41 +1,21 @@
+ package com.gome.bootwizard.activity;
+ 
+ import android.app.Activity;
+-//import android.app.IrisManager;
+-//import android.app.facecode.FacecodeManager;
+ import android.content.Context;
+ import android.content.Intent;
+-
+-//import android.hardware.fingerprint.FingerprintManager;
+ import android.net.Uri;
+ import android.os.Bundle;
+-
+ import android.util.Log;
+ import android.view.View;
+ import android.widget.Button;
+-
+ import com.gome.bootwizard.R;
+ import com.gome.bootwizard.navigation.Navigator;
+ import com.gome.bootwizard.service.ScreenOffService;
+ import com.gome.bootwizard.timer.MybTimeTask;
+ import com.gome.bootwizard.util.HasRequest;
+-
+-//import com.google.android.gms.appindexing.Action;
+-//import com.google.android.gms.appindexing.AppIndex;
+-//import com.google.android.gms.appindexing.Thing;
+-//import com.google.android.gms.common.api.GoogleApiClient;
+-
+-//import butterknife.BindView;
+-//import butterknife.OnClick;
+-
+ import static com.gome.bootwizard.navigation.Navigator.LAST_PAGE;
+ import android.view.View.OnClickListener;
+-/**
+- * finger print page
+- *
+- * @author Yusong.Liang
+- * @date 2017/5/17.
+- */
++import android.provider.Settings;
+ public class FingerPrintActivity extends BaseActivity implements HasRequest,OnClickListener {
+ 
+     /**
+@@ -61,7 +41,8 @@
+             case R.id.btn_previous:
+ 
+                 Intent mIntent = new Intent(FingerPrintActivity.this,WelcomeActivity.class);
+-                mIntent.putExtra(LAST_PAGE, true);
++				Settings.Global.putInt(getContentResolver(),LAST_PAGE, 1);
++               // mIntent.putExtra(LAST_PAGE, true);
+                 startActivity(mIntent);
+                 overridePendingTransition(R.anim.gome_activity_open_enter,R.anim.gome_activity_open_exit);
+     //           stopService(intentServise);
+@@ -74,44 +55,9 @@
+                 break;
+         }
+     }
+-	/*
+-    @OnClick({R.id.btn_previous, R.id.btn_next})
+-    void navigate(View v) {
+-        switch (v.getId()) {
+-            case R.id.btn_previous://skip
+ 
+-                Intent mIntent = new Intent(FingerPrintActivity.this,WelcomeActivity.class);
+-                mIntent.putExtra(LAST_PAGE, true);
+-                startActivity(mIntent);
+-                overridePendingTransition(R.anim.gome_activity_open_enter,R.anim.gome_activity_open_exit);
+-//                stopService(intentServise);
+-                finish();
+-                break;
+-            case R.id.btn_next://set fingerprint
+-                moveToFingerPrint();
+-//                mNavigator.navigateToFingerPrintSettings(this, REQUEST_FINGERPRINT_CODE);
+-                break;
+-        }
+-    }
+-
+-    @Override
+-    public void onBackPressed() {
+-        backToActivity();
+-        stopService(intentServise);
+-    }*/
+     private void backToActivity(){
+-     /*   IrisManager mIrisManager = (IrisManager) getSystemService(Context.IRIS_SERVICE);
+-        final boolean hasFeature = mIrisManager.isHasFeature();
+-        FacecodeManager mFacecodemanager = (FacecodeManager) getSystemService(Context.FACECODE_SERVICE);
+-        boolean hasFaces = mFacecodemanager.hasFaces();
+-        if (!hasFeature){
+-            mNavigator.navigateToIrisActivity(this);
+-        }else if (hasFeature&&!hasFaces){
+-            mNavigator.navigateToFaceCodeActivity(this);
+-        }else if (hasFeature&&hasFaces){
+-            mNavigator.navigateToProtocolActivity(this);
+-        }
+-      */  overridePendingTransition(R.anim.gome_activity_close_enter,R.anim.gome_activity_close_exit);
++        overridePendingTransition(R.anim.gome_activity_close_enter,R.anim.gome_activity_close_exit);
+         finish();
+     }
+     @Override
+@@ -125,22 +71,6 @@
+ 				overridePendingTransition(R.anim.gome_activity_close_enter,R.anim.gome_activity_close_exit);
+ 				finish();
+ 		}
+-        //destoryed();
+-  /*      if (REQUEST_FINGERPRINT_CODE == requestCode&& Activity.RESULT_FIRST_USER== resultCode) {
+-//            if (RESULT_OK == resultCode) {
+-            FingerprintManager fpm = (FingerprintManager) getSystemService(Context.FINGERPRINT_SERVICE);
+-            int size = fpm.getEnrolledFingerprints().size();
+-            if (size>0){
+-                mNavigator.navigateToSuccessfulSettingActivity(this, Navigator.TYPE_FINGERPRINT);
+-                overridePendingTransition(R.anim.gome_activity_open_enter,R.anim.gome_activity_open_exit);
+-                finish();
+-            }
+-        }else if (REQUEST_FINGERPRINT_CODE == requestCode&& Activity.RESULT_CANCELED== resultCode) {
+-//            mResult = true;
+-//            hideHomeRecent();
+-
+-        }
+-		*/
+     }
+     private void moveToFingerPrint(){
+ 
+@@ -209,13 +139,9 @@
+                mIntent.setAction("android.settings.FINGERPRINT_SETUP");
+ 			   mIntent.putExtra("is_from_boot_wizard", true);
+ 		       startActivityForResult(mIntent,REQUEST_FINGERPRINT_CODE);
+-			   //overridePendingTransition(R.anim.gome_activity_open_enter,R.anim.gome_activity_open_exit);
+ 			   isToAddFinger = false;
+-			   //finish();
+-		}else {
+-				
++		}else {			
+ 			Intent mIntent = new Intent(FingerPrintActivity.this,PolicyForCMCC.class);
+-			//mIntent.putExtra(LAST_PAGE, true);
+ 			startActivity(mIntent);
+ 			overridePendingTransition(R.anim.gome_activity_open_enter,R.anim.gome_activity_open_exit);
+ 			finish();
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/FaceCodeActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/FaceCodeActivity.java	(revision 11566)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/FaceCodeActivity.java	(revision 11567)
+@@ -90,39 +90,7 @@
+ 	}
+ 	
+ 	}
+-	/*
+-    @OnClick({R.id.btn_previous, R.id.btn_next})
+-    void navigate(View v) {
+-        switch (v.getId()) {
+-            case R.id.btn_previous:
+-                FingerprintManager fpm = (FingerprintManager) this.getSystemService(Context.FINGERPRINT_SERVICE);
+-                int mFingerprintSize = fpm.getEnrolledFingerprints().size();
+-                IrisManager mIrisManager = (IrisManager) getSystemService(Context.IRIS_SERVICE);
+-                final boolean hasFeature = mIrisManager.isHasFeature();
+-                if (!hasFeature) {
+-                    mNavigator.navigateToIrisActivity(this);
+-                    overridePendingTransition(R.anim.gome_activity_open_enter,R.anim.gome_activity_open_exit);
+-                }else if (mFingerprintSize==0&&hasFeature){
+-                    mNavigator.navigateToFingerPrintActivity(this);
+-                    overridePendingTransition(R.anim.gome_activity_open_enter,R.anim.gome_activity_open_exit);
+-                }else if (mFingerprintSize>0&&hasFeature){
+-                    mNavigator.navigateToWelcomeActivity(this,true);
+-                    overridePendingTransition(R.anim.gome_activity_open_enter,R.anim.gome_activity_open_exit);
+-                }
+ 
+-//                stopService(intentServise1);
+-                finish();
+-                break;
+-            case R.id.btn_next:
+-                moveToFace();
+-                //     mNavigator.navigateToFaceCodeSettings(this, REQUEST_FACE_CODE_CODE);
+-               //mNavigator.navigateToSafePasswordActivity(this, true);
+-                Log.e("REQUEST_FACE_Skip",REQUEST_FACE_CODE_CODE+"");
+-                break;
+-        }
+-    }
+-*/
+- //   @RequiresApi(api = Build.VERSION_CODES.M)
+     @Override
+     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+         super.onActivityResult(requestCode, resultCode, data);
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java	(revision 11566)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java	(revision 11567)
+@@ -34,9 +34,9 @@
+ //import butterknife.BindView;
+ //import butterknife.OnClick;
+ 
++import static com.gome.bootwizard.navigation.Navigator.LAST_PAGE;
+ 
+ 
+-
+ /**
+  * Welcome page,also used as Finish page
+  */
+@@ -101,8 +101,7 @@
+ 
+         Log.e("BootWizard_welcome", "bootwizardstart");
+ 
+-        final Intent intent = getIntent();
+-        mIsLastPage = intent.getBooleanExtra(Navigator.LAST_PAGE, false);
++        mIsLastPage = Settings.Global.getInt(getContentResolver(),LAST_PAGE, 0) == 1;
+         if (mIsLastPage){ 
+ 		    btnStart.setText(getString(R.string.start_launch));
+ 		    findViewById(R.id.tv_tips_finish).setVisibility(View.VISIBLE);
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/PolicyForCMCC.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/PolicyForCMCC.java	(revision 11566)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/PolicyForCMCC.java	(revision 11567)
+@@ -34,38 +34,15 @@
+ import android.util.Log;
+ import com.gome.bootwizard.navigation.Navigator;
+ import static com.gome.bootwizard.navigation.Navigator.LAST_PAGE;
+-
+-
+-//import android.app.IrisManager;
+-//import android.app.facecode.FacecodeManager;
+ import android.content.Context;
+ import android.content.Intent;
+ 
+-//import android.hardware.fingerprint.FingerprintManager;
+ import android.net.Uri;
+ import android.os.Bundle;
+-
+-
+-
+-
+-
+-
+ import com.gome.bootwizard.service.ScreenOffService;
+ import com.gome.bootwizard.timer.MybTimeTask;
+ import com.gome.bootwizard.util.HasRequest;
+-
+-//import com.google.android.gms.appindexing.Action;
+-//import com.google.android.gms.appindexing.AppIndex;
+-//import com.google.android.gms.appindexing.Thing;
+-//import com.google.android.gms.common.api.GoogleApiClient;
+-
+-//import butterknife.BindView;
+-//import butterknife.OnClick;
+-
+-
+-/**
+- * Application that sets the provisioned bit, like SetupWizard does.
+- */
++import android.provider.Settings;
+ public class PolicyForCMCC extends BaseActivity  {
+     protected Button mStatementButton;
+ 	boolean isCancel =true;
+@@ -119,7 +96,8 @@
+ 				finish();
+ 			}else{
+ 				Intent mIntent = new Intent(PolicyForCMCC.this,WelcomeActivity.class);
+-				mIntent.putExtra(LAST_PAGE, true);
++				Settings.Global.putInt(getContentResolver(),LAST_PAGE, 1);
++				//mIntent.putExtra(LAST_PAGE, true);
+ 				startActivity(mIntent);
+ 				overridePendingTransition(R.anim.gome_activity_open_enter,R.anim.gome_activity_open_exit);
+ 				finish();
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/AndroidManifest.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/AndroidManifest.xml	(revision 11566)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/AndroidManifest.xml	(revision 11567)
+@@ -24,7 +24,7 @@
+         android:theme="@style/AppTheme">
+ 
+         <activity
+-            android:name=".activity.WelcomeActivity"
++            android:name="com.gome.bootwizard.activity.WelcomeActivity"
+             android:launchMode="singleTop"
+             android:exported="true"
+             android:excludeFromRecents="true"
+@@ -39,7 +39,7 @@
+         </activity>
+ 
+         <activity
+-            android:name=".activity.LanguageActivity"
++            android:name="com.gome.bootwizard.activity.LanguageActivity"
+             android:launchMode="singleTask"
+             android:exported="true"
+             android:excludeFromRecents="true"
+@@ -47,7 +47,7 @@
+ 			 
+  </activity>
+         <activity
+-            android:name=".activity.SIMCardActivity"
++            android:name="com.gome.bootwizard.activity.SIMCardActivity"
+             android:launchMode="singleTask"
+             android:exported="true"
+             android:excludeFromRecents="true"
+@@ -54,7 +54,7 @@
+             android:screenOrientation="portrait" />
+ 
+          <activity
+-            android:name=".activity.FaceCodeActivity"
++            android:name="com.gome.bootwizard.activity.FaceCodeActivity"
+             android:launchMode="singleTask"
+             android:exported="true"
+             android:excludeFromRecents="true"
+@@ -61,7 +61,7 @@
+             android:screenOrientation="portrait" />
+ 			
+ 	 <activity
+-            android:name=".activity.PolicyForCMCC"
++            android:name="com.gome.bootwizard.activity.PolicyForCMCC"
+             android:launchMode="singleTask"
+             android:exported="true"
+             android:excludeFromRecents="true"
+@@ -69,7 +69,7 @@
+ 
+ 
+         <activity
+-            android:name=".activity.UserAgreementActivity"
++            android:name="com.gome.bootwizard.activity.UserAgreementActivity"
+             android:launchMode="singleTask"
+             android:excludeFromRecents="true"
+             android:exported="true"
+@@ -76,7 +76,7 @@
+             android:screenOrientation="portrait" />
+ 
+         <activity
+-            android:name=".activity.PrivacyPolicyActivity"
++            android:name="com.gome.bootwizard.activity.PrivacyPolicyActivity"
+             android:launchMode="singleTask"
+             android:exported="true"
+             android:excludeFromRecents="true"
+@@ -85,7 +85,7 @@
+         
+ 
+         <activity
+-            android:name=".activity.FingerPrintActivity"
++            android:name="com.gome.bootwizard.activity.FingerPrintActivity"
+             android:launchMode="singleTask"
+             android:exported="true"
+             android:excludeFromRecents="true"
+@@ -94,7 +94,7 @@
+         
+ 
+         <activity
+-            android:name=".activity.SafePasswordActivity"
++            android:name="com.gome.bootwizard.activity.SafePasswordActivity"
+             android:launchMode="singleTask"
+             android:excludeFromRecents="true"
+             android:exported="true"
+@@ -101,7 +101,7 @@
+             android:screenOrientation="portrait" />
+ 
+         <activity
+-            android:name=".activity.SuccessfulSettingActivity"
++            android:name="com.gome.bootwizard.activity.SuccessfulSettingActivity"
+             android:launchMode="singleTask"
+             android:excludeFromRecents="true"
+             android:exported="true"
+@@ -108,7 +108,7 @@
+             android:screenOrientation="portrait" />
+ 
+         <activity
+-            android:name=".activity.FinishActivity"
++            android:name="com.gome.bootwizard.activity.FinishActivity"
+             android:launchMode="singleTask"
+             android:excludeFromRecents="true"
+             android:exported="true"

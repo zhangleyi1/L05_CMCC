@@ -1,0 +1,25 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AddAppShortcutAdapter.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AddAppShortcutAdapter.java	(revision 7727)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AddAppShortcutAdapter.java	(revision 7728)
+@@ -54,13 +54,13 @@
+ 		holder.item.setOnClickListener(this);
+ 		holder.itemView.setTag(position);//add
+ 		Log.d("AppListAdapter","holder.itemView.setTag...");
+-        if(info.isContanin()){
+-            holder.app_name.setTextColor(Color.GRAY);
+-			holder.right_icon.setVisibility(View.GONE);
+-        }else{
+-            holder.app_name.setTextColor(Color.BLACK);
+-			holder.right_icon.setVisibility(View.VISIBLE);
+-        }
++//        if(info.isContanin()){
++//            holder.app_name.setTextColor(Color.GRAY);
++//			holder.right_icon.setVisibility(View.GONE);
++//        }else{
++        holder.app_name.setTextColor(Color.BLACK);
++        holder.right_icon.setVisibility(View.VISIBLE);
++//        }
+ 		/*holder.item.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {

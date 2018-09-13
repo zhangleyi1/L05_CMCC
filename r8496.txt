@@ -1,0 +1,24 @@
+Index: packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java	(revision 8495)
++++ packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java	(revision 8496)
+@@ -1055,7 +1055,8 @@
+             if (prefix == null || prefix.length() == 0) {
+                 for (int i = 0; i < origEntries.size(); i++) {
+                     ApplicationsState.AppEntry entry = origEntries.get(i);
+-                    if (entry.label.equals("Live Wallpaper Picker")) {
++                    String apkFileName = entry.apkFile.getName();
++                    if (apkFileName.equals("LiveWallpapersPicker.apk") || apkFileName.equals("ImsService.apk")) {
+                         continue;
+                     }
+                     newEntries.add(entry);
+@@ -1065,7 +1066,8 @@
+                 final String spacePrefixStr = " " + prefixStr;
+                 for (int i = 0; i < origEntries.size(); i++) {
+                     ApplicationsState.AppEntry entry = origEntries.get(i);
+-                    if (entry.label.equals("Live Wallpaper Picker")) {
++                    String apkFileName = entry.apkFile.getName();
++                    if (apkFileName.equals("LiveWallpapersPicker.apk") || apkFileName.equals("ImsService.apk")) {
+                         continue;
+                     }
+                     String nlabel = entry.getNormalizedLabel();

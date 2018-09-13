@@ -1,0 +1,21 @@
+Index: packages/services/Telephony/src/com/android/phone/EditPhoneNumberPreference.java
+===================================================================
+--- packages/services/Telephony/src/com/android/phone/EditPhoneNumberPreference.java	(revision 5260)
++++ packages/services/Telephony/src/com/android/phone/EditPhoneNumberPreference.java	(revision 5261)
+@@ -131,7 +131,7 @@
+         mContactListIntent = new Intent("android.intent.action.PICK");
+         mContactListIntent.setType(Phone.CONTENT_TYPE);
+         //@}
+-        
++
+         //get the edit phone number default settings
+         TypedArray a = context.obtainStyledAttributes(attrs,
+                 R.styleable.EditPhoneNumberPreference, 0, R.style.EditPhoneNumberPreference);
+@@ -215,6 +215,7 @@
+             }
+             editText.setText(BidiFormatter.getInstance().unicodeWrap(
+                     mPhoneNumber, TextDirectionHeuristics.LTR));
++            editText.setSelection(editText.length());
+             editText.setMovementMethod(ArrowKeyMovementMethod.getInstance());
+             /// M: Add for VoLTE IOT, make the edit text can input IP address @{
+             if (!shouldInputText()) {

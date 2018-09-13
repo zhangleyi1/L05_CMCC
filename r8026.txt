@@ -1,0 +1,16 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 8025)
++++ vendor/customer/custom.mk	(revision 8026)
+@@ -20,6 +20,7 @@
+                     SogouInput \
+                     MainApp \
+                     10086android \
++                    mmnes \
+                     139mail \
+                     Baidu
+ 
+Index: vendor/customer/apps/mmnes/mmnes1.3.0_release_online_5410232117.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream

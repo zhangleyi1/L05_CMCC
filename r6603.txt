@@ -1,0 +1,39 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AddAppShortcutActivity.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AddAppShortcutActivity.java	(revision 6602)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AddAppShortcutActivity.java	(revision 6603)
+@@ -103,8 +103,7 @@
+ 		adapter.setOnItemClickListener(new OnItemClickListener(){
+             @Override    
+      		public void onItemClick(View view , int position){
+-          		 String packName=list.get(position).getPackerName();
+-		  	 	Log.d("AppListActivity","packName== "+packName);
++                String packName = adapter.getListData().get(position).getPackerName();
+ 		   		Intent intent=new Intent();
+ 		   		intent.putExtra("packageName", packName);
+ 		   		setResult(ADD_SHORTCUT_RESULT, intent);
+@@ -179,7 +178,7 @@
+                         }
+ 
+                     }
+-                    if (searchList.size() > 0 && adapter != null) {
++                    if (adapter != null) {
+                         adapter.updateData(searchList);
+                     } else {
+                        // Toast.makeText(AppListActivity.this, "no result", 0).show();
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AddAppShortcutAdapter.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AddAppShortcutAdapter.java	(revision 6602)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AddAppShortcutAdapter.java	(revision 6603)
+@@ -105,6 +105,11 @@
+         data= list;
+         notifyDataSetChanged();
+     }
++
++    public List<AppInfo> getListData() {
++        return data;
++    }
++    
+     public class AppInfoHodler extends RecyclerView.ViewHolder {
+         public TextView title;
+         public TextView app_name;

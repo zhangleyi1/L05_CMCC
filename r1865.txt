@@ -1,0 +1,26 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarView.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarView.java	(revision 1864)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarView.java	(revision 1865)
+@@ -915,7 +915,7 @@
+     protected int mCurrentUserId = 0;
+     
+     public void updateNailIcon() {
+-        if(!isWithNailIcon()) {
++        if(!isWithNailIcon() || getNailButton() == null) {
+             Log.d(TAG, "updateNailIcon: current layout without nail, do nothing!");
+             return;
+         }
+Index: frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java	(revision 1864)
++++ frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java	(revision 1865)
+@@ -21997,7 +21997,7 @@
+                     mLastPkgName = str;
+                 }
+                 
+-                Log.d(TAG, "resumedAppLocked: mLastPkgName = " + mLastPkgName);
++                //Log.d(TAG, "resumedAppLocked: mLastPkgName = " + mLastPkgName);
+             }
+         }
+         //ADD-E By Justin.Shen for Hide/Show navigation-bar

@@ -1,0 +1,27 @@
+Index: packages/apps/Dialer/InCallUI/src/com/android/incallui/InCallVideoCallCallback.java
+===================================================================
+--- packages/apps/Dialer/InCallUI/src/com/android/incallui/InCallVideoCallCallback.java	(revision 8146)
++++ packages/apps/Dialer/InCallUI/src/com/android/incallui/InCallVideoCallCallback.java	(revision 8147)
+@@ -246,7 +246,8 @@
+     @Override
+     public void onPeerDimensionsChanged(int width, int height) {
+         Log.d(this, "[onPeerDimensionsChanged] size: " + InCallUtils.formatSize(width, height));
+-        InCallVideoCallCallbackNotifier.getInstance().peerDimensionsChanged(mCall, width, height);
++        InCallVideoCallCallbackNotifier.getInstance().
++                onPeerDimensionsWithAngleChanged(mCall, width, height, 0);
+     }
+ 
+     /* M: ViLTE part start */
+Index: packages/apps/Dialer/InCallUI/res/values/dimens.xml
+===================================================================
+--- packages/apps/Dialer/InCallUI/res/values/dimens.xml	(revision 8146)
++++ packages/apps/Dialer/InCallUI/res/values/dimens.xml	(revision 8147)
+@@ -116,7 +116,7 @@
+ 
+     <!-- The smaller dimension of the video preview.  When in portrait orientation this is the
+          width of the preview.  When in landscape, this is the height. -->
+-    <dimen name="video_preview_small_dimension">90dp</dimen>
++    <dimen name="video_preview_small_dimension">120dp</dimen>
+ 
+     <dimen name="video_preview_margin">0dp</dimen>
+ 

@@ -1,0 +1,13 @@
+Index: frameworks/base/core/res/res/values/config.xml
+===================================================================
+--- frameworks/base/core/res/res/values/config.xml	(revision 7740)
++++ frameworks/base/core/res/res/values/config.xml	(revision 7741)
+@@ -1697,7 +1697,7 @@
+     <bool name="config_dreamsSupported">true</bool>
+ 
+     <!-- If supported, are dreams enabled? (by default) -->
+-    <bool name="config_dreamsEnabledByDefault">true</bool>
++    <bool name="config_dreamsEnabledByDefault">false</bool>
+     <!-- If supported and enabled, are dreams activated when docked? (by default) -->
+     <bool name="config_dreamsActivatedOnDockByDefault">false</bool>
+     <!-- If supported and enabled, are dreams activated when asleep and charging? (by default) -->

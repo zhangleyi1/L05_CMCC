@@ -1,0 +1,19 @@
+Index: frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 8407)
++++ frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 8408)
+@@ -1793,11 +1793,13 @@
+ 		//register for three finger shotscreen 
+ 		filter.addAction("intent.action.SendKey");
+ 		context.registerReceiver(mKeyReceiver, filter);
+-		 //register for simPin Keyguard broadcasts  
++		//register for simPin Keyguard broadcasts 
++		/*
+ 		IntentFilter simPinKeyguardfilter = new IntentFilter();
+ 		simPinKeyguardfilter.addAction(SIM_PIN_KEYGUARD_START);
+ 		simPinKeyguardfilter.addAction(SIM_PIN_KEYGUARD_STOP);
+ 		context.registerReceiver(mSimPINKeyguardReceiver, simPinKeyguardfilter);
++		*/
+ 		// register for unbind_stop_face_service
+ 		IntentFilter unbindFaceServiceFilter = new IntentFilter();
+ 		unbindFaceServiceFilter.addAction(UNBIND_STOP_FACE_SERVICE);

@@ -1,0 +1,13 @@
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 4399)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 4400)
+@@ -236,7 +236,7 @@
+ 		TESTITEM_WIFI, 
+ 		TESTITEM_GPS, 
+ 		TESTITEM_FINGER,
+-  		TESTITEM_CALLING,
++//  	TESTITEM_CALLING,
+ //  	TESTITEM_GYRO
+ //	 	TESTITEM_HALL,
+ //	 	TESTITEM_NFC,

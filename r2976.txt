@@ -1,0 +1,13 @@
+Index: packages/apps/ContactsCommon/res_ext/values-zh-rCN/mtk_strings.xml
+===================================================================
+--- packages/apps/ContactsCommon/res_ext/values-zh-rCN/mtk_strings.xml	(revision 2975)
++++ packages/apps/ContactsCommon/res_ext/values-zh-rCN/mtk_strings.xml	(revision 2976)
+@@ -99,7 +99,7 @@
+     <string name="has_double_phone_number">不可重复保存同类型号码，请检查</string>
+     <string name="phone_book_busy">"电话簿忙碌中，请稍候再试。"</string>
+     <string name="sim_invalid">"卡无效不能保存联系人。"</string>
+-    <string name="cannot_insert_null_number">"不能保存电话号码为空的联系人。"</string>
++    <string name="cannot_insert_null_number">"请输入名字或至少一个电话号码。"</string>
+     <string name="AirPlane_mode_on">"飞行模式开启时不能保存联系人。"</string>
+     <string name="FDNEnabled">"固定拨号启用时不能保存联系人"。</string>
+     <string name="sim_invalid_number">"不能保存无效号码。"</string>

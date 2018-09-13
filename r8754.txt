@@ -1,0 +1,83 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java	(revision 8753)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java	(revision 8754)
+@@ -41,6 +41,7 @@
+ import android.os.RemoteException;
+ import android.os.UserHandle;
+ import android.provider.MediaStore;
++import android.provider.Settings;
+ import android.service.media.CameraPrewarmService;
+ import android.telecom.TelecomManager;
+ import android.util.AttributeSet;
+@@ -168,6 +169,8 @@
+         }
+     };
+ 
++    private String[] mBlackArray;
++
+     private boolean mLeftIsVoiceAssist;
+     private AssistManager mAssistManager;
+ 
+@@ -364,6 +367,8 @@
+ 		} else {
+ 			mFuncLayout.setVisibility(View.GONE);
+ 		}
++
++        mBlackArray = mContext.getResources().getStringArray(R.array.face_unlock_black_list);
+     }
+ 	
+ 	public void initIcon(){
+@@ -463,7 +468,35 @@
+ 		DBManager manager = new DBManager(mContext);
+ 		manager.openDatabase();
+ 		db = AppDB.getInstance();
+-		list = db.getDefaultApp(DEFAULT_TABLE);
++
++                String faceEnable = Settings.System.getStringForUser(mContext.getContentResolver(), Settings.System.FACE_STATE_ENABLED, 0);
++                int faceUnlockState = Settings.System.getInt(mContext.getContentResolver(), Settings.System.FACE_UNLOCK_STATE_ENABLED, 0);
++
++                if (faceEnable.equals("1") && (faceUnlockState == 1) && mBlackArray != null && mBlackArray.length > 0 ) {
++                    List<AppInfo> defaultList = db.getDefaultApp(DEFAULT_TABLE);
++                    if (list != null) {
++                        list.clear();
++                    } else {
++                        list = new ArrayList<AppInfo>();
++                    }
++
++                    for(AppInfo app:defaultList) {
++                        boolean skip = false;
++                        for(String packageName:mBlackArray) {
++                            if(packageName.equals(app.getPackerName())) {
++                                skip = true;
++                                break;
++                            }
++                        }
++
++                        if(!skip) {
++                            list.add(app);
++                        }
++                    }
++                } else {
++            	    list = db.getDefaultApp(DEFAULT_TABLE);
++                }
++
+ 		return AppUtils.getAppInfo( mContext, list);
+ 	}
+ 	
+Index: frameworks/base/packages/SystemUI/res/values/strings.xml
+===================================================================
+--- frameworks/base/packages/SystemUI/res/values/strings.xml	(revision 8753)
++++ frameworks/base/packages/SystemUI/res/values/strings.xml	(revision 8754)
+@@ -1701,6 +1701,11 @@
+ 	<string name="apps_title">"Alternative shortcuts"</string>
+ 	<string name="func_dialog_button">"GOT IT"</string>
+ 	<string name="func_notice">"Add shortcuts from the list below."</string>
++
++    <!-- Add for face unlock -->
++    <string-array name="face_unlock_black_list">
++        <item>com.mediatek.hz.camera</item>
++    </string-array>
+ 	
+     <!-- ADD-S By Justin.Shen for Hide/Show navigation-bar -->
+     <string name="navigation_bar_tips">Tap to auto hide the navigation bar</string>

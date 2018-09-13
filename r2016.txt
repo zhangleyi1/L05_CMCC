@@ -1,0 +1,47 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AppUtils.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AppUtils.java	(revision 2015)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AppUtils.java	(revision 2016)
+@@ -200,13 +200,12 @@
+     public static void showDialog(final Context context, String content){
+         AlertDialog.Builder dialog=new AlertDialog.Builder(context,R.style.Theme_AppCompat_Light_Dialog_Alert_Self);
+         dialog.setMessage(content);
+-        dialog.setPositiveButton(context.getResources().getString(R.string.func_dialog_button), new DialogInterface.OnClickListener() {
++        dialog.setPositiveButton(null/*context.getResources().getString(R.string.func_dialog_button)*/, new DialogInterface.OnClickListener() {
+             @Override
+             public void onClick(DialogInterface dialog, int which) {
+             }
+         });
+-
+-        dialog.setCancelable(false);
++        dialog.setCancelable(true);
+         dialog.show();
+     }
+     public  static Intent startApp(Context context,String packagename) {
+Index: frameworks/base/packages/SystemUI
+===================================================================
+--- frameworks/base/packages/SystemUI	(revision 2015)
++++ frameworks/base/packages/SystemUI	(revision 2016)
+
+Property changes on: frameworks/base/packages/SystemUI
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base/packages/SystemUI:r1884
+Index: frameworks/base/packages
+===================================================================
+--- frameworks/base/packages	(revision 2015)
++++ frameworks/base/packages	(revision 2016)
+
+Property changes on: frameworks/base/packages
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base/packages:r1884
+Index: frameworks/base
+===================================================================
+--- frameworks/base	(revision 2015)
++++ frameworks/base	(revision 2016)
+
+Property changes on: frameworks/base
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base:r1884

@@ -1,0 +1,55 @@
+Index: packages/apps/Settings/src/com/android/settings/search/Ranking.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/search/Ranking.java	(revision 7738)
++++ packages/apps/Settings/src/com/android/settings/search/Ranking.java	(revision 7739)
+@@ -168,7 +168,7 @@
+         sRankMap.put(NavigationBarSettings.class.getName(), RANK_NAVI_BAR);
+ 
+         //Regulatory & Safety
+-        sRankMap.put("android.settings.RegulatorySaftySettings", RANK_REGULATORY_SAFETY);
++        //sRankMap.put("android.settings.RegulatorySaftySettings", RANK_REGULATORY_SAFETY);
+ 
+         // Location
+         sRankMap.put(LocationSettings.class.getName(), RANK_LOCATION);
+Index: packages/apps/Settings/src/com/android/settings/search/SearchIndexableResources.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/search/SearchIndexableResources.java	(revision 7738)
++++ packages/apps/Settings/src/com/android/settings/search/SearchIndexableResources.java	(revision 7739)
+@@ -274,12 +274,12 @@
+                         LocationSettings.class.getName(),
+                         R.drawable.ic_settings_location));
+  
+-        sResMap.put("android.settings.RegulatorySaftySettings",
++        /*sResMap.put("android.settings.RegulatorySaftySettings",
+                 new SearchIndexableResource(
+                         Ranking.getRankForClassName("android.settings.RegulatorySaftySettings"),
+                         R.xml.regulatory_safety_settings,
+                         "android.settings.RegulatorySaftySettings",
+-                        R.drawable.ic_settings_regulatory_safety));
++                        R.drawable.ic_settings_regulatory_safety));*/
+ 
+ 		sResMap.put(ProcessStatsSummary.class.getName(),
+                 new SearchIndexableResource(
+Index: packages/apps/Settings/src/com/android/settings/SettingsActivity.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/SettingsActivity.java	(revision 7738)
++++ packages/apps/Settings/src/com/android/settings/SettingsActivity.java	(revision 7739)
+@@ -1156,7 +1156,7 @@
+     private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
+             boolean addToBackStack, int titleResId, CharSequence title, boolean withTransition) {
+         mCurrentFragment = fragmentName;
+-        if ("android.settings.RegulatorySaftySettings".equals(fragmentName)) {
++        /*if ("android.settings.RegulatorySaftySettings".equals(fragmentName)) {
+             Intent regulatoryIntent = new Intent();
+             String pakagename="com.jrdcom.Elabel";
+             String classname="com.jrdcom.Elabel.SettingsRegulatoryActivity";
+@@ -1165,7 +1165,8 @@
+             startActivity(regulatoryIntent);
+             finish();  
+             return null;
+-        }else if("com.android.settings.navigationbar.NavigationBarSettings".equals(fragmentName)) {
++        }else */
++        if("com.android.settings.navigationbar.NavigationBarSettings".equals(fragmentName)) {
+             Intent navintent = new Intent();
+             navintent.setClass(this, NavigationBarSettings.class);
+             startActivity(navintent);

@@ -1,0 +1,26 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarPolicy.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarPolicy.java	(revision 10865)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarPolicy.java	(revision 10866)
+@@ -51,6 +51,7 @@
+ import com.android.systemui.statusbar.policy.HotspotController;
+ import com.android.systemui.statusbar.policy.RotationLockController;
+ import com.android.systemui.statusbar.policy.UserInfoController;
++import android.telephony.TelephonyManager;
+ 
+ /**
+  * This class contains all of the policy about which icons are installed in the status
+@@ -249,6 +250,13 @@
+ 
+     private final void updateVolumeZen() {
+         AudioManager audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
++        TelephonyManager telephonyManager = (TelephonyManager) mContext
++                .getSystemService(Context.TELEPHONY_SERVICE);
++        boolean isDial = false;
++        if (telephonyManager != null && (telephonyManager.getCallState() 
++                != TelephonyManager.CALL_STATE_IDLE)) {
++            isDial = true;
++        }
+ 
+         boolean zenVisible = false;
+         int zenIconId = 0;

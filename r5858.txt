@@ -1,0 +1,14 @@
+Index: packages/providers/MediaProvider/AndroidManifest.xml
+===================================================================
+--- packages/providers/MediaProvider/AndroidManifest.xml	(revision 5857)
++++ packages/providers/MediaProvider/AndroidManifest.xml	(revision 5858)
+@@ -20,7 +20,8 @@
+     <application android:process="android.process.media"
+                  android:label="@string/app_label"
+                  android:allowBackup="false"
+-                 android:supportsRtl="true">
++                 android:supportsRtl="true"
++                 android:directBootAware="true">
+         <provider android:name="MediaProvider" android:authorities="media"
+                 android:multiprocess="false" android:exported="true">
+             <grant-uri-permission android:pathPrefix="/external/" />

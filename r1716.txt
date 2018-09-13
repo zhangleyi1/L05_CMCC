@@ -1,0 +1,12 @@
+Index: vendor/customer/Android.mk
+===================================================================
+--- vendor/customer/Android.mk	(revision 1715)
++++ vendor/customer/Android.mk	(revision 1716)
+@@ -1205,7 +1205,6 @@
+ LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app
+ include $(BUILD_PREBUILT)
+ 
+-LOCAL_PATH := $(call my-dir)
+ #########################
+ ## mmnes  
+ ########################

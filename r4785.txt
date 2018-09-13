@@ -1,0 +1,127 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 4784)
++++ vendor/customer/custom.mk	(revision 4785)
+@@ -23,8 +23,7 @@
+                     mmnes \
+                     iReader \
+                     Diagnostics \
+-                    139mail \
+-                    HeFition 
++                    139mail
+ 
+ # Overrides
+ PRODUCT_PROPERTY_OVERRIDES +=
+@@ -33,4 +32,5 @@
+ $(call inherit-product-if-exists, vendor/customer/apps/MainApp/MainApp.mk)
+ PRODUCT_COPY_FILES += vendor/customer/apps/Weather/Weather_Global_v7.0.2.2.0466.0_signed_releasekey_alldpi.apk:system/vendor/operator/app/Weather/Weather.apk \
+ vendor/customer/apps/mCloud/mCloud_3.7.5_508-000.apk:system/vendor/operator/app/mCloud/mCloud.apk \
+-vendor/customer/apps/migu_video/resigned_4.0.0.10_71_20171205094744_sec_signed.apk:system/vendor/operator/app/migu_video/migu_video.apk 
++vendor/customer/apps/migu_video/resigned_4.0.0.10_71_20171205094744_sec_signed.apk:system/vendor/operator/app/migu_video/migu_video.apk \
++vendor/customer/apps/HeFition/HeFition_V6.1.0330_2017121815_PROD_release.apk:system/vendor/operator/app/HeFition/HeFition.apk 
+\ No newline at end of file
+Index: vendor/customer/apps/HeFition/Android.mk
+===================================================================
+--- vendor/customer/apps/HeFition/Android.mk	(revision 4784)
++++ vendor/customer/apps/HeFition/Android.mk	(revision 4785)
+@@ -1,31 +0,0 @@
+-LOCAL_PATH:= $(call my-dir)
+-
+-include $(CLEAR_VARS)
+-LOCAL_MODULE := HeFition
+-LOCAL_MODULE_TAGS := optional
+-LOCAL_SRC_FILES := HeFition_V6.1.0330_2017121815_PROD_release.apk
+-LOCAL_MODULE_CLASS := APPS
+-LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+-LOCAL_CERTIFICATE := PRESIGNED
+-LOCAL_TARGET_CPU_ABI := armeabi
+-LOCAL_PREBUILT_JNI_LIBS := lib/$(LOCAL_TARGET_CPU_ABI)/libbinaryByFounder.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libbreakpad.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libBugly.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libcmcc.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libcmmap.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libdatabase_sqlcipher.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libgif.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libjingle_peerconnection_so.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/liblemon.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libnative-rcs-utils.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libqrcodedecoder.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libsqlcipher_android.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libsqlite.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libstlport_shared.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libtsc.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libzmf.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libzvs.so
+-LOCAL_DEX_PREOPT := true
+-LOCAL_MULTILIB := 32
+-LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app
+-include $(BUILD_PREBUILT)
+\ No newline at end of file
+Index: vendor/customer/apps/HeFition/lib/armeabi/libzvs.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libBugly.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libtsc.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libsqlcipher_android.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libzmf.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libstlport_shared.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libcmmap.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libsqlite.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libbinaryByFounder.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libqrcodedecoder.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libjingle_peerconnection_so.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libgif.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libcmcc.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libnative-rcs-utils.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libbreakpad.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/liblemon.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libdatabase_sqlcipher.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream

@@ -1,0 +1,40 @@
+Index: vendor/mediatek/proprietary/packages/apps/DataProtection/src/com/mediatek/dataprotection/ViewLockedFilesActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/DataProtection/src/com/mediatek/dataprotection/ViewLockedFilesActivity.java	(revision 4893)
++++ vendor/mediatek/proprietary/packages/apps/DataProtection/src/com/mediatek/dataprotection/ViewLockedFilesActivity.java	(revision 4894)
+@@ -1664,7 +1664,7 @@
+             if (TextUtils.isEmpty(mimeType)) {
+                 canOpen = false;
+                 UiUtils.showToast(this,
+-                        getString(R.string.msg_unable_open_file));
++                        getString(R.string.unlock_file_first));
+             }
+             client.release();
+         }
+@@ -1676,7 +1676,7 @@
+             if (TextUtils.isEmpty(mimeType)) {
+                 canOpen = false;
+                 UiUtils.showToast(this,
+-                        getString(R.string.msg_unable_open_file));
++                        getString(R.string.unlock_file_first));
+             }
+         }
+ 
+@@ -1686,7 +1686,7 @@
+             Uri uri = DataBaseHelper.convertPathToUri(getApplicationContext(), path);
+             if (uri == null) {
+                 UiUtils.showToast(this,
+-                        getString(R.string.msg_unable_open_file));
++                        getString(R.string.unlock_file_first));
+                 mHasOpenedFileToShow = false;
+                 return ;
+             }
+@@ -1722,7 +1722,7 @@
+                 }
+             } catch (android.content.ActivityNotFoundException e) {
+                 UiUtils.showToast(this,
+-                        getString(R.string.msg_unable_open_file));
++                        getString(R.string.unlock_file_first));
+                 mHasOpenedFileToShow = false;
+             }
+             Log.d(TAG, "ViewLockedFilesActivity open file: intent = " + intent + "token = " + token

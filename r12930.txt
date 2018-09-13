@@ -1,0 +1,43 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarPolicy.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarPolicy.java	(revision 12929)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBarPolicy.java	(revision 12930)
+@@ -26,6 +26,7 @@
+ import android.content.Intent;
+ import android.content.IntentFilter;
+ import android.content.pm.UserInfo;
++import android.content.pm.PackageManager;
+ import android.hardware.display.WifiDisplayStatus;
+ import android.media.AudioManager;
+ import android.net.wifi.p2p.WifiP2pDevice;
+@@ -100,6 +101,7 @@
+     private boolean mManagedProfileInQuietMode = false;
+ 
+     private BluetoothController mBluetooth;
++    private static final Intent PHONE_INTENT = new Intent(Intent.ACTION_DIAL);
+ 
+     @VisibleForTesting
+     public PhoneStatusBarPolicy(Context context, StatusBarIconController iconController,
+@@ -252,6 +254,9 @@
+         AudioManager audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+         TelephonyManager telephonyManager = (TelephonyManager) mContext
+                 .getSystemService(Context.TELEPHONY_SERVICE);
++        PackageManager pm = mContext.getPackageManager();
++        boolean isPhoneVisible = pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
++                && pm.resolveActivity(PHONE_INTENT, 0) != null;
+         boolean isDial = false;
+         if (telephonyManager != null && (telephonyManager.getCallState() 
+                 != TelephonyManager.CALL_STATE_IDLE)) {
+@@ -296,10 +301,10 @@
+             volumeDescription = mContext.getString(R.string.accessibility_ringer_vibrate);
+         }
+ 
+-        if (zenVisible  && !isDial) {
++        if (zenVisible  && !isDial && !isPhoneVisible ) {
+             mIconController.setIcon(mSlotZen, zenIconId, zenDescription);
+         }
+-        if (zenVisible != mZenVisible  && !isDial) {
++        if (zenVisible != mZenVisible  && !isDial && !isPhoneVisible) {
+             mIconController.setIconVisibility(mSlotZen, zenVisible);
+             mZenVisible = zenVisible;
+         }

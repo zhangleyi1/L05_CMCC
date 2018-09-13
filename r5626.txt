@@ -1,0 +1,24 @@
+Index: frameworks/base/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java
+===================================================================
+--- frameworks/base/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java	(revision 5625)
++++ frameworks/base/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java	(revision 5626)
+@@ -2405,6 +2405,8 @@
+                     R.integer.face_unlokc_state_enabled);
+             loadStringSetting(stmt, Settings.System.FACE_STATE_ENABLED,
+                     R.string.def_face_state_enabled);
++            // Set default time format
++            loadStringSetting(stmt, Settings.System.TIME_12_24, R.string.time_12_24);
+ 
+             // Set default tty mode
+             loadSetting(stmt, Settings.System.TTY_MODE, 0);
+Index: frameworks/base/packages/SettingsProvider/res/values/defaults.xml
+===================================================================
+--- frameworks/base/packages/SettingsProvider/res/values/defaults.xml	(revision 5625)
++++ frameworks/base/packages/SettingsProvider/res/values/defaults.xml	(revision 5626)
+@@ -238,4 +238,6 @@
+ 	<!-- Add for take photo/video by touch fingerprint sensor start -->
+ 	<integer name="def_fingerprin_take_photo_video">1</integer>
+ 	<!-- Add for take photo/video by touch fingerprint sensor end -->
++    <!-- Add for default time format -->
++    <string name="time_12_24" translatable="false">24</string>
+ </resources>

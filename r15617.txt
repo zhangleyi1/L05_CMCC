@@ -1,0 +1,66 @@
+Index: frameworks/native/libs/binder/Parcel.cpp
+===================================================================
+--- frameworks/native/libs/binder/Parcel.cpp	(revision 15616)
++++ frameworks/native/libs/binder/Parcel.cpp	(revision 15617)
+@@ -1430,7 +1430,13 @@
+             && len <= pad_size(len)) {
+         if (mObjectsSize > 0) {
+             status_t err = validateReadData(mDataPos + pad_size(len));
+-            if(err != NO_ERROR) return err;
++     //       if(err != NO_ERROR) return err;
++	 if(err != NO_ERROR) {
++                // Still increment the data position by the expected length
++                mDataPos += pad_size(len);
++                ALOGV("read Setting data pos of %p to %zu", this, mDataPos);
++                return err;
++            }
+         }
+         memcpy(outData, mData+mDataPos, len);
+         mDataPos += pad_size(len);
+@@ -1452,7 +1458,13 @@
+             && len <= pad_size(len)) {
+         if (mObjectsSize > 0) {
+             status_t err = validateReadData(mDataPos + pad_size(len));
+-            if(err != NO_ERROR) return NULL;
++      //      if(err != NO_ERROR) return NULL;
++	  if(err != NO_ERROR) {
++                // Still increment the data position by the expected length
++                mDataPos += pad_size(len);
++                ALOGV("readInplace Setting data pos of %p to %zu", this, mDataPos);
++                return NULL;
++            }
+         }
+ 
+         const void* data = mData+mDataPos;
+@@ -1470,7 +1482,12 @@
+     if ((mDataPos+sizeof(T)) <= mDataSize) {
+         if (mObjectsSize > 0) {
+             status_t err = validateReadData(mDataPos + sizeof(T));
+-            if(err != NO_ERROR) return err;
++      //      if(err != NO_ERROR) return err;
++	  if(err != NO_ERROR) {
++                // Still increment the data position by the expected length
++                mDataPos += sizeof(T);
++                return err;
++            }
+         }
+ 
+         const void* data = mData+mDataPos;
+Index: frameworks
+===================================================================
+--- frameworks	(revision 15616)
++++ frameworks	(revision 15617)
+
+Property changes on: frameworks
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks:r15564-15569
+Index: .
+===================================================================
+--- .	(revision 15616)
++++ .	(revision 15617)
+
+Property changes on: .
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE:r15564-15569

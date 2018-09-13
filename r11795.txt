@@ -1,0 +1,20 @@
+Index: vendor/mediatek/proprietary/packages/apps/Stk/res/values-zh-rHK/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Stk/res/values-zh-rHK/strings.xml	(revision 11794)
++++ vendor/mediatek/proprietary/packages/apps/Stk/res/values-zh-rHK/strings.xml	(revision 11795)
+@@ -84,4 +84,5 @@
+     <string name="default_open_channel_msg">"開啟頻道？"</string>
+     <string name="stk_dialog_accept">"是"</string>
+     <string name="stk_dialog_reject">"否"</string>
++    <string name="menu_name_lable">USIM卡應用</string>
+ </resources>
+Index: vendor/mediatek/proprietary/packages/apps/Stk/res/values-zh-rTW/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Stk/res/values-zh-rTW/strings.xml	(revision 11794)
++++ vendor/mediatek/proprietary/packages/apps/Stk/res/values-zh-rTW/strings.xml	(revision 11795)
+@@ -92,4 +92,5 @@
+     <string name="lable_busy_on_bip">應用程式忙於執行BIP指令，請稍後再試一次。</string>
+     <string name="main_menu_not_initialized">主選單未初始化</string>
+     <string name="lable_busy_on_call">手機忙於通話，請先結束通話</string>
++    <string name="menu_name_lable">USIM卡應用</string>
+ </resources>

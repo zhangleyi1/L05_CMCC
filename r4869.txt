@@ -1,0 +1,13 @@
+Index: frameworks/base/services/core/java/com/android/server/NetworkTimeUpdateService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/NetworkTimeUpdateService.java	(revision 4868)
++++ frameworks/base/services/core/java/com/android/server/NetworkTimeUpdateService.java	(revision 4869)
+@@ -226,7 +226,7 @@
+               Time today = new Time(Time.getCurrentTimezone());
+               today.setToNow();
+               Log.d(TAG, "First boot:" + tempString + " with date:" + today);
+-              today.set(1, 1, 2018);
++              today.set(1, 0, 2018);
+               Log.d(TAG, "Set the year to " + mDefaultYear);
+                      SystemProperties.set(BOOT_SYS_PROPERTY, "false");
+                  SystemClock.setCurrentTimeMillis(today.toMillis(false));

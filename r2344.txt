@@ -1,0 +1,56 @@
+Index: build/core/Makefile
+===================================================================
+--- build/core/Makefile	(revision 2343)
++++ build/core/Makefile	(revision 2344)
+@@ -146,8 +146,9 @@
+   else
+     BF_BUILD_NUMBER := $(BUILD_NUMBER)
+   endif
+-  BUILD_FINGERPRINT := $(PRODUCT_BRAND)/$(TARGET_PRODUCT)/$(TARGET_DEVICE):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BF_BUILD_NUMBER):$(TARGET_BUILD_VARIANT)/$(BUILD_VERSION_TAGS)
+-endif
++  #BUILD_FINGERPRINT := $(PRODUCT_BRAND)/$(TARGET_PRODUCT)/$(TARGET_DEVICE):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BF_BUILD_NUMBER):$(TARGET_BUILD_VARIANT)/$(BUILD_VERSION_TAGS)
++  BUILD_FINGERPRINT := $(FINGER_PRINT_BRAND)/$(FINGER_PRINT_NAME)/$(FINGER_PRINT_DEVICE):$(PLATFORM_VERSION)/$(BUILD_ID)/$(FINGER_PRINT_TIME):$(TARGET_BUILD_VARIANT)/$(FINGER_PRINT_BUILD_VERSION_TAGS)
++  endif
+ ifneq ($(words $(BUILD_FINGERPRINT)),1)
+   $(error BUILD_FINGERPRINT cannot contain spaces: "$(BUILD_FINGERPRINT)")
+ endif
+Index: build/core/version_defaults.mk
+===================================================================
+--- build/core/version_defaults.mk	(revision 2343)
++++ build/core/version_defaults.mk	(revision 2344)
+@@ -157,4 +157,10 @@
+   # from this date/time" value.  Make it start with a non-digit so that
+   # anyone trying to parse it as an integer will probably get "0".
+   BUILD_NUMBER := eng.$(shell echo $${USER:0:6}).$(shell $(DATE) +%Y%m%d.%H%M%S)
++  
++  FINGER_PRINT_BRAND:= TCL
++  FINGER_PRINT_NAME:= ALCATEL_980CN1
++  FINGER_PRINT_DEVICE:= TCL_V760
++  FINGER_PRINT_BUILD_VERSION_TAGS:= release-keys
++  FINGER_PRINT_TIME :=$(shell date +%Y%m%d.%H%M%S)
+ endif
+Index: build/tools/buildinfo.sh
+===================================================================
+--- build/tools/buildinfo.sh	(revision 2343)
++++ build/tools/buildinfo.sh	(revision 2344)
+@@ -33,8 +33,8 @@
+ fi
+ echo "ro.product.model=TCL V760"
+ echo "ro.product.brand=TCL"
+-echo "ro.product.name=ALCATEL 980CN1"
+-echo "ro.product.device=TCL V760"
++echo "ro.product.name=ALCATEL_980CN1"
++echo "ro.product.device=TCL_V760"
+ echo "ro.product.board=$TARGET_BOOTLOADER_BOARD_NAME"
+ 
+ # These values are deprecated, use "ro.product.cpu.abilist"
+@@ -61,7 +61,8 @@
+ 
+ echo "# Do not try to parse description, fingerprint, or thumbprint"
+ echo "ro.build.description=$PRIVATE_BUILD_DESC"
+-echo "ro.build.fingerprint=TCL/A3A_PLUS/TCL_V760:7.1.1/N6F26Q/980CN1_LECN_V1.0_171126:user/release-keys"
++echo "ro.build.fingerprint=$BUILD_FINGERPRINT"
++#echo "ro.build.fingerprint=TCL/A3A_PLUS/TCL_V760:7.1.1/N6F26Q/980CN1_LECN_V1.0_171126:user/release-keys"
+ if [ -n "$BUILD_THUMBPRINT" ] ; then
+   echo "ro.build.thumbprint=$BUILD_THUMBPRINT"
+ fi

@@ -1,0 +1,87 @@
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libikirface.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libikirface.so
+===================================================================
+--- frameworks/base/packages/SystemUI/libs/arm64-v8a/libikirface.so	(revision 0)
++++ frameworks/base/packages/SystemUI/libs/arm64-v8a/libikirface.so	(revision 2331)
+
+Property changes on: frameworks/base/packages/SystemUI/libs/arm64-v8a/libikirface.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libIrisking.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libIrisking.so
+===================================================================
+--- frameworks/base/packages/SystemUI/libs/arm64-v8a/libIrisking.so	(revision 0)
++++ frameworks/base/packages/SystemUI/libs/arm64-v8a/libIrisking.so	(revision 2331)
+
+Property changes on: frameworks/base/packages/SystemUI/libs/arm64-v8a/libIrisking.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libcvface_api.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libcvface_api.so
+===================================================================
+--- frameworks/base/packages/SystemUI/libs/arm64-v8a/libcvface_api.so	(revision 0)
++++ frameworks/base/packages/SystemUI/libs/arm64-v8a/libcvface_api.so	(revision 2331)
+
+Property changes on: frameworks/base/packages/SystemUI/libs/arm64-v8a/libcvface_api.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libjni_cvface_api.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: frameworks/base/packages/SystemUI/libs/arm64-v8a/libjni_cvface_api.so
+===================================================================
+--- frameworks/base/packages/SystemUI/libs/arm64-v8a/libjni_cvface_api.so	(revision 0)
++++ frameworks/base/packages/SystemUI/libs/arm64-v8a/libjni_cvface_api.so	(revision 2331)
+
+Property changes on: frameworks/base/packages/SystemUI/libs/arm64-v8a/libjni_cvface_api.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: frameworks/base/packages/SystemUI
+===================================================================
+--- frameworks/base/packages/SystemUI	(revision 2330)
++++ frameworks/base/packages/SystemUI	(revision 2331)
+
+Property changes on: frameworks/base/packages/SystemUI
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base/packages/SystemUI:r2223
+Index: frameworks/base/packages
+===================================================================
+--- frameworks/base/packages	(revision 2330)
++++ frameworks/base/packages	(revision 2331)
+
+Property changes on: frameworks/base/packages
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base/packages:r2223
+Index: frameworks/base
+===================================================================
+--- frameworks/base	(revision 2330)
++++ frameworks/base	(revision 2331)
+
+Property changes on: frameworks/base
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base:r2223

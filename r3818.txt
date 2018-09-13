@@ -1,0 +1,30 @@
+Index: packages/apps/Email/UnifiedEmail/res/values-zh-rHK/strings.xml
+===================================================================
+--- packages/apps/Email/UnifiedEmail/res/values-zh-rHK/strings.xml	(revision 3817)
++++ packages/apps/Email/UnifiedEmail/res/values-zh-rHK/strings.xml	(revision 3818)
+@@ -481,4 +481,5 @@
+     <string name="security_hold_required_text" msgid="6619955920101834286">"<xliff:g id="EMAIL_ADDRESS">%1$s</xliff:g> 需要進行安全性更新"</string>
+     <string name="update_security_text" msgid="3527335757205741077">"立即更新"</string>
+     <string name="forms_are_disabled" msgid="2876312737118986789">"Gmail 的表格已停用"</string>
++    <string name="preferences_signature_content" msgid="4801741764511807065">"發自我的TCL V760"</string>
+ </resources>
+Index: packages/apps/Email/UnifiedEmail/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Email/UnifiedEmail/res/values-zh-rCN/strings.xml	(revision 3817)
++++ packages/apps/Email/UnifiedEmail/res/values-zh-rCN/strings.xml	(revision 3818)
+@@ -481,4 +481,5 @@
+     <string name="security_hold_required_text" msgid="6619955920101834286">"<xliff:g id="EMAIL_ADDRESS">%1$s</xliff:g>需要进行安全更新"</string>
+     <string name="update_security_text" msgid="3527335757205741077">"立即更新"</string>
+     <string name="forms_are_disabled" msgid="2876312737118986789">"Gmail已停用表单"</string>
++    <string name="preferences_signature_content" msgid="4801741764511807065">"发自我的TCL V760"</string>
+ </resources>
+Index: packages/apps/Email/UnifiedEmail/res/values-zh-rTW/strings.xml
+===================================================================
+--- packages/apps/Email/UnifiedEmail/res/values-zh-rTW/strings.xml	(revision 3817)
++++ packages/apps/Email/UnifiedEmail/res/values-zh-rTW/strings.xml	(revision 3818)
+@@ -481,4 +481,5 @@
+     <string name="security_hold_required_text" msgid="6619955920101834286">"<xliff:g id="EMAIL_ADDRESS">%1$s</xliff:g> 需要進行安全性更新"</string>
+     <string name="update_security_text" msgid="3527335757205741077">"立即更新"</string>
+     <string name="forms_are_disabled" msgid="2876312737118986789">"Gmail 已停用表單"</string>
++    <string name="preferences_signature_content" msgid="4801741764511807065">"發自我的TCL V760"</string>
+ </resources>

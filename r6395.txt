@@ -1,0 +1,16 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/mediatek/music/ext/Op01MusicTrackBrowserExtension.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/mediatek/music/ext/Op01MusicTrackBrowserExtension.java	(revision 6394)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/mediatek/music/ext/Op01MusicTrackBrowserExtension.java	(revision 6395)
+@@ -65,9 +65,9 @@
+                              = PluginUtils.ACTIVITY_REQUEST_CODE_BASE_ID;
+     private static final String SELECT_FILE_FROM_FILEMANAGER = "com.mediatek.filemanager.ADD_FILE";
+     private static final String EXTERNAL_STORAGE
+-            = "content://com.jrdcom.filemanager.fileProvider/external_storage/";
++            = "content://com.jrdcom.filemanager.cn.fileProvider/external_storage/";
+     private static final String STORAGE
+-            = "content://com.jrdcom.filemanager.fileProvider/path/storage/";
++            = "content://com.jrdcom.filemanager.cn.fileProvider/path/storage/";
+ 
+     /**
+      * Constructor.

@@ -1,0 +1,20 @@
+Index: packages/apps/Settings/AndroidManifest.xml
+===================================================================
+--- packages/apps/Settings/AndroidManifest.xml	(revision 6826)
++++ packages/apps/Settings/AndroidManifest.xml	(revision 6827)
+@@ -3219,7 +3219,6 @@
+                 android:name=".qstile.DevelopmentTiles$ShowLayout"
+                 android:label="@string/debug_layout"
+                 android:icon="@drawable/tile_icon_show_layout"
+-                android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+                 android:enabled="false">
+             <intent-filter>
+                 <action android:name="android.service.quicksettings.action.QS_TILE" />
+@@ -3229,6 +3228,7 @@
+                 android:name=".qstile.DevelopmentTiles$GPUProfiling"
+                 android:label="@string/track_frame_time"
+                 android:icon="@drawable/tile_icon_graphics"
++                android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+                 android:enabled="false">
+             <intent-filter>
+                 <action android:name="android.service.quicksettings.action.QS_TILE" />

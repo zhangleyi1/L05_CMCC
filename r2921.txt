@@ -1,0 +1,13 @@
+Index: device/ausshine/aus6739_66_n1/ProjectConfig.mk
+===================================================================
+--- device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 2920)
++++ device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 2921)
+@@ -458,7 +458,7 @@
+ MTK_LWA_SUPPORT = no
+ MTK_M4U_SUPPORT = no
+ MTK_MAGICONFERENCE_SUPPORT = no
+-MTK_MASS_STORAGE = no
++MTK_MASS_STORAGE = yes
+ MTK_MD1_SUPPORT = 12
+ MTK_MD2_SUPPORT = 4
+ MTK_MD3_SUPPORT = 2

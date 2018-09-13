@@ -1,0 +1,38 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java	(revision 8188)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java	(revision 8189)
+@@ -203,6 +203,7 @@
+ import com.android.systemui.statusbar.stack.StackStateAnimator;
+ import com.android.systemui.statusbar.stack.StackViewState;
+ import com.android.systemui.volume.VolumeComponent;
++import com.android.systemui.funcsetting.AppUtils;
+ /// M: BMW
+ import com.mediatek.multiwindow.MultiWindowManager;
+ 
+@@ -5888,6 +5889,7 @@
+     private void restartApplication() {
+         Log.d(TAG, "restartApplication: mPackageName = " + mPackageName);
+         Log.d(TAG, "restartApplication: mClassName = " + mClassName);
++        /**
+         if(mPackageName != null && mClassName != null) {
+             Intent intent = new Intent(Intent.ACTION_MAIN);
+             intent.addCategory(Intent.CATEGORY_LAUNCHER);
+@@ -5896,6 +5898,8 @@
+             intent.setComponent(cn);
+             mContext.startActivity(intent);
+         }
++        **/
++        startActivity(AppUtils.startApp(mContext,mPackageName), false);
+     }
+     
+     private void createSwitchScreenModeView(Context context) {
+@@ -5945,7 +5949,7 @@
+                         restartApplication();
+                         showToast();
+                     }
+-                }, 10);
++                }, 500);
+ 			}
+         });
+         mSwitchScreenModeView.addView(rotateTextView);

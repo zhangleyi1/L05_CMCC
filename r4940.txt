@@ -1,0 +1,51 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java	(revision 4939)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java	(revision 4940)
+@@ -213,6 +213,9 @@
+ 	private static final String GOOGLE_SEARCH="com.google.android.googlequicksearchbox";
+ 	private static final String RECORD_VIDEO="com.tct.screenrecorder";
+ 	private static final String CALCULATOR="com.google.android.calculator";
++    private static final String LIVE_WALLPAPER_PICKER="com.android.wallpaper.livepicker";
++    private static final String LIVE_WALLPAPER_PICKER_ACTION
++            ="android.service.wallpaper.LIVE_WALLPAPER_CHOOSER";
+ 	private Drawable mEnable;
+ 	private Drawable mDisable;
+ 	private static final String MUSIC="com.alcatel.music5";
+@@ -1108,13 +1111,15 @@
+ 							}else{
+ 								startApp(mContext,packagerName);
+ 							}
+-						}else if(packagerName.equals(AppUtils.CONTACTS)){
+-							if(mContactPhone.isEmpty()){
+-								AppUtils.startContactApp(mContext,mActivityStarter);
+-							}else{
+-								Intent intent=new Intent(Intent.ACTION_CALL,Uri.parse("tel:" +mContactPhone));
+-								mContext.startActivity(intent);
+-							}
++						}else if(packagerName.equals(AppUtils.CONTACTS)) {
++                            if (mContactPhone.isEmpty()) {
++                                AppUtils.startContactApp(mContext, mActivityStarter);
++                            } else {
++                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mContactPhone));
++                                mContext.startActivity(intent);
++                            }
++                        } else if (packagerName.equals(LIVE_WALLPAPER_PICKER)) {
++                            launchLiveWallpaper();
+ 						}else{
+ 							startApp(mContext,packagerName);															
+ 						}
+@@ -1123,6 +1128,13 @@
+             }
+         }
+     }
++
++    private void launchLiveWallpaper() {
++        Intent intent = new Intent(LIVE_WALLPAPER_PICKER_ACTION);
++        intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
++        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
++        mActivityStarter.startActivity(intent, false);
++    }
+ 	
+ 	//lance modify for Diagnostic @{
+     private void saveUsageToDiagnostics(String packageName) {

@@ -1,0 +1,13 @@
+Index: build/target/product/full_base.mk
+===================================================================
+--- build/target/product/full_base.mk	(revision 3804)
++++ build/target/product/full_base.mk	(revision 3805)
+@@ -45,7 +45,7 @@
+ 
+ # Additional settings used in all AOSP builds
+ PRODUCT_PROPERTY_OVERRIDES := \
+-    ro.config.ringtone=Fresh.mp3 \
++    ro.config.ringtone=Fresh.ogg \
+     ro.config.alarm_alert=Galactic.mp3\
+     ro.config.notification_sound=Success.mp3
+ 

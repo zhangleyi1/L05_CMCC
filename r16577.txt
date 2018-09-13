@@ -1,0 +1,27 @@
+Index: frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardUpdateMonitor.java
+===================================================================
+--- frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardUpdateMonitor.java	(revision 16576)
++++ frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardUpdateMonitor.java	(revision 16577)
+@@ -955,6 +955,10 @@
+         public void onAuthenticationError(int errMsgId, CharSequence errString) {
+ 			if (Settings.System.getInt(mContext.getContentResolver(),Settings.System.FINGERPRINTS_UNCLOCK_DEVICE, 1) != 0) {
+ 				handleFingerprintError(errMsgId, errString.toString());
++				/*modfied for bug id 6902378 start*/
++				setFingerprintRunningState(FINGERPRINT_STATE_STOPPED);
++				mHandler.sendEmptyMessageDelayed(MSG_STARTED_WAKING_UP,1000*30);
++				/*end*/
+ 			}
+         }
+ 
+Index: frameworks/base/packages/Keyguard/src/com/android/keyguard
+===================================================================
+--- frameworks/base/packages/Keyguard/src/com/android/keyguard	(revision 16576)
++++ frameworks/base/packages/Keyguard/src/com/android/keyguard	(revision 16577)
+
+Property changes on: frameworks/base/packages/Keyguard/src/com/android/keyguard
+___________________________________________________________________
+Added: svn:mergeinfo
+   Merged /L05A/TA_Version/5058A_Telcel/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base/packages/Keyguard/src/com/android/keyguard:r10177-10216
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/frameworks/base/packages/Keyguard/src/com/android/keyguard:r1814-1816,1852-1854,1884,2195-2198,2201-2202,2223,10891-10895,16563
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-OF.P33_K39V1_INHOUSE/frameworks/base/packages/Keyguard/src/com/android/keyguard:r116,136,153,300
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-OF.P53_K39V1_INHOUSE/frameworks/base/packages/Keyguard/src/com/android/keyguard:r472,514,634-635,722,733,809,827,849,861,882-883,899,901,915,920-922,931,977,981,984,1019,1022

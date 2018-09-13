@@ -1,0 +1,29 @@
+Index: device/mediatek/common/sepolicy/basic/system_app.te
+===================================================================
+--- device/mediatek/common/sepolicy/basic/system_app.te	(revision 2808)
++++ device/mediatek/common/sepolicy/basic/system_app.te	(revision 2809)
+@@ -56,3 +56,4 @@
+ allow system_app media_rw_data_file:dir { read open getattr };
+ allow system_app cache_recovery_file:file { read open setattr };
+ allow system_app shell_data_file:dir { read open getattr };
++allow system_app media_rw_data_file:file append;
+Index: device/mediatek/common/sepolicy/full/system_app.te
+===================================================================
+--- device/mediatek/common/sepolicy/full/system_app.te	(revision 2808)
++++ device/mediatek/common/sepolicy/full/system_app.te	(revision 2809)
+@@ -165,3 +165,4 @@
+ allow system_app media_rw_data_file:dir { read open getattr };
+ allow system_app cache_recovery_file:file { read open setattr };
+ allow system_app shell_data_file:dir { read open getattr };
++allow system_app media_rw_data_file:file append;
+\ No newline at end of file
+Index: device/mediatek/common/sepolicy/bsp/system_app.te
+===================================================================
+--- device/mediatek/common/sepolicy/bsp/system_app.te	(revision 2808)
++++ device/mediatek/common/sepolicy/bsp/system_app.te	(revision 2809)
+@@ -133,3 +133,4 @@
+ allow system_app media_rw_data_file:dir { read open getattr };
+ allow system_app cache_recovery_file:file { read open setattr };
+ allow system_app shell_data_file:dir { read open getattr };
++allow system_app media_rw_data_file:file append;
+\ No newline at end of file

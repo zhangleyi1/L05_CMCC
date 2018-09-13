@@ -1,0 +1,33 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/simmessage/ManageSimMessages.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/simmessage/ManageSimMessages.java	(revision 10102)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/simmessage/ManageSimMessages.java	(revision 10103)
+@@ -181,6 +181,8 @@
+     ///M: fix bug ALPS00850867.
+     private boolean mIsCurrentSimFull;
+ 
++    private boolean mCoppy2MemoryFailed;
++
+     /// M: fix bug ALPS00448222, posting UI update Runnables for Contact update
+     private Handler mHandler = new Handler();
+ 
+@@ -666,6 +668,7 @@
+         if (address == null || address.equals("")) {
+             MmsApp.getToastHandler().sendEmptyMessage(MmsApp.MSG_MMS_CAN_NOT_SAVE);
+             MmsLog.d(MmsApp.TXN_TAG, "copyToPhoneMemory address is null ,return ");
++            mCoppy2MemoryFailed = true;
+             return;
+         }
+         /// @}
+@@ -801,7 +804,10 @@
+                     Cursor cursor = (Cursor) mMsgListAdapter.getItem(i);
+                     copyToPhoneMemory2(cursor);
+                 }
+-                MmsApp.getToastHandler().sendEmptyMessage(MmsApp.MSG_DONE);
++                if (!mCoppy2MemoryFailed) {
++                    MmsApp.getToastHandler().sendEmptyMessage(MmsApp.MSG_DONE);
++                }
++                mCoppy2MemoryFailed = false;
+                 break;
+         }
+ 

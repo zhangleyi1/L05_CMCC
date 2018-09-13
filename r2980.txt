@@ -1,0 +1,28 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/drawable-xhdpi/ic_backuprestore_launcher.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/drawable-hdpi/ic_backuprestore_launcher.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/drawable-xxhdpi/ic_backuprestore_launcher.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/drawable-mdpi/ic_backuprestore_launcher.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/MobilePortal/res/drawable-hdpi/mobileportal.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/MobilePortal/res/drawable-mdpi/mobileportal.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/MobilePortal/res/drawable-xhdpi/mobileportal.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream

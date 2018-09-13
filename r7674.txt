@@ -1,0 +1,18 @@
+Index: packages/apps/Contacts/src/com/mediatek/contacts/list/service/DeleteProcessor.java
+===================================================================
+--- packages/apps/Contacts/src/com/mediatek/contacts/list/service/DeleteProcessor.java	(revision 7673)
++++ packages/apps/Contacts/src/com/mediatek/contacts/list/service/DeleteProcessor.java	(revision 7674)
+@@ -69,11 +69,11 @@
+     private volatile boolean mIsDone;
+     private volatile boolean mIsRunning;
+ 
+-    private static final int MAX_OP_COUNT_IN_ONE_BATCH = 100;
++    private static final int MAX_OP_COUNT_IN_ONE_BATCH = 499;//modified by ruyi.guo
+ 
+     // change max count and max count in one batch for special operator
+     private static final int MAX_COUNT = 1551;
+-    private static final int MAX_COUNT_IN_ONE_BATCH = 50;
++    private static final int MAX_COUNT_IN_ONE_BATCH = 499;//modified by ruyi.guo
+ 
+     public DeleteProcessor(final MultiChoiceService service,
+             final MultiChoiceHandlerListener listener, final List<MultiChoiceRequest> requests,

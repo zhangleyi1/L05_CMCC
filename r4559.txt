@@ -1,0 +1,13 @@
+Index: packages/apps/Settings/src/com/android/settings/DeviceAdminSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/DeviceAdminSettings.java	(revision 4558)
++++ packages/apps/Settings/src/com/android/settings/DeviceAdminSettings.java	(revision 4559)
+@@ -176,7 +176,7 @@
+ 		for(int i = mAdmins.size() - 1; i >= 0; i--) {
+ 			flag = false;
+ 			for(int j = i - 1; j >= 0; j--) {				
+-				if((((DeviceAdminInfo)getObject(i)).getPackageName()).equals(((DeviceAdminInfo)getObject(j)).getPackageName())) {
++				if((((DeviceAdminInfo)getObject(i)).getPackageName()).equals(((DeviceAdminInfo)getObject(j)).getPackageName()) && !(((DeviceAdminInfo)getObject(j)).getPackageName()).equals("android.deviceadmin.cts")) {					
+ 					flag = true;
+ 				}
+ 			}

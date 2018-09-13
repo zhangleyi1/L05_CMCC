@@ -1,0 +1,13 @@
+Index: AUS6739_66_N1_MOLY.LR12A.R2.MP.V1/mcu/common/service/nvram/src/nvram_main.c
+===================================================================
+--- AUS6739_66_N1_MOLY.LR12A.R2.MP.V1/mcu/common/service/nvram/src/nvram_main.c	(revision 9245)
++++ AUS6739_66_N1_MOLY.LR12A.R2.MP.V1/mcu/common/service/nvram/src/nvram_main.c	(revision 9246)
+@@ -2122,7 +2122,7 @@
+         case NVRAM_EF_SIM_LOCK_LID:
+             /* Do not allow file lost */
+             if(trigger_assert && nvram_filelost_precheck(NVRAM_EF_BRANCH_VERNO_LID,(kal_uint8*)default_brach_verno)) {
+-                NVRAM_EXT_ASSERT(KAL_FALSE, ldi->LID, NVRAM_LOC_READ_IMPORTANT_DATA_FAIL_1, -9); //FS_FILE_NOT_FOUND
++                // NVRAM_EXT_ASSERT(KAL_FALSE, ldi->LID, NVRAM_LOC_READ_IMPORTANT_DATA_FAIL_1, -9); //FS_FILE_NOT_FOUND
+             }
+             return KAL_TRUE;
+         default:

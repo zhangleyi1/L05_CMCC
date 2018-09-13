@@ -1,0 +1,56 @@
+Index: vendor/customer/apps/Fota/isdm_FotaRes.plf
+===================================================================
+--- vendor/customer/apps/Fota/isdm_FotaRes.plf	(revision 12236)
++++ vendor/customer/apps/Fota/isdm_FotaRes.plf	(revision 12237)
+@@ -145,6 +145,23 @@
+ 
+ <VAR>
+ <SIMPLE_VAR>
++<SDMID>feature_ota_getlocation_on</SDMID>
++<C_NAME>feature_ota_getlocation_on</C_NAME>
++<C_TYPE>eBOOLEAN</C_TYPE>
++<ARRAY>NOT_ARRAY</ARRAY>
++<METATYPE>Boolean</METATYPE>
++<IS_CUSTO>1</IS_CUSTO>
++<FEATURE>Settings</FEATURE>
++<DESC>This SDMID indicates that whether ota getlocationinfo should be enabled. 0x01:yes, 0x00:no, the default value is 0x01.</DESC>
++<VALUE>0x01</VALUE>
++</SIMPLE_VAR>
++</VAR>
++
++
++
++
++<VAR>
++<SIMPLE_VAR>
+ <SDMID>def_jrdfota_is_tmo</SDMID>
+ <C_NAME>is_tmo</C_NAME>
+ <C_TYPE>eBOOLEAN</C_TYPE>
+Index: vendor/mediatek/proprietary/packages/apps/FotaOverlay/isdm_FotaRes.plf
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/FotaOverlay/isdm_FotaRes.plf	(revision 12236)
++++ vendor/mediatek/proprietary/packages/apps/FotaOverlay/isdm_FotaRes.plf	(revision 12237)
+@@ -145,6 +145,23 @@
+ 
+ <VAR>
+ <SIMPLE_VAR>
++<SDMID>feature_ota_getlocation_on</SDMID>
++<C_NAME>feature_ota_getlocation_on</C_NAME>
++<C_TYPE>eBOOLEAN</C_TYPE>
++<ARRAY>NOT_ARRAY</ARRAY>
++<METATYPE>Boolean</METATYPE>
++<IS_CUSTO>1</IS_CUSTO>
++<FEATURE>Settings</FEATURE>
++<DESC>This SDMID indicates that whether ota getlocationinfo should be enabled. 0x01:yes, 0x00:no, the default value is 0x01.</DESC>
++<VALUE>0x01</VALUE>
++</SIMPLE_VAR>
++</VAR>
++
++
++
++
++<VAR>
++<SIMPLE_VAR>
+ <SDMID>def_jrdfota_is_tmo</SDMID>
+ <C_NAME>is_tmo</C_NAME>
+ <C_TYPE>eBOOLEAN</C_TYPE>

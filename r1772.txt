@@ -1,0 +1,11 @@
+Index: vendor/mediatek/proprietary/operator/OP01/SPEC0200/SEGC/custom.conf
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/SPEC0200/SEGC/custom.conf	(revision 1771)
++++ vendor/mediatek/proprietary/operator/OP01/SPEC0200/SEGC/custom.conf	(revision 1772)
+@@ -22,5 +22,5 @@
+ fmtransmitter.RDSValue = TCL V760
+ wlan.SSID = TCL V760
+ Setting.Model= @ro.product.model@
+-Setting.SWVerno= @ro.mediatek.version.release@
++Setting.SWVerno= @ro.build.display.id@
+ 

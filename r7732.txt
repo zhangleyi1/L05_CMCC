@@ -1,0 +1,25 @@
+Index: frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml	(revision 7731)
++++ frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml	(revision 7732)
+@@ -133,6 +133,7 @@
+     </plurals>
+     <string name="fingerprint_not_recognized" msgid="2690661881608146617">"无法识别"</string>
+     <string name="add_fingerprint_message_secturity">"请先设置安全密码"</string>
++    <string name="cancel_face_entering">取消人脸识别入口</string>
+     <string name="ok">"确定"</string>
+     <string name="ic_default_move_face_center">"将脸部移到识别窗口的中间"</string>
+     <string name="ic_default_sacn_face_description_info">"请将手机放在离脸部20-50厘米的地方。将面部放置在屏幕上的圆圈上"</string>
+Index: frameworks/base/packages/Keyguard/res/values/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values/strings.xml	(revision 7731)
++++ frameworks/base/packages/Keyguard/res/values/strings.xml	(revision 7732)
+@@ -425,7 +425,7 @@
+ 	<string name="face_face_get">Recognition failure</string>
+     <string name="face_entry_timeout">Entry Failed, Entry Failed</string>
+     <string name="add_fingerprint_message_secturity">You need set security password first</string>
+-    <string name="cancel_face_entering">Canclelled face Entry</string>
++    <string name="cancel_face_entering">Cancelled face Entry</string>
+     <string name="ic_default_move_face_center">Move the face into the middle of the frame</string>
+     <string name="ic_default_stay_font">Please keep your face straight</string>
+     <string name="ic_default_dark_light">The ambient light is dim at this time. Please go back to the bright place to identify</string>

@@ -1,0 +1,13 @@
+Index: packages/apps/Email/provider_src/com/android/email/activity/setup/AccountSettingsUtils.java
+===================================================================
+--- packages/apps/Email/provider_src/com/android/email/activity/setup/AccountSettingsUtils.java	(revision 9111)
++++ packages/apps/Email/provider_src/com/android/email/activity/setup/AccountSettingsUtils.java	(revision 9112)
+@@ -523,7 +523,7 @@
+             while ((xmlEventType = xml.next()) != XmlResourceParser.END_DOCUMENT) {
+                 if (xmlEventType == XmlResourceParser.START_TAG && "provider".equals(xml.getName())) {
+                     String providerDomain = getXmlAttribute(context, xml, "domain");
+-                    if (!serverName.contains(providerDomain) && !hasWildchars(providerDomain)&& !("gmail.com".equals(providerDomain))) {
++                    if (!serverName.contains(providerDomain) && !hasWildchars(providerDomain)&& !("google.com".equals(providerDomain))) {
+                         serverName.add(providerDomain);
+                     }
+                 }

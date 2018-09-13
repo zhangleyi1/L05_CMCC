@@ -1,0 +1,29 @@
+Index: packages/apps/Calendar/src/com/android/calendar/CalendarController.java
+===================================================================
+--- packages/apps/Calendar/src/com/android/calendar/CalendarController.java	(revision 5129)
++++ packages/apps/Calendar/src/com/android/calendar/CalendarController.java	(revision 5130)
+@@ -57,9 +57,9 @@
+     public static final String EVENT_EDIT_ON_LAUNCH = "editMode";
+ 
+     public static final int MIN_CALENDAR_YEAR = 1970;
+-    public static final int MAX_CALENDAR_YEAR = 2036;
++    public static final int MAX_CALENDAR_YEAR = 2037;
+     public static final int MIN_CALENDAR_WEEK = 0;
+-    public static final int MAX_CALENDAR_WEEK = 3497; // weeks between 1/1/1970 and 1/1/2037
++    public static final int MAX_CALENDAR_WEEK = 3549;//3497; // weeks between 1/1/1970 and 12/30/2037
+ 
+     private final Context mContext;
+ 
+Index: packages/apps/Calendar/src/com/android/calendar/Utils.java
+===================================================================
+--- packages/apps/Calendar/src/com/android/calendar/Utils.java	(revision 5129)
++++ packages/apps/Calendar/src/com/android/calendar/Utils.java	(revision 5130)
+@@ -121,7 +121,7 @@
+     static boolean mMinutesLoaded = false;
+ 
+     public static final int YEAR_MIN = 1970;
+-    public static final int YEAR_MAX = 2036;
++    public static final int YEAR_MAX = 2037;
+ 
+     // The name of the shared preferences file. This name must be maintained for
+     // historical

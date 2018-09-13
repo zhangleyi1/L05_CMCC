@@ -1,0 +1,35 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MediaPlaybackService.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MediaPlaybackService.java	(revision 8630)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MediaPlaybackService.java	(revision 8631)
+@@ -118,6 +118,7 @@
+     public static final String PAUSE_ACTION = "com.android.music.musicservicecommand.pause";
+     public static final String PREVIOUS_ACTION = "com.android.music.musicservicecommand.previous";
+     public static final String NEXT_ACTION = "com.android.music.musicservicecommand.next";
++	public static final String REMOVE_ACTION = "com.android.music.musicservicecommand.remove";// remove notification
+ 
+     private static final String ACTION_SHUTDOWN_IPO = "android.intent.action.ACTION_SHUTDOWN_IPO";
+     /// M: BT AVRCP, AVRCP14
+@@ -630,7 +631,13 @@
+                     mQuietMode = true;
+                 }
+                 openCurrentAndNext();
+-            }
++            }else if(REMOVE_ACTION.equals(action)){
++            	MusicLogUtils.d("yujunjie", "MediaPlaybackService:onReceive(1)...");
++				if(!mPlayer.isPlaying()){
++					MusicLogUtils.d("yujunjie", "MediaPlaybackService:onReceive(2)...");
++					stopForeground(true);
++				}
++			}
+         }
+     };
+ 
+@@ -857,6 +864,7 @@
+         /// M:register LOSSESSBT broadcast,to turn on or off seamless play
+         commandFilter.addAction(ACTION_LOSSESSBT_ENABLE);
+         commandFilter.addAction(ACTION_LOSSESSBT_DISABLE);
++		commandFilter.addAction(REMOVE_ACTION);
+         registerReceiver(mIntentReceiver, commandFilter);
+ 
+         /// M:let the callback onChange() run in this thread,not in main thread @{

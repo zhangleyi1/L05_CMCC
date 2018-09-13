@@ -1,0 +1,58 @@
+Index: packages/apps/Settings/src/com/android/settings/BootedReceiver.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/BootedReceiver.java	(revision 3855)
++++ packages/apps/Settings/src/com/android/settings/BootedReceiver.java	(revision 3856)
+@@ -13,7 +13,7 @@
+ import android.os.ServiceManager;
+ import java.io.IOException;
+ import java.io.RandomAccessFile;
+-
++import android.content.ComponentName;
+ /**
+  * Created by Administrator on 2017/8/26.
+  */
+@@ -79,7 +79,11 @@
+ 		} else{
+ 			Log.e("----","-----------------------");
+ 			}*/
+-
++		//add for cmcc 
++		Intent intentStart=new Intent();
++		intentStart.setComponent(new ComponentName("com.greenpoint.android.mc10086.activity", "com.leadeon.cmcc.cservice.PushService"));
++		context.startService(intentStart);
++		
+         if (isRoot()) {
+             writeToNv();
+         }
+Index: vendor/customer/apps/10086android/10086_android_V3.7.5_20170913_D3000_V1.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/10086android/Android.mk
+===================================================================
+--- vendor/customer/apps/10086android/Android.mk	(revision 3855)
++++ vendor/customer/apps/10086android/Android.mk	(revision 3856)
+@@ -3,7 +3,7 @@
+ include $(CLEAR_VARS)
+ LOCAL_MODULE := 10086android
+ LOCAL_MODULE_TAGS := optional
+-LOCAL_SRC_FILES := 10086_android_V3.7.5_20170913_D3000_V1.apk
++LOCAL_SRC_FILES := 10086_android_V3.7.5_20171218_D3000_V1.apk
+ LOCAL_MODULE_CLASS := APPS
+ LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+ LOCAL_CERTIFICATE := PRESIGNED
+Index: vendor/customer/apps/10086android/10086_android_V3.7.5_20171218_D3000_V1.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/10086android/10086_android_V3.7.5_20171218_D3000_V1.apk
+===================================================================
+--- vendor/customer/apps/10086android/10086_android_V3.7.5_20171218_D3000_V1.apk	(revision 0)
++++ vendor/customer/apps/10086android/10086_android_V3.7.5_20171218_D3000_V1.apk	(revision 3856)
+
+Property changes on: vendor/customer/apps/10086android/10086_android_V3.7.5_20171218_D3000_V1.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

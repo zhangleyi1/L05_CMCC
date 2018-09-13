@@ -1,0 +1,12 @@
+Index: vendor/mediatek/proprietary/operator/OP01/frameworks/packages/FwkPlugin/src/com/mediatek/op/net/ConnectivityServiceExt.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/frameworks/packages/FwkPlugin/src/com/mediatek/op/net/ConnectivityServiceExt.java	(revision 2691)
++++ vendor/mediatek/proprietary/operator/OP01/frameworks/packages/FwkPlugin/src/com/mediatek/op/net/ConnectivityServiceExt.java	(revision 2692)
+@@ -144,6 +144,7 @@
+         try {
+             if (wifiService != null) {
+                 hasConnectableAP = wifiService.hasConnectableAp();
++				hasConnectableAP=false;
+             }
+         } catch (RemoteException e) {
+             Log.d("@M_" + MTK_TAG, "hasConnectableAp failed!");

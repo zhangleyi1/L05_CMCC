@@ -1,0 +1,39 @@
+Index: packages/apps/Settings/res/values-zh-rHK/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 4565)
++++ packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 4566)
+@@ -3330,6 +3330,8 @@
+ 	<string name="fingerprint_manager_back_to_home_summary">在任意界面觸摸指紋傳感器返回主界面。</string>
+     <string name="title_activity_face_entry_settings">人臉科技</string>
+     <string name="remove_face_dialog_info_remove">"删除人臉數據 ?"</string>
++    <string name="delete_success">删除成功</string>
++    <string name="security_settings_face_preference_title">臉部</string>
+ 	<string name="reenter_face_dialog_title">提示</string>
+     <string name="button_ok">確定</string>
+     <string name="button_delete">"删除"</string>
+Index: packages/apps/Settings/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 4565)
++++ packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 4566)
+@@ -3435,6 +3435,8 @@
+ 	<string name="battery_low_summary">电量低于15%自动开启灯</string>
+     <string name="title_activity_face_entry_settings">人脸科技</string>
+     <string name="remove_face_dialog_info_remove">"删除人脸数据 ?"</string>
++    <string name="delete_success">删除成功</string>
++    <string name="security_settings_face_preference_title">脸部</string>
+ 	<string name="reenter_face_dialog_title">提示</string>
+     <string name="button_ok">确定</string>
+     <string name="button_delete">"删除"</string>
+Index: packages/apps/Settings/res/values-zh-rTW/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 4565)
++++ packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 4566)
+@@ -3327,6 +3327,8 @@
+ 	<string name="fingerprint_manager_back_to_home_summary">在任意界面觸摸指紋傳感器返回主界面。</string>
+     <string name="title_activity_face_entry_settings">人臉科技</string>
+     <string name="remove_face_dialog_info_remove">"删除人臉數據 ?"</string>
++    <string name="delete_success">删除成功</string>
++    <string name="security_settings_face_preference_title">臉部</string>
+ 	<string name="reenter_face_dialog_title">提示</string>
+     <string name="button_ok">確定</string>
+     <string name="button_delete">"删除"</string>

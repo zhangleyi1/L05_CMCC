@@ -1,0 +1,4 @@
+Index: device/mediatek/build/build/tools/ptgen/MT6739/partition_table_MT6739.xls
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream

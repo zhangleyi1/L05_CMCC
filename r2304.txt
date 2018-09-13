@@ -1,0 +1,76 @@
+Index: packages/apps/Dialer/src/com/android/dialer/SpecialCharSequenceMgr.java
+===================================================================
+--- packages/apps/Dialer/src/com/android/dialer/SpecialCharSequenceMgr.java	(revision 2303)
++++ packages/apps/Dialer/src/com/android/dialer/SpecialCharSequenceMgr.java	(revision 2304)
+@@ -512,7 +512,7 @@
+ 
+                 /// M: Add single IMEI and MEID handle for OP01 OM project. @{
+                 if (DialerFeatureOptions.isOpLightCustSupport()) {
+-                    deviceIds = handleOpIMEIs(deviceIds);
++                    deviceIds = handleOpIMEIs(deviceIds,context);
+                 }
+                 /// @}
+             } catch (SecurityException e) {
+@@ -986,22 +986,53 @@
+      * @param List<String> list, the IMEI string list.
+      * @return List<String>, the IMEI string list handled.
+      */
+-    private static List<String> handleOpIMEIs(List<String> list) {
++    private static List<String> handleOpIMEIs(List<String> list,Context context ) {
++    	TelephonyManager telephonyManager =
++                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
++    	String svnver ="SVN: ";
++		String version=SystemProperties.get("ro.def.software.version");
++		if(!TextUtils.isEmpty(version)&& version!=null){
++			svnver = svnver + version; 
++		}
++		int len=version.length();
++    	String vers=version.substring(len-2, len);
+         int phoneCount = TelephonyManager.getDefault().getPhoneCount();
+         String meid = "";
+         list.clear();
+-        for (int i = 0; i < phoneCount; i++) {
+-            String imei = TelephonyManager.getDefault().getImei(i);
+-            Log.d(TAG, "handleOpIMEIs, imei = " + PhoneNumberUtil.pii(imei));
+-            list.add("IMEI:" + imei);
+-
+-            if (TextUtils.isEmpty(meid)) {
+-                meid = TelephonyManagerEx.getDefault().getMeid(i);
++		if(phoneCount >1){
++			for (int i = 0; i < phoneCount; i++) {
++            	String imei = TelephonyManager.getDefault().getImei(i);
++				imei="IMEI"+(i+1)+":"+imei;
++            	Log.d(TAG, "handleOpIMEIs, imei = " + PhoneNumberUtil.pii(imei));
++            	list.add(imei);
++            	if (TextUtils.isEmpty(meid)) {
++                	meid = TelephonyManagerEx.getDefault().getMeid(i);
++                	Log.d(TAG, "handleOpIMEIs, meid = " + PhoneNumberUtil.pii(meid));
++            	}
++        	}
++			for (int i = 0; i < phoneCount; i++) {
++				String vers1="IMEISV"+(i+1)+":"+vers;
++            	list.add(vers1);
++        	}
++		}else{
++			String deviceId = telephonyManager.getDeviceId(0);
++			/// M: Avoid null object be added
++			if(!TextUtils.isEmpty(deviceId)&& deviceId!=null){
++				deviceId="IMEI:"+deviceId;
++				list.add(deviceId);
++			}
++			if (!TextUtils.isEmpty(vers)) {
++				vers="IMEISV:"+vers;
++                list.add(vers);
++            }
++			if (TextUtils.isEmpty(meid)) {
++                meid = TelephonyManagerEx.getDefault().getMeid(0);
+                 Log.d(TAG, "handleOpIMEIs, meid = " + PhoneNumberUtil.pii(meid));
+             }
+-        }
++		}
+         meid = "MEID:" + meid;
+         list.add(meid);
++		list.add(svnver);
+         return list;
+     }
+     /// @}

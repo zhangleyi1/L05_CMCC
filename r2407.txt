@@ -1,0 +1,13 @@
+Index: device/ausshine/aus6739_66_n1/ProjectConfig.mk
+===================================================================
+--- device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 2406)
++++ device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 2407)
+@@ -716,4 +716,6 @@
+ WIFI_WEP_KEY_ID_SET = no
+ #CREATE_PROJECT_INFO=20171102102954
+ DMNR_COMPLEX_ARCH_SUPPORT = yes
+-MTK_BOOT_WIZARD = yes
+\ No newline at end of file
++MTK_BOOT_WIZARD = yes
++
++MTK_FULLSCREEN_SWITCH_SUPPORT = yes

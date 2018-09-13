@@ -1,0 +1,110 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/SignalClusterView.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/SignalClusterView.java	(revision 8494)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/SignalClusterView.java	(revision 8495)
+@@ -94,7 +94,9 @@
+ 
+     ViewGroup mEthernetGroup, mWifiGroup;
+     View mNoSimsCombo;
++    View mNoSimsComboSlot2;
+     ImageView mVpn, mEthernet, mWifi, mAirplane, mNoSims, mEthernetDark, mWifiDark, mNoSimsDark;
++    ImageView mNoSimsSlot2, mNoSimsDarkSlot2;
+     View mWifiAirplaneSpacer;
+     View mWifiSignalSpacer;
+     LinearLayout mMobileSignalGroup;
+@@ -207,6 +209,9 @@
+         mWifiAirplaneSpacer =         findViewById(R.id.wifi_airplane_spacer);
+         mWifiSignalSpacer =           findViewById(R.id.wifi_signal_spacer);
+         mMobileSignalGroup = (LinearLayout) findViewById(R.id.mobile_signal_group);
++        mNoSimsSlot2 = (ImageView) findViewById(R.id.no_sims_slot2);
++        mNoSimsDarkSlot2     = (ImageView) findViewById(R.id.no_sims_dark_slot2);
++        mNoSimsComboSlot2 = findViewById(R.id.no_sims_combo_slot2);
+ 
+         maybeScaleVpnAndNoSimsIcons();
+     }
+@@ -227,6 +232,10 @@
+                 new ScalingDrawableWrapper(mNoSims.getDrawable(), mIconScaleFactor));
+         mNoSimsDark.setImageDrawable(
+                 new ScalingDrawableWrapper(mNoSimsDark.getDrawable(), mIconScaleFactor));
++        mNoSimsSlot2.setImageDrawable(
++                new ScalingDrawableWrapper(mNoSimsSlot2.getDrawable(), mIconScaleFactor));
++        mNoSimsDarkSlot2.setImageDrawable(
++                new ScalingDrawableWrapper(mNoSimsDarkSlot2.getDrawable(), mIconScaleFactor));
+     }
+ 
+     @Override
+@@ -245,6 +254,8 @@
+         /// M: Add for Plugin feature @ {
+         mStatusBarExt.setCustomizedNoSimView(mNoSims);
+         mStatusBarExt.setCustomizedNoSimView(mNoSimsDark);
++        mStatusBarExt.setCustomizedNoSimView(mNoSimsSlot2);
++        mStatusBarExt.setCustomizedNoSimView(mNoSimsDarkSlot2);
+         mStatusBarExt.addSignalClusterCustomizedView(mContext, this,
+                 indexOfChild(findViewById(R.id.mobile_signal_group)));
+         /// @ }
+@@ -568,9 +579,11 @@
+         }
+ 
+         mNoSimsCombo.setVisibility(mNoSimsVisible ? View.VISIBLE : View.GONE);
++        mNoSimsComboSlot2.setVisibility(mNoSimsVisible ? View.VISIBLE : View.GONE);
+         /// M: Add for Plugin feature @ {
+         mStatusBarExt.setCustomizedNoSimsVisible(mNoSimsVisible);
+         mStatusBarExt.setCustomizedAirplaneView(mNoSimsCombo, mIsAirplaneMode);
++        mStatusBarExt.setCustomizedAirplaneView(mNoSimsComboSlot2, mIsAirplaneMode);
+         /// @ }
+ 
+         boolean anythingVisible = mNoSimsVisible || mWifiVisible || mIsAirplaneMode
+@@ -610,8 +623,12 @@
+         applyDarkIntensity(
+                 StatusBarIconController.getDarkIntensity(mTintArea, mNoSims, mDarkIntensity),
+                 mNoSims, mNoSimsDark);
++        applyDarkIntensity(
++                StatusBarIconController.getDarkIntensity(mTintArea, mNoSimsSlot2, mDarkIntensity),
++                mNoSimsSlot2, mNoSimsDarkSlot2);
+         /// M: Add for noSim view in tint mode. @{
+         mStatusBarExt.setNoSimIconTint(mIconTint, mNoSims);
++        mStatusBarExt.setNoSimIconTint(mIconTint, mNoSimsSlot2);
+         /// @}
+ 
+         /// M: Add for plugin items tint handling. @{
+@@ -848,6 +865,8 @@
+ 
+                 mPhoneStateExt.setCustomizedAirplaneView(
+                     mNoSimsCombo, mIsAirplaneMode);
++                mPhoneStateExt.setCustomizedAirplaneView(
++                        mNoSimsComboSlot2, mIsAirplaneMode);
+                 mPhoneStateExt.setCustomizedNetworkTypeView(
+                     mSubId, mNetworkIcon, mNetworkType);
+                 mPhoneStateExt.setCustomizedDataTypeView(
+Index: frameworks/base/packages/SystemUI/res/layout/signal_cluster_view.xml
+===================================================================
+--- frameworks/base/packages/SystemUI/res/layout/signal_cluster_view.xml	(revision 8494)
++++ frameworks/base/packages/SystemUI/res/layout/signal_cluster_view.xml	(revision 8495)
+@@ -104,6 +104,27 @@
+             android:alpha="0.0"
+             />
+     </FrameLayout>
++    <FrameLayout
++        android:id="@+id/no_sims_combo_slot2"
++        android:layout_height="wrap_content"
++        android:layout_width="wrap_content"
++        android:contentDescription="@string/accessibility_no_sims">
++        <com.android.systemui.statusbar.AlphaOptimizedImageView
++            android:theme="@style/DualToneLightTheme"
++            android:id="@+id/no_sims_slot2"
++            android:layout_height="wrap_content"
++            android:layout_width="wrap_content"
++            android:src="@drawable/stat_sys_no_sims"
++            />
++        <com.android.systemui.statusbar.AlphaOptimizedImageView
++            android:theme="@style/DualToneDarkTheme"
++            android:id="@+id/no_sims_dark_slot2"
++            android:layout_height="wrap_content"
++            android:layout_width="wrap_content"
++            android:src="@drawable/stat_sys_no_sims"
++            android:alpha="0.0"
++            />
++    </FrameLayout>
+     <View
+         android:id="@+id/wifi_airplane_spacer"
+         android:layout_width="@dimen/status_bar_airplane_spacer_width"

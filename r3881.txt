@@ -1,0 +1,152 @@
+Index: frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 3880)
++++ frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 3881)
+@@ -24,6 +24,8 @@
+ import android.Manifest;
+ import android.annotation.IntDef;
+ import android.app.ActivityManager;
++import android.bluetooth.BluetoothAdapter;
++import android.bluetooth.BluetoothManager;
+ import android.content.BroadcastReceiver;
+ import android.content.ContentResolver;
+ import android.content.Context;
+@@ -38,7 +40,10 @@
+ import android.hardware.display.WifiDisplayStatus;
+ import android.hardware.display.DisplayManagerInternal;
+ import android.hardware.display.DisplayManagerInternal.DisplayPowerRequest;
++import android.media.AudioManager;
+ import android.net.Uri;
++import android.net.wifi.WifiManager;
++import android.nfc.NfcAdapter;
+ import android.os.BatteryManager;
+ import android.os.BatteryManagerInternal;
+ import android.os.Binder;
+@@ -55,6 +60,7 @@
+ import android.os.SystemProperties;
+ import android.os.Trace;
+ import android.os.UserHandle;
++import android.os.UserManager;
+ import android.os.WorkSource;
+ import android.provider.Settings;
+ import android.provider.Settings.Secure;
+@@ -62,6 +68,7 @@
+ import android.service.dreams.DreamManagerInternal;
+ import android.service.vr.IVrManager;
+ import android.service.vr.IVrStateCallbacks;
++import android.telephony.TelephonyManager;
+ import android.util.EventLog;
+ import android.util.PrintWriterPrinter;
+ import android.util.Slog;
+@@ -82,6 +89,7 @@
+ import com.android.server.lights.Light;
+ import com.android.server.lights.LightsManager;
+ import com.android.server.vr.VrManagerService;
++
+ import libcore.util.Objects;
+ 
+ import java.io.FileDescriptor;
+@@ -563,6 +571,22 @@
+     private static native void nativeSendPowerHint(int hintId, int data);
+     private static native void nativeSetFeature(int featureId, int data);
+ 
++    private WifiManager mWifiManager;
++    private TelephonyManager mTelephonyManager;
++    private AudioManager mAudioManager;
++    private BluetoothAdapter mBluetoothAdapter;
++    private int mNoLowPowerScreenoffTimeout;
++    private int mNoLowPowerScreenBrightness;
++    private int mNoLowPowerLocationMode;
++    private int mNoLowPowerWifiApState;
++    private int mNoLowPowerWifiState;
++    private boolean mNoLowPowerDataEnabled;
++    private boolean mNoLowPowerBluetoothEnabled;
++    private int mNoLowPowerVibrateRingerSetting;
++    private int mNoLowPowerVibrateNotificationSetting;
++    private NfcAdapter mNfcAdapter;
++    private boolean mNfcEnabled;
++
+     public PowerManagerService(Context context) {
+         super(context);
+         mContext = context;
+@@ -632,6 +656,13 @@
+             mBatteryManagerInternal = getLocalService(BatteryManagerInternal.class);
+ 
+             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
++            mWifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);//wifi
++            mTelephonyManager = (TelephonyManager)mContext.getSystemService(Context.TELEPHONY_SERVICE);//��������
++            mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);//����������
++            BluetoothManager bluetoothManager = (BluetoothManager)mContext.getSystemService(Context.BLUETOOTH_SERVICE);//����
++            mBluetoothAdapter = bluetoothManager.getAdapter();
++            mNfcAdapter = NfcAdapter.getDefaultAdapter(mContext);//NFC
++
+             mScreenBrightnessSettingMinimum = pm.getMinimumScreenBrightnessSetting();
+             mScreenBrightnessSettingMaximum = pm.getMaximumScreenBrightnessSetting();
+             mScreenBrightnessSettingDefault = pm.getDefaultScreenBrightnessSetting();
+@@ -1011,11 +1042,66 @@
+                     mContext.sendBroadcastAsUser(new Intent(
+                             PowerManager.ACTION_POWER_SAVE_MODE_CHANGED_INTERNAL), UserHandle.ALL,
+                             Manifest.permission.DEVICE_POWER);
++                    handlePowerSaveMode(mLowPowerModeEnabled);//�رշ���
+                 }
+             });
+         }
+     }
++private  void  handlePowerSaveMode(boolean LowPowerMode){
++    final ContentResolver resolver = mContext.getContentResolver();
++    if (LowPowerMode) {//�͹���ģʽ
++        mNoLowPowerScreenoffTimeout = Settings.System.getIntForUser(resolver,
++                Settings.System.SCREEN_OFF_TIMEOUT, DEFAULT_SCREEN_OFF_TIMEOUT,
++                UserHandle.USER_CURRENT);//��ȡ֮ǰ����Ļ˯��ʱ��
++//        mNoLowPowerScreenBrightness = Settings.System.getIntForUser(resolver,
++//                Settings.System.SCREEN_BRIGHTNESS, mScreenBrightnessSettingDefault,
++//                UserHandle.USER_CURRENT);//��ȡ֮ǰ����Ļ����
++        mNoLowPowerLocationMode = Settings.Secure.getIntForUser(resolver,
++                Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF,
++                UserHandle.USER_CURRENT);//��ȡ֮ǰ��λ״̬
++        mNoLowPowerWifiApState = mWifiManager.getWifiApState();//wifi�ȵ�״̬
++        mNoLowPowerWifiState = mWifiManager.getWifiState();//wifi״̬
++        mNoLowPowerDataEnabled = mTelephonyManager.getDataEnabled();//��������״̬
++        mNoLowPowerBluetoothEnabled = mBluetoothAdapter.isEnabled();//����״̬
++//        mNoLowPowerVibrateRingerSetting = mAudioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER);//������
++//        mNoLowPowerVibrateNotificationSetting= mAudioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION);//֪ͨ��
++        mNfcEnabled = mNfcAdapter.isNdefPushEnabled();//NFC״̬
+ 
++        Settings.System.putInt(resolver, Settings.System.SCREEN_OFF_TIMEOUT, 30000);//������Ļ˯��ʱ��15��
++//        Settings.System.putInt(resolver, Settings.System.SCREEN_BRIGHTNESS, 10);//������Ļ����Ϊ10
++        Settings.Secure.putInt(resolver, Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);//�رն�λ
++
++        mWifiManager.setWifiApEnabled(null, false);//�ر�wifi�ȵ�
++        mWifiManager.setWifiEnabled(false);//�ر�wifi
++        mTelephonyManager.setDataEnabled(false);//�ر���������
++        mBluetoothAdapter.disable();//�ر�����
++//        mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_OFF);//�ر�������
++//        mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION, AudioManager.VIBRATE_SETTING_OFF);//�ر�֪ͨ��
++        if (mNfcEnabled==true){
++            mNfcAdapter.disableNdefPush();
++        }
++    } else {//����ǵ͹���ģʽ�رպ�һϵ�еĻָ�����
++        Settings.System.putInt(resolver, Settings.System.SCREEN_OFF_TIMEOUT, mNoLowPowerScreenoffTimeout);//�ָ���Ļ˯��ʱ��
++//        Settings.System.putInt(resolver, Settings.System.SCREEN_BRIGHTNESS, mNoLowPowerScreenBrightness);//�ָ���Ļ����
++        Settings.Secure.putInt(resolver, Settings.Secure.LOCATION_MODE, mNoLowPowerLocationMode);//�ָ���λ
++
++//        mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, mNoLowPowerVibrateRingerSetting);//�ָ�������
++//        mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION, mNoLowPowerVibrateNotificationSetting);//�ָ�֪ͨ��
++        if (mNoLowPowerWifiApState == WifiManager.WIFI_AP_STATE_ENABLED) {//����WiFi�ȵ�
++            mWifiManager.setWifiApEnabled(null, true);
++        }
++        if (mNoLowPowerWifiState == WifiManager.WIFI_STATE_ENABLED) {//����WiFi
++            mWifiManager.setWifiEnabled(true);
++        }
++        if (mNfcEnabled==true){
++            mNfcAdapter.enableNdefPush();
++        }
++        mTelephonyManager.setDataEnabled(mNoLowPowerDataEnabled);//������������
++        if (mNoLowPowerBluetoothEnabled) {
++            mBluetoothAdapter.enable();//������
++        }
++    }
++}
+     private void handleSettingsChangedLocked() {
+         updateSettingsLocked();
+         updatePowerStateLocked();

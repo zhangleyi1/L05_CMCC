@@ -1,0 +1,23 @@
+Index: vendor/mediatek/proprietary/packages/apps/Browser/provider/src/com/android/browser/provider/Browser.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Browser/provider/src/com/android/browser/provider/Browser.java	(revision 4627)
++++ vendor/mediatek/proprietary/packages/apps/Browser/provider/src/com/android/browser/provider/Browser.java	(revision 4628)
+@@ -162,6 +162,10 @@
+        get them. */
+     private static final int MAX_HISTORY_COUNT = 250;
+ 
++    public static void open(Context c, String url) {
++        c.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
++    }
++
+     /**
+      *  Open an activity to save a bookmark. Launch with a title
+      *  and/or a url, both of which can be edited by the user before saving.
+@@ -177,6 +181,7 @@
+         Intent i = new Intent(Intent.ACTION_INSERT, Browser.BOOKMARKS_URI);
+         i.putExtra("title", title);
+         i.putExtra("url", url);
++        i.setType("vnd.android.cursor.dir/bookmark");
+         c.startActivity(i);
+     }
+ 

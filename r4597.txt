@@ -1,0 +1,12 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/MessageUtils.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/MessageUtils.java	(revision 4596)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/MessageUtils.java	(revision 4597)
+@@ -1043,6 +1043,7 @@
+         }
+ 
+         Intent intent = new Intent(Intent.ACTION_VIEW);
++        intent.setPackage("com.tcl.gallery");
+         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+         intent.putExtra("SingleItemOnly", true); // So we don't see "surrounding" images in Gallery
+         /// M: CanShare: false, Hide the videopalye's share option menu.

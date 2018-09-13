@@ -1,0 +1,384 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/ctm/src/com/tcl/regservice/CtmApplication.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/ctm/src/com/tcl/regservice/CtmApplication.java	(revision 0)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/ctm/src/com/tcl/regservice/CtmApplication.java	(revision 1767)
+@@ -0,0 +1,304 @@
++package com.tcl.regservice;
++
++import android.app.Application;
++import android.app.AlarmManager;
++import android.app.PendingIntent;
++import android.content.ContentResolver;
++import android.content.IntentFilter;
++import android.content.Context;
++import android.database.ContentObserver;
++import cn.richinfo.dm.DMSDK;
++import com.dmyk.android.telephony.DmykTelephonyManager;
++import com.dmyk.android.telephony.DmykAbsTelephonyManager;
++import android.net.Uri;
++import android.net.ConnectivityManager;
++import android.net.Network;
++import android.net.NetworkCapabilities;
++import android.net.NetworkRequest;
++import android.os.Handler;
++import android.os.SystemProperties;
++import android.content.Intent;
++import com.dmyk.android.telephony.DmykTelephonyManager.MLog;
++import android.provider.Settings;
++
++
++public class CtmApplication extends Application {
++    private DmykTelephonyManager mDTM = null;
++    private Context mContext;
++    private ApnObserver[] mObservers = new ApnObserver[2];
++    private static CtmApplication sInstance;
++
++    private static final String ENHANCED_4G_MODE_ENABLED_SIM1 =
++                                    Settings.Global.ENHANCED_4G_MODE_ENABLED;
++    private static final String ENHANCED_4G_MODE_ENABLED_SIM2 = "volte_vt_enabled_sim2";
++    private static final long NO_SIM_NOTIFICATION_DELAY = 5*60*1000;
++    public static final String TRANSIENT_SLOT_FLAG = "service.ctm.slot_flag";
++
++    public CtmApplication() {
++        super();
++    }
++
++    public void onCreate() {
++        super.onCreate();
++        MLog.d("CtmApplication.onCreate()");
++        mContext = getApplicationContext();
++        DMSDK.init(this);
++        DMSDK.setDebugMode(true);
++        // NOTE: this should be invoked after DMSDK.init(this), otherwise we cannot use the
++        // the context specified by DMSDK. If DMSDK provides a non-null context, then use
++        // application context instead.
++        mDTM = (DmykTelephonyManager) DmykAbsTelephonyManager.getDefault(this);
++        // DMSDK.setDmykAbsTelephonyManager(mDTM);
++
++        registerNetworkCallback();
++        // Observers for APN provider
++        for (int slot = 0; slot < 2; ++slot) {
++            Uri uri = mDTM.getAPNContentUri(slot);
++            if (uri == null) {
++                MLog.d("No URI for slot " + slot + ", probably there is no sim in the slot");
++                mObservers[slot] = null;
++            } else {
++                mObservers[slot] = new ApnObserver(uri);
++                getContentResolver().registerContentObserver(uri, true, mObservers[slot]);
++            }
++        }
++
++        // Sync VoLTE status before registering observers
++        syncVolteStatus();
++        registerVolteObservers();
++
++        sInstance = this;
++    }
++
++    public static CtmApplication getInstance() {
++        return sInstance;
++    }
++    
++    public int getSlotFlag() {
++        String valueStr = SystemProperties.get(TRANSIENT_SLOT_FLAG, Integer.toString(0x00));
++        int value = Integer.parseInt(valueStr);
++        return value;
++    }
++    
++    /**
++     * 0x00 - neither slot is determined
++     * 0x01 - slot 1 is determined and slot 2 is not determined
++     * 0x02 - slot 2 is determined and slot 1 is not determined
++     * 0x03 - both slots are determined, boot phase passed
++     */
++    public void setSlotFlag(int value) {
++        SystemProperties.set(TRANSIENT_SLOT_FLAG, Integer.toString(value));
++    }
++
++
++    private void sendConnnectivityChanged(){
++        Intent intent = new Intent(DmykAbsTelephonyManager.ACTION_CONNECTIVITY_CHANGE);
++        sendBroadcast(intent);
++    }
++
++    private void registerNetworkCallback() {
++        final ConnectivityManager connectivityMgr = ConnectivityManager.from(mContext);
++        final NetworkRequest wifiRequest = new NetworkRequest.Builder()
++            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
++            .build();
++        final NetworkRequest dataRequest = new NetworkRequest.Builder()
++            .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
++            .build();
++        connectivityMgr.registerNetworkCallback(
++            wifiRequest,
++            new ConnectivityManager.NetworkCallback() {
++                /**
++                 * @param network
++                 */
++                @Override
++                public void onAvailable(Network network) {
++                    MLog.d("WifiCallback.onAvailable, network=" + network);
++                    sendConnnectivityChanged();
++                }
++
++                /**
++                 * @param network
++                 */
++                @Override
++                public void onLost(Network network) {
++                    MLog.d("WifiCallback.onLost, network=" + network);
++                    sendConnnectivityChanged();
++                }
++            });
++
++        connectivityMgr.registerNetworkCallback(
++            dataRequest,
++            new ConnectivityManager.NetworkCallback() {
++                /**
++                 * @param network
++                 */
++                @Override
++                public void onAvailable(Network network) {
++                    MLog.d("MobileCallback.onAvailable, network=" + network);
++                    sendConnnectivityChanged();
++                }
++                /**
++                 * @param network
++                 */
++                @Override
++                public void onLost(Network network) {
++                    MLog.d("MobileCallback.onLost, network=" + network);
++                    sendConnnectivityChanged();
++                }
++            });
++    }
++    private class ApnObserver extends ContentObserver {
++        public final Uri uri;
++        public ApnObserver(Uri uri) {
++            super(new Handler());
++            this.uri = uri;
++        }
++
++        @Override
++        public void onChange(boolean selfChange) {
++            onChange(selfChange, null);
++        }
++
++        @Override
++        public void onChange(boolean selfChange, Uri uri) {
++            Intent intent = new Intent(DmykAbsTelephonyManager.ACTION_APN_STATE_CHANGE);
++            intent.setData(uri);
++            sendBroadcast(intent);
++        }
++
++    }
++
++    private class VolteStatusObserver extends ContentObserver {
++        private int mSlotId;
++        private String mKey;
++        public VolteStatusObserver(int slotId, String key) {
++            super(new Handler());
++            mSlotId = slotId;
++            mKey = key;
++        }
++
++        @Override
++        public void onChange(boolean selfChange) {
++            onChange(selfChange, null);
++        }
++
++        @Override
++        public void onChange(boolean selfChange, Uri uri) {
++            MLog.d("VolteStatusObserver.onChange(" + selfChange + ", " + uri + ")");
++            int internalStatus = mDTM.getVoLTEState(mSlotId);
++            MLog.d("VolteStatusObserver.onChange(): internalStatus=" + internalStatus);
++            int status = Settings.System.getInt(
++                getContentResolver(),
++                mKey,
++                DmykAbsTelephonyManager.VOLTE_STATE_UNKNOWN);
++            MLog.d("VolteStatusObserver.onChange(): status=" + status);
++            if (internalStatus != DmykAbsTelephonyManager.VOLTE_STATE_UNKNOWN &&
++                status != DmykAbsTelephonyManager.VOLTE_STATE_UNKNOWN) {
++                if (internalStatus != status) {
++                    mDTM.setVoLTEState(mSlotId, status);
++                }
++
++                Intent intent = new Intent(DmykAbsTelephonyManager.ACTION_VOLTE_STATE_CHANGE);
++                sendBroadcast(intent);
++            }
++        }
++    }
++
++    private class InternalVolteStatusObserver extends ContentObserver {
++        private int mSlotId;
++        private String mKey;
++        public InternalVolteStatusObserver(int slotId, String key) {
++            super(new Handler());
++            mSlotId = slotId;
++            mKey = key;
++        }
++
++        @Override
++        public void onChange(boolean selfChange) {
++            onChange(selfChange, null);
++        }
++
++        @Override
++        public void onChange(boolean selfChange, Uri uri) {
++            MLog.d("InternalVolteStatusObserver.onChange(" + selfChange + ", " + uri + ")");
++            int internalStatus = mDTM.getVoLTEState(mSlotId);
++            MLog.d("InternalVolteStatusObserver.onChange(): internalStatus=" + internalStatus);
++            int status = Settings.System.getInt(
++                getContentResolver(),
++                mKey,
++                DmykAbsTelephonyManager.VOLTE_STATE_UNKNOWN);
++            MLog.d("InternalVolteStatusObserver.onChange(): status=" + status);
++            if (internalStatus != DmykAbsTelephonyManager.VOLTE_STATE_UNKNOWN &&
++                status != DmykAbsTelephonyManager.VOLTE_STATE_UNKNOWN) {
++                if (internalStatus != status) {
++                    MLog.d("InternalVolteStatusObserver.onChange(): set status, key="
++                               + mKey + ", status=" + internalStatus);
++                    Settings.System.putInt(
++                        getContentResolver(),
++                        mKey,
++                        internalStatus);
++                }
++            }
++        }
++    }
++
++    public void updateAPNObservers() {
++        MLog.d("Update APNObserver list");
++        for (int slot = 0; slot < 2; ++slot) {
++            Uri uri = mDTM.getAPNContentUri(slot);
++            if (uri == null) {
++                MLog.d("No URI for slot " + slot + ", probably there is no sim in the slot");
++                if (mObservers[slot] != null) {
++                    getContentResolver().unregisterContentObserver(mObservers[slot]);
++                    mObservers[slot] = null;
++                }
++            } else {
++                if (mObservers[slot] != null) {
++                    if (mObservers[slot].uri.compareTo(uri) != 0) {
++                        getContentResolver().unregisterContentObserver(mObservers[slot]);
++                        mObservers[slot] = new ApnObserver(uri);
++                        getContentResolver().registerContentObserver(uri, true, mObservers[slot]);
++                    }
++                } else {
++                    mObservers[slot] = new ApnObserver(uri);
++                    getContentResolver().registerContentObserver(uri, true, mObservers[slot]);
++                }
++            }
++        }
++
++    }
++
++    private void syncVolteStatus() {
++        MLog.d("syncVolteStatus");
++        ContentResolver cr = getContentResolver();
++        Settings.Global.putInt(
++            cr,
++            DmykAbsTelephonyManager.VOLTE_DMYK_STATE_0,
++            mDTM.getVoLTEState(0));
++        Settings.Global.putInt(
++            cr,
++            DmykAbsTelephonyManager.VOLTE_DMYK_STATE_1,
++            mDTM.getVoLTEState(1));
++    }
++
++    private void registerVolteObservers() {
++        MLog.d("registerVolteObservers");
++        ContentResolver cr = getContentResolver();
++        cr.registerContentObserver(
++            Settings.System.getUriFor(Settings.System.VOLTE_DMYK_STATE_0),
++            true,
++            new VolteStatusObserver(0, Settings.System.VOLTE_DMYK_STATE_0));
++        cr.registerContentObserver(
++            Settings.System.getUriFor(Settings.System.VOLTE_DMYK_STATE_1),
++            true,
++            new VolteStatusObserver(1, Settings.System.VOLTE_DMYK_STATE_1));
++        cr.registerContentObserver(
++            Settings.Global.getUriFor(ENHANCED_4G_MODE_ENABLED_SIM1),
++            true,
++            new InternalVolteStatusObserver(0, Settings.System.VOLTE_DMYK_STATE_0));
++        cr.registerContentObserver(
++            Settings.Global.getUriFor(ENHANCED_4G_MODE_ENABLED_SIM2),
++            true,
++            new InternalVolteStatusObserver(1, Settings.System.VOLTE_DMYK_STATE_1));
++    }
++}
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/ctm/src/com/tcl/regservice/CtmReceiver.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/ctm/src/com/tcl/regservice/CtmReceiver.java	(revision 0)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/ctm/src/com/tcl/regservice/CtmReceiver.java	(revision 1767)
+@@ -0,0 +1,70 @@
++package com.tcl.regservice;
++
++import android.content.BroadcastReceiver;
++import android.content.Context;
++import android.content.Intent;
++import android.telephony.TelephonyManager;
++import com.dmyk.android.telephony.DmykAbsTelephonyManager;
++import com.dmyk.android.telephony.DmykTelephonyManager;
++import com.dmyk.android.telephony.DmykTelephonyManager.MLog;
++
++
++import android.telephony.TelephonyManager;
++import android.telephony.SubscriptionManager;
++import com.tcl.regservice.CtmApplication;
++
++public class CtmReceiver extends BroadcastReceiver {
++    public void onReceive(Context context, Intent intent) {
++        String action = intent.getAction();
++        MLog.d("CtmReceiver receives " + action);
++        if ("android.intent.action.SIM_STATE_CHANGED".equals(action)) {
++            String state = intent.getStringExtra("ss");
++            int slotId = intent.getIntExtra("slot", -1);
++            MLog.d("SIM_STATE_CHANGED: state=" + state + ", slotId=" + slotId);
++            if (slotId != -1) {
++                TelephonyManager tm =
++                    (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
++                int stateCode = tm.getSimState(slotId);
++                MLog.d("SIM_STATE_CHANGED: stateCode=" + stateCode);
++                CtmApplication ca = CtmApplication.getInstance();
++                if (state.equals("LOADED")) {
++                    MLog.d("sim state loaded");
++                    int slotFlag = ca.getSlotFlag();
++                    slotFlag |= 1 << slotId;
++                    ca.setSlotFlag(slotFlag);
++                    if (0x03 == slotFlag) {
++                        // both slot are determined, send the last state
++                        Intent newIntent =
++                            new Intent(DmykAbsTelephonyManager.ACTION_SIM_STATE_CHANGED);
++                        newIntent.putExtra(DmykAbsTelephonyManager.EXTRA_SIM_PHONEID, slotId);
++                        newIntent.putExtra(DmykAbsTelephonyManager.EXTRA_SIM_STATE,
++                                           DmykAbsTelephonyManager.SIM_STATE_READY);
++                        context.sendBroadcast(newIntent);
++                    }
++                    ca.updateAPNObservers();
++                } else if (stateCode == TelephonyManager.SIM_STATE_ABSENT) {
++                    MLog.d("sim state absent");
++                    int slotFlag = ca.getSlotFlag();
++                    slotFlag |= 1 << slotId;
++                    ca.setSlotFlag(slotFlag);
++                    if (0x03 == slotFlag) {
++                        // both slot are determined, send the last state
++                        Intent newIntent =
++                            new Intent(DmykAbsTelephonyManager.ACTION_SIM_STATE_CHANGED);
++                        newIntent.putExtra(DmykAbsTelephonyManager.EXTRA_SIM_PHONEID, slotId);
++                        newIntent.putExtra(DmykAbsTelephonyManager.EXTRA_SIM_STATE,
++                                           DmykAbsTelephonyManager.SIM_STATE_ABSENT);
++                        context.sendBroadcast(newIntent);
++                    }
++                    ca.updateAPNObservers();
++                }
++            }
++        } else if (DmykAbsTelephonyManager.ACTION_VOLTE_STATE_SETTING.equals(action)) {
++            int slotId = intent.getIntExtra(DmykAbsTelephonyManager.EXTRA_SIM_PHONEID, -1);
++            Intent newIntent = new Intent(DmykAbsTelephonyManager.ACTION_VOLTE_STATE_SETTING);
++            newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
++            context.startActivity(newIntent);
++        }
++    }
++}
++

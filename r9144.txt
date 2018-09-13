@@ -1,0 +1,30 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarIconController.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarIconController.java	(revision 9143)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarIconController.java	(revision 9144)
+@@ -297,6 +297,12 @@
+             removeIcon(index);
+             return;
+         }
++        // Techain add for 117072 by zhangle at 2018/03/06 start.
++        if ("com.sohu.inputmethod.sogou".equals(icon.pkg)) {
++            // android.util.Log.d("StatusBarIconController","[setIconVisibility] sogou input no need set icon");
++            return;
++        }
++        // Techain add for 117072 by zhangle at 2018/03/06 end.
+         boolean isNew = getIcon(index) == null;
+         super.setIcon(index, icon);
+         if (isNew) {
+@@ -307,6 +313,12 @@
+     }
+ 
+     private void handleSet(int index, StatusBarIcon icon) {
++        // Techain add for 117072 by zhangle at 2018/03/06 start.
++        if (icon != null && "com.sohu.inputmethod.sogou".equals(icon.pkg)) {
++            // android.util.Log.d("StatusBarIconController","[setIconVisibility] sogou input no need set icon");
++            return;
++        }
++        // Techain add for 117072 by zhangle at 2018/03/06 end.
+         int viewIndex = getViewIndex(index);
+         StatusBarIconView view = (StatusBarIconView) mStatusIcons.getChildAt(viewIndex);
+         view.set(icon);

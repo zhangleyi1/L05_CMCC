@@ -1,0 +1,12 @@
+Index: vendor/mediatek/proprietary/bootable/bootloader/preloader/custom/aus6739_66_n1/inc/custom_MemoryDevice.h
+===================================================================
+--- vendor/mediatek/proprietary/bootable/bootloader/preloader/custom/aus6739_66_n1/inc/custom_MemoryDevice.h	(revision 1774)
++++ vendor/mediatek/proprietary/bootable/bootloader/preloader/custom/aus6739_66_n1/inc/custom_MemoryDevice.h	(revision 1775)
+@@ -106,6 +106,6 @@
+ 
+ //#define CS_PART_NUMBER[0]       H9CCNNNBJTMLAR_1GB
+ #define CS_PART_NUMBER[0]        KMQE60013M_B318
+-//#define CS_PART_NUMBER[1]       MT29TZZZ7D7DKLAH_107
++#define CS_PART_NUMBER[1]        MT29TZZZ7D7DKLAH_107
+ 
+ #endif /* __CUSTOM_MEMORYDEVICE__ */

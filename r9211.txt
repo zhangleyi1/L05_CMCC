@@ -1,0 +1,16 @@
+Index: packages/apps/Settings/src/com/android/settings/deviceinfo/PrivateVolumeSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/deviceinfo/PrivateVolumeSettings.java	(revision 9210)
++++ packages/apps/Settings/src/com/android/settings/deviceinfo/PrivateVolumeSettings.java	(revision 9211)
+@@ -667,6 +667,11 @@
+     }
+ 
+     private void updatePreference(StorageItemPreference pref, long size) {
++        // Techain add for 121552 by zhangle at 2018/03/06 start.
++        if(size < 0) {
++            size = 0;
++        }
++        // Techain add for 121552 by zhangle at 2018/03/06 end.
+         pref.setStorageSize(size, mTotalSize);
+     }
+ 

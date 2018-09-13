@@ -1,0 +1,34 @@
+Index: frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardUpdateMonitor.java
+===================================================================
+--- frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardUpdateMonitor.java	(revision 14429)
++++ frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardUpdateMonitor.java	(revision 14430)
+@@ -557,6 +557,10 @@
+                 && mFingerprintRunningState == FINGERPRINT_STATE_CANCELLING_RESTARTING) {
+             setFingerprintRunningState(FINGERPRINT_STATE_STOPPED);
+             startListeningForFingerprint();
++        }else if (msgId == FingerprintManager.FINGERPRINT_ERROR_LOCKOUT ){
++			      if(unlockScreen() == false){
++				       setFingerprintRunningState(FINGERPRINT_STATE_STOPPED);
++			       }
+         } else {
+             setFingerprintRunningState(FINGERPRINT_STATE_STOPPED);
+         }
+@@ -567,6 +571,18 @@
+             }
+         }
+     }
++    
++    private boolean unlockScreen(){
++		PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
++		boolean screenOn = pm.isScreenOn();
++		if (!screenOn) {            
++			PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "bright");
++			wl.acquire(5000); 
++			wl.release();
++			return true;
++        }                 
++        return false;
++	 }
+ 
+     private void handleFingerprintLockoutReset() {
+         updateFingerprintListeningState();

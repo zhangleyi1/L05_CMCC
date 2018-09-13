@@ -1,0 +1,12 @@
+Index: packages/apps/DeskClock/AndroidManifest.xml
+===================================================================
+--- packages/apps/DeskClock/AndroidManifest.xml	(revision 3752)
++++ packages/apps/DeskClock/AndroidManifest.xml	(revision 3753)
+@@ -121,6 +121,7 @@
+                 android:theme="@style/AlarmAlertFullScreenTheme"
+                 android:windowSoftInputMode="stateAlwaysHidden"
+                 android:showOnLockScreen="true"
++				android:resizeableActivity="false"
+                 android:directBootAware="true" />
+ 
+         <activity android:name="ScreensaverActivity"

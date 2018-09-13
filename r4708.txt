@@ -1,0 +1,58 @@
+Index: packages/apps/Settings/src/com/android/settings/applications/ProcStatsData.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/applications/ProcStatsData.java	(revision 4707)
++++ packages/apps/Settings/src/com/android/settings/applications/ProcStatsData.java	(revision 4708)
+@@ -19,6 +19,7 @@
+ import android.app.ActivityManager;
+ import android.content.Context;
+ import android.content.pm.PackageManager;
++import android.content.pm.PackageManager.NameNotFoundException;
+ import android.os.ParcelFileDescriptor;
+ import android.os.RemoteException;
+ import android.os.ServiceManager;
+@@ -287,17 +288,25 @@
+                         }
+                         ProcStatsEntry ent = entriesMap.get(proc.getName(), proc.getUid());
+                         if (ent == null) {
+-                            ent = new ProcStatsEntry(proc, st.mPackageName, bgTotals, runTotals,
+-                                    mUseUss);
+-                            if (ent.mRunWeight > 0) {
+-                                if (DEBUG) Log.d(TAG, "Adding proc " + proc.getName() + "/"
+-                                            + proc.getUid() + ": time="
+-                                            + ProcessStatsUi.makeDuration(ent.mRunDuration) + " ("
+-                                            + ((((double) ent.mRunDuration) / memTotalTime) * 100)
+-                                            + "%)"
+-                                            + " pss=" + ent.mAvgRunMem);
+-                                entriesMap.put(proc.getName(), proc.getUid(), ent);
+-                                procEntries.add(ent);
++                            try {
++                                if (mPm != null && mPm.getApplicationInfo(st.mPackageName,
++                                        PackageManager.GET_UNINSTALLED_PACKAGES) != null) {
++                                    ent = new ProcStatsEntry(proc, st.mPackageName, bgTotals, runTotals,
++                                            mUseUss);
++                                    if (ent.mRunWeight > 0) {
++                                        if (DEBUG) Log.d(TAG, "Adding proc " + proc.getName() + "/"
++                                                + proc.getUid() + ": time="
++                                                + ProcessStatsUi.makeDuration(ent.mRunDuration) + " ("
++                                                + ((((double) ent.mRunDuration) / memTotalTime) * 100)
++                                                + "%)"
++                                                + " pss=" + ent.mAvgRunMem);
++                                        entriesMap.put(proc.getName(), proc.getUid(), ent);
++                                        procEntries.add(ent);
++                                    }
++                                }                                
++
++                            } catch (NameNotFoundException e) {
++                                Log.d(TAG, st.mPackageName + " not found");
+                             }
+                         } else {
+                             ent.addPackage(st.mPackageName);
+@@ -328,7 +337,7 @@
+                                             + " to proc " + ss.getProcessName());
+                                 ent.addService(ss);
+                             } else {
+-                                Log.w(TAG, "No process " + ss.getProcessName() + "/"
++                                Log.w(TAG, "No service " + ss.getProcessName() + "/"
+                                         + uids.keyAt(iu) + " for service " + ss.getName());
+                             }
+                         }

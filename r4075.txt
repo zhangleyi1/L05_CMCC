@@ -1,0 +1,46 @@
+Index: frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml	(revision 4074)
++++ frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml	(revision 4075)
+@@ -132,4 +132,6 @@
+       <item quantity="one">设备已保持锁定状态达 <xliff:g id="NUMBER_0">%d</xliff:g> 小时。请确认密码。</item>
+     </plurals>
+     <string name="fingerprint_not_recognized" msgid="2690661881608146617">"无法识别"</string>
++    <string name="add_fingerprint_message_secturity">"请先设置安全密码"</string>
++    <string name="ok">"确定"</string>
+ </resources>
+Index: frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml	(revision 4074)
++++ frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml	(revision 4075)
+@@ -132,4 +132,6 @@
+       <item quantity="one">裝置在 <xliff:g id="NUMBER_0">%d</xliff:g> 小時後尚未解鎖，請確認密碼。</item>
+     </plurals>
+     <string name="fingerprint_not_recognized" msgid="2690661881608146617">"未能辨別"</string>
++    <string name="add_fingerprint_message_secturity">"請先設置安全密碼"</string>
++    <string name="ok">"確定"</string>
+ </resources>
+Index: frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml	(revision 4074)
++++ frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml	(revision 4075)
+@@ -132,4 +132,6 @@
+       <item quantity="one">裝置已有 <xliff:g id="NUMBER_0">%d</xliff:g> 小時未解鎖。請確認密碼。</item>
+     </plurals>
+     <string name="fingerprint_not_recognized" msgid="2690661881608146617">"無法識別"</string>
++     <string name="add_fingerprint_message_secturity">"請先設置安全密碼"</string>
++    <string name="ok">"確定"</string>
+ </resources>
+Index: frameworks/base/packages/Keyguard/res/values/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values/strings.xml	(revision 4074)
++++ frameworks/base/packages/Keyguard/res/values/strings.xml	(revision 4075)
+@@ -425,7 +425,7 @@
+ 	<string name="face_cancel_identify">Face detect operation cancelled</string>
+ 	<string name="face_face_get">Recognition failure</string>
+     <string name="face_entry_timeout">Entry Failed, Entry Failed</string>
+-    <string name="add_fingerprint_message_secturity">You need set secturity password first</string>
++    <string name="add_fingerprint_message_secturity">You need set security password first</string>
+     <string name="cancel_face_entering">Canclelled face Entry</string>
+     <string name="ic_default_move_face_center">Move the face into the middle of the frame</string>
+     <string name="ic_default_stay_font">Please keep your face straight</string>

@@ -1,0 +1,38 @@
+Index: frameworks/base/packages/Keyguard/src/com/face/scanner/FaceActivity.java
+===================================================================
+--- frameworks/base/packages/Keyguard/src/com/face/scanner/FaceActivity.java	(revision 4675)
++++ frameworks/base/packages/Keyguard/src/com/face/scanner/FaceActivity.java	(revision 4676)
+@@ -87,6 +87,7 @@
+     private static final int Face_DEMO_REMOVE_REQUEST = 303;
+     //Add by junwei.shen, for deal Face entry timeout, at 2017.7.4
+     private static final int Face_ENTRY_TIMEOUT = 304;
++    private static final int FROM_SETTING = 400;
+     
+     public static final int MSG_SHOW_HINT1_TV = 0x001;
+     public static final int MSG_SHOW_HINT2_TV = 0x002;
+@@ -106,6 +107,7 @@
+     public String HINT_TEXT_4;
+     
+     private int mRequestType;
++    private int mFromSource;
+     private boolean isFMode;
+     private User user; // 
+     private boolean isNotHacker; 
+@@ -246,6 +248,7 @@
+         HINT_TEXT_4 = getString(R.string.ic_default_no_face_data_info);
+         //isFMode = getIntent().getBooleanExtra("isFMode", false);
+         mRequestType = getIntent().getIntExtra("requestType", 0);
++        mFromSource = getIntent().getIntExtra("source", 0);
+        // Log.d(TAG, "mRequestType:"+mRequestType+", isFMode:"+isFMode);
+         /*if(isFMode)
+         {
+@@ -568,6 +571,9 @@
+         mCameraView.releaseCamera();
+         stopThread();
+         super.onPause();
++        if (mRequestType == Face_NEW_REQUEST && mFromSource == FROM_SETTING) {
++            finish();
++        }
+     }
+ 
+     private void stopThread() {

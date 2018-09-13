@@ -1,0 +1,35 @@
+Index: packages/apps/Settings/src/com/mediatek/wifi/WifiConfigControllerExt.java
+===================================================================
+--- packages/apps/Settings/src/com/mediatek/wifi/WifiConfigControllerExt.java	(revision 8246)
++++ packages/apps/Settings/src/com/mediatek/wifi/WifiConfigControllerExt.java	(revision 8247)
+@@ -31,7 +31,11 @@
+ 
+ import java.util.ArrayList;
+ import java.util.Arrays;
++import java.util.List;
+ 
++import android.telephony.SubscriptionInfo;
++import android.telephony.SubscriptionManager;
++
+ public class WifiConfigControllerExt {
+     private static final String TAG = "WifiConfigControllerExt";
+ 
+@@ -264,6 +268,18 @@
+                         }
+                     }
+                 }
++                // added by ruyi.guo for 120449 begin
++                else {
++                    final SubscriptionManager subscriptionManager = SubscriptionManager
++                            .from(mContext);
++                    List<SubscriptionInfo> sil = subscriptionManager
++                            .getActiveSubscriptionInfoList();
++
++                    if (sil != null && sil.size() == 1) {
++                        mSimSlot.setSelection(sil.get(0).getSimSlotIndex() + 1);
++                    }
++                }
++                // added by ruyi.guo for 120449 end
+             }
+         } else {
+             if (TelephonyManager.getDefault().getPhoneCount() == WIFI_EAP_METHOD_DUAL_SIM) {

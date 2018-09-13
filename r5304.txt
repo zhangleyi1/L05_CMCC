@@ -1,0 +1,75 @@
+Index: packages/apps/Bluetooth/src/com/android/bluetooth/opp/BluetoothOppNotification.java
+===================================================================
+--- packages/apps/Bluetooth/src/com/android/bluetooth/opp/BluetoothOppNotification.java	(revision 5303)
++++ packages/apps/Bluetooth/src/com/android/bluetooth/opp/BluetoothOppNotification.java	(revision 5304)
+@@ -55,6 +55,7 @@
+ import android.os.Message;
+ import android.os.Process;
+ import android.media.AudioManager;
++import android.telephony.TelephonyManager;
+ 
+ import java.util.HashMap;
+ import android.os.PowerManager;
+@@ -645,10 +646,11 @@
+             AudioManager audioManager =
+                     (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+             Notification n = null;
++            Notification.Builder builder = null;
+             int mode = audioManager.getRingerMode();
+             switch (mode) {
+                 case AudioManager.RINGER_MODE_VIBRATE:
+-                    n = new Notification.Builder(mContext)
++                    builder = new Notification.Builder(mContext)
+                             .setOnlyAlertOnce(true)
+                             .setOngoing(true)
+                             .setVibrate(new long[]{200, 1000})
+@@ -669,11 +671,11 @@
+                                     R.string.incoming_file_confirm_Notification_content,
+                                     info.mDeviceName, info.mFileName)))
+                             .setSubText(Formatter.formatFileSize(mContext, info.mTotalBytes))
+-                            .setSmallIcon(R.drawable.bt_incomming_file_notification)
+-                            .build();
++                            .setSmallIcon(R.drawable.bt_incomming_file_notification);
++                    n = builder.build();
+                     break;
+                 default:
+-                    n = new Notification.Builder(mContext)
++                    builder = new Notification.Builder(mContext)
+                             .setOnlyAlertOnce(true)
+                             .setOngoing(true)
+                             .setVibrate(new long[]{200})
+@@ -694,11 +696,16 @@
+                                     R.string.incoming_file_confirm_Notification_content,
+                                     info.mDeviceName, info.mFileName)))
+                             .setSubText(Formatter.formatFileSize(mContext, info.mTotalBytes))
+-                            .setSmallIcon(R.drawable.bt_incomming_file_notification)
+-                            .build();
++                            .setSmallIcon(R.drawable.bt_incomming_file_notification);
++                    n = builder.build();
+                     break;
+             }
+ 
++            if(isInTelephoneCall(mContext)) {
++                builder.setDefaults(0);
++                n = builder.build();
++            }
++
+             mNotificationMgr.notify(info.mID, n);
+             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+             PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "MMS_RECEIVER");
+@@ -707,6 +714,15 @@
+         cursor.close();
+     }
+ 
++    /**
++     * @return <code>true</code> iff the device is currently in a telephone call
++     */
++    private static boolean isInTelephoneCall(Context context) {
++        final TelephonyManager tm = (TelephonyManager)
++                context.getSystemService(Context.TELEPHONY_SERVICE);
++        return tm.getCallState() != TelephonyManager.CALL_STATE_IDLE;
++    }
++
+     private void clearIncomingNotify() {
+         if (D) Log.d(TAG, "clearIncomingNotify ++ ");
+         Cursor cursor = mContext.getContentResolver().query(BluetoothShare.CONTENT_URI, null,

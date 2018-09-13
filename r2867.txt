@@ -1,0 +1,14 @@
+Index: device/mediatek/mt6739/init.mt6739.rc
+===================================================================
+--- device/mediatek/mt6739/init.mt6739.rc	(revision 2866)
++++ device/mediatek/mt6739/init.mt6739.rc	(revision 2867)
+@@ -1011,7 +1011,8 @@
+ start atci_service
+ start atcid-daemon-u
+ 
+-
++on property:persist.sys.curef=*
++    setprop ro.tct.curef $persist.sys.curef
+ # monitor property gesture flag status start
+ on property:persist.sys.double.flags=*
+     write /dev/tp_gesture ${persist.sys.double.flags}

@@ -1,0 +1,40 @@
+Index: packages/apps/DeskClock/src/com/android/deskclock/alarms/AlarmKlaxon.java
+===================================================================
+--- packages/apps/DeskClock/src/com/android/deskclock/alarms/AlarmKlaxon.java	(revision 5183)
++++ packages/apps/DeskClock/src/com/android/deskclock/alarms/AlarmKlaxon.java	(revision 5184)
+@@ -27,6 +27,7 @@
+ import com.android.deskclock.Utils;
+ import com.android.deskclock.provider.AlarmInstance;
+ import com.android.deskclock.settings.SettingsActivity;
++import android.telephony.TelephonyManager;
+ 
+ /**
+  * Manages playing ringtone and vibrating the device.
+@@ -60,7 +61,9 @@
+         if (instance.mVibrate) {
+             final Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+             if (Utils.isLOrLater()) {
+-                vibrateLOrLater(vibrator);
++                if (!isTelephonyCalling(context)) {
++                    vibrateLOrLater(vibrator);
++                }
+             } else {
+                 vibrator.vibrate(sVibratePattern, 0);
+             }
+@@ -85,4 +88,15 @@
+ 
+         return sAsyncRingtonePlayer;
+     }
++
++    private static boolean isTelephonyCalling(Context context) {
++        boolean calling = false;
++        TelephonyManager telephonyManager
++                = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
++        if (TelephonyManager.CALL_STATE_OFFHOOK == telephonyManager.getCallState()
++                || TelephonyManager.CALL_STATE_RINGING == telephonyManager.getCallState()) {
++            calling = true;
++        }
++        return calling;
++    }
+ }
+\ No newline at end of file

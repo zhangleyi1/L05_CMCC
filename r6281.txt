@@ -1,0 +1,22 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java	(revision 6280)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java	(revision 6281)
+@@ -2256,7 +2256,7 @@
+                 case MENU_OPEN_WITH_BROWSER:
+ 
+                     if (mURLs.size() == 1) {
+-                       // Browser.open(ComposeMessageActivity.this, mURLs.get(0));
++                        Browser.open(ComposeMessageActivity.this, mURLs.get(0));
+                     } else if (mURLs.size() > 1) {
+                         CharSequence items[] = mURLs.toArray(new CharSequence[mURLs.size()]);
+                         new AlertDialog.Builder(ComposeMessageActivity.this)
+@@ -3080,7 +3080,7 @@
+         // add for op plugin
+         mOpComposeExt = OpMessageUtils.getOpMessagePlugin().getOpComposeExt();
+ 
+-        mMessageSubId = (int) Settings.System.getLong(getContentResolver(),
++        mMessageSubId = (int) Settings.System.getLong(getContentReslver(),
+                 Settings.System.SMS_SIM_SETTING, Settings.System.DEFAULT_SIM_NOT_SET);
+ 
+         mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

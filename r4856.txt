@@ -1,0 +1,20 @@
+Index: packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintSettings.java	(revision 4855)
++++ packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintSettings.java	(revision 4856)
+@@ -558,6 +558,7 @@
+ 				if(!onOrOff){
+ 					showDialog(preference,onOrOff,CLOSE_UNLOCK_AND_FUNC_TYPE);
+ 				}else{
++                                        mUnclockPreference.setChecked(true);
+ 					updateVaule(onOrOff,CLOSE_UNLOCK_AND_FUNC_TYPE);
+ 				}
+             	
+@@ -578,6 +579,7 @@
+ 
+ 		private void updateVaule(boolean onOrOff,int type){
+ 			if(type==CLOSE_UNLOCK_AND_FUNC_TYPE){
++                                updateGearButton(mFingerprintsCategory,onOrOff);
+ 				Settings.System.putInt(mContext.getContentResolver(),
+                         Settings.System.FINGERPRINTS_UNCLOCK_DEVICE, onOrOff ? 1 : 0);
+ 			}else{

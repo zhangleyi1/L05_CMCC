@@ -1,0 +1,36 @@
+Index: frameworks/opt/telephony/src/java/com/android/internal/telephony/GsmCdmaPhone.java
+===================================================================
+--- frameworks/opt/telephony/src/java/com/android/internal/telephony/GsmCdmaPhone.java	(revision 2639)
++++ frameworks/opt/telephony/src/java/com/android/internal/telephony/GsmCdmaPhone.java	(revision 2640)
+@@ -1798,8 +1798,8 @@
+         String number = null;
+         if (isPhoneTypeGsm()) {
+             // Read from the SIM. If its null, try reading from the shared preference area.
+-            IccRecords r = mIccRecords.get();
+-            number = (r != null) ? r.getVoiceMailNumber() : "";
++            //IccRecords r = mIccRecords.get();
++            //number = (r != null) ? r.getVoiceMailNumber() : "";
+             if (TextUtils.isEmpty(number)) {
+                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
+                 number = sp.getString(VM_NUMBER + getPhoneId(), null);
+@@ -2068,10 +2068,16 @@
+         Message resp;
+         mVmNumber = voiceMailNumber;
+         resp = obtainMessage(EVENT_SET_VM_NUMBER_DONE, 0, 0, onComplete);
+-        IccRecords r = mIccRecords.get();
+-        if (r != null) {
+-            r.setVoiceMailNumber(alphaTag, mVmNumber, resp);
+-        }
++
++        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
++        SharedPreferences.Editor editor = sp.edit();
++        editor.putString(VM_NUMBER + getPhoneId(), voiceMailNumber);
++        editor.apply();
++
++        //IccRecords r = mIccRecords.get();
++        //if (r != null) {
++         //   r.setVoiceMailNumber(alphaTag, mVmNumber, resp);
++       // }
+     }
+ 
+     private boolean isValidCommandInterfaceCFReason (int commandInterfaceCFReason) {

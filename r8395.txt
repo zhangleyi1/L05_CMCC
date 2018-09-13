@@ -1,0 +1,68 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/simmessage/ManageSimMessages.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/simmessage/ManageSimMessages.java	(revision 8394)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/simmessage/ManageSimMessages.java	(revision 8395)
+@@ -650,6 +650,52 @@
+         }, "copyToPhoneMemory").start();
+     }
+ 
++    private void copyToPhoneMemory2(Cursor cursor) {
++        final String address = cursor.getString(cursor.getColumnIndexOrThrow("address"));
++        final String body = cursor.getString(cursor.getColumnIndexOrThrow("body"));
++        final Long date = cursor.getLong(cursor.getColumnIndexOrThrow("date"));
++        final String serviceCenter = cursor.getString(
++                cursor.getColumnIndexOrThrow("service_center_address"));
++        final boolean isIncomingMessage = isIncomingMessage(cursor);
++        MmsLog.dpi(MmsApp.TXN_TAG, "\t address \t=" + address
++                + "\t body \t=" + body
++                + "\t date \t=" + date
++                + "\t sc \t=" + serviceCenter
++                + "\t isIncoming \t=" + isIncomingMessage);
++        /// M: fix ALPS01659494,notify user can not save null address message
++        if (address == null || address.equals("")) {
++            MmsApp.getToastHandler().sendEmptyMessage(MmsApp.MSG_MMS_CAN_NOT_SAVE);
++            MmsLog.d(MmsApp.TXN_TAG, "copyToPhoneMemory address is null ,return ");
++            return;
++        }
++        /// @}
++        new Thread(new Runnable() {
++            public void run() {
++                try {
++                    if (isIncomingMessage) {
++                        MmsLog.d(MmsApp.TXN_TAG, "Copy incoming sms to phone");
++                        Telephony.Sms.Inbox.addMessage(
++                                mCurrentSubId, mContentResolver,
++                                address, body, null, serviceCenter,
++                                date, true);
++                    } else {
++                        // / M: outgoing sms has not date info
++                        Long currentTime = System.currentTimeMillis();
++                        MmsLog.d(MmsApp.TXN_TAG, "Copy outgoing sms to phone");
++                        Telephony.Sms.Sent.addMessage(mCurrentSubId,
++                                mContentResolver, address, body, null,
++                                serviceCenter, currentTime);
++                    }
++                    Recycler.getSmsRecycler().deleteOldMessages(
++                            getApplicationContext());
++                    MmsWidgetProvider.notifyDatasetChanged(getApplicationContext());
++                } catch (SQLiteException e) {
++                    SqliteWrapper.checkSQLiteException(getApplicationContext(), e);
++                }
++            }
++        }, "copyToPhoneMemory").start();
++    }
++
+     private boolean isIncomingMessage(Cursor cursor) {
+         int messageStatus = cursor.getInt(
+                 cursor.getColumnIndexOrThrow("status"));
+@@ -753,8 +799,9 @@
+                 int msgNum = mCursor.getCount();
+                 for(int i=0; i < msgNum;i++) {
+                     Cursor cursor = (Cursor) mMsgListAdapter.getItem(i);
+-                    copyToPhoneMemory(cursor);
++                    copyToPhoneMemory2(cursor);
+                 }
++                MmsApp.getToastHandler().sendEmptyMessage(MmsApp.MSG_DONE);
+                 break;
+         }
+ 

@@ -1,0 +1,13 @@
+Index: packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintSettings.java	(revision 3455)
++++ packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintSettings.java	(revision 3456)
+@@ -950,7 +950,7 @@
+     	public void onGearClick(FingerprintPreference p) {
+        		mCurrentFingprintPreference=p;
+         	Intent intent=new Intent();
+-            intent.setComponent(new ComponentName("com.android.systemui","com.android.systemui.funcsetting.AddAppShortcuttActivity"));
++            intent.setComponent(new ComponentName("com.android.systemui","com.android.systemui.funcsetting.AddAppShortcutActivity));
+ 			intent.putExtra(FINGER_GEAR,ADD_SHORTCUT_REQUEST);
+ 			startActivityForResult(intent,ADD_SHORTCUT_REQUEST);
+     	}

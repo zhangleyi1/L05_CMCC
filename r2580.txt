@@ -1,0 +1,34 @@
+Index: packages/apps/Dialer/src/com/android/dialer/calllog/MissedCallNotifier.java
+===================================================================
+--- packages/apps/Dialer/src/com/android/dialer/calllog/MissedCallNotifier.java	(revision 2579)
++++ packages/apps/Dialer/src/com/android/dialer/calllog/MissedCallNotifier.java	(revision 2580)
+@@ -139,6 +139,7 @@
+                 .setContentIntent(createCallLogPendingIntent())
+                 .setAutoCancel(true)
+                 .setWhen(timeMs)
++				.setShowWhen(true) 
+                 .setDeleteIntent(createClearMissedCallsPendingIntent());
+ 
+         // Create the notification suitable for display when sensitive information is showing.
+@@ -149,6 +150,7 @@
+                 .setContentIntent(createCallLogPendingIntent())
+                 .setAutoCancel(true)
+                 .setWhen(timeMs)
++				.setShowWhen(true) 
+                 .setPriority(Notification.PRIORITY_MAX)
+                 .setDeleteIntent(createClearMissedCallsPendingIntent())
+                 // Include a public version of the notification to be shown when the missed call
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/transaction/MessagingNotification.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/transaction/MessagingNotification.java	(revision 2579)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/transaction/MessagingNotification.java	(revision 2580)
+@@ -1202,7 +1202,8 @@
+         }
+ 
+         final Notification.Builder noti = new Notification.Builder(context)
+-                .setWhen(mostRecentNotification.mTimeMillis);
++                .setWhen(mostRecentNotification.mTimeMillis)
++				.setShowWhen(true);
+ 
+         if (isNew && !isContinuousComming) {
+             noti.setTicker(mostRecentNotification.mTicker);

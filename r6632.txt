@@ -1,0 +1,697 @@
+Index: packages/apps/Settings/src/com/android/settings/DeviceInfoSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/DeviceInfoSettings.java	(revision 6631)
++++ packages/apps/Settings/src/com/android/settings/DeviceInfoSettings.java	(revision 6632)
+@@ -53,11 +53,6 @@
+ 
+ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+ 
+-//lance add for Diagnostic @{
+-import android.content.ActivityNotFoundException;
+-import android.content.pm.PackageManager.NameNotFoundException;
+-// @}
+-
+ public class DeviceInfoSettings extends SettingsPreferenceFragment implements Indexable {
+ 
+     private static final String LOG_TAG = "DeviceInfoSettings";
+@@ -80,7 +75,6 @@
+     private static final String KEY_DEVICE_FEEDBACK = "device_feedback";
+     private static final String KEY_SAFETY_LEGAL = "safetylegal";
+     private static final String KEY_RELEASE_TIME = "release_time";
+-	private static final String KEY_INFORMED_CONSENT = "informed_consent";//lance add for Diagnostic
+ 
+     static final int TAPS_TO_BE_A_DEVELOPER = 7;
+ 
+@@ -196,45 +190,11 @@
+         removePreferenceIfActivityMissing(
+                 "safety_info", "android.settings.SHOW_SAFETY_AND_REGULATORY_INFO");
+ 
+-        //lance add for diagnostic @{
+-        if(!shouldShowInformedConsent()) {
+-            getPreferenceScreen().removePreference(findPreference(KEY_INFORMED_CONSENT));
+-        } else {
+-            findPreference(KEY_INFORMED_CONSENT).setEnabled(true);
+-        }
+-        //@}
+-
+         ///M:
+         mExts = new DeviceInfoSettingsExts(getActivity(), this);
+         mExts.initMTKCustomization(getPreferenceScreen());
+     }
+-	
+-    //lance add for diagnostic @{
+-    public boolean shouldShowInformedConsent() {
+-        return hasDiagnosticApp() && (getResources().getBoolean(R.bool.def_settings_informed_consent_show));   
+-    }
+ 
+-    public boolean hasDiagnosticApp() {
+-        try {
+-            getPackageManager().getApplicationIcon("com.tct.diagnostics");
+-            return true;
+-        } catch (NameNotFoundException e) {
+-            // TODO Auto-generated catch block
+-            Log.w(LOG_TAG, "get com.tct.diagnostics failed!");
+-            return false;
+-        }
+-    }
+-	
+-    private void updateInformedSummary(){
+-        Preference pre = findPreference(KEY_INFORMED_CONSENT);
+-        if(null != pre){
+-            int isOn = Settings.Global.getInt(getContentResolver(), "def.diagnostic.on", 0);
+-            pre.setSummary(isOn == 1 ? R.string.informed_consent_on
+-                    : R.string.informed_consent_off);
+-        }
+-    }
+-	//@}
+-
+     @Override
+     public void onResume() {
+         super.onResume();
+@@ -250,7 +210,6 @@
+                 getActivity(), UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
+         mDebuggingFeaturesDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(
+                 getActivity(), UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
+-		updateInformedSummary();//lance add for Diagnostic
+     }
+ 
+     @Override
+@@ -354,16 +313,7 @@
+             startActivity(intent);
+             return true;
+             //[BUGFIX]-Mod-END by TCTNB.yubin.ying
+-            //lance add for Diagnostic @{
+-        }	else if (preference.getKey().equals(KEY_INFORMED_CONSENT)){
+-            Intent intent = new Intent("com.tct.diagnostic.INFORMEDCONSENT");
+-            try{
+-                startActivity(intent);
+-            }catch(ActivityNotFoundException e){
+-                Log.d(LOG_TAG, "lancelot happened error:this activity can not be found");
+-            }
+         }
+-		// @}
+         /// M:
+         mExts.onCustomizedPreferenceTreeClick(preference);
+         return super.onPreferenceTreeClick(preference);
+Index: packages/apps/Settings/src/com/android/settings/LockScreenSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/LockScreenSettings.java	(revision 6631)
++++ packages/apps/Settings/src/com/android/settings/LockScreenSettings.java	(revision 6632)
+@@ -49,7 +49,6 @@
+ 
+     private static final String TAG = "LockScreenSettings";
+     private static final String PREF_KEY_FUNCTION_SETTINGS = "fun_setting";
+-    public static final String SETTINGS_FUNC_ENABLED = "isFuncOn"; //lance modify for Diagnostic
+ 	private Preference mFunctionPreference;
+     @Override
+     public void onCreate(Bundle savedInstanceState) {
+@@ -85,7 +84,7 @@
+         return MetricsEvent.SETTINGS_GESTURES;
+     }
+ 	private void updateSummary(){
+-		String func_switch=Settings.System.getString(getContentResolver(), SETTINGS_FUNC_ENABLED);//lance modify for Diagnostic
++		String func_switch=Settings.System.getString(getContentResolver(),"func_switch");
+ 		if(func_switch==null){
+ 			func_switch="false";}
+ 		if(func_switch.equals("true")){
+Index: packages/apps/Settings/res/values-zh-rTW/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 6631)
++++ packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 6632)
+@@ -3344,8 +3344,4 @@
+ 	<string name="fingerprint_unlock_device_summary">使用指紋解鎖您的設備</string>
+ 	<string name="fingerprint_luncher_shortcuts_title">快速啟動功能快捷鍵</string>
+ 	<string name="fingerprint_luncher_shortcuts_summary">使用獨特的指紋從鎖定屏幕立即啟動相關的Func快捷方式</string>
+-
+-  <string name="informed_consent">體驗改善</string>
+-  <string name="informed_consent_on">開</string>
+-  <string name="informed_consent_off">關</string>
+ </resources>
+Index: packages/apps/Settings/res/values/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values/strings.xml	(revision 6631)
++++ packages/apps/Settings/res/values/strings.xml	(revision 6632)
+@@ -8115,8 +8115,4 @@
+     <string name="fingerprint_cannot_be_repeated">The name of the fingerprint cannot be repeated.</string>
+ 
+     <string name="alarm_priority">Alarms are always priority interruptions</string>
+-
+-    <string name="informed_consent">Experience improvement</string>
+-    <string name="informed_consent_on">On</string>
+-    <string name="informed_consent_off">Off</string>
+ </resources>
+Index: packages/apps/Settings/res/values/bools.xml
+===================================================================
+--- packages/apps/Settings/res/values/bools.xml	(revision 6631)
++++ packages/apps/Settings/res/values/bools.xml	(revision 6632)
+@@ -47,9 +47,8 @@
+     <!--Whether help links are defined. -->
+     <bool name="config_has_help">false</bool>
+ 	
+-    <!-- remove sound settings cast -->
+-    <bool name="remove_sound_settings_cast">true</bool>
++	<!-- remove sound settings cast -->
++	<bool name="remove_sound_settings_cast">true</bool>
+ 	
+-    <bool name="config_remove_wifi_calling">true</bool>
+-    <bool name="def_settings_informed_consent_show">true</bool>
++	<bool name="config_remove_wifi_calling">true</bool>
+ </resources>
+Index: packages/apps/Settings/res/values-zh-rHK/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 6631)
++++ packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 6632)
+@@ -3347,8 +3347,4 @@
+ 	<string name="fingerprint_unlock_device_summary">使用指紋解鎖您的設備</string>
+ 	<string name="fingerprint_luncher_shortcuts_title">快速啟動功能快捷鍵</string>
+ 	<string name="fingerprint_luncher_shortcuts_summary">使用獨特的指紋從鎖定屏幕立即啟動相關的Func快捷方式</string>
+-
+-  <string name="informed_consent">體驗改善</string>
+-  <string name="informed_consent_on">開</string>
+-  <string name="informed_consent_off">關</string>
+ </resources>
+Index: packages/apps/Settings/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 6631)
++++ packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 6632)
+@@ -3447,8 +3447,4 @@
+     <string name="fingerprint_cannot_be_repeated">指纹名称不能重复</string>
+ 
+     <string name="alarm_priority">闹钟始终为优先打扰内容</string>
+-
+-    <string name="informed_consent">体验改善</string>
+-    <string name="informed_consent_on">开</string>
+-    <string name="informed_consent_off">关</string>
+ </resources>
+Index: packages/apps/Settings/res/xml/device_info_settings.xml
+===================================================================
+--- packages/apps/Settings/res/xml/device_info_settings.xml	(revision 6631)
++++ packages/apps/Settings/res/xml/device_info_settings.xml	(revision 6632)
+@@ -45,13 +45,6 @@
+ 	     android:summary="@string/software_updates_more_summary" >
+ 	</PreferenceScreen>
+ 
+-        <!-- lance add for Diagnostic -->
+-        <Preference android:key="informed_consent"
+-                android:enabled="false"
+-                android:shouldDisableView="false"
+-                android:title="@string/informed_consent"
+-                android:summary="@string/informed_consent_off"/>
+-
+         <!-- Device status - launches activity -->
+         <PreferenceScreen android:key="status_info"
+                 android:title="@string/device_status"
+Index: packages/services/Telecomm/src/com/android/server/telecom/CallLogManager.java
+===================================================================
+--- packages/services/Telecomm/src/com/android/server/telecom/CallLogManager.java	(revision 6631)
++++ packages/services/Telecomm/src/com/android/server/telecom/CallLogManager.java	(revision 6632)
+@@ -50,12 +50,6 @@
+ import android.widget.Toast;
+ import android.text.TextUtils;
+ 
+-//begin added by jiayi.wang for task 3682185 at 2017.01.04
+-import android.content.ContentProviderClient;
+-import android.os.RemoteException;
+-import android.content.ContentValues;
+-//end added by jiayi.wang for task 3682185 at 2017.01.04
+-
+ // TODO: Needed for move to system service: import com.android.internal.R;
+ import com.android.internal.annotations.VisibleForTesting;
+ import com.android.internal.telephony.CallerInfo;
+@@ -155,13 +149,6 @@
+     private static final String CALL_TYPE = "callType";
+     private static final String CALL_DURATION = "duration";
+ 
+-    //begin added by jiayi.wang for task 3682185 at 2017.01.04
+-    private static final String SCHEME = "content";
+-    private static final String AUTHORITY = "com.tct.diagnostics.provider.diagnosticsinfo";
+-    private static final String TABLE_NAME = "diagnostics";
+-    private static final Uri CONTENT_URI = new Uri.Builder().scheme(SCHEME).authority(AUTHORITY).path(TABLE_NAME).build();
+-    //end added by jiayi.wang for task 3682185 at 2017.01.04
+-
+     private Object mLock;
+     private String mCurrentCountryIso;
+ 
+@@ -228,9 +215,6 @@
+             /// @}
+ 
+             logCall(call, type, true /*showNotificationForMissedCall*/);
+-			//begin added by jiayi.wang for task 3682185 at 2017.01.04
+-            recordCall(disconnectCause,type);
+-            //end added by jiayi.wang for task 3682185 at 2017.01.04
+         }
+ 
+         /// M: Log the conference unconnected participants (such as connect fail, remote reject)
+@@ -443,67 +427,6 @@
+         }
+     }
+ 
+-    //begin added by jiayi.wang for task 3682185 at 2017.01.04
+-    private void recordCall(int disconnectCause,int callType) {
+-        ContentValues values = new ContentValues();
+-        values.put("action","ADD");
+-        boolean isOutGoing = (callType == Calls.OUTGOING_TYPE);
+-        if (isOutGoing) {
+-            values.put("PHONE_MO_VOICE",String.valueOf(1));
+-        } else {
+-            values.put("PHONE_MT_VOICE",String.valueOf(1));
+-        }
+-        switch (disconnectCause) {
+-            case DisconnectCause.LOCAL:
+-                values.put("DISCONNECT_LOCAL",String.valueOf(1));
+-                break;
+-            case DisconnectCause.REMOTE:
+-                values.put("DISCONNECT_REMOTE",String.valueOf(1));
+-                break;
+-            case DisconnectCause.CANCELED:
+-                values.put("DISCONNECT_CANCELED",String.valueOf(1));
+-                break;
+-            case DisconnectCause.MISSED:
+-                values.put("DISCONNECT_MISSED",String.valueOf(1));
+-                break;
+-            case DisconnectCause.REJECTED:
+-                values.put("DISCONNECT_REJECTED",String.valueOf(1));
+-                break;
+-            case DisconnectCause.BUSY:
+-                values.put("DISCONNECT_BUSY",String.valueOf(1));
+-                break;
+-            case DisconnectCause.RESTRICTED:
+-                values.put("DISCONNECT_RESTRICTED",String.valueOf(1));
+-                break;
+-            case DisconnectCause.ERROR:
+-                values.put("DISCONNECT_ERROR",String.valueOf(1));
+-                break;
+-            case DisconnectCause.UNKNOWN:
+-                values.put("DISCONNECT_UNKNOWN",String.valueOf(1));
+-                break;
+-            case DisconnectCause.OTHER:
+-                values.put("DISCONNECT_OTHER",String.valueOf(1));
+-                break;
+-            default:
+-                values.put("DISCONNECT_UNKNOWN",String.valueOf(1));
+-                break;
+-        }
+-        ContentProviderClient privider = mContext.getContentResolver().acquireUnstableContentProviderClient(AUTHORITY);
+-        try {
+-            if (privider != null) {
+-                privider.update(CONTENT_URI, values, null, null);
+-            }
+-        } catch (IllegalArgumentException e) {
+-             Log.d("LSH","llegalArgumentException Exception: "+e);
+-        } catch (RemoteException e) {
+-             Log.d("LSH","write2DB() RemoteException Exception: "+e);
+-        } finally {
+-             if (privider != null) {
+-                privider.release();
+-             }
+-        }
+-    }
+-    //end added by jiayi.wang for task 3682185 at 2017.01.04
+     /**
+      * Based on the video state of the call, determines the call features applicable for the call.
+      *
+Index: packages/services/Telephony/src/com/android/phone/CallNotifier.java
+===================================================================
+--- packages/services/Telephony/src/com/android/phone/CallNotifier.java	(revision 6631)
++++ packages/services/Telephony/src/com/android/phone/CallNotifier.java	(revision 6632)
+@@ -61,15 +61,6 @@
+ import java.util.List;
+ import java.util.Map;
+ 
+-//begin added by jiayi.wang for task 3682185 at 2017.01.04
+-import com.android.internal.telephony.imsphone.ImsPhone;
+-import android.telephony.SignalStrength;
+-import android.content.ContentProviderClient;
+-import android.content.ContentValues;
+-import android.os.RemoteException;
+-import android.net.Uri;
+-//end added by jiayi.wang for task 3682185 at 2017.01.04
+-
+ import com.mediatek.phone.ext.ExtensionManager;
+ import com.mediatek.phone.ext.ICallForwardExt.ICfiAction;
+ 
+@@ -84,18 +75,6 @@
+     , ICfiAction {
+     /// @}
+     private static final String LOG_TAG = "CallNotifier";
+-
+-    //begin added by jiayi.wang for task 3682185 at 2017.01.04
+-    private static final String SCHEME = "content";
+-    private static final String AUTHORITY = "com.tct.diagnostics.provider.diagnosticsinfo";
+-    private static final String TABLE_NAME = "diagnostics";
+-    private static final Uri CONTENT_URI = new Uri.Builder().scheme(SCHEME).authority(AUTHORITY).path(TABLE_NAME).build();
+-    private int mSignalStrength = 0;
+-    private boolean mPhoneFlag = false;
+-    private Phone mCurrentPhone = null;
+-    private ContentValues mValues;
+-   //end added by jiayi.wang for task 3682185 at 2017.01.04
+-
+     private static final boolean DBG =
+             (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
+     private static final boolean VDBG = (PhoneGlobals.DBG_LEVEL >= 2);
+@@ -667,7 +646,6 @@
+                 CallNotifierPhoneStateListener listener = new CallNotifierPhoneStateListener(subId);
+                 mTelephonyManager.listen(listener,
+                         PhoneStateListener.LISTEN_MESSAGE_WAITING_INDICATOR
+-                        | PhoneStateListener.LISTEN_CALL_STATE //added by jiayi.wang for task 3682185 at 2017.01.04
+                         | PhoneStateListener.LISTEN_CALL_FORWARDING_INDICATOR);
+                 mPhoneStateListeners.put(subId, listener);
+             }
+@@ -840,89 +818,6 @@
+                     mApplication.getApplicationContext(), CallNotifier.this, visible);
+             /// }@
+         }
+-
+-        //begin added by jiayi.wang for task 3682185 at 2017.01.04
+-        @Override
+-        public void onCallStateChanged(int state, String incomingNumber) {
+-            super.onCallStateChanged(state, incomingNumber);
+-            switch (state) {
+-                case TelephonyManager.CALL_STATE_OFFHOOK:
+-                    if (!mPhoneFlag) {
+-                        mCurrentPhone = PhoneUtils.getPhoneUsingSubId(this.mSubId);
+-                        storePhoneType(mCurrentPhone);
+-                        mPhoneFlag = true;
+-                    }
+-                    break;
+-                case TelephonyManager.CALL_STATE_IDLE:
+-                    if (mPhoneFlag && mCurrentPhone != null) {
+-                        mSignalStrength = mCurrentPhone.getSignalStrength().getLevel();
+-                        switch (mSignalStrength) {
+-                            case SignalStrength.SIGNAL_STRENGTH_NONE_OR_UNKNOWN:
+-                                mValues.put("SIGNAL_STRENGTH_NONE",String.valueOf(1));
+-                                break;
+-                            case SignalStrength.SIGNAL_STRENGTH_POOR:
+-                                mValues.put("SIGNAL_STRENGTH_POOR",String.valueOf(1));
+-                                break;
+-                            case SignalStrength.SIGNAL_STRENGTH_MODERATE:
+-                                mValues.put("SIGNAL_STRENGTH_MODERATE",String.valueOf(1));
+-                                break;
+-                            case SignalStrength.SIGNAL_STRENGTH_GOOD:
+-                                mValues.put("SIGNAL_STRENGTH_GOOD",String.valueOf(1));
+-                                break;
+-                            case SignalStrength.SIGNAL_STRENGTH_GREAT:
+-                                mValues.put("SIGNAL_STRENGTH_GREAT",String.valueOf(1));
+-                                break;
+-                            default:
+-                                break;
+-                        }
+-                        recordCall(mValues);
+-                    }
+-                    mPhoneFlag = false;
+-                    break;
+-                case TelephonyManager.CALL_STATE_RINGING:
+-                     mCurrentPhone = PhoneUtils.getPhoneUsingSubId(this.mSubId);
+-                     storePhoneType(mCurrentPhone);
+-                     mPhoneFlag = true;
+-                     break;
+-                default:
+-                    break;
+-             }
+-         }
+-
+-        private void storePhoneType (Phone phone) {
+-            mValues = new ContentValues();
+-            mValues.put("action","ADD");
+-            if (phone != null) {
+-                if (phone.isImsRegistered()) {
+-                    if (phone.isVolteEnabled()) {
+-                        mValues.put("CALL_TYPE_VOLTE",String.valueOf(1));
+-                    } else if (phone.getImsPhone() !=null && ((ImsPhone) phone.getImsPhone()).isWifiCallingEnabled()){
+-                        mValues.put("CALL_TYPE_WFC",String.valueOf(1));
+-                    }
+-                } else {
+-                  mValues.put("CALL_TYPE_CELULLAR",String.valueOf(1));
+-                }
+-            }
+-
+-        }
+-
+-        private void recordCall(ContentValues values) {
+-            ContentProviderClient privider = mApplication.getContentResolver().acquireUnstableContentProviderClient(AUTHORITY);
+-            try {
+-                 if (privider != null) {
+-                    privider.update(CONTENT_URI, values, null, null);
+-                 }
+-            } catch (IllegalArgumentException e) {
+-                 Log.d("LSH","llegalArgumentException Exception: "+e);
+-            } catch (RemoteException e) {
+-                 Log.d("LSH","write2DB() RemoteException Exception: "+e);
+-            } finally {
+-                 if (privider != null) {
+-                    privider.release();
+-                 }
+-            }
+-        }
+-        //end added by jiayi.wang for task 3682185 at 2017.01.04
+     };
+ 
+     private void log(String msg) {
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 6631)
++++ vendor/customer/custom.mk	(revision 6632)
+@@ -20,7 +20,6 @@
+                     MainApp \
+                     10086android \
+                     mmnes \
+-                    Diagnostics \
+                     139mail \
+                     Baidu
+ 
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AppUtils.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AppUtils.java	(revision 6631)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/AppUtils.java	(revision 6632)
+@@ -40,10 +40,7 @@
+     public static final String CONTANCTS_URI = "contacts_uri";
+     public static final String CONTACTS="com.android.contacts";
+     public static final String MUSIC = "com.android.music";
+-	//lance modify for Diagnostic @{
+-    public static final String SETTINGS_FUNC_ENABLED = "isFuncOn"; 
+-    public static final String SETTINGS_FUNC_SHORTS = "choosed_list";
+-	// @}
++    public static final String FUNC_SWITCH = "func_switch";
+     public static final String TORCH="com.google.torch";
+     public static final int DEFAULT_APPS_TITLE_INDEX = 0;
+     public static final int DEFAULT_APPS = 1;
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/FuncListAdapter.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/FuncListAdapter.java	(revision 6631)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/FuncListAdapter.java	(revision 6632)
+@@ -19,12 +19,6 @@
+ import java.util.ArrayList;
+ import java.util.Collections;
+ import java.util.List;
+-//lance modify for Diagnostic @{
+-import android.provider.Settings;
+-import org.json.JSONArray;
+-import org.json.JSONException;
+-import org.json.JSONObject;
+-// @}
+ 
+ /**
+  * Created by Administrator on 2017/8/29.
+@@ -146,7 +140,7 @@
+                             // modify for 110918 by dongdongli 20171115 end }
+                         }
+                     }
+-                    updateFuncShorts(); //lance modify for Diagnostic
++                    
+                 }
+             });
+             holder.edit_icon.setOnClickListener(new View.OnClickListener() {
+@@ -194,29 +188,6 @@
+ 
+     }
+ 
+-    //lance modify for Diagnostic @{
+-    public void updateFuncShorts() {
+-        JSONObject root = new JSONObject();
+-        JSONArray jsonArray = new JSONArray();
+-        int id = 0;
+-        try {
+-            for(AppInfo appinfo:data) {
+-                if (isInDefaultAppInfoList(appinfo.getPackerName())) {
+-                    android.util.Log.d("lancelot", "appinfo:" + appinfo.getPackerName());
+-                    JSONObject obj = new JSONObject();
+-                    obj.put("id", id++);
+-                    obj.put("name", appinfo.getAppName());
+-                    obj.put("mainclassName", appinfo.getPackerName());
+-                    jsonArray.put(obj);
+-                }
+-            }
+-            root.put("objlist", jsonArray);
+-            Settings.System.putString(mContext.getContentResolver(), AppUtils.SETTINGS_FUNC_SHORTS, root.toString());
+-        } catch (JSONException e) {
+-            e.printStackTrace();
+-        }
+-    }
+-    // @}
+ 
+     public void deleteData(int pos) {
+         AppInfo info = data.get(pos);
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/FuncSettings.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/FuncSettings.java	(revision 6631)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/funcsetting/FuncSettings.java	(revision 6632)
+@@ -77,12 +77,12 @@
+                     mFuncSwitch.setText(getString(R.string.func_on));
+                     funcSettingList.setVisibility(View.VISIBLE);
+                     switchOff.setVisibility(View.GONE);
+-					Settings.System.putString(getContentResolver(),AppUtils.SETTINGS_FUNC_ENABLED,"true");
++					Settings.System.putString(getContentResolver(),AppUtils.FUNC_SWITCH,"true");
+                 } else {
+                     mFuncSwitch.setText(getString(R.string.func_off));
+                     funcSettingList.setVisibility(View.GONE);
+                     switchOff.setVisibility(View.VISIBLE);
+-					Settings.System.putString(getContentResolver(),AppUtils.SETTINGS_FUNC_ENABLED,"false");
++					Settings.System.putString(getContentResolver(),AppUtils.FUNC_SWITCH,"false");
+                 }
+             }
+         });
+@@ -102,7 +102,7 @@
+  
+         funcSettingList = (RecyclerView) findViewById(R.id.func_setting_recycler);
+         funcSettingList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+-		String func_switch=Settings.System.getString(getContentResolver(),AppUtils.SETTINGS_FUNC_ENABLED);
++		String func_switch=Settings.System.getString(getContentResolver(),AppUtils.FUNC_SWITCH);
+ 		if(func_switch==null){
+ 			func_switch="false";}
+ 		if(func_switch.equals("true")){
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java	(revision 6631)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java	(revision 6632)
+@@ -107,12 +107,6 @@
+ import android.graphics.Bitmap;
+ import android.graphics.drawable.BitmapDrawable;
+ import android.net.Uri;
+-//lance modify for Diagnostic @{
+-import android.content.ContentProviderClient;
+-import android.content.ContentValues;
+-import android.widget.Toast;
+-//@}
+-
+ /**
+  * Implementation for the bottom area of the Keyguard, including camera/phone affordance and status
+  * text.
+@@ -326,7 +320,7 @@
+ 		mLeftAffordanceView.setVisibility(View.GONE);
+ 		mCameraImageView.setVisibility(View.GONE);
+         
+-		String func_switch=Settings.System.getString(mContext.getContentResolver(),AppUtils.SETTINGS_FUNC_ENABLED);
++		String func_switch=Settings.System.getString(mContext.getContentResolver(),AppUtils.FUNC_SWITCH);
+ 		if(func_switch==null){
+ 			func_switch="false";
+ 		}
+@@ -1065,7 +1059,7 @@
+                     } else {
+                    
+                         packagerName = list.get(index).getPackerName();
+-						saveUsageToDiagnostics(packagerName); //lance modify for Diagnostic
++						
+                         if (packagerName.equals(CAMERA)) {
+ 							// modify by dongdongli for 112586 20171114 start {
+ 							launchCamera(CAMERA_LAUNCH_SOURCE_AFFORDANCE);
+@@ -1136,33 +1130,6 @@
+         mActivityStarter.startActivity(intent, false);
+     }
+ 	
+-	//lance modify for Diagnostic @{
+-    private void saveUsageToDiagnostics(String packageName) {
+-        final String SCHEME = "content";
+-        final String AUTHORITY = "com.tct.diagnostics.provider.diagnosticsinfo";
+-        final String TABLE_NAME = "diagnostics";
+-        final Uri CONTENT_URI = new Uri.Builder().scheme(SCHEME)
+-                       .authority(AUTHORITY).path(TABLE_NAME).build();
+-        ContentValues values = new ContentValues();
+-        values.put("action","ADD");
+-        values.put(("FUNC_TOTAL_" + packageName.replace(".", "_")).toUpperCase(),1);
+-        ContentProviderClient provider = mContext.getContentResolver().acquireUnstableContentProviderClient(AUTHORITY);
+-        try {
+-            if(provider!=null){
+-                provider.update(CONTENT_URI, values, null, null);
+-            }
+-         } catch (IllegalArgumentException e) {
+-             Log.d("Shortcuts","llegalArgumentException Exception: " + e);
+-        } catch (RemoteException e) {
+-             Log.d("Shortcuts", "write2DB() RemoteException Exception: " + e);
+-         } finally {
+-             if(provider!=null){
+-               provider.release();
+-            }
+-         }
+-    }
+-	// @}
+-
+ 	private void changeTorchMode(boolean isChecked) {
+ 		if(mFlashlightController.isLowBattery()){
+ 			return;
+Index: frameworks/opt/telephony/src/java/com/android/internal/telephony/IccSmsInterfaceManager.java
+===================================================================
+--- frameworks/opt/telephony/src/java/com/android/internal/telephony/IccSmsInterfaceManager.java	(revision 6631)
++++ frameworks/opt/telephony/src/java/com/android/internal/telephony/IccSmsInterfaceManager.java	(revision 6632)
+@@ -24,7 +24,6 @@
+ import android.app.AppOpsManager;
+ import android.app.PendingIntent;
+ import android.content.ContentResolver;
+-import android.content.ContentValues; // added by jiayi.wang for task 3682185 at 2017.01.04
+ import android.content.Context;
+ import android.database.Cursor;
+ import android.database.sqlite.SQLiteException;
+@@ -737,18 +736,6 @@
+         mPhone.getContext().enforceCallingPermission(
+                 Manifest.permission.SEND_SMS,
+                 "Sending SMS message");
+-        // begin added by jiayi.wang for task 3682185 at 2017.01.04
+-        try{
+-            ContentValues values = new ContentValues();
+-            values.put("action","ADD");
+-            values.put("FRM_MESSAGE_SMS_SEND", 1);
+-            Log.i("qiang.sun", "FRM_MESSAGE_SMS_SEND");
+-            mContext.getContentResolver().update(Uri.parse("content://com.tct.diagnostics.provider.diagnosticsinfo/diagnostics/"),
+-                        values, null, null);
+-        }catch(Exception e){
+-            Log.i("com.tct.diagnostics.provider.diagnosticsinfo : ", e.toString());
+-        }
+-        // end added by jiayi.wang for task 3682185 at 2017.01.04
+         sendTextInternal(callingPackage, destAddr, scAddr, text, sentIntent, deliveryIntent,
+             persistMessageForNonDefaultSmsApp);
+     }
+Index: frameworks/opt/telephony/src/java/com/android/internal/telephony/gsm/GsmInboundSmsHandler.java
+===================================================================
+--- frameworks/opt/telephony/src/java/com/android/internal/telephony/gsm/GsmInboundSmsHandler.java	(revision 6631)
++++ frameworks/opt/telephony/src/java/com/android/internal/telephony/gsm/GsmInboundSmsHandler.java	(revision 6632)
+@@ -23,11 +23,6 @@
+ import android.os.SystemProperties;
+ // MTK-END
+ import android.provider.Telephony.Sms.Intents;
+-// begin added by jiayi.wang for task 3682185 at 2017.01.04
+-import android.content.ContentValues;
+-import android.net.Uri;
+-import android.util.Log;
+-// end added by jiayi.wang for task 3682185 at 2017.01.04
+ 
+ import com.android.internal.telephony.CommandsInterface;
+ import com.android.internal.telephony.InboundSmsHandler;
+@@ -184,19 +179,6 @@
+             return Intents.RESULT_SMS_OUT_OF_MEMORY;
+         }
+ 
+-        //begin added by jiayi.wang for task 3682185 at 2017.01.04
+-        try{
+-            ContentValues values = new ContentValues();
+-            values.put("action","ADD");
+-            values.put("FRM_MESSAGE_SMS_RECEIVE", 1);
+-            Log.i("qiang.sun", "FRM_MESSAGE_SMS_RECEIVE");
+-            mContext.getContentResolver().update(Uri.parse("content://com.tct.diagnostics.provider.diagnosticsinfo/diagnostics/"),
+-                        values, null, null);
+-        }catch(Exception e){
+-            Log.i("com.tct.diagnostics.provider.diagnosticsinfo : ", e.toString());
+-        }
+-        //end added by jiayi.wang for task 3682185 at 2017.01.04
+-
+         return dispatchNormalMessage(smsb);
+     }
+ 

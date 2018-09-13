@@ -1,0 +1,40 @@
+Index: packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java	(revision 7768)
++++ packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java	(revision 7769)
+@@ -1050,22 +1050,31 @@
+ 
+         ArrayList<ApplicationsState.AppEntry> applyPrefixFilter(CharSequence prefix,
+                                                                 ArrayList<ApplicationsState.AppEntry> origEntries) {
++            ArrayList<ApplicationsState.AppEntry> newEntries
++                    = new ArrayList<ApplicationsState.AppEntry>();
+             if (prefix == null || prefix.length() == 0) {
+-                return origEntries;
++                for (int i = 0; i < origEntries.size(); i++) {
++                    ApplicationsState.AppEntry entry = origEntries.get(i);
++                    if (entry.label.equals("Live Wallpaper Picker")) {
++                        continue;
++                    }
++                    newEntries.add(entry);
++                }
+             } else {
+                 String prefixStr = ApplicationsState.normalize(prefix.toString());
+                 final String spacePrefixStr = " " + prefixStr;
+-                ArrayList<ApplicationsState.AppEntry> newEntries
+-                        = new ArrayList<ApplicationsState.AppEntry>();
+                 for (int i = 0; i < origEntries.size(); i++) {
+                     ApplicationsState.AppEntry entry = origEntries.get(i);
++                    if (entry.label.equals("Live Wallpaper Picker")) {
++                        continue;
++                    }
+                     String nlabel = entry.getNormalizedLabel();
+                     if (nlabel.startsWith(prefixStr) || nlabel.indexOf(spacePrefixStr) != -1) {
+                         newEntries.add(entry);
+                     }
+                 }
+-                return newEntries;
+             }
++            return newEntries;
+         }
+ 
+         @Override

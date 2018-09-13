@@ -1,0 +1,13 @@
+Index: frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 9386)
++++ frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 9387)
+@@ -1122,7 +1122,7 @@
+             }
+ 
+             // Techain modify for 121355 by zhangle at 2018/03/07 start
+-            if(packageName.contains("com.tencent.mobileqq") && !isInteractiveInternal()) {return;}
++            if( packageName != null && packageName.contains("com.tencent.mobileqq") && !isInteractiveInternal()) {return;}
+             // Techain modify for 121355 by zhangle at 2018/03/07 end
+             WakeLock wakeLock;
+             int index = findWakeLockIndexLocked(lock);

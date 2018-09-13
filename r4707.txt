@@ -1,0 +1,76 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java	(revision 4706)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBottomAreaView.java	(revision 4707)
+@@ -110,6 +110,7 @@
+ //lance modify for Diagnostic @{
+ import android.content.ContentProviderClient;
+ import android.content.ContentValues;
++import android.widget.Toast;
+ //@}
+ 
+ /**
+@@ -1047,15 +1048,17 @@
+         
+ 		@Override
+         public void onClick(View v) {
++			long curTime = System.currentTimeMillis();
+             if (view == null) {
+                 view = v;
++				mLastTime = curTime;
+             } else {
+                 if (v.getId() != view.getId()) {
+                     view = v;
+-                    mLastTime = System.currentTimeMillis();
++                    mLastTime = curTime;
+                 } else {
+-                    if (System.currentTimeMillis() - mLastTime > 1000) {
+-                        mLastTime = System.currentTimeMillis();
++                    if ((curTime - mLastTime > 1000)) {// && (mTorchIndex != index)
++                        mLastTime = curTime;
+                     } else {
+                    
+                         packagerName = list.get(index).getPackerName();
+@@ -1087,11 +1090,17 @@
+ 								AppUtils.startMusicApp(mContext,mActivityStarter);
+ 							}
+ 							
+-        				}else if(packagerName.equals(TORCH)){							
+-							mFlashlightController.setState(!mFlashlightController.getState());
+-							changeTorchMode(mFlashlightController.getState());
+-							mAppInfo.setDrawable( mFlashlightController.getState() ? mDisable : mEnable);						
+-							initIcon();	
++        				}else if(packagerName.equals(TORCH)){
++							boolean bState = mFlashlightController.getState();
++							mFlashlightController.setState(!bState);
++							changeTorchMode(!bState);
++							//twice will do sucessfully, otherwise fail -add by javen 2017-12-29
++							mFlashlightController.setState(!bState);
++							changeTorchMode(!bState);
++							
++							mAppInfo.setDrawable( !bState ? mDisable : mEnable);
++							initIcon();
++							view = null;
+         				}else if(packagerName.equals(FUNC_SETTINGS)){
+         					String introduction = list.get(index).getIntroduction();
+         					if(introduction.equals("Edit Func settings")){
+@@ -1142,9 +1151,11 @@
+     }
+ 	// @}
+ 
+-	private void changeTorchMode(boolean isChecked) {	
++	private void changeTorchMode(boolean isChecked) {
++		if(mFlashlightController.isLowBattery()){
++			return;
++		}
+ 		mFlashlightController.setFlashlight(isChecked);
+-
+ 	} 
+ 
+ 	private void getPhoneContacts(Uri uri){ 
+@@ -1190,5 +1201,4 @@
+ 		}
+ 		return info;		   
+ 	}
+-	
+ }

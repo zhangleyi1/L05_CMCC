@@ -1,0 +1,36 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/src/com/mediatek/backuprestore/MainActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/src/com/mediatek/backuprestore/MainActivity.java	(revision 3692)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/src/com/mediatek/backuprestore/MainActivity.java	(revision 3693)
+@@ -330,19 +330,7 @@
+     }
+ 
+     @Override
+-    public boolean onPrepareOptionsMenu(Menu menu) {
+-        MenuItem menuItem = null;
+-        if (isShowScanner) {
+-            menuItem = menu.findItem(R.id.scanner);
+-            menuItem.setVisible(true);
+-        } else {
+-            menuItem = menu.findItem(R.id.scanner);
+-            menuItem.setVisible(false);
+-        }
+-        return true;
+-    }
+ 
+-    @Override
+     public boolean onOptionsItemSelected(MenuItem item) {
+         switch (item.getItemId()) {
+         case R.id.settings:
+@@ -349,9 +337,9 @@
+             Intent intent = new Intent(this, StorageSettingsActivity.class);
+             startActivity(intent);
+             break;
+-        case R.id.scanner:
++        /*case R.id.scanner:
+             showDialog(DialogID.DLG_SCANN_INFO);
+-            break;
++            break;*/
+         default:
+             break;
+         }

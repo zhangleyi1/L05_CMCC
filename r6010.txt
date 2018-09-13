@@ -1,0 +1,38 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/LockIcon.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/LockIcon.java	(revision 6009)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/LockIcon.java	(revision 6010)
+@@ -168,6 +168,11 @@
+                     R.dimen.keyguard_affordance_customize_icon_height);
+ 				iconWidth = getResources().getDimensionPixelSize(
+                     R.dimen.keyguard_affordance_customize_icon_width);
++			} else if(anyFingerprintIcon){
++				iconHeight = getResources().getDimensionPixelSize(
++                    R.dimen.keyguard_affordance_fingerprint_icon_height);
++				iconWidth = getResources().getDimensionPixelSize(
++                    R.dimen.keyguard_affordance_fingerprint_icon_width);
+ 			} else {
+ 				iconHeight = getResources().getDimensionPixelSize(
+                     R.dimen.keyguard_affordance_icon_height);
+@@ -177,7 +182,7 @@
+ 			// add end }
+ 			
+ 			
+-            if (!anyFingerprintIcon && (icon.getIntrinsicHeight() != iconHeight
++            if (/*!anyFingerprintIcon && */(icon.getIntrinsicHeight() != iconHeight
+                     || icon.getIntrinsicWidth() != iconWidth)) {
+                 icon = new IntrinsicSizeDrawable(icon, iconWidth, iconHeight);
+             }
+Index: frameworks/base/packages/SystemUI/res/values/dimens.xml
+===================================================================
+--- frameworks/base/packages/SystemUI/res/values/dimens.xml	(revision 6009)
++++ frameworks/base/packages/SystemUI/res/values/dimens.xml	(revision 6010)
+@@ -443,6 +443,8 @@
+ 	<dimen name="keyguard_affordance_customize_icon_height">48dp</dimen>
+ 	<dimen name="keyguard_affordance_customize_icon_width">48dp</dimen>
+ 	<!-- add end }-->
++	<dimen name="keyguard_affordance_fingerprint_icon_height">32dp</dimen>
++	<dimen name="keyguard_affordance_fingerprint_icon_width">32dp</dimen>
+ 
+     <!-- The text size for battery level -->
+     <dimen name="battery_level_text_size">12sp</dimen>

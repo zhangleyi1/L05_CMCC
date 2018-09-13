@@ -1,0 +1,16 @@
+Index: vendor/mediatek/proprietary/packages/apps/BrowserOverlay/res/values/isdm_BrowserRes_defaults.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BrowserOverlay/res/values/isdm_BrowserRes_defaults.xml	(revision 3594)
++++ vendor/mediatek/proprietary/packages/apps/BrowserOverlay/res/values/isdm_BrowserRes_defaults.xml	(revision 3595)
+@@ -24,6 +24,11 @@
+ -->
+ <resources>
+     <string name="def_browser_homepage_base">"http://go.10086.cn/rd/go/dh/"</string>
++    <string name="def_browser_bookmark1_name">"Alcatel Portal"</string>
++    <string name="def_browser_bookmark1_url">"http://3g.my-alcatel.com"</string>  
++    <string name="def_browser_bookmark1_value">"0"</string>
++    <string name="def_browser_bookmark2_value">"0"</string>
++
+     <string name="def_uaProfUrl_forBrowser">"http://www-ccpp.tcl-ta.com/files/980cn1.xml"</string>
+     <string name="def_browser_useragent">"Mozilla/5.0 (Linux; Android 7.1.1;zh-cn;980CN1 Build/N6F26Q) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/59.0.3071.125 Mobile Safari/537.36 Hawk/TurboBrowser/v2.0.0.1.0177.0_0818"</string>
+ </resources>

@@ -1,0 +1,13 @@
+Index: packages/apps/WallpaperPicker/res/values-nodpi/wallpapers.xml
+===================================================================
+--- packages/apps/WallpaperPicker/res/values-nodpi/wallpapers.xml	(revision 2320)
++++ packages/apps/WallpaperPicker/res/values-nodpi/wallpapers.xml	(revision 2321)
+@@ -17,7 +17,7 @@
+ 
+ <resources>
+     <string-array name="wallpapers" translatable="false">
+-    	<item>wallpaper_01</item>
++    	<!--<item>wallpaper_01</item>-->
+         <item>wallpaper_02</item>
+ 	<item>wallpaper_03</item>
+         <item>wallpaper_04</item>

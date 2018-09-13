@@ -1,0 +1,1464 @@
+Index: vendor/customer/apps/HeFition/Android.mk
+===================================================================
+--- vendor/customer/apps/HeFition/Android.mk	(revision 0)
++++ vendor/customer/apps/HeFition/Android.mk	(revision 4695)
+@@ -0,0 +1,22 @@
++LOCAL_PATH:= $(call my-dir)
++
++include $(CLEAR_VARS)
++LOCAL_MODULE := 10086android
++LOCAL_MODULE_TAGS := optional
++LOCAL_SRC_FILES := 10086_android_V3.7.5_20171218_D3000_V1.apk
++LOCAL_MODULE_CLASS := APPS
++LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
++LOCAL_CERTIFICATE := PRESIGNED
++LOCAL_TARGET_CPU_ABI := armeabi
++LOCAL_PREBUILT_JNI_LIBS := lib/$(LOCAL_TARGET_CPU_ABI)/libaes-jni.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libBaiduMapSDK_base_v4_2_0.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libBaiduMapSDK_map_v4_2_0.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libentryexpro.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libjni.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/liblocSDK7a.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libnamecardrec.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libuptsmaddon.so
++LOCAL_DEX_PREOPT := true
++LOCAL_MULTILIB := 32
++LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app
++include $(BUILD_PREBUILT)
+\ No newline at end of file
+Index: vendor/customer/apps/HeFition/lib/armeabi/libdatabase_sqlcipher.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libdatabase_sqlcipher.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libdatabase_sqlcipher.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libdatabase_sqlcipher.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libdatabase_sqlcipher.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libzvs.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libzvs.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libzvs.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libzvs.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libzvs.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libBugly.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libBugly.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libBugly.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libBugly.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libBugly.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libtsc.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libtsc.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libtsc.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libtsc.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libtsc.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libsqlcipher_android.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libsqlcipher_android.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libsqlcipher_android.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libsqlcipher_android.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libsqlcipher_android.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libzmf.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libzmf.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libzmf.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libzmf.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libzmf.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libstlport_shared.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libstlport_shared.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libstlport_shared.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libstlport_shared.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libstlport_shared.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libcmmap.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libcmmap.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libcmmap.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libcmmap.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libcmmap.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libsqlite.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libsqlite.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libsqlite.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libsqlite.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libsqlite.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libbinaryByFounder.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libbinaryByFounder.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libbinaryByFounder.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libbinaryByFounder.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libbinaryByFounder.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libqrcodedecoder.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libqrcodedecoder.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libqrcodedecoder.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libqrcodedecoder.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libqrcodedecoder.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libjingle_peerconnection_so.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libjingle_peerconnection_so.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libjingle_peerconnection_so.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libjingle_peerconnection_so.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libjingle_peerconnection_so.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libcmcc.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libcmcc.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libcmcc.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libcmcc.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libcmcc.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libgif.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libgif.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libgif.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libgif.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libgif.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libbreakpad.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libbreakpad.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libbreakpad.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libbreakpad.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libbreakpad.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/libnative-rcs-utils.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/libnative-rcs-utils.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/libnative-rcs-utils.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/libnative-rcs-utils.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/libnative-rcs-utils.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/lib/armeabi/liblemon.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/lib/armeabi/liblemon.so
+===================================================================
+--- vendor/customer/apps/HeFition/lib/armeabi/liblemon.so	(revision 0)
++++ vendor/customer/apps/HeFition/lib/armeabi/liblemon.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/lib/armeabi/liblemon.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/HeFition/HeFition_V6.1.0330_2017121815_PROD_release.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/HeFition_V6.1.0330_2017121815_PROD_release.apk
+===================================================================
+--- vendor/customer/apps/HeFition/HeFition_V6.1.0330_2017121815_PROD_release.apk	(revision 0)
++++ vendor/customer/apps/HeFition/HeFition_V6.1.0330_2017121815_PROD_release.apk	(revision 4695)
+
+Property changes on: vendor/customer/apps/HeFition/HeFition_V6.1.0330_2017121815_PROD_release.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/139mail/Android.mk
+===================================================================
+--- vendor/customer/apps/139mail/Android.mk	(revision 0)
++++ vendor/customer/apps/139mail/Android.mk	(revision 4695)
+@@ -0,0 +1,25 @@
++LOCAL_PATH:= $(call my-dir)
++
++include $(CLEAR_VARS)
++LOCAL_MODULE := 139mail
++LOCAL_MODULE_TAGS := optional
++LOCAL_SRC_FILES := PE-A-V7.4.1-20171218_26365-apm__1193001.apk
++LOCAL_MODULE_CLASS := APPS
++LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
++LOCAL_CERTIFICATE := PRESIGNED
++LOCAL_TARGET_CPU_ABI := armeabi
++LOCAL_PREBUILT_JNI_LIBS := lib/$(LOCAL_TARGET_CPU_ABI)/libBaiduMapSDK_base_v4_3_0.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libBaiduMapSDK_map_v4_3_0.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libBugly.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libEasyAR.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libgif.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libHelloARNative.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/liblocSDK7a.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libmp3lame.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libmsc.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libpns.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libumc_jni.so
++LOCAL_DEX_PREOPT := true
++LOCAL_MULTILIB := 32
++LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app
++include $(BUILD_PREBUILT)
+\ No newline at end of file
+Index: vendor/customer/apps/139mail/lib/armeabi/libEasyAR.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/lib/armeabi/libEasyAR.so
+===================================================================
+--- vendor/customer/apps/139mail/lib/armeabi/libEasyAR.so	(revision 0)
++++ vendor/customer/apps/139mail/lib/armeabi/libEasyAR.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/139mail/lib/armeabi/libEasyAR.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/139mail/lib/armeabi/libumc_jni.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/lib/armeabi/libumc_jni.so
+===================================================================
+--- vendor/customer/apps/139mail/lib/armeabi/libumc_jni.so	(revision 0)
++++ vendor/customer/apps/139mail/lib/armeabi/libumc_jni.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/139mail/lib/armeabi/libumc_jni.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/139mail/lib/armeabi/libgif.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/lib/armeabi/libgif.so
+===================================================================
+--- vendor/customer/apps/139mail/lib/armeabi/libgif.so	(revision 0)
++++ vendor/customer/apps/139mail/lib/armeabi/libgif.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/139mail/lib/armeabi/libgif.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/139mail/lib/armeabi/liblocSDK7a.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/lib/armeabi/liblocSDK7a.so
+===================================================================
+--- vendor/customer/apps/139mail/lib/armeabi/liblocSDK7a.so	(revision 0)
++++ vendor/customer/apps/139mail/lib/armeabi/liblocSDK7a.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/139mail/lib/armeabi/liblocSDK7a.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/139mail/lib/armeabi/libBaiduMapSDK_base_v4_3_0.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/lib/armeabi/libBaiduMapSDK_base_v4_3_0.so
+===================================================================
+--- vendor/customer/apps/139mail/lib/armeabi/libBaiduMapSDK_base_v4_3_0.so	(revision 0)
++++ vendor/customer/apps/139mail/lib/armeabi/libBaiduMapSDK_base_v4_3_0.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/139mail/lib/armeabi/libBaiduMapSDK_base_v4_3_0.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/139mail/lib/armeabi/libBaiduMapSDK_map_v4_3_0.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/lib/armeabi/libBaiduMapSDK_map_v4_3_0.so
+===================================================================
+--- vendor/customer/apps/139mail/lib/armeabi/libBaiduMapSDK_map_v4_3_0.so	(revision 0)
++++ vendor/customer/apps/139mail/lib/armeabi/libBaiduMapSDK_map_v4_3_0.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/139mail/lib/armeabi/libBaiduMapSDK_map_v4_3_0.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/139mail/lib/armeabi/libHelloARNative.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/lib/armeabi/libHelloARNative.so
+===================================================================
+--- vendor/customer/apps/139mail/lib/armeabi/libHelloARNative.so	(revision 0)
++++ vendor/customer/apps/139mail/lib/armeabi/libHelloARNative.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/139mail/lib/armeabi/libHelloARNative.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/139mail/lib/armeabi/libmp3lame.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/lib/armeabi/libmp3lame.so
+===================================================================
+--- vendor/customer/apps/139mail/lib/armeabi/libmp3lame.so	(revision 0)
++++ vendor/customer/apps/139mail/lib/armeabi/libmp3lame.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/139mail/lib/armeabi/libmp3lame.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/139mail/lib/armeabi/libpns.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/lib/armeabi/libpns.so
+===================================================================
+--- vendor/customer/apps/139mail/lib/armeabi/libpns.so	(revision 0)
++++ vendor/customer/apps/139mail/lib/armeabi/libpns.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/139mail/lib/armeabi/libpns.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/139mail/lib/armeabi/libBugly.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/lib/armeabi/libBugly.so
+===================================================================
+--- vendor/customer/apps/139mail/lib/armeabi/libBugly.so	(revision 0)
++++ vendor/customer/apps/139mail/lib/armeabi/libBugly.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/139mail/lib/armeabi/libBugly.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/139mail/lib/armeabi/libmsc.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/lib/armeabi/libmsc.so
+===================================================================
+--- vendor/customer/apps/139mail/lib/armeabi/libmsc.so	(revision 0)
++++ vendor/customer/apps/139mail/lib/armeabi/libmsc.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/139mail/lib/armeabi/libmsc.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/139mail/PE-A-V7.4.1-20171218_26365-apm__1193001.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/139mail/PE-A-V7.4.1-20171218_26365-apm__1193001.apk
+===================================================================
+--- vendor/customer/apps/139mail/PE-A-V7.4.1-20171218_26365-apm__1193001.apk	(revision 0)
++++ vendor/customer/apps/139mail/PE-A-V7.4.1-20171218_26365-apm__1193001.apk	(revision 4695)
+
+Property changes on: vendor/customer/apps/139mail/PE-A-V7.4.1-20171218_26365-apm__1193001.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/mCloud_3.7.5_508-000.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/mCloud_3.7.5_508-000.apk
+===================================================================
+--- vendor/customer/apps/mCloud/mCloud_3.7.5_508-000.apk	(revision 0)
++++ vendor/customer/apps/mCloud/mCloud_3.7.5_508-000.apk	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/mCloud_3.7.5_508-000.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/Android.mk
+===================================================================
+--- vendor/customer/apps/mCloud/Android.mk	(revision 0)
++++ vendor/customer/apps/mCloud/Android.mk	(revision 4695)
+@@ -0,0 +1,27 @@
++LOCAL_PATH:= $(call my-dir)
++
++include $(CLEAR_VARS)
++LOCAL_MODULE := mCloud
++LOCAL_MODULE_TAGS := optional
++LOCAL_SRC_FILES := mCloud_3.7.5_508-000.apk
++LOCAL_MODULE_CLASS := APPS
++LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
++LOCAL_CERTIFICATE := PRESIGNED
++LOCAL_TARGET_CPU_ABI := armeabi
++LOCAL_PREBUILT_JNI_LIBS := lib/$(LOCAL_TARGET_CPU_ABI)/libcmcc_haze.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libcmcc_rusteze.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libFastKDCore.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libfileinfo.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libgif.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libijkffmpeg.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libijkplayer.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libijksdl.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libkh.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libmcloud-jni.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libpl_droidsonroids_gif.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libus.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libxmppservice.so
++LOCAL_DEX_PREOPT := true
++LOCAL_MULTILIB := 32
++LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app
++include $(BUILD_PREBUILT)
+\ No newline at end of file
+Index: vendor/customer/apps/mCloud/lib/armeabi/libfileinfo.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libfileinfo.so
+===================================================================
+--- vendor/customer/apps/mCloud/lib/armeabi/libfileinfo.so	(revision 0)
++++ vendor/customer/apps/mCloud/lib/armeabi/libfileinfo.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/lib/armeabi/libfileinfo.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/lib/armeabi/libcmcc_haze.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libcmcc_haze.so
+===================================================================
+--- vendor/customer/apps/mCloud/lib/armeabi/libcmcc_haze.so	(revision 0)
++++ vendor/customer/apps/mCloud/lib/armeabi/libcmcc_haze.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/lib/armeabi/libcmcc_haze.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/lib/armeabi/libijksdl.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libijksdl.so
+===================================================================
+--- vendor/customer/apps/mCloud/lib/armeabi/libijksdl.so	(revision 0)
++++ vendor/customer/apps/mCloud/lib/armeabi/libijksdl.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/lib/armeabi/libijksdl.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/lib/armeabi/libmcloud-jni.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libmcloud-jni.so
+===================================================================
+--- vendor/customer/apps/mCloud/lib/armeabi/libmcloud-jni.so	(revision 0)
++++ vendor/customer/apps/mCloud/lib/armeabi/libmcloud-jni.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/lib/armeabi/libmcloud-jni.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/lib/armeabi/libijkffmpeg.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libijkffmpeg.so
+===================================================================
+--- vendor/customer/apps/mCloud/lib/armeabi/libijkffmpeg.so	(revision 0)
++++ vendor/customer/apps/mCloud/lib/armeabi/libijkffmpeg.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/lib/armeabi/libijkffmpeg.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/lib/armeabi/libkh.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libkh.so
+===================================================================
+--- vendor/customer/apps/mCloud/lib/armeabi/libkh.so	(revision 0)
++++ vendor/customer/apps/mCloud/lib/armeabi/libkh.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/lib/armeabi/libkh.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/lib/armeabi/libpl_droidsonroids_gif.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libpl_droidsonroids_gif.so
+===================================================================
+--- vendor/customer/apps/mCloud/lib/armeabi/libpl_droidsonroids_gif.so	(revision 0)
++++ vendor/customer/apps/mCloud/lib/armeabi/libpl_droidsonroids_gif.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/lib/armeabi/libpl_droidsonroids_gif.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/lib/armeabi/libFastKDCore.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libFastKDCore.so
+===================================================================
+--- vendor/customer/apps/mCloud/lib/armeabi/libFastKDCore.so	(revision 0)
++++ vendor/customer/apps/mCloud/lib/armeabi/libFastKDCore.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/lib/armeabi/libFastKDCore.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/lib/armeabi/libgif.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libgif.so
+===================================================================
+--- vendor/customer/apps/mCloud/lib/armeabi/libgif.so	(revision 0)
++++ vendor/customer/apps/mCloud/lib/armeabi/libgif.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/lib/armeabi/libgif.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/lib/armeabi/libxmppservice.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libxmppservice.so
+===================================================================
+--- vendor/customer/apps/mCloud/lib/armeabi/libxmppservice.so	(revision 0)
++++ vendor/customer/apps/mCloud/lib/armeabi/libxmppservice.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/lib/armeabi/libxmppservice.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/lib/armeabi/libcmcc_rusteze.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libcmcc_rusteze.so
+===================================================================
+--- vendor/customer/apps/mCloud/lib/armeabi/libcmcc_rusteze.so	(revision 0)
++++ vendor/customer/apps/mCloud/lib/armeabi/libcmcc_rusteze.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/lib/armeabi/libcmcc_rusteze.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/lib/armeabi/libus.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libus.so
+===================================================================
+--- vendor/customer/apps/mCloud/lib/armeabi/libus.so	(revision 0)
++++ vendor/customer/apps/mCloud/lib/armeabi/libus.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/lib/armeabi/libus.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/mCloud/lib/armeabi/libijkplayer.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libijkplayer.so
+===================================================================
+--- vendor/customer/apps/mCloud/lib/armeabi/libijkplayer.so	(revision 0)
++++ vendor/customer/apps/mCloud/lib/armeabi/libijkplayer.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/mCloud/lib/armeabi/libijkplayer.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/Android.mk
+===================================================================
+--- vendor/customer/apps/migu_video/Android.mk	(revision 0)
++++ vendor/customer/apps/migu_video/Android.mk	(revision 4695)
+@@ -0,0 +1,31 @@
++LOCAL_PATH:= $(call my-dir)
++
++include $(CLEAR_VARS)
++LOCAL_MODULE := HeFition
++LOCAL_MODULE_TAGS := optional
++LOCAL_SRC_FILES := HeFition_V6.1.0330_2017121815_PROD_release.apk
++LOCAL_MODULE_CLASS := APPS
++LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
++LOCAL_CERTIFICATE := PRESIGNED
++LOCAL_TARGET_CPU_ABI := armeabi
++LOCAL_PREBUILT_JNI_LIBS := lib/$(LOCAL_TARGET_CPU_ABI)/libbinaryByFounder.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libbreakpad.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libBugly.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libcmcc.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libcmmap.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libdatabase_sqlcipher.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libgif.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libjingle_peerconnection_so.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/liblemon.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libnative-rcs-utils.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libqrcodedecoder.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libsqlcipher_android.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libsqlite.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libstlport_shared.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libtsc.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libzmf.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libzvs.so
++LOCAL_DEX_PREOPT := true
++LOCAL_MULTILIB := 32
++LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app
++include $(BUILD_PREBUILT)
+\ No newline at end of file
+Index: vendor/customer/apps/migu_video/lib/armeabi/libDexHelper-x86.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libDexHelper-x86.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libDexHelper-x86.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libDexHelper-x86.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libDexHelper-x86.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libcodecgif.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libcodecgif.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libcodecgif.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libcodecgif.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libcodecgif.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libzegoavkit.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libzegoavkit.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libzegoavkit.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libzegoavkit.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libzegoavkit.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libffmpeg.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libffmpeg.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libffmpeg.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libffmpeg.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libffmpeg.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libaes.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libaes.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libaes.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libaes.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libaes.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libapi.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libapi.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libapi.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libapi.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libapi.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libottupnp.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libottupnp.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libottupnp.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libottupnp.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libottupnp.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libappmanager.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libappmanager.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libappmanager.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libappmanager.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libappmanager.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libDlnaClient.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libDlnaClient.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libDlnaClient.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libDlnaClient.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libDlnaClient.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libcomrepository.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libcomrepository.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libcomrepository.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libcomrepository.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libcomrepository.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libweibosdkcore.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libweibosdkcore.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libweibosdkcore.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libweibosdkcore.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libweibosdkcore.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libwebbrowser.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libwebbrowser.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libwebbrowser.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libwebbrowser.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libwebbrowser.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmsc.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmsc.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libmsc.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libmsc.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libmsc.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libcodecjpeg.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libcodecjpeg.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libcodecjpeg.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libcodecjpeg.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libcodecjpeg.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libimplugin.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libimplugin.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libimplugin.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libimplugin.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libimplugin.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libdresden.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libdresden.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libdresden.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libdresden.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libdresden.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libSkyLinkJni.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libSkyLinkJni.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libSkyLinkJni.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libSkyLinkJni.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libSkyLinkJni.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libzegoavkit2_jni.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libzegoavkit2_jni.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libzegoavkit2_jni.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libzegoavkit2_jni.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libzegoavkit2_jni.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libirdetodrm.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libirdetodrm.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libirdetodrm.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libirdetodrm.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libirdetodrm.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libcodecwebp.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libcodecwebp.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libcodecwebp.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libcodecwebp.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libcodecwebp.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libtxcore20140804_50.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libtxcore20140804_50.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libtxcore20140804_50.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libtxcore20140804_50.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libtxcore20140804_50.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libhttppipe.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libhttppipe.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libhttppipe.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libhttppipe.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libhttppipe.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libArcSoftSpotlight.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libArcSoftSpotlight.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libArcSoftSpotlight.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libArcSoftSpotlight.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libArcSoftSpotlight.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/liblauncher.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/liblauncher.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/liblauncher.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/liblauncher.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/liblauncher.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmediaplayersystem.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmediaplayersystem.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libmediaplayersystem.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libmediaplayersystem.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libmediaplayersystem.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libapi_canvas.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libapi_canvas.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libapi_canvas.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libapi_canvas.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libapi_canvas.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmgdrm.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmgdrm.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libmgdrm.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libmgdrm.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libmgdrm.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/liblocSDK7a.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/liblocSDK7a.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/liblocSDK7a.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/liblocSDK7a.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/liblocSDK7a.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmapview.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmapview.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libmapview.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libmapview.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libmapview.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libbarcodescanner.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libbarcodescanner.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libbarcodescanner.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libbarcodescanner.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libbarcodescanner.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libdes.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libdes.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libdes.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libdes.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libdes.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmgsoundtouch.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmgsoundtouch.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libmgsoundtouch.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libmgsoundtouch.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libmgsoundtouch.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmgmediaplayer.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmgmediaplayer.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libmgmediaplayer.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libmgmediaplayer.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libmgmediaplayer.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmg20pbase.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmg20pbase.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libmg20pbase.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libmg20pbase.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libmg20pbase.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libDexHelper.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libDexHelper.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libDexHelper.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libDexHelper.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libDexHelper.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libgetuiext2.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libgetuiext2.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libgetuiext2.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libgetuiext2.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libgetuiext2.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/liblua.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/liblua.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/liblua.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/liblua.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/liblua.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libsdl.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libsdl.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libsdl.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libsdl.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libsdl.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libTransferClient.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libTransferClient.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libTransferClient.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libTransferClient.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libTransferClient.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libkhmigu.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libkhmigu.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libkhmigu.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libkhmigu.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libkhmigu.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libBaiduMapSDK_base_v4_2_0.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libBaiduMapSDK_base_v4_2_0.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libBaiduMapSDK_base_v4_2_0.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libBaiduMapSDK_base_v4_2_0.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libBaiduMapSDK_base_v4_2_0.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libgloox.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libgloox.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libgloox.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libgloox.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libgloox.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libBaiduMapSDK_map_v4_2_0.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libBaiduMapSDK_map_v4_2_0.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libBaiduMapSDK_map_v4_2_0.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libBaiduMapSDK_map_v4_2_0.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libBaiduMapSDK_map_v4_2_0.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmediaplayer.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmediaplayer.so
+===================================================================
+--- vendor/customer/apps/migu_video/lib/armeabi/libmediaplayer.so	(revision 0)
++++ vendor/customer/apps/migu_video/lib/armeabi/libmediaplayer.so	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/lib/armeabi/libmediaplayer.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/migu_video/resigned_4.0.0.10_71_20171205094744_sec_signed.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/resigned_4.0.0.10_71_20171205094744_sec_signed.apk
+===================================================================
+--- vendor/customer/apps/migu_video/resigned_4.0.0.10_71_20171205094744_sec_signed.apk	(revision 0)
++++ vendor/customer/apps/migu_video/resigned_4.0.0.10_71_20171205094744_sec_signed.apk	(revision 4695)
+
+Property changes on: vendor/customer/apps/migu_video/resigned_4.0.0.10_71_20171205094744_sec_signed.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

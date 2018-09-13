@@ -1,0 +1,15 @@
+Index: vendor/mediatek/proprietary/frameworks/opt/fullscreenswitchservice/src/com/mediatek/fullscreenswitch/FullscreenDataHelper.java
+===================================================================
+--- vendor/mediatek/proprietary/frameworks/opt/fullscreenswitchservice/src/com/mediatek/fullscreenswitch/FullscreenDataHelper.java	(revision 9036)
++++ vendor/mediatek/proprietary/frameworks/opt/fullscreenswitchservice/src/com/mediatek/fullscreenswitch/FullscreenDataHelper.java	(revision 9037)
+@@ -281,7 +281,9 @@
+                             for (ActivityInfo activityInfo : activities) {
+                                 if (activityInfo.resizeMode == ActivityInfo.RESIZE_MODE_UNRESIZEABLE) {
+                                     isCropScreenMode = true;
+-                                    break;
++                                    
++                                }else{
++                                	  break;
+                                 }
+                             }
+                             

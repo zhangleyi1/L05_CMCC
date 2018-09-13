@@ -1,0 +1,16 @@
+Index: vendor/mediatek/proprietary/packages/apps/TechainDTV/FCITV_techain.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/packages/apps/TechainDTV/lib/armeabi/libbaseband_jni.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/packages/apps/TechainDTV/lib/armeabi/libFaudio.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/packages/apps/TechainDTV/lib/armeabi/libFciIsdbtCoreTV.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream

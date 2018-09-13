@@ -1,0 +1,143 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 4699)
++++ vendor/customer/custom.mk	(revision 4700)
+@@ -22,7 +22,11 @@
+                     10086android \
+                     mmnes \
+                     iReader \
+-                    Diagnostics
++                    Diagnostics \
++                    139mail \
++                    mCloud \
++                    migu_video \
++                    HeFition
+ 
+ # Overrides
+ PRODUCT_PROPERTY_OVERRIDES +=
+Index: vendor/customer/apps/HeFition/Android.mk
+===================================================================
+--- vendor/customer/apps/HeFition/Android.mk	(revision 4699)
++++ vendor/customer/apps/HeFition/Android.mk	(revision 4700)
+@@ -1,21 +1,30 @@
+ LOCAL_PATH:= $(call my-dir)
+ 
+ include $(CLEAR_VARS)
+-LOCAL_MODULE := 10086android
++LOCAL_MODULE := HeFition
+ LOCAL_MODULE_TAGS := optional
+-LOCAL_SRC_FILES := 10086_android_V3.7.5_20171218_D3000_V1.apk
++LOCAL_SRC_FILES := HeFition_V6.1.0330_2017121815_PROD_release.apk
+ LOCAL_MODULE_CLASS := APPS
+ LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+ LOCAL_CERTIFICATE := PRESIGNED
+ LOCAL_TARGET_CPU_ABI := armeabi
+-LOCAL_PREBUILT_JNI_LIBS := lib/$(LOCAL_TARGET_CPU_ABI)/libaes-jni.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libBaiduMapSDK_base_v4_2_0.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libBaiduMapSDK_map_v4_2_0.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libentryexpro.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libjni.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/liblocSDK7a.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libnamecardrec.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libuptsmaddon.so
++LOCAL_PREBUILT_JNI_LIBS := lib/$(LOCAL_TARGET_CPU_ABI)/libbinaryByFounder.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libbreakpad.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libBugly.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libcmcc.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libcmmap.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libdatabase_sqlcipher.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libgif.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libjingle_peerconnection_so.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/liblemon.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libnative-rcs-utils.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libqrcodedecoder.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libsqlcipher_android.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libsqlite.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libstlport_shared.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libtsc.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libzmf.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libzvs.so
+ LOCAL_DEX_PREOPT := true
+ LOCAL_MULTILIB := 32
+ LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app
+Index: vendor/customer/apps/migu_video/Android.mk
+===================================================================
+--- vendor/customer/apps/migu_video/Android.mk	(revision 4699)
++++ vendor/customer/apps/migu_video/Android.mk	(revision 4700)
+@@ -1,30 +1,57 @@
+ LOCAL_PATH:= $(call my-dir)
+ 
+ include $(CLEAR_VARS)
+-LOCAL_MODULE := HeFition
++LOCAL_MODULE := migu_video
+ LOCAL_MODULE_TAGS := optional
+-LOCAL_SRC_FILES := HeFition_V6.1.0330_2017121815_PROD_release.apk
++LOCAL_SRC_FILES := resigned_4.0.0.10_71_20171205094744_sec_signed.apk
+ LOCAL_MODULE_CLASS := APPS
+ LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+ LOCAL_CERTIFICATE := PRESIGNED
+ LOCAL_TARGET_CPU_ABI := armeabi
+-LOCAL_PREBUILT_JNI_LIBS := lib/$(LOCAL_TARGET_CPU_ABI)/libbinaryByFounder.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libbreakpad.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libBugly.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libcmcc.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libcmmap.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libdatabase_sqlcipher.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libgif.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libjingle_peerconnection_so.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/liblemon.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libnative-rcs-utils.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libqrcodedecoder.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libsqlcipher_android.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libsqlite.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libstlport_shared.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libtsc.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libzmf.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libzvs.so
++LOCAL_PREBUILT_JNI_LIBS := lib/$(LOCAL_TARGET_CPU_ABI)/libaes.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libapi.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libapi_canvas.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libappmanager.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libArcSoftSpotlight.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libBaiduMapSDK_base_v4_2_0.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libBaiduMapSDK_map_v4_2_0.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libbarcodescanner.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libcodecgif.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libcodecjpeg.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libcodecwebp.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libcomrepository.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libdes.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libDexHelper.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libDexHelper-x86.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libDlnaClient.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libdresden.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libffmpeg.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libgetuiext2.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libgloox.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libhttppipe.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libimplugin.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libirdetodrm.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libkhmigu.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/liblauncher.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/liblocSDK7a.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/liblua.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libmapview.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libmediaplayer.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libmediaplayersystem.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libmg20pbase.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libmgdrm.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libmgmediaplayer.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libmgsoundtouch.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libmsc.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libottupnp.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libsdl.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libSkyLinkJni.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libTransferClient.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libtxcore20140804_50.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libwebbrowser.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libweibosdkcore.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libzegoavkit2_jni.so \
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libzegoavkit.so
+ LOCAL_DEX_PREOPT := true
+ LOCAL_MULTILIB := 32
+ LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app

@@ -1,0 +1,22 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/MessageUtils.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/MessageUtils.java	(revision 2008)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/MessageUtils.java	(revision 2009)
+@@ -1811,10 +1811,10 @@
+             tag = String.valueOf(size) + "B";
+         } else if (size < 1024L * 1024L) {
+             fsize /= 1024.0f;
+-            tag = String.format(Locale.ENGLISH, "%.2f", fsize) + "KB";
++            tag = String.format(Locale.ENGLISH, "%.2f", fsize) + "K";
+         } else {
+             fsize /= 1024.0f * 1024.0f;
+-            tag = String.format(Locale.ENGLISH, "%.2f", fsize) + "MB";
++            tag = String.format(Locale.ENGLISH, "%.2f", fsize) + "M";
+         }
+         return tag;
+     }
+
+Property changes on: vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/MessageUtils.java
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/MessageUtils.java:r2001

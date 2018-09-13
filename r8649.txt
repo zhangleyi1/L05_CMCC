@@ -1,0 +1,33 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/res/values-zh-rTW/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/res/values-zh-rTW/strings.xml	(revision 8648)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/res/values-zh-rTW/strings.xml	(revision 8649)
+@@ -155,4 +155,6 @@
+     <string name="fast_scroll_alphabet" msgid="5548732936480723311">" ABCDEFGHIJKLMNOPQRSTUVWXYZ"</string>
+     <string name="widget_initial_text" msgid="3166878738860903586">"輕觸即可選擇音樂。"</string>
+     <string name="effectspanel" msgid="8804547581593509614">"音效"</string>
++	<string name="music_storage_permission_deny">沒有權限。您可以在設置->應用程序中更改權限。</string>
++
+ </resources>
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/res/values-zh-rHK/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/res/values-zh-rHK/strings.xml	(revision 8648)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/res/values-zh-rHK/strings.xml	(revision 8649)
+@@ -155,4 +155,6 @@
+     <string name="fast_scroll_alphabet" msgid="5548732936480723311">" ABCDEFGHIJKLMNOPQRSTUVWXYZ"</string>
+     <string name="widget_initial_text" msgid="3166878738860903586">"輕觸即可選擇音樂。"</string>
+     <string name="effectspanel" msgid="8804547581593509614">"音效"</string>
++	<string name="music_storage_permission_deny">沒有權限。您可以在設置->應用程序中更改權限。</string>
++
+ </resources>
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/res/values-zh-rCN/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/res/values-zh-rCN/strings.xml	(revision 8648)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/res/values-zh-rCN/strings.xml	(revision 8649)
+@@ -155,4 +155,6 @@
+     <string name="fast_scroll_alphabet" msgid="5548732936480723311">" ABCDEFGHIJKLMNOPQRSTUVWXYZ"</string>
+     <string name="widget_initial_text" msgid="3166878738860903586">"触摸可选择音乐。"</string>
+     <string name="effectspanel" msgid="8804547581593509614">"音效"</string>
++	<string name="music_storage_permission_deny">没有权限。您可以在设置->应用程序中更改权限。</string>
++
+ </resources>

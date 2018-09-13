@@ -1,0 +1,41 @@
+Index: packages/apps/Dialer/src/com/android/dialer/SpecialCharSequenceMgr.java
+===================================================================
+--- packages/apps/Dialer/src/com/android/dialer/SpecialCharSequenceMgr.java	(revision 5066)
++++ packages/apps/Dialer/src/com/android/dialer/SpecialCharSequenceMgr.java	(revision 5067)
+@@ -123,7 +123,7 @@
+ 	private static final String MMI_CHECK_ROOT= "*#858#";
+ 	private static final String MMI_CHECK_Efused= "*#9463*5#";
+ 	private static final String MMI_CHECK_ROOT2="*#7668#";
+-	private static final String CUSTOMER_VERSION_FOR_TCL = "*#837#";	
++	private static final String CUSTOMER_VERSION_FOR_TCL = "*#3228#";	
+     /// @}
+ 
+     /**
+@@ -642,8 +642,11 @@
+ 			deviceIds.add(build);
+ 			String stringInfo =  new String(product_info, CU_REF_START, CU_REF_LENGTH);
+ 			boolean haseChar=false;
+-			if(stringInfo.startsWith("50") || stringInfo.startsWith("98")){
+-				haseChar=true;
++			for(int i=0;i<CU_REF_LENGTH;i++){
++				if((product_info[i+CU_REF_START]^0)!=0){
++					haseChar=true;
++					break;
++				}
+ 			}
+ 			String su_ref=null;
+ 			if(!TextUtils.isEmpty(stringInfo ) && haseChar){
+@@ -703,8 +706,11 @@
+ 			initProductInfo();
+ 			String stringInfo = new String(product_info, CU_REF_START, CU_REF_LENGTH);
+ 			boolean haseChar=false;
+-			if(stringInfo.startsWith("50") || stringInfo.startsWith("98")){
+-				haseChar=true;
++			for(int i=0;i<CU_REF_LENGTH;i++){
++				if((product_info[i+CU_REF_START]^0)!=0){
++					haseChar=true;
++					break;
++				}
+ 			}
+ 			String su_ref=null;
+ 			if(!TextUtils.isEmpty(stringInfo ) && haseChar){

@@ -1,0 +1,13 @@
+Index: build/target/product/full_base.mk
+===================================================================
+--- build/target/product/full_base.mk	(revision 9496)
++++ build/target/product/full_base.mk	(revision 9497)
+@@ -46,7 +46,7 @@
+ # Additional settings used in all AOSP builds
+ PRODUCT_PROPERTY_OVERRIDES := \
+     ro.config.ringtone=Fresh.ogg \
+-    ro.config.alarm_alert=Atmospheric_Forest-default.mp3\
++    ro.config.alarm_alert=Forest.mp3\
+     ro.config.notification_sound=Success.mp3
+ 
+ # Put en_US first in the list, so make it default.

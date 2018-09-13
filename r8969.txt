@@ -1,0 +1,14 @@
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 8968)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 8969)
+@@ -194,7 +194,8 @@
+   			TESTITEM_CALLING,
+ 			TESTITEM_FACTORY_RESET,
+ 			TESTITEM_BATTERY_LEVERl,
+-			TESTITEM_FLAG
++			TESTITEM_FLAG,
++			TESTITEM_EFUSE
+   		//	TESTITEM_HALL,
+   		//	TESTITEM_NFC,
+   		//	TESTITEM_TPRAWDATA,

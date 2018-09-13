@@ -1,0 +1,67 @@
+Index: packages/apps/Email/src/com/mediatek/email/extension/AccountSetupChooseMailProvider.java
+===================================================================
+--- packages/apps/Email/src/com/mediatek/email/extension/AccountSetupChooseMailProvider.java	(revision 4147)
++++ packages/apps/Email/src/com/mediatek/email/extension/AccountSetupChooseMailProvider.java	(revision 4148)
+@@ -79,6 +79,9 @@
+ import com.android.mail.utils.LogUtils;
+ import com.mediatek.email.ext.IServerProviderExt;
+ 
++import java.util.ArrayList;
++
++
+ /**
+  * The AccountSetupChooseMailProvider activity help user to choose the commonly used
+  * email service provider(ESP) more quickly.
+@@ -97,10 +100,12 @@
+ 
+     // use to save ESP names.
+     private String[] mMailProviderNames;
++	private ArrayList<String>mMailProviderNames2=new ArrayList();
+     // use to save ESP domain names.
+     private String[] mMailProviderDomains;
+     // use to save ESP icons to show.
+     private int[] mMailProviderIcons;
++	private ArrayList<Integer>mMailProviderIcons2=new ArrayList();
+     // decide how many ESP to show in list.
+     private int mMailProviderCount;
+     // use to save ESP email hint, only supported by Vendor Policy
+@@ -180,7 +185,7 @@
+ 
+         public MyAdapter(Context context) {
+             this.mInflater = LayoutInflater.from(context);
+-            mItemCount = mMailProviderCount;
++            mItemCount = mMailProviderCount-1;
+         }
+ 
+         public int getCount() {
+@@ -201,8 +206,8 @@
+             }
+             ImageView logoView = (ImageView) convertView.findViewById(R.id.logo);
+             TextView othersView = (TextView) convertView.findViewById(R.id.name);
+-            logoView.setImageDrawable((mResources.getDrawable(mMailProviderIcons[position])));
+-            othersView.setText(mMailProviderNames[position]);
++			logoView.setImageDrawable((mResources.getDrawable(mMailProviderIcons2.get(position))));
++            othersView.setText(mMailProviderNames2.get(position));
+             return convertView;
+         }
+     }
+@@ -210,7 +215,19 @@
+     private void loadResources() {
+         if (EmailPluginUtils.isSupportProviderList(this)) {
+             mMailProviderNames = EmailPluginUtils.getProviderNames(this);
++			int nameLength=mMailProviderNames.length;
++			for(int i=0;i<nameLength;i++){
++				if(i!=2){
++					mMailProviderNames2.add(mMailProviderNames[i]);
++				}
++			}
+             mMailProviderIcons = EmailPluginUtils.getProviderIcons(this);
++			int iconLength=mMailProviderIcons.length;
++			for(int i=0;i<iconLength;i++){
++				if(i!=2){
++					mMailProviderIcons2.add(mMailProviderIcons[i]);
++				}
++			}
+             mMailProviderDomains = EmailPluginUtils.getProviderDomains(this);
+             mMailProviderCount = EmailPluginUtils.getProviderCount(this);
+             mResources = EmailPluginUtils.getProviderResources(this);

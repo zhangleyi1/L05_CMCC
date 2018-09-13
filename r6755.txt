@@ -1,0 +1,16 @@
+Index: packages/apps/Dialer/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Dialer/res/values-zh-rCN/strings.xml	(revision 6754)
++++ packages/apps/Dialer/res/values-zh-rCN/strings.xml	(revision 6755)
+@@ -272,4 +272,11 @@
+     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"已屏蔽"</string>
+     <string name="accessibility_call_is_active" msgid="2297282583928508760">"正在与<xliff:g id="NAMEORNUMBER">^1</xliff:g>通话"</string>
+ 	<string name="emergency_number">"紧急电话"</string>
++	<string name="last_call">最后通话时间:</string>
++    <string name="received_call">接收通话时间:</string>
++    <string name="dialed_call">拨打通话时间:</string>
++    <string name="call_history">通话历史时间:</string>
++    <string name="reset">重置</string>
++    <string name="back">返回</string>
++    <string name="call_timer">通话计时</string>
+ </resources>

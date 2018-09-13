@@ -1,0 +1,50 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 4019)
++++ vendor/customer/custom.mk	(revision 4020)
+@@ -21,7 +21,8 @@
+                     MainApp \
+                     10086android \
+                     mmnes \
+-                    iReader
++                    iReader \
++                    Gboard
+ 
+ # Overrides
+ PRODUCT_PROPERTY_OVERRIDES +=
+Index: vendor/customer/apps/Gboard/Android.mk
+===================================================================
+--- vendor/customer/apps/Gboard/Android.mk	(revision 0)
++++ vendor/customer/apps/Gboard/Android.mk	(revision 4020)
+@@ -0,0 +1,15 @@
++LOCAL_PATH:= $(call my-dir)
++
++include $(CLEAR_VARS)
++LOCAL_MODULE := Gboard
++LOCAL_MODULE_TAGS := optional
++LOCAL_MODULE_CLASS := APPS
++LOCAL_BUILT_MODULE_STEM := package.apk
++LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
++#LOCAL_PRIVILEGED_MODULE :=
++LOCAL_CERTIFICATE := PRESIGNED
++LOCAL_DEX_PREOPT := true
++LOCAL_OVERRIDES_PACKAGES := LatinIME LatinImeGoogle
++LOCAL_SRC_FILES := $(LOCAL_MODULE).apk
++
++include $(BUILD_PREBUILT)
+\ No newline at end of file
+Index: vendor/customer/apps/Gboard/Gboard.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/Gboard/Gboard.apk
+===================================================================
+--- vendor/customer/apps/Gboard/Gboard.apk	(revision 0)
++++ vendor/customer/apps/Gboard/Gboard.apk	(revision 4020)
+
+Property changes on: vendor/customer/apps/Gboard/Gboard.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

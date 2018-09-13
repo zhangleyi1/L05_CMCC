@@ -1,0 +1,23 @@
+Index: packages/apps/Email/res/xml/providers.xml
+===================================================================
+--- packages/apps/Email/res/xml/providers.xml	(revision 4156)
++++ packages/apps/Email/res/xml/providers.xml	(revision 4157)
+@@ -125,6 +125,18 @@
+     -->
+ 
+ <providers>
++	<provider id="google" label="Google" domain="google.com">
++        <incoming uri="imap+ssl+://imap.gmail.com" username="$email" />
++        <outgoing uri="smtp+ssl+://smtp.gmail.com" username="$email" />
++    </provider>
++    <provider id="android" label="Android" domain="android.com">
++        <incoming uri="imap+ssl+://imap.gmail.com" username="$email" />
++        <outgoing uri="smtp+ssl+://smtp.gmail.com" username="$email" />
++    </provider>
++    <provider id="chromium" label="Chromium" domain="chromium.org" oauth="google">
++        <incoming uri="imap+ssl+://imap.gmail.com" username="$email" />
++        <outgoing uri="smtp+ssl+://smtp.gmail.com" username="$email" />
++    </provider>
+     <!-- M: CHINA -->
+     <provider id="163" label="163Mail" domain="163.com">
+         <incoming uri="imap+ssl+trustallcerts://imap.163.com" username="$email" />

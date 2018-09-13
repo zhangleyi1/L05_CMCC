@@ -1,0 +1,74 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/QuickStatusBarHeader.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/QuickStatusBarHeader.java	(revision 5076)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/QuickStatusBarHeader.java	(revision 5077)
+@@ -35,6 +35,7 @@
+ import com.android.internal.logging.MetricsLogger;
+ import com.android.internal.logging.MetricsProto;
+ import com.android.keyguard.KeyguardStatusView;
++import com.android.keyguard.CarrierText;
+ import com.android.systemui.FontSizeUtils;
+ import com.android.systemui.R;
+ import com.android.systemui.qs.QSPanel;
+@@ -71,7 +72,7 @@
+ 
+     private ViewGroup mDateTimeGroup;
+     private ViewGroup mDateTimeAlarmGroup;
+-    private TextView mEmergencyOnly;
++    private CarrierText mEmergencyOnly;
+ 
+     protected ExpandableIndicator mExpandIndicator;
+ 
+@@ -100,7 +101,7 @@
+     protected void onFinishInflate() {
+         super.onFinishInflate();
+ 
+-        mEmergencyOnly = (TextView) findViewById(R.id.header_emergency_calls_only);
++        mEmergencyOnly = (CarrierText) findViewById(R.id.header_emergency_calls_only);
+ 
+         mEdit = findViewById(android.R.id.edit);
+         findViewById(android.R.id.edit).setOnClickListener(view ->
+@@ -265,8 +266,9 @@
+     protected void updateVisibilities() {
+         updateAlarmVisibilities();
+         updateDateTimePosition();
+-        mEmergencyOnly.setVisibility(mExpanded && mShowEmergencyCallsOnly
+-                ? View.VISIBLE : View.INVISIBLE);
++//        mEmergencyOnly.setVisibility(mExpanded && mShowEmergencyCallsOnly
++//                ? View.VISIBLE : View.INVISIBLE);
++        mEmergencyOnly.setVisibility(View.VISIBLE);
+         mSettingsContainer.findViewById(R.id.tuner_icon).setVisibility(
+                 TunerService.isTunerEnabled(mContext) ? View.VISIBLE : View.INVISIBLE);
+         final boolean isDemo = UserManager.isDeviceInDemoMode(mContext);
+@@ -276,8 +278,7 @@
+     }
+ 
+     private void updateDateTimePosition() {
+-        mDateTimeAlarmGroup.setTranslationY(mShowEmergencyCallsOnly
+-                ? mExpansionAmount * mDateTimeTranslation : 0);
++        mDateTimeAlarmGroup.setTranslationY(mExpansionAmount * mDateTimeTranslation);
+     }
+ 
+     private void updateListeners() {
+Index: frameworks/base/packages/SystemUI/res/layout/quick_status_bar_expanded_header.xml
+===================================================================
+--- frameworks/base/packages/SystemUI/res/layout/quick_status_bar_expanded_header.xml	(revision 5076)
++++ frameworks/base/packages/SystemUI/res/layout/quick_status_bar_expanded_header.xml	(revision 5077)
+@@ -103,7 +103,7 @@
+ 
+     </LinearLayout>
+ 
+-    <TextView
++    <com.android.keyguard.CarrierText
+         android:id="@+id/header_emergency_calls_only"
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+@@ -113,8 +113,6 @@
+         android:paddingEnd="10dp"
+         android:paddingTop="6dp"
+         android:visibility="gone"
+-        android:textAppearance="@style/TextAppearance.StatusBar.Expanded.EmergencyCallsOnly"
+-        android:text="@*android:string/emergency_calls_only"
+         android:singleLine="true"
+         android:gravity="center_vertical"
+         android:focusable="true" />

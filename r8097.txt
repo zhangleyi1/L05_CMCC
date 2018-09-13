@@ -1,0 +1,24 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java	(revision 8096)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java	(revision 8097)
+@@ -1663,7 +1663,7 @@
+                 knownPrefix = false;
+ 
+                 /// M: Code analyze 022, Add bookmark. Maybe exist multi URL address @{
+-                if (msgItem.isSms() && mURLs.size() <= 0) {
++                if (mURLs.size() <= 0) {
+                     menu.add(0, MENU_ADD_TO_BOOKMARK, 0, R.string.menu_add_to_bookmark)
+                             .setOnMenuItemClickListener(l);
+                     menu.add(0, MENU_OPEN_WITH_BROWSER, 0, R.string.menu_goto_browser)
+@@ -1691,8 +1691,8 @@
+             }
+         }
+         /// M: New plugin API @{
+-        mOpComposeExt.addCallAndContactMenuItems(
+-                this, menu, MENU_ADD_TO_BOOKMARK, mURLs, msgItem);
++        //mOpComposeExt.addCallAndContactMenuItems(
++                //this, menu, MENU_ADD_TO_BOOKMARK, mURLs, msgItem);
+         /// @}
+     }
+ 

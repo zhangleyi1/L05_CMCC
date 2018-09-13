@@ -1,0 +1,15 @@
+Index: frameworks/base/services/core/java/com/android/server/storage/DeviceStorageMonitorService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/storage/DeviceStorageMonitorService.java	(revision 4696)
++++ frameworks/base/services/core/java/com/android/server/storage/DeviceStorageMonitorService.java	(revision 4697)
+@@ -237,7 +237,9 @@
+ 			 }else{
+ 			        mBuilder = null;
+ 				 showLowFreeStorageWarningStrategy(context);
+-				 mDialog = mBuilder.create();
++				 if (mBuilder != null) {
++				     mDialog = mBuilder.create();
++				 }
+ 			 }
+ 		  }
+ 		   if(mDialog !=null ){		   	

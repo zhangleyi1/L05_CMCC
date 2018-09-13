@@ -1,0 +1,13 @@
+Index: build/tools/buildinfo.sh
+===================================================================
+--- build/tools/buildinfo.sh	(revision 9409)
++++ build/tools/buildinfo.sh	(revision 9410)
+@@ -62,7 +62,7 @@
+ echo "# Do not try to parse description, fingerprint, or thumbprint"
+ echo "ro.build.description=$PRIVATE_BUILD_DESC"
+ #echo "ro.build.fingerprint=$BUILD_FINGERPRINT"
+-echo "ro.build.fingerprint=TCL/980CN1/A3A_PLUS:7.1.1/N6F26Q/980CN1_LECN_V2.8_180307:user/release-keys"
++echo "ro.build.fingerprint=TCL/980CN1/A3A_PLUS:7.1.1/N6F26Q/980CN1_LECN_V2.9_180307:user/release-keys"
+ if [ -n "$BUILD_THUMBPRINT" ] ; then
+   echo "ro.build.thumbprint=$BUILD_THUMBPRINT"
+ fi

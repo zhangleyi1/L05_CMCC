@@ -1,0 +1,26 @@
+Index: frameworks/base/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java
+===================================================================
+--- frameworks/base/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java	(revision 4631)
++++ frameworks/base/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java	(revision 4632)
+@@ -2497,7 +2497,7 @@
+             //loadSetting(stmt, Settings.Secure.ADB_ENABLED, 0);
+ 			// Allow def input method
+ 			loadStringSetting(stmt, Settings.Secure.ENABLED_INPUT_METHODS,
+-                    R.string.def_input_method);
++                    R.string.enabled_input_methods);
+ 			loadStringSetting(stmt,Settings.Secure.DEFAULT_INPUT_METHOD,
+ 					R.string.def_input_method);	
+             // Allow mock locations default, based on build
+Index: frameworks/base/packages/SettingsProvider/res/values/defaults.xml
+===================================================================
+--- frameworks/base/packages/SettingsProvider/res/values/defaults.xml	(revision 4631)
++++ frameworks/base/packages/SettingsProvider/res/values/defaults.xml	(revision 4632)
+@@ -225,7 +225,7 @@
+     <integer name="def_navigation_bar_background_index">0</integer>
+     <integer name="def_navigation_bar_background_color">0x00000000</integer>
+ 	
+-	<string name="enabled_input_methods" translatable="false">com.sohu.inputmethod.sogou/.SogouIME</string>
++	<string name="enabled_input_methods" translatable="false">com.sohu.inputmethod.sogou/.SogouIME:com.android.inputmethod.latin/.LatinIME</string>
+ 	<string name="def_input_method">com.sohu.inputmethod.sogou/.SogouIME</string>
+ 	
+ 	

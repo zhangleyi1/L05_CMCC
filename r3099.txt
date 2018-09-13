@@ -1,0 +1,10 @@
+Index: device/ausshine/aus6739_66_n1/system.prop
+===================================================================
+--- device/ausshine/aus6739_66_n1/system.prop	(revision 3098)
++++ device/ausshine/aus6739_66_n1/system.prop	(revision 3099)
+@@ -88,4 +88,4 @@
+ 
+ ro.business.name=TCL V760
+ ro.mtk_gemini_support = 1
+-persist.sys.timezone = Asia/Beijing
++persist.sys.timezone = Asia/Shanghai

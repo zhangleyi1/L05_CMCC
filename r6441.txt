@@ -1,0 +1,28 @@
+Index: packages/apps/Settings/src/com/android/settings/bluetooth/BluetoothPairingRequest.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/bluetooth/BluetoothPairingRequest.java	(revision 6440)
++++ packages/apps/Settings/src/com/android/settings/bluetooth/BluetoothPairingRequest.java	(revision 6441)
+@@ -68,11 +68,11 @@
+             String deviceName = device != null ? device.getName() : null;
+             boolean shouldShowDialog= LocalBluetoothPreferences.shouldShowDialogInForeground(
+                         context, deviceAddress, deviceName);
+-            if (powerManager.isInteractive() && shouldShowDialog) {
++            //if (powerManager.isInteractive() && shouldShowDialog) {
+                 // Since the screen is on and the BT-related activity is in the foreground,
+                 // just open the dialog
+-                context.startActivity(pairingIntent);
+-            } else {
++            context.startActivity(pairingIntent);
++            /*} else {
+                 // Put up a notification that leads to the dialog
+                 Resources res = context.getResources();
+                 Notification.Builder builder = new Notification.Builder(context)
+@@ -99,7 +99,7 @@
+                 NotificationManager manager = (NotificationManager)
+                         context.getSystemService(Context.NOTIFICATION_SERVICE);
+                 manager.notify(NOTIFICATION_ID, builder.getNotification());
+-            }
++            }*/
+ 
+         } else if (action.equals(BluetoothDevice.ACTION_PAIRING_CANCEL)) {
+ 

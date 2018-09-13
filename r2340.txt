@@ -1,0 +1,12 @@
+Index: vendor/customer/Android.mk
+===================================================================
+--- vendor/customer/Android.mk	(revision 2339)
++++ vendor/customer/Android.mk	(revision 2340)
+@@ -1112,6 +1112,7 @@
+ LOCAL_SRC_FILES := apps/SogouInput/SogouInput_android_v8.15_sweb.apk
+ LOCAL_MODULE_CLASS := APPS
+ LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
++LOCAL_OVERRIDES_PACKAGES := LatinIME
+ LOCAL_CERTIFICATE := PRESIGNED
+ LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app
+ LOCAL_DEX_PREOPT := true

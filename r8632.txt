@@ -1,0 +1,23 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MusicBrowserActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MusicBrowserActivity.java	(revision 8631)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MusicBrowserActivity.java	(revision 8632)
+@@ -85,6 +85,7 @@
+     private static final String PLAYLIST = "Playlist";
+     private static final String PLAYBACK = "Playback";
+     private static final String SAVE_TAB = "activetab";
++	public static final String REMOVE_ACTION = "com.android.music.musicservicecommand.remove";
+     static final int ARTIST_INDEX = 0;
+     static final int ALBUM_INDEX = 1;
+     static final int SONG_INDEX = 2;
+@@ -301,6 +302,10 @@
+         unregisterReceiver(mSdcardstatustListener);
+         mActivityManager.dispatchDestroy(false);
+         }
++		Intent intent = new Intent();
++		intent.setAction(REMOVE_ACTION);
++		this.sendBroadcast(intent);
++		MusicLogUtils.d("yujunjie", "MusicBrowserActivity: onDestroy()... ");
+         super.onDestroy();
+     }
+ 

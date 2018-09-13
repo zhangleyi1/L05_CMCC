@@ -1,0 +1,89 @@
+Index: packages/apps/Dialer/InCallUI/src/com/android/incallui/widget/multiwaveview/GlowPadView.java
+===================================================================
+--- packages/apps/Dialer/InCallUI/src/com/android/incallui/widget/multiwaveview/GlowPadView.java	(revision 8256)
++++ packages/apps/Dialer/InCallUI/src/com/android/incallui/widget/multiwaveview/GlowPadView.java	(revision 8257)
+@@ -70,7 +70,7 @@
+  */
+ public class GlowPadView extends View {
+     private static final String TAG = "GlowPadView";
+-    private static final boolean DEBUG = false;
++    private static final boolean DEBUG = true;
+ 
+     // Wave state machine
+     private static final int STATE_IDLE = 0;
+Index: packages/apps/Dialer/InCallUI/src/com/android/incallui/widget/multiwaveview/TargetDrawable.java
+===================================================================
+--- packages/apps/Dialer/InCallUI/src/com/android/incallui/widget/multiwaveview/TargetDrawable.java	(revision 8256)
++++ packages/apps/Dialer/InCallUI/src/com/android/incallui/widget/multiwaveview/TargetDrawable.java	(revision 8257)
+@@ -26,7 +26,7 @@
+ 
+ public class TargetDrawable {
+     private static final String TAG = "TargetDrawable";
+-    private static final boolean DEBUG = false;
++    private static final boolean DEBUG = true;
+ 
+     public static final int[] STATE_ACTIVE =
+             { android.R.attr.state_enabled, android.R.attr.state_active };
+Index: packages/apps/Dialer/InCallUI/src/com/android/incallui/widget/multiwaveview/Tweener.java
+===================================================================
+--- packages/apps/Dialer/InCallUI/src/com/android/incallui/widget/multiwaveview/Tweener.java	(revision 8256)
++++ packages/apps/Dialer/InCallUI/src/com/android/incallui/widget/multiwaveview/Tweener.java	(revision 8257)
+@@ -32,7 +32,7 @@
+ 
+ class Tweener {
+     private static final String TAG = "Tweener";
+-    private static final boolean DEBUG = false;
++    private static final boolean DEBUG = true;
+ 
+     ObjectAnimator animator;
+     private static HashMap<Object, Tweener> sTweens = new HashMap<Object, Tweener>();
+Index: packages/apps/Dialer/InCallUI/src/com/android/incallui/AccelerometerListener.java
+===================================================================
+--- packages/apps/Dialer/InCallUI/src/com/android/incallui/AccelerometerListener.java	(revision 8256)
++++ packages/apps/Dialer/InCallUI/src/com/android/incallui/AccelerometerListener.java	(revision 8257)
+@@ -33,7 +33,7 @@
+ public class AccelerometerListener {
+     private static final String TAG = "AccelerometerListener";
+     private static final boolean DEBUG = true;
+-    private static final boolean VDEBUG = false;
++    private static final boolean VDEBUG = true;
+ 
+     private SensorManager mSensorManager;
+     private Sensor mSensor;
+Index: packages/apps/Dialer/InCallUI/src/com/android/incallui/Log.java
+===================================================================
+--- packages/apps/Dialer/InCallUI/src/com/android/incallui/Log.java	(revision 8256)
++++ packages/apps/Dialer/InCallUI/src/com/android/incallui/Log.java	(revision 8257)
+@@ -41,13 +41,13 @@
+ 
+     /// M: Optimize log output
+     private static final String PROP_FORCE_DEBUG_KEY = "persist.log.tag.tel_dbg";
+-    public static final boolean FORCE_DEBUG =
+-            (SystemProperties.getInt(PROP_FORCE_DEBUG_KEY, 0) == 1); /* STOPSHIP if true */
++    public static final boolean FORCE_DEBUG = true;
++           // (SystemProperties.getInt(PROP_FORCE_DEBUG_KEY, 0) == 1); /* STOPSHIP if true */
+     /// @}
+-    public static final boolean DEBUG = FORCE_DEBUG ||
+-            android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
+-    public static final boolean VERBOSE = FORCE_DEBUG ||
+-            android.util.Log.isLoggable(TAG, android.util.Log.VERBOSE);
++    public static final boolean DEBUG = true;//FORCE_DEBUG ||
++            //android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
++    public static final boolean VERBOSE = true;//FORCE_DEBUG ||
++            //android.util.Log.isLoggable(TAG, android.util.Log.VERBOSE);
+     public static final String TAG_DELIMETER = " - ";
+ 
+     public static void d(String tag, String msg) {
+Index: packages/apps/Dialer/InCallUI/src/com/android/incallui/InCallAnimationUtils.java
+===================================================================
+--- packages/apps/Dialer/InCallUI/src/com/android/incallui/InCallAnimationUtils.java	(revision 8256)
++++ packages/apps/Dialer/InCallUI/src/com/android/incallui/InCallAnimationUtils.java	(revision 8257)
+@@ -35,7 +35,7 @@
+      * Turn on when you're interested in fading animation. Intentionally untied from other debug
+      * settings.
+      */
+-    private static final boolean FADE_DBG = false;
++    private static final boolean FADE_DBG = true;
+ 
+     /**
+      * Duration for animations in msec, which can be used with

@@ -1,0 +1,21 @@
+Index: frameworks/base/core/res/res/values-zh-rCN/strings.xml
+===================================================================
+--- frameworks/base/core/res/res/values-zh-rCN/strings.xml	(revision 4772)
++++ frameworks/base/core/res/res/values-zh-rCN/strings.xml	(revision 4773)
+@@ -1689,4 +1689,16 @@
+ 	<string name="face_verify_fail_tip">验证失败 </string>
+     <string name="face_verify_timeout_tip">没有检测到人脸</string>
+ 	<string name="shutdown_poweroff">"确定"</string>
++	
++	<string name="low_storage_view_title_500m">存储小于500MB</string>
++	<string name="low_storage_view_title_100m">存储小于100MB</string>
++	<string name="low_storage_view_title_50m">存储小于50MB</string>
++	
++	<string name="low_storage_warning_message_500m">应用程序现在可以正常工作。你想释放空间吗？ 别再提醒我了.</string>
++	<string name="low_storage_warning_message_100m">Wi-Fi和移动数据被禁用.应用可能会停止工作。 你想释放空间吗？</string>
++	<string name="low_storage_warning_message_50m">Wi-Fi和移动数据被禁用.应用可能会停止工作。 你想释放空间吗？</string>
++	
++	<string name="free_memory_ignore_btn">忽略</string>
++	<string name="free_memory_free_up_space_btn">释放空间</string>
++	
+     </resources>

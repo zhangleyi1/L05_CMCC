@@ -1,0 +1,48 @@
+Index: vendor/mediatek/proprietary/packages/apps/BrowserOverlay/res/values/isdm_BrowserRes_defaults.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BrowserOverlay/res/values/isdm_BrowserRes_defaults.xml	(revision 3580)
++++ vendor/mediatek/proprietary/packages/apps/BrowserOverlay/res/values/isdm_BrowserRes_defaults.xml	(revision 3581)
+@@ -24,43 +24,6 @@
+ -->
+ <resources>
+     <string name="def_browser_homepage_base">"http://go.10086.cn/rd/go/dh/"</string>
+-
+-    <string name="def_browser_bookmark1_name">"MM网"</string>
+-    <string name="def_browser_bookmark1_url">"http://a.10086.cn/j/6601/"</string>
+-    <string name="def_browser_bookmark1_value">"1"</string>
+-
+-    <string name="def_browser_bookmark2_name">"手机阅读"</string>
+-    <string name="def_browser_bookmark2_url">"http://wap.cmread.com"</string>
+-    <string name="def_browser_bookmark2_value">"1"</string>
+-
+-    <string name="def_browser_bookmark3_name">"手机游戏"</string>
+-    <string name="def_browser_bookmark3_url">"http://g.10086.cn"</string>
+-    <string name="def_browser_bookmark3_value">"1"</string>
+-
+-    <string name="def_browser_bookmark4_name">"手机视频"</string>
+-    <string name="def_browser_bookmark4_url">"http://wap.cmvideo.cn"</string>
+-    <string name="def_browser_bookmark4_value">"1"</string>
+-
+-    <string name="def_browser_bookmark5_name">"无线音乐"</string>
+-    <string name="def_browser_bookmark5_url">"http://m.10086.cn/wireless/html5/index.html"</string>
+-    <string name="def_browser_bookmark5_value">"1"</string>
+-
+-    <string name="def_browser_bookmark6_name">"冲浪网址"</string>
+-    <string name="def_browser_bookmark6_url">"http://go.10086.cn/?coc=6GG2GGRq"</string>
+-    <string name="def_browser_bookmark6_value">"1"</string>
+-
+-    <string name="def_browser_bookmark7_name">"飞信首页"</string>
+-    <string name="def_browser_bookmark7_url">"http://f.10086.cn"</string>
+-    <string name="def_browser_bookmark7_value">"1"</string>
+-
+-    <string name="def_browser_bookmark8_name">"139邮箱"</string>
+-    <string name="def_browser_bookmark8_url">"http://mail.10086.cn"</string>
+-    <string name="def_browser_bookmark8_value">"1"</string>
+-
+-    <string name="def_browser_bookmark9_name">"12580"</string>
+-    <string name="def_browser_bookmark9_url">"http://12580wap.10086.cn/?pid=PCM002942000"</string>
+-    <string name="def_browser_bookmark9_value">"1"</string>
+-
+     <string name="def_uaProfUrl_forBrowser">"http://www-ccpp.tcl-ta.com/files/980cn1.xml"</string>
+     <string name="def_browser_useragent">"Mozilla/5.0 (Linux; Android 7.1.1;zh-cn;980CN1 Build/N6F26Q) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/59.0.3071.125 Mobile Safari/537.36 Hawk/TurboBrowser/v2.0.0.1.0177.0_0818"</string>
+ </resources>

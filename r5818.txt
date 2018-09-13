@@ -1,0 +1,32 @@
+Index: vendor/customer/apps/HiLauncher/launcherPro_HiLauncher_V1.3.0.180109.1_cn_p_118010901_2018010919_cn_release_tclsign.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HiLauncher/Android.mk
+===================================================================
+--- vendor/customer/apps/HiLauncher/Android.mk	(revision 5817)
++++ vendor/customer/apps/HiLauncher/Android.mk	(revision 5818)
+@@ -3,7 +3,7 @@
+ include $(CLEAR_VARS)
+ LOCAL_MODULE := HiLauncher
+ LOCAL_MODULE_TAGS := optional
+-LOCAL_SRC_FILES := launcherPro_HiLauncher_V1.3.0.180109.1_cn_p_118010901_2018010919_cn_release_tclsign.apk
++LOCAL_SRC_FILES := launcherPro_HiLauncher_V1.3.0.180111.1_cn_p_118011101_2018011115_cn_release_sign.apk
+ LOCAL_MODULE_CLASS := APPS
+ LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+ LOCAL_PRIVILEGED_MODULE := true
+Index: vendor/customer/apps/HiLauncher/launcherPro_HiLauncher_V1.3.0.180111.1_cn_p_118011101_2018011115_cn_release_sign.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HiLauncher/launcherPro_HiLauncher_V1.3.0.180111.1_cn_p_118011101_2018011115_cn_release_sign.apk
+===================================================================
+--- vendor/customer/apps/HiLauncher/launcherPro_HiLauncher_V1.3.0.180111.1_cn_p_118011101_2018011115_cn_release_sign.apk	(revision 0)
++++ vendor/customer/apps/HiLauncher/launcherPro_HiLauncher_V1.3.0.180111.1_cn_p_118011101_2018011115_cn_release_sign.apk	(revision 5818)
+
+Property changes on: vendor/customer/apps/HiLauncher/launcherPro_HiLauncher_V1.3.0.180111.1_cn_p_118011101_2018011115_cn_release_sign.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

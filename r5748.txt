@@ -1,0 +1,30 @@
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/lib/armeabi/libinit_thh.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: device/mediatek/mt6739/init.microtrust.rc
+===================================================================
+--- device/mediatek/mt6739/init.microtrust.rc	(revision 5747)
++++ device/mediatek/mt6739/init.microtrust.rc	(revision 5748)
+@@ -104,9 +104,6 @@
+     start init_thh_service
+     start ifaad
+ 
+-on property:soter.teei.thh.init=INIT_END
+-    start check_ifaa_service
+-
+ service init_thh_service /vendor/bin/init_thh startload
+     class core
+     user system
+@@ -128,11 +125,3 @@
+     user system
+     group system shell
+     disabled
+-
+-# check ifaa key
+-service check_ifaa_service /vendor/bin/init_thh export -t tee1 -p pubkey
+-    class core
+-    user system
+-    group system
+-    disabled
+-    oneshot

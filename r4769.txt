@@ -1,0 +1,18 @@
+Index: device/mediatek/common/sepolicy/bsp/mtkfusionrild.te
+===================================================================
+--- device/mediatek/common/sepolicy/bsp/mtkfusionrild.te	(revision 4768)
++++ device/mediatek/common/sepolicy/bsp/mtkfusionrild.te	(revision 4769)
+@@ -11,3 +11,4 @@
+ allow mtkfusionrild cdma_prop:property_service set;
+ allow mtkfusionrild toolbox_exec:file execute_no_trans;
+ set_prop(mtkfusionrild,mtk_net_ipv6_prop)
++allow mtkfusionrild nvram_device:blk_file {read open write};
+Index: device/mediatek/common/sepolicy/full/mtkfusionrild.te
+===================================================================
+--- device/mediatek/common/sepolicy/full/mtkfusionrild.te	(revision 4768)
++++ device/mediatek/common/sepolicy/full/mtkfusionrild.te	(revision 4769)
+@@ -12,3 +12,4 @@
+ allow mtkfusionrild cdma_prop:property_service set;
+ allow mtkfusionrild toolbox_exec:file execute_no_trans;
+ set_prop(mtkfusionrild,mtk_net_ipv6_prop)
++allow mtkfusionrild nvram_device:blk_file {read open write};

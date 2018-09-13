@@ -1,0 +1,15 @@
+Index: frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 11777)
++++ frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 11778)
+@@ -866,7 +866,9 @@
+                     executeFaceVerifyFail();
+                     break;
+                 case MSG_NO_FACE_VERITY:
+-                    executeFaceVerifyTimeout();
++					if(keyguardOn()){
++						executeFaceVerifyTimeout();
++					}
+                     break;
+                 case MSG_EXIT_FACE_VERIFY:
+                     exitFaceVerify();

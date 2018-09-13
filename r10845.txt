@@ -1,0 +1,75 @@
+Index: frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 10844)
++++ frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 10845)
+@@ -3314,7 +3314,8 @@
+         if (keyCode == KeyEvent.KEYCODE_HOME) {
+ 			ActivityManager activityManager = (ActivityManager)mContext.getSystemService(Context.ACTIVITY_SERVICE);
+             ComponentName topActivity = activityManager.getRunningTasks(1).get(0).topActivity;
+-            if (topActivity.getPackageName().equals("com.mediatek.factorymode") || topActivity.getPackageName().equals("com.android.mmi")){
++            if (topActivity.getPackageName().equals("com.mediatek.factorymode") || topActivity.getPackageName().equals("com.android.mmi") 
++                || topActivity.getClassName().equals("com.android.systemui.NavigationBarTipsActivity")){
+                 return 0;
+             }
+             // If we have released the home key, and didn't do anything else
+Index: frameworks/base/packages/SystemUI/AndroidManifest.xml
+===================================================================
+--- frameworks/base/packages/SystemUI/AndroidManifest.xml	(revision 10844)
++++ frameworks/base/packages/SystemUI/AndroidManifest.xml	(revision 10845)
+@@ -609,5 +609,10 @@
+     <protected-broadcast android:name="com.android.deskclock.SNOOZE_ALARM" />
+     <protected-broadcast android:name="com.android.deskclock.DISMISS_ALARM" />
+     <protected-broadcast android:name="com.android.deskclock.POWER_ON_ALARM" />
++    
++    <protected-broadcast android:name="android.intent.action.RESET_NAVIGATION_BAR" />
++    <protected-broadcast android:name="android.intent.action.NAVIGATION_BAR_TIPS_ANIMATION_FINISH" />
++    <protected-broadcast android:name="com.gome.bootwizard.started" />
++    <protected-broadcast android:name="com.gome.bootwizard.stoped" />
+ 
+ </manifest>
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java	(revision 10844)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java	(revision 10845)
+@@ -5712,6 +5712,19 @@
+         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+         mContext.startActivity(intent);
+         mNavigationBarView.updateNailIcon();
++        mHandler.postDelayed(new Runnable() {
++            @Override
++            public void run() {
++                ActivityManager activityManager = (ActivityManager)mContext.getSystemService(Context.ACTIVITY_SERVICE);
++                ComponentName topActivity = activityManager.getRunningTasks(1).get(0).topActivity;
++                Log.d(TAG, "startNavigationBarTipsAnimations: ClassName = " + topActivity.getClassName());
++                if(!topActivity.getClassName().equals("com.android.systemui.NavigationBarTipsActivity")) {
++                    Settings.Global.putInt(mContext.getContentResolver(), "navigation_bar_tips_animation", 0);
++                    Intent it = new Intent("android.intent.action.NAVIGATION_BAR_TIPS_ANIMATION_FINISH");
++                    mContext.sendBroadcast(it);
++                }
++            }
++        }, 35000);
+     }
+     
+     final private ContentObserver mDeviceProvisionedObserver = new ContentObserver(mHandler) {
+@@ -5729,7 +5742,7 @@
+                     public void run() {
+                         startNavigationBarTipsAnimations();
+                     }
+-                }, 6000);
++                }, 7000);
+             }
+         }
+     };
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/NavigationBarTipsActivity.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/NavigationBarTipsActivity.java	(revision 10844)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/NavigationBarTipsActivity.java	(revision 10845)
+@@ -52,6 +52,8 @@
+         getWindow().getAttributes().privateFlags |=
+                 WindowManager.LayoutParams.PRIVATE_FLAG_FORCE_DECOR_VIEW_VISIBILITY;
+         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
++        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
++        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_GESTURE_ISOLATED);
+                 
+         mNavigationBarAnimationText = (TextView)findViewById(R.id.navigation_bar_tips_msg);
+         mNavigationBarSettingButton = (Button)findViewById(R.id.navigation_bar_tips_settings_butn);

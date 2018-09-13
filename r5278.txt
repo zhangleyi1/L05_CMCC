@@ -1,0 +1,15 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java	(revision 5277)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/android/mms/ui/ComposeMessageActivity.java	(revision 5278)
+@@ -3902,6 +3902,10 @@
+                 invalidateOptionsMenu();
+             }
+         }
++
++        if (mWorkingMessage != null && mWorkingMessage.getConversation().hasDraft()) {
++            loadDraft();
++        }
+     }
+ 
+     @Override

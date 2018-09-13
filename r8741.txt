@@ -1,0 +1,26 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java	(revision 8740)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java	(revision 8741)
+@@ -68,10 +68,10 @@
+ 		isWarning = true;
+         while (isWarning) {  
+             try {
+-                Thread.sleep(1000);// �߳���ͣ1�룬��λ����  
++                Thread.sleep(1000);
+                 Message message = new Message();  
+                 message.what = 1;  
+-                mHandler.sendMessage(message);// ������Ϣ  
++                mHandler.sendMessage(message); 
+             } catch (InterruptedException e) {  
+                 e.printStackTrace();  
+             }  
+@@ -78,7 +78,7 @@
+         }  
+ 		Message message = new Message();  
+         message.what = 2;  
+-        mHandler.sendMessage(message);// ������Ϣ  
++        mHandler.sendMessage(message);
+ 		isWarning = false;
+     }  
+ }  

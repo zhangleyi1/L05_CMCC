@@ -1,0 +1,19 @@
+Index: vendor/mediatek/proprietary/hardware/audio/mt6739/aud_drv/AudioALSAStreamManager.cpp
+===================================================================
+--- vendor/mediatek/proprietary/hardware/audio/mt6739/aud_drv/AudioALSAStreamManager.cpp	(revision 14128)
++++ vendor/mediatek/proprietary/hardware/audio/mt6739/aud_drv/AudioALSAStreamManager.cpp	(revision 14129)
+@@ -796,10 +796,10 @@
+         {
+             pCaptureHandler = new AudioALSACaptureHandlerSyncIO(stream_attribute_target);
+         }
+-        else if (isModeInPhoneCall() == true)
+-        //else if ((stream_attribute_target->input_source == AUDIO_SOURCE_VOICE_UPLINK) || (stream_attribute_target->input_source == AUDIO_SOURCE_VOICE_DOWNLINK) ||
+-         //        (stream_attribute_target->input_source == AUDIO_SOURCE_VOICE_CALL) ||
+-         //        ((isModeInPhoneCall() == true) && (WCNChipController::GetInstance()->IsBTMergeInterfaceSupported() == false) && (stream_attribute_target->input_device == AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET)))
++        //else if (isModeInPhoneCall() == true)
++        else if ((stream_attribute_target->input_source == AUDIO_SOURCE_VOICE_UPLINK) || (stream_attribute_target->input_source == AUDIO_SOURCE_VOICE_DOWNLINK) ||
++                 (stream_attribute_target->input_source == AUDIO_SOURCE_VOICE_CALL) ||
++                 ((isModeInPhoneCall() == true) && (WCNChipController::GetInstance()->IsBTMergeInterfaceSupported() == false) && (stream_attribute_target->input_device == AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET)))
+         {
+             if ((isModeInPhoneCall() == false) ||
+                 (SpeechDriverFactory::GetInstance()->GetSpeechDriver()->GetApSideModemStatus(SPEECH_STATUS_MASK) == false))

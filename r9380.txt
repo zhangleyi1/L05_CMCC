@@ -1,0 +1,42 @@
+Index: frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 9379)
++++ frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 9380)
+@@ -1121,6 +1121,9 @@
+                         + ", tag=\"" + tag + "\", ws=" + ws + ", uid=" + uid + ", pid=" + pid);
+             }
+ 
++            // Techain modify for 121355 by zhangle at 2018/03/07 start
++            if(packageName.contains("com.tencent.mobileqq") && !isInteractiveInternal()) {return;}
++            // Techain modify for 121355 by zhangle at 2018/03/07 end
+             WakeLock wakeLock;
+             int index = findWakeLockIndexLocked(lock);
+             boolean notifyAcquire;
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/BaseStatusBar.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/BaseStatusBar.java	(revision 9379)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/BaseStatusBar.java	(revision 9380)
+@@ -2316,7 +2316,10 @@
+         // Add the expanded view and icon.
+         mNotificationData.add(entry, ranking);
+         updateNotifications();
+-	if(!mPowerManager.isScreenOn() && entry.key!= null && (entry.key.contains("com.android.mms") || entry.key.contains("com.tencent.mm"))){
++    // Techain modify for 121355 by zhangle at 2018/03/07 start
++	// if(!mPowerManager.isScreenOn() && entry.key!= null && (entry.key.contains("com.android.mms") || entry.key.contains("com.tencent.mm"))){
++	if(!mPowerManager.isScreenOn() && entry.key!= null && (entry.key.contains("com.android.mms"))){
++    // Techain modify for 121355 by zhangle at 2018/03/07 end
+ 		mNotificationWakeLock.acquire(6000);
+ 	}
+ 	 
+@@ -2568,7 +2571,10 @@
+         final RemoteViews headsUpContentView = entry.cachedHeadsUpContentView;
+         final RemoteViews publicContentView = entry.cachedPublicContentView;
+ 
+-	 if(!mPowerManager.isScreenOn() && entry.key!= null && (entry.key.contains("com.android.mms") || entry.key.contains("com.tencent.mm"))){
++    // Techain modify for 121355 by zhangle at 2018/03/07 start
++     // if(!mPowerManager.isScreenOn() && entry.key!= null && (entry.key.contains("com.android.mms") || entry.key.contains("com.tencent.mm"))){
++     if(!mPowerManager.isScreenOn() && entry.key!= null && (entry.key.contains("com.android.mms"))){
++    // Techain modify for 121355 by zhangle at 2018/03/07 end
+ 		mNotificationWakeLock.acquire(6000);
+ 	}
+         // Reapply the RemoteViews

@@ -1,0 +1,85 @@
+Index: vendor/customer/apps/CameraTcl/Camera_v8.1.4.1.0019.0_for_A3PLUS.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/CameraTcl/Camera_v8.1.4.1.0027.0_for_A3PLUS.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/CameraTcl/Camera_v8.1.4.1.0027.0_for_A3PLUS.apk
+===================================================================
+--- vendor/customer/apps/CameraTcl/Camera_v8.1.4.1.0027.0_for_A3PLUS.apk	(revision 0)
++++ vendor/customer/apps/CameraTcl/Camera_v8.1.4.1.0027.0_for_A3PLUS.apk	(revision 12889)
+
+Property changes on: vendor/customer/apps/CameraTcl/Camera_v8.1.4.1.0027.0_for_A3PLUS.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/CameraTcl/Android.mk
+===================================================================
+--- vendor/customer/apps/CameraTcl/Android.mk	(revision 12888)
++++ vendor/customer/apps/CameraTcl/Android.mk	(revision 12889)
+@@ -3,7 +3,7 @@
+ include $(CLEAR_VARS)
+ LOCAL_MODULE := CameraTcl
+ LOCAL_MODULE_TAGS := optional
+-LOCAL_SRC_FILES := Camera_v8.1.4.1.0019.0_for_A3PLUS.apk
++LOCAL_SRC_FILES := Camera_v8.1.4.1.0027.0_for_A3PLUS.apk
+ LOCAL_MODULE_CLASS := APPS
+ LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+ LOCAL_CERTIFICATE := platform
+@@ -12,7 +12,9 @@
+ LOCAL_TARGET_CPU_ABI := armeabi-v7a
+ LOCAL_PREBUILT_JNI_LIBS := lib/$(LOCAL_TARGET_CPU_ABI)/libmorpho_memory_allocator.so \
+                            lib/$(LOCAL_TARGET_CPU_ABI)/libmorpho_panorama_gp.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libmorpho_panorama_selfie.so
++                           lib/$(LOCAL_TARGET_CPU_ABI)/libmorpho_panorama_selfie.so \
++						   lib/$(LOCAL_TARGET_CPU_ABI)/libjni_stereoinfoaccessor.so \
++						   lib/$(LOCAL_TARGET_CPU_ABI)/libstereoinfoaccessor.so
+ LOCAL_OVERRIDES_PACKAGES := Camera Camera2
+ LOCAL_MULTILIB :=32
+ include $(BUILD_PREBUILT)
+\ No newline at end of file
+Index: vendor/customer/apps/CameraTcl/lib/armeabi-v7a/libjni_stereoinfoaccessor.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/CameraTcl/lib/armeabi-v7a/libjni_stereoinfoaccessor.so
+===================================================================
+--- vendor/customer/apps/CameraTcl/lib/armeabi-v7a/libjni_stereoinfoaccessor.so	(revision 0)
++++ vendor/customer/apps/CameraTcl/lib/armeabi-v7a/libjni_stereoinfoaccessor.so	(revision 12889)
+
+Property changes on: vendor/customer/apps/CameraTcl/lib/armeabi-v7a/libjni_stereoinfoaccessor.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/CameraTcl/lib/armeabi-v7a/libstereoinfoaccessor.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/CameraTcl/lib/armeabi-v7a/libstereoinfoaccessor.so
+===================================================================
+--- vendor/customer/apps/CameraTcl/lib/armeabi-v7a/libstereoinfoaccessor.so	(revision 0)
++++ vendor/customer/apps/CameraTcl/lib/armeabi-v7a/libstereoinfoaccessor.so	(revision 12889)
+
+Property changes on: vendor/customer/apps/CameraTcl/lib/armeabi-v7a/libstereoinfoaccessor.so
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/CameraTcl
+===================================================================
+--- vendor/customer/apps/CameraTcl	(revision 12888)
++++ vendor/customer/apps/CameraTcl	(revision 12889)
+
+Property changes on: vendor/customer/apps/CameraTcl
+___________________________________________________________________
+Added: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/vendor/customer/apps/CameraTcl:r1989,2001,2271-2272,2850-2851,2854,3750-3752,3877,12538-12539
+   Merged /mtk_release_version/MT6739/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/vendor/customer/apps/CameraTcl:r1010-2762
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-OF.P53_K39V1_INHOUSE/vendor/customer/apps/CameraTcl:r514,535,635,733,779,859-861

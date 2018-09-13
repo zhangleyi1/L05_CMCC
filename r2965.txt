@@ -1,0 +1,150 @@
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/AndroidManifest.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/AndroidManifest.xml	(revision 2964)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/AndroidManifest.xml	(revision 2965)
+@@ -42,6 +42,7 @@
+     <uses-permission android:name="android.permission.DEVICE_POWER" />
+     <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/> 
+ 	<uses-permission android:name="android.permission.SHUTDOWN"/>
++	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+     <application
+         android:allowBackup="true"
+         android:icon="@drawable/ic_launcher"
+@@ -191,7 +192,10 @@
+         <activity
+              android:name=".batterylevel.BatteryLevel"
+              android:screenOrientation="portrait" />
+-            
++		<activity
++             android:name=".AutoTestFinish"
++             android:screenOrientation="portrait" />
++    
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 2964)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/MMITestDevice.java	(revision 2965)
+@@ -357,6 +357,9 @@
+ 					Tracability.setMMITestResult((byte)0);
+ 				}else{
+ 					Tracability.setMMITestResult((byte)1);
++					Intent i =new Intent();
++					i.setClass(this, AutoTestFinish.class);
++					startActivity(i);
+ 				}
+ 			} else {
+ 				TestSelectedItem(autotestitem[currenttestitem]);
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/AutoTestFinish.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/AutoTestFinish.java	(revision 0)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/AutoTestFinish.java	(revision 2965)
+@@ -0,0 +1,55 @@
++package com.android.mmi;
++
++
++import android.app.Activity;
++import android.content.Intent;
++import android.os.Bundle;
++import android.view.View;
++import android.view.View.OnClickListener;
++import android.widget.Button;
++import android.widget.TextView;
++import android.view.Window;
++import android.view.WindowManager;
++
++public class AutoTestFinish extends Activity implements OnClickListener{
++   // TextView result ;
++    Button restart;
++    Button poweroff ;
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++		
++		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
++				WindowManager.LayoutParams.FLAG_FULLSCREEN);
++		getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_GESTURE_ISOLATED);
++		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); 
++        
++        setContentView(R.layout.testfinish);
++        restart =(Button) findViewById(R.id.restart);
++        poweroff =(Button) findViewById(R.id.poweroff);
++        restart.setOnClickListener(this);
++        poweroff.setOnClickListener(this);
++    }
++
++    @Override
++    public void onClick(View key) {
++        // TODO Auto-generated method stub
++        switch (key.getId()) {
++        case R.id.restart:
++            Intent i =new Intent();
++					i.setClass(this, MMITestDevice.class);
++					startActivity(i);
++			
++            break;
++        case R.id.poweroff:
++			Intent intent = new Intent("android.intent.action.ACTION_REQUEST_SHUTDOWN");
++            intent.putExtra("android.intent.extra.KEY_CONFIRM", false);
++            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
++            startActivity(intent);
++        break;
++
++        default:
++            break;
++        }
++    }
++
++}
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/layout/testfinish.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/layout/testfinish.xml	(revision 0)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/layout/testfinish.xml	(revision 2965)
+@@ -0,0 +1,45 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++	android:background="@color/green"
++     >
++
++    <TextView
++        android:id="@+id/textView1"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_centerHorizontal="true"
++        android:text="@string/autotest_name" />
++
++    <TextView
++        android:id="@+id/textView2"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_centerInParent="true"
++        android:text="@string/all_passed" />
++
++    <LinearLayout
++        android:id="@+id/linearLayout1"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_alignParentBottom="true"
++        android:orientation="horizontal" >
++
++        <Button
++            android:id="@+id/restart"
++            android:layout_width="0dp"
++            android:layout_weight="1"
++            android:layout_height="wrap_content"
++            android:text="@string/restart" />
++
++        <Button
++            android:id="@+id/poweroff"
++            android:layout_width="0dp"
++            android:layout_weight="1"
++            android:layout_height="wrap_content"
++            android:layout_marginBottom="22dp"
++            android:text="@string/power_off" />
++    </LinearLayout>
++
++</RelativeLayout>
+\ No newline at end of file

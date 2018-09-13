@@ -1,0 +1,21 @@
+Index: frameworks/base/services/core/java/com/android/server/audio/AudioService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/audio/AudioService.java	(revision 3689)
++++ frameworks/base/services/core/java/com/android/server/audio/AudioService.java	(revision 3690)
+@@ -5712,9 +5712,14 @@
+     }
+ 
+     private boolean readCameraSoundForced() {
+-        return  true;/*SystemProperties.getBoolean("audio.camerasound.force", false) ||
++        AudioManager audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);  
++        int mode = audioManager.getRingerMode(); 
++        if(mode ==AudioManager.RINGER_MODE_SILENT){
++             return true;
++        }
++        return SystemProperties.getBoolean("audio.camerasound.force", false) ||
+                 mContext.getResources().getBoolean(
+-                        com.android.internal.R.bool.config_camera_sound_forced);*/
++                        com.android.internal.R.bool.config_camera_sound_forced);
+     }
+ 
+     /// M: Add for MTK_DOLBY_DAP_SUPPORT @{

@@ -1,0 +1,14 @@
+Index: frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java	(revision 8093)
++++ frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java	(revision 8094)
+@@ -15669,8 +15669,7 @@
+ 		//add by mzj for cts start
+ 		Log.d(TAG, "mzj pkgName := "+ pkgName);
+ 		if (pkgName.equals("com.android.cts.net.hostside") || pkgName.equals("com.android.preconditions.cts") 
+-			|| pkgName.equals("com.android.cts.net.hostside.app2")
+-			|| pkgName.equals("com.android.preconditions.cts")){
++			|| pkgName.equals("com.android.cts.net.hostside.app2")){
+ 	        SystemProperties.set("persist.sys.cts", "1");
+ 	        Log.d(TAG, "set persist.sys.cts = 1");
+ 	    } 

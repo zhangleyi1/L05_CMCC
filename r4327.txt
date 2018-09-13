@@ -1,0 +1,33 @@
+Index: frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml	(revision 4326)
++++ frameworks/base/packages/Keyguard/res/values-zh-rHK/strings.xml	(revision 4327)
+@@ -138,4 +138,6 @@
+     <string name="ic_default_sacn_face_description_info">"請將手機放在離臉部20-50厘米的地方。將面部放置在屏幕上的圓圈上"</string>
+     <string name="ic_default_no_face_data_info">沒有檢測到臉部，請重新在明亮的地方識別</string>
+     <string name="face_face_get">識別失敗</string>
++	<string name="ic_default_start_entry_face_btn">開始錄入</string>
++    <string name="ic_default_entry_face_data_error_info">無法進入，面部識別不成功，請保持前監視器清潔，然後再試一次.</string>
+ </resources>
+Index: frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml	(revision 4326)
++++ frameworks/base/packages/Keyguard/res/values-zh-rTW/strings.xml	(revision 4327)
+@@ -138,4 +138,6 @@
+     <string name="ic_default_sacn_face_description_info">"請將手機放在離臉部20-50厘米的地方。將面部放置在屏幕上的圓圈上"</string>
+     <string name="ic_default_no_face_data_info">沒有檢測到臉部，請重新在明亮的地方識別</string>
+     <string name="face_face_get">識別失敗</string>
++	<string name="ic_default_start_entry_face_btn">開始錄入</string>
++    <string name="ic_default_entry_face_data_error_info">無法進入，面部識別不成功，請保持前監視器清潔，然後再試一次.</string>
+ </resources>
+Index: frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml	(revision 4326)
++++ frameworks/base/packages/Keyguard/res/values-zh-rCN/strings.xml	(revision 4327)
+@@ -138,4 +138,6 @@
+     <string name="ic_default_sacn_face_description_info">"请将手机放在离脸部20-50厘米的地方。将面部放置在屏幕上的圆圈上"</string>
+     <string name="ic_default_no_face_data_info">没有检测到脸部,请重新在明亮的地方识别</string>
+     <string name="face_face_get">识别失败</string>
++	<string name="ic_default_start_entry_face_btn">开始录入</string>
++    <string name="ic_default_entry_face_data_error_info">无法进入，面部识别不成功，请保持前摄像头清洁，然后再试一次.</string>
+ </resources>

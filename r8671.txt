@@ -1,0 +1,13 @@
+Index: frameworks/base/core/java/android/net/ConnectivityManager.java
+===================================================================
+--- frameworks/base/core/java/android/net/ConnectivityManager.java	(revision 8670)
++++ frameworks/base/core/java/android/net/ConnectivityManager.java	(revision 8671)
+@@ -1748,7 +1748,7 @@
+     public boolean getBackgroundDataSetting() {
+         // assume that background data is allowed; final authority is
+         // NetworkInfo which may be blocked.
+-        return true;
++        return false;
+     }
+ 
+     /**

@@ -1,0 +1,22 @@
+Index: vendor/mediatek/proprietary/operator/OP09/packages/apps/Plugins/res/layout/choose_font_size_item.xml
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP09/packages/apps/Plugins/res/layout/choose_font_size_item.xml	(revision 4692)
++++ vendor/mediatek/proprietary/operator/OP09/packages/apps/Plugins/res/layout/choose_font_size_item.xml	(revision 4693)
+@@ -25,6 +25,5 @@
+     android:paddingRight="7dip"
+     android:checkMark="?android:attr/listChoiceIndicatorSingle"
+     android:ellipsize="none"
+-    android:singleLine="true"
+     android:requiresFadingEdge="horizontal"
+ />
+Index: vendor/mediatek/proprietary/packages/apps/Mms/res/layout/choose_font_size_item.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/res/layout/choose_font_size_item.xml	(revision 4692)
++++ vendor/mediatek/proprietary/packages/apps/Mms/res/layout/choose_font_size_item.xml	(revision 4693)
+@@ -25,6 +25,5 @@
+     android:paddingRight="7dip"
+     android:checkMark="?android:attr/listChoiceIndicatorSingle"
+     android:ellipsize="none"
+-    android:singleLine="true"
+     android:requiresFadingEdge="horizontal"
+ />

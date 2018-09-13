@@ -1,0 +1,22 @@
+Index: frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java	(revision 8743)
++++ frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java	(revision 8744)
+@@ -5677,7 +5677,7 @@
+             }
+             
+             Settings.Global.putStringForUser(mContext.getContentResolver(), Settings.Global.POLICY_CONTROL, 
+-                                            isFixed ? "" : "immersive.navigation=-com.android.systemui,*", mCurrentUserId);
++                                            isFixed ? "" : "immersive.navigation=*", mCurrentUserId);
+             
+             mHandler.removeCallbacks(mShowNavigationBar);
+             cancelAutohide();
+@@ -5786,7 +5786,7 @@
+                         if("1".equals(flags[1])) {
+                             boolean isFixed = checkNavigationBarFixed();
+                             Settings.Global.putStringForUser(mContext.getContentResolver(), Settings.Global.POLICY_CONTROL, 
+-                                            !isFixed ? "" : "immersive.navigation=-com.android.systemui,*", mCurrentUserId);
++                                            !isFixed ? "" : "immersive.navigation=*", mCurrentUserId);
+                             mHandler.postDelayed(new Runnable() {
+                                 @Override
+                                 public void run() {

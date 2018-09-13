@@ -1,0 +1,52 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/values-Zh-rTW/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/values-Zh-rTW/strings.xml	(revision 3593)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/values-Zh-rTW/strings.xml	(revision 3594)
+@@ -74,7 +74,7 @@
+     <string name="login_notice">﻿“備份與恢復”功能為中國移動定制機特有功能，可在所有品牌的中國移動定制機間互相使用</string>
+     <string name="remind">提醒</string>
+     
+-    <string name="scanner_all">掃描所有文件</string>
++    <string name="scanner_all"> </string>
+     <string name="settings_storage">備份還原存儲</string>
+     <string name="pref_customize_storage">定制</string>
+     <string name="phone_path">手機</string>
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/values-Zh-rCN/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/values-Zh-rCN/strings.xml	(revision 3593)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/values-Zh-rCN/strings.xml	(revision 3594)
+@@ -74,7 +74,7 @@
+     <string name="login_notice">﻿“备份与恢复”功能为中国移动定制机特有功能，可在所有品牌的中国移动定制机间互相使用</string>
+     <string name="remind">提醒</string>
+     
+-    <string name="scanner_all">扫描所有文件</string>
++    <string name="scanner_all"> </string>
+     <string name="settings_storage">备份还原存储</string>
+     <string name="pref_customize_storage">自定义</string>
+     <string name="phone_path">手机</string>
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/values/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/values/strings.xml	(revision 3593)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/values/strings.xml	(revision 3594)
+@@ -74,7 +74,7 @@
+     <string name="login_notice">﻿Backup and Restore is a CMCC customized feature that can be used among all CMCC contract phones</string>
+     <string name="remind">Remind</string>
+     
+-    <string name="scanner_all">Scanner All Files</string>
++	<string name="scanner_all"> </string>
+     <string name="settings_storage">Backup and Restore Storage</string>
+     <string name="pref_customize_storage">customize</string>
+     <string name="phone_path">Phone</string>
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/values-en/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/values-en/strings.xml	(revision 3593)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/BackupRestore/res/values-en/strings.xml	(revision 3594)
+@@ -73,7 +73,7 @@
+     <string name="login_notice">﻿Backup and Restore is a CMCC customized feature that can be used among all CMCC contract phones</string>
+     <string name="remind">Remind</string>
+     
+-     <string name="scanner_all">Scanner All Files</string>
++    <string name="scanner_all"> </string>
+     <string name="settings_storage">Backup and Restore Storage</string>
+     <string name="pref_customize_storage">customize</string>
+     <string name="phone_path">Phone</string>

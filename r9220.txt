@@ -1,0 +1,13 @@
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/activity_welcome.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/activity_welcome.xml	(revision 9219)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/activity_welcome.xml	(revision 9220)
+@@ -10,7 +10,7 @@
+ 	
+     <ImageView
+         android:id="@+id/tcl_welcome"
+-        android:layout_width="wrap_content"
++        android:layout_width="178dp"
+ 	android:layout_alignParentTop="true" 
+         android:layout_height="wrap_content"
+         android:layout_gravity="center_vertical"

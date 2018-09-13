@@ -1,0 +1,49 @@
+Index: packages/apps/Dialer/InCallUI/src/com/android/incallui/VideoCallFragment.java
+===================================================================
+--- packages/apps/Dialer/InCallUI/src/com/android/incallui/VideoCallFragment.java	(revision 8933)
++++ packages/apps/Dialer/InCallUI/src/com/android/incallui/VideoCallFragment.java	(revision 8934)
+@@ -311,6 +311,16 @@
+         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+             // Not Handled
+         }
++        
++        /// add @{
++        @Override
++        public void onSurfaceTextureSizeSeted(SurfaceTexture surfaceTexture, int width, int height) {
++               Log.d(this, "[debug_surface]onSurfaceTextureSizeSeted mSurfaceId=" + mSurfaceId +", w:" + width + "h:" + height);
++               if (mSurfaceId == SURFACE_PREVIEW && (width != mWidth || height != mHeight)) {
++                   setSurfaceDimensions(mWidth, mHeight);
++               }
++        }
++        /// @}
+ 
+         @Override
+         public void onViewAttachedToWindow(View v) {
+Index: frameworks/base/core/java/android/view/TextureView.java
+===================================================================
+--- frameworks/base/core/java/android/view/TextureView.java	(revision 8933)
++++ frameworks/base/core/java/android/view/TextureView.java	(revision 8934)
+@@ -390,6 +390,12 @@
+             mLayer.setSurfaceTexture(mSurface);
+             mSurface.setDefaultBufferSize(getWidth(), getHeight());
+             mSurface.setOnFrameAvailableListener(mUpdateListener, mAttachInfo.mHandler);
++            
++            /// add @{
++            if (mListener != null && !createNewSurface) {
++                mListener.onSurfaceTextureSizeSeted(mSurface, getWidth(), getHeight());
++             }
++            /// @}
+ 
+             if (mListener != null && createNewSurface) {
+                 mListener.onSurfaceTextureAvailable(mSurface, getWidth(), getHeight());
+@@ -842,6 +848,10 @@
+          * @param surface The surface just updated
+          */
+         public void onSurfaceTextureUpdated(SurfaceTexture surface);
++        /// add @{
++        /** @hide */
++        default void onSurfaceTextureSizeSeted(SurfaceTexture surface, int width, int height){}
++        /// @}
+     }
+ 
+     private native void nCreateNativeWindow(SurfaceTexture surface);

@@ -1,0 +1,14 @@
+Index: packages/services/Telephony/src/com/mediatek/settings/TelephonyUtils.java
+===================================================================
+--- packages/services/Telephony/src/com/mediatek/settings/TelephonyUtils.java	(revision 5542)
++++ packages/services/Telephony/src/com/mediatek/settings/TelephonyUtils.java	(revision 5543)
+@@ -549,7 +549,8 @@
+ 
+             boolean isNetworkRoaming = !TelephonyManagerEx.getDefault().isInHomeNetwork(subId);
+ 
+-            if (!TelephonyUtils.isMobileDataEnabled(subId)) {
++            if ((!TelephonyUtils.isMobileDataEnabled(subId)) &&
++                (subId == SubscriptionManager.getDefaultDataSubscriptionId())) {
+                 result = true;
+             /// M: add for dual volte feature @{
+             } else if ((subId != SubscriptionManager.getDefaultDataSubscriptionId()) &&

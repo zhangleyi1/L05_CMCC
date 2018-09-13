@@ -1,0 +1,20 @@
+Index: device/ausshine/aus6739_66_n1/ProjectConfig.mk
+===================================================================
+--- device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 1707)
++++ device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 1708)
+@@ -288,13 +288,13 @@
+ MTK_CSD_DIALER_SUPPORT = no
+ MTK_CTA_SET = yes
+ MTK_CTA_SUPPORT = no
+-MTK_CTM_SUPPORT = no
++MTK_CTM_SUPPORT = yes
+ MTK_CTSC_MTBF_INTERNAL_SUPPORT = no
+ MTK_CT_VOLTE_SUPPORT = no
+ MTK_CUSTOMERSERVICE_APP = no
+ MTK_CUSTOM_USERLOAD_ENGINEERMODE = no
+ MTK_DAL_SUPPORT = no
+-MTK_DATADIALOG_APP = no
++MTK_DATADIALOG_APP = yes
+ MTK_DEFAULT_DATA_OFF = no
+ MTK_DEINTERLACE_SUPPORT = yes
+ MTK_DEVREG_APP = no

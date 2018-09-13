@@ -1,0 +1,122 @@
+Index: packages/apps/Settings/res/layout/user_dictionary_add_word_fullscreen.xml
+===================================================================
+--- packages/apps/Settings/res/layout/user_dictionary_add_word_fullscreen.xml	(revision 4954)
++++ packages/apps/Settings/res/layout/user_dictionary_add_word_fullscreen.xml	(revision 4955)
+@@ -1,5 +1,4 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<!-- Copyright (C) 2012 The Android Open Source Project
++<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2012 The Android Open Source Project
+ 
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+@@ -17,54 +16,67 @@
+     android:id="@+id/user_dict_settings_add_dialog_top"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+-    android:orientation="vertical" >
++    android:orientation="vertical">
+ 
+-    <EditText
+-        android:id="@+id/user_dictionary_add_word_text"
++    <ScrollView
+         android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_gravity="fill_horizontal|center_vertical"
+-        android:layout_marginBottom="4dip"
+-        android:layout_marginStart="4dip"
+-        android:layout_marginTop="4dip"
+-        android:hint="@string/user_dict_settings_add_word_hint"
+-        android:imeOptions="flagNoFullscreen"
+-        android:inputType="textNoSuggestions"
+-        android:maxLength="@integer/maximum_user_dictionary_word_length"
+-        android:textDirection="locale" >
++        android:layout_height="wrap_content">
+ 
+-        <requestFocus />
+-    </EditText>
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="vertical">
+ 
+-    <GridLayout
+-        android:id="@+id/user_dictionary_add_word_grid"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_marginEnd="4dip"
+-        android:layout_marginStart="4dip"
+-        android:columnCount="2" >
++            <EditText
++                android:id="@+id/user_dictionary_add_word_text"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="fill_horizontal|center_vertical"
++                android:layout_marginBottom="4dip"
++                android:layout_marginStart="4dip"
++                android:layout_marginTop="4dip"
++                android:hint="@string/user_dict_settings_add_word_hint"
++                android:imeOptions="flagNoFullscreen"
++                android:inputType="textNoSuggestions"
++                android:maxLength="@integer/maximum_user_dictionary_word_length"
++                android:textDirection="locale">
+ 
+-        <TextView
+-            android:id="@+id/user_dictionary_add_shortcut_label"
+-            style="?android:attr/textAppearanceSmall"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_gravity="start|center_vertical"
+-            android:text="@string/user_dict_settings_add_shortcut_option_name" />
++                <requestFocus />
++            </EditText>
+ 
+-        <EditText
+-            android:id="@+id/user_dictionary_add_shortcut"
+-            android:layout_width="wrap_content"
+-			android:layout_height="wrap_content"
+-            android:layout_gravity="fill_horizontal|center_vertical"
+-            android:layout_marginBottom="4dip"
+-            android:layout_marginStart="4dip"
+-            android:layout_marginTop="4dip"
+-            android:hint="@string/user_dict_settings_add_shortcut_hint"
+-            android:imeOptions="flagNoFullscreen"
+-            android:inputType="textNoSuggestions"
+-            android:textDirection="locale"
+-            android:maxLength="@integer/maximum_user_dictionary_word_length" />
+-    </GridLayout>
++            <GridLayout
++                android:id="@+id/user_dictionary_add_word_grid"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_marginEnd="4dip"
++                android:layout_marginStart="4dip"
++                android:columnCount="2">
+ 
++                <TextView
++                    android:id="@+id/user_dictionary_add_shortcut_label"
++                    style="?android:attr/textAppearanceSmall"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:layout_gravity="start|center_vertical"
++                    android:text="@string/user_dict_settings_add_shortcut_option_name" />
++
++                <EditText
++                    android:id="@+id/user_dictionary_add_shortcut"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:layout_gravity="fill_horizontal|center_vertical"
++                    android:layout_marginBottom="4dip"
++                    android:layout_marginStart="4dip"
++                    android:layout_marginTop="4dip"
++                    android:hint="@string/user_dict_settings_add_shortcut_hint"
++                    android:imeOptions="flagNoFullscreen"
++                    android:inputType="textNoSuggestions"
++                    android:maxLength="@integer/maximum_user_dictionary_word_length"
++                    android:textDirection="locale" />
++            </GridLayout>
++
++        </LinearLayout>
++
++    </ScrollView>
++
+ </LinearLayout>

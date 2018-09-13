@@ -1,0 +1,13 @@
+Index: device/ausshine/aus6739_66_n1/ProjectConfig.mk
+===================================================================
+--- device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 1679)
++++ device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 1680)
+@@ -703,7 +703,7 @@
+ NO_INIT_PERMISSION_CHECK = yes
+ NXP_SMARTPA_SUPPORT = no_nxp
+ OP01_COMPATIBLE = no
+-OPTR_SPEC_SEG_DEF = NONE
++OPTR_SPEC_SEG_DEF = OP01_SPEC0200_SEGC
+ PURE_AP_USE_EXTERNAL_MODEM = no
+ SENSOR_BATCH_SUPPORT = no
+ SIM_ME_LOCK_MODE = 0

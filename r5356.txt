@@ -1,0 +1,48 @@
+Index: frameworks/base/services/core/java/com/android/server/notification/NotificationManagerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/notification/NotificationManagerService.java	(revision 5355)
++++ frameworks/base/services/core/java/com/android/server/notification/NotificationManagerService.java	(revision 5356)
+@@ -3784,8 +3784,17 @@
+             }
+             if (mNotificationPulseEnabled) {
+                 // pulse repeatedly
+-                mNotificationLight.setFlashing(ledARGB, Light.LIGHT_FLASH_TIMED,
+-                        ledOnMS, ledOffMS);
++                if("com.android.dialer".equals(packageName)){
++						ContentResolver contentResolver=getContext().getContentResolver();
++						int value=Settings.Global.getInt(contentResolver,KEY_LEDEVENT,1);
++						if(value==1){
++							mNotificationLight.setFlashing(ledARGB, Light.LIGHT_FLASH_TIMED,
++                            ledOnMS, ledOffMS);
++						}
++				}else{
++					mNotificationLight.setFlashing(ledARGB, Light.LIGHT_FLASH_TIMED,
++                            ledOnMS, ledOffMS);
++				}
+             }
+             if (mStatusBar != null) {
+                 // let SystemUI make an independent decision
+Index: packages/apps/Dialer/src/com/android/dialer/calllog/MissedCallNotifier.java
+===================================================================
+--- packages/apps/Dialer/src/com/android/dialer/calllog/MissedCallNotifier.java	(revision 5355)
++++ packages/apps/Dialer/src/com/android/dialer/calllog/MissedCallNotifier.java	(revision 5356)
+@@ -24,6 +24,7 @@
+ import android.graphics.Bitmap;
+ import android.os.AsyncTask;
+ import android.provider.CallLog.Calls;
++import android.provider.Settings;
+ import android.text.TextUtils;
+ import android.util.Log;
+ 
+@@ -156,8 +157,9 @@
+                 // Include a public version of the notification to be shown when the missed call
+                 // notification is shown on the user's lock screen and they have chosen to hide
+                 // sensitive notification information.
+-                .setPublicVersion(publicBuilder.build());
+-
++                .setPublicVersion(publicBuilder.build())
++                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
++	
+         // Add additional actions when there is only 1 missed call and the user isn't locked
+         if (UserManagerCompat.isUserUnlocked(mContext) && count == 1) {
+             if (!TextUtils.isEmpty(number)

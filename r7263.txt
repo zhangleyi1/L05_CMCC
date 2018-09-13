@@ -1,0 +1,22 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MediaButtonIntentReceiver.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MediaButtonIntentReceiver.java	(revision 7262)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MediaButtonIntentReceiver.java	(revision 7263)
+@@ -189,8 +189,8 @@
+ 						if( keycode == KeyEvent.KEYCODE_HEADSETHOOK){
+ 							if(mkeyCountDownTimer==null ){
+ 								mkeyCountDownTimer =new keyCountDownTimer(millisInFuture,countDownInterval,context,i);
++								mkeyCountDownTimer.start();
+ 							}
+-							mkeyCountDownTimer.start();
+ 						}
+                         if (keycode == KeyEvent.KEYCODE_HEADSETHOOK &&
+                                 eventtime - sLastClickTime < 300) {
+@@ -304,6 +304,7 @@
+ 			}
+ 			sLastClickTime = 0;
+ 			keyCount=0;
++			mkeyCountDownTimer=null;
+ 		}
+ 	}
+ }

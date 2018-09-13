@@ -1,0 +1,17 @@
+Index: vendor/mediatek/proprietary/scripts/check_dep/android_dep_rule.mak
+===================================================================
+--- vendor/mediatek/proprietary/scripts/check_dep/android_dep_rule.mak	(revision 1773)
++++ vendor/mediatek/proprietary/scripts/check_dep/android_dep_rule.mak	(revision 1774)
+@@ -683,9 +683,9 @@
+ endif
+ ################################################
+ ifeq (OP01_SPEC0200_SEGC, $(strip $(OPTR_SPEC_SEG_DEF)))
+-   ifeq ($(filter cmcc_%, $(BOOT_LOGO)),)
+-      $(call dep-err-common, Please set BOOT_LOGO as cmcc_% or set OPTR_SPEC_SEG_DEF as not OP01_SPEC0200_SEGC)
+-   endif
++#   ifeq ($(filter cmcc_%, $(BOOT_LOGO)),)
++#      $(call dep-err-common, Please set BOOT_LOGO as cmcc_% or set OPTR_SPEC_SEG_DEF as not OP01_SPEC0200_SEGC)
++#   endif
+    ifeq ($(MTK_STREAMING_VIDEO_SUPPORT),yes)
+       $(call dep-err-common, Please turn off MTK_STREAMING_VIDEO_SUPPORT or set OPTR_SPEC_SEG_DEF as not OP01_SPEC0200_SEGC)
+    endif

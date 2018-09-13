@@ -1,0 +1,65 @@
+Index: kernel-4.4/drivers/usb/gadget/android.c
+===================================================================
+--- kernel-4.4/drivers/usb/gadget/android.c	(revision 1847)
++++ kernel-4.4/drivers/usb/gadget/android.c	(revision 1848)
+@@ -2551,7 +2551,7 @@
+ 
+ 	/* Default strings - should be updated by userspace */
+ 	strncpy(manufacturer_string, "TCL", sizeof(manufacturer_string)-1);
+-	strncpy(product_string, "V760", sizeof(product_string) - 1);
++	strncpy(product_string, "TCL V760", sizeof(product_string) - 1);
+ 	strncpy(serial_string, "0123456789ABCDEF", sizeof(serial_string) - 1);
+ 
+ 	id = usb_string_id(cdev);
+Index: vendor/mediatek/proprietary/custom/common/hal/inc/camera_custom_exif.h
+===================================================================
+--- vendor/mediatek/proprietary/custom/common/hal/inc/camera_custom_exif.h	(revision 1847)
++++ vendor/mediatek/proprietary/custom/common/hal/inc/camera_custom_exif.h	(revision 1848)
+@@ -79,7 +79,7 @@
+ {
+ #ifdef EN_CUSTOM_EXIF_INFO
+ #define CUSTOM_EXIF_STRING_MAKE  "TCL"
+-#define CUSTOM_EXIF_STRING_MODEL "V760"
++#define CUSTOM_EXIF_STRING_MODEL "TCL V760"
+ #define CUSTOM_EXIF_STRING_SOFTWARE "custom software"
+ static customExifInfo_t exifTag = {CUSTOM_EXIF_STRING_MAKE,CUSTOM_EXIF_STRING_MODEL,CUSTOM_EXIF_STRING_SOFTWARE};
+     if (0 != ppCustomExifTag) {
+Index: vendor/mediatek/proprietary/operator/OP01/SPEC0200/SEGC/custom.conf
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/SPEC0200/SEGC/custom.conf	(revision 1847)
++++ vendor/mediatek/proprietary/operator/OP01/SPEC0200/SEGC/custom.conf	(revision 1848)
+@@ -17,7 +17,7 @@
+ rtsp_streaming.UserAgent = stagefright/1.2 (Linux @apc.kernel.version@;Android @ro.build.version.release@; MTKDevice_TD/V1);
+ *.UAProfileURL = http://218.249.47.94/UAProfile/CMCC/MT6755_UAprofile_M.xml
+ dm.Manufacturer = TCL
+-dm.Model = V760
++dm.Model = TCL V760
+ bluetooth.HostName = TCL V760
+ fmtransmitter.RDSValue = TCL V760
+ wlan.SSID = TCL V760
+Index: device/ausshine/aus6739_66_n1/full_aus6739_66_n1.mk
+===================================================================
+--- device/ausshine/aus6739_66_n1/full_aus6739_66_n1.mk	(revision 1847)
++++ device/ausshine/aus6739_66_n1/full_aus6739_66_n1.mk	(revision 1848)
+@@ -38,7 +38,7 @@
+ PRODUCT_MANUFACTURER := TCL
+ PRODUCT_NAME := full_aus6739_66_n1
+ PRODUCT_DEVICE := aus6739_66_n1
+-PRODUCT_MODEL := V760
++PRODUCT_MODEL := TCL V760
+ PRODUCT_POLICY := android.policy_phone
+ PRODUCT_BRAND := alps
+ 
+Index: device/mediatek/common/custom.conf
+===================================================================
+--- device/mediatek/common/custom.conf	(revision 1847)
++++ device/mediatek/common/custom.conf	(revision 1848)
+@@ -22,7 +22,7 @@
+ #http_streaming.UAProfileURL = http://218.249.47.94/Xianghe/MTK_Athens15_UAProfile.xml
+ #rtsp_streaming.UAProfileURL = http://218.249.47.94/Xianghe/MTK_Athens15_UAProfile.xml
+ dm.Manufacturer = TCL
+-dm.Model = V760
++dm.Model = TCL V760
+ bluetooth.HostName = TCL V760
+ fmtransmitter.RDSValue = TCL V760
+ wlan.SSID = TCL V760

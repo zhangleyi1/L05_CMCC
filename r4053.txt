@@ -1,0 +1,15 @@
+Index: frameworks/base/core/java/android/preference/SeekBarVolumizer.java
+===================================================================
+--- frameworks/base/core/java/android/preference/SeekBarVolumizer.java	(revision 4052)
++++ frameworks/base/core/java/android/preference/SeekBarVolumizer.java	(revision 4053)
+@@ -159,6 +159,10 @@
+         } else {
+             mSeekBar.setProgress(mLastProgress > -1 ? mLastProgress : mOriginalStreamVolume);
+         }
++		mMuted = mAudioManager.isStreamMute(mStreamType);
++        if (mCallback != null) {
++            mCallback.onMuted(mMuted, isZenMuted());
++        }
+     }
+ 
+     @Override

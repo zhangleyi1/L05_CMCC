@@ -1,0 +1,12 @@
+Index: kernel-4.4/arch/arm64/configs/aus6739_66_n1_defconfig
+===================================================================
+--- kernel-4.4/arch/arm64/configs/aus6739_66_n1_defconfig	(revision 3125)
++++ kernel-4.4/arch/arm64/configs/aus6739_66_n1_defconfig	(revision 3126)
+@@ -525,7 +525,6 @@
+ CONFIG_SECURITY_NETWORK=y
+ CONFIG_SECURITY_SELINUX=y
+ CONFIG_SECURITY_SELINUX_BOOTPARAM=y
+-CONFIG_CRYPTO_NULL=y
+ CONFIG_CRYPTO_ECHAINIV=y
+ CONFIG_CRYPTO_XCBC=y
+ CONFIG_CRYPTO_SHA512=y

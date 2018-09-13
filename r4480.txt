@@ -1,0 +1,31 @@
+Index: packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java	(revision 4479)
++++ packages/apps/Settings/src/com/android/settings/applications/ManageApplications.java	(revision 4480)
+@@ -1172,6 +1172,11 @@
+ 
+             // Bind the data efficiently with the holder
+             ApplicationsState.AppEntry entry = mEntries.get(position);
++            // lance add for bug 117124 @{
++            if(entry.info.packageName.equals("com.android.fmradio")){
++            	entry.icon = mContext.getResources().getDrawable(R.drawable.tp_radio);
++            }
++            // @}
+             synchronized (entry) {
+                 holder.entry = entry;
+                 if (entry.label != null) {
+Index: packages/apps/Settings/res/drawable-xxhdpi/tp_radio.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/Settings/res/drawable-xxhdpi/tp_radio.png
+===================================================================
+--- packages/apps/Settings/res/drawable-xxhdpi/tp_radio.png	(revision 0)
++++ packages/apps/Settings/res/drawable-xxhdpi/tp_radio.png	(revision 4480)
+
+Property changes on: packages/apps/Settings/res/drawable-xxhdpi/tp_radio.png
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

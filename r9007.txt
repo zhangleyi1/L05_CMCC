@@ -1,0 +1,13 @@
+Index: packages/apps/Dialer/AndroidManifest.xml
+===================================================================
+--- packages/apps/Dialer/AndroidManifest.xml	(revision 9006)
++++ packages/apps/Dialer/AndroidManifest.xml	(revision 9007)
+@@ -341,7 +341,7 @@
+                   android:label="@string/phoneAppLabel"
+                   android:excludeFromRecents="true"
+                   android:launchMode="singleInstance"
+-                  android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|mnc|mcc"
++                  android:configChanges="screenSize|smallestScreenSize|screenLayout|keyboardHidden|keyboard|navigation|mnc|mcc"
+                   android:exported="false"
+                   android:screenOrientation="nosensor"
+                   android:directBootAware="true"

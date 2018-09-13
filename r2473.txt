@@ -1,0 +1,13 @@
+Index: frameworks/av/media/libmedia/MediaProfiles.cpp
+===================================================================
+--- frameworks/av/media/libmedia/MediaProfiles.cpp	(revision 2472)
++++ frameworks/av/media/libmedia/MediaProfiles.cpp	(revision 2473)
+@@ -2082,7 +2082,7 @@
+ 
+     CamcorderProfile *profile = new MediaProfiles::CamcorderProfile;
+     profile->mCameraId = CamId;
+-    profile->mFileFormat = OUTPUT_FORMAT_THREE_GPP;
++    profile->mFileFormat = OUTPUT_FORMAT_MPEG_4;//OUTPUT_FORMAT_THREE_GPP  lance modify for bug 114767
+     profile->mQuality = quality;
+     profile->mDuration = 30;
+     profile->mVideoCodec = videoCodec;

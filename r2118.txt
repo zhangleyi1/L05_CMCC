@@ -1,0 +1,23 @@
+Index: packages/apps/Email/src/com/android/email/activity/setup/AccountSettingsFragment.java
+===================================================================
+--- packages/apps/Email/src/com/android/email/activity/setup/AccountSettingsFragment.java	(revision 2117)
++++ packages/apps/Email/src/com/android/email/activity/setup/AccountSettingsFragment.java	(revision 2118)
+@@ -729,7 +729,7 @@
+         mAccountName.setText(senderName);
+         mAccountName.setOnPreferenceChangeListener(this);
+ 
+-        final String accountSignature = mAccount.getSignature();
++        final String accountSignature = mContext.getResources().getString(R.string.preferences_signature_content);
+         mAccountSignature = (EditTextPreference) findPreference(PREFERENCE_SIGNATURE);
+         mAccountSignature.setText(accountSignature);
+         mAccountSignature.setOnPreferenceChangeListener(this);
+Index: packages/apps/Email/UnifiedEmail/res/values/strings.xml
+===================================================================
+--- packages/apps/Email/UnifiedEmail/res/values/strings.xml	(revision 2117)
++++ packages/apps/Email/UnifiedEmail/res/values/strings.xml	(revision 2118)
+@@ -1167,4 +1167,5 @@
+ 
+     <!-- activity name of the photoviewer -->
+     <string name="photo_view_activity" translatable="false">com.android.mail.photo.MailPhotoViewActivity</string>
++    <string name="preferences_signature_content" msgid="4801741764511807065">"Sent from my TCL V760"</string>
+ </resources>

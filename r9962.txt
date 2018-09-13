@@ -1,0 +1,20 @@
+Index: packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintEnrollFinish.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintEnrollFinish.java	(revision 9961)
++++ packages/apps/Settings/src/com/android/settings/fingerprint/FingerprintEnrollFinish.java	(revision 9962)
+@@ -23,6 +23,7 @@
+ import android.os.UserHandle;
+ import android.view.View;
+ import android.widget.Button;
++import android.provider.Settings;
+ 
+ import com.android.internal.logging.MetricsProto.MetricsEvent;
+ import com.android.settings.R;
+@@ -54,6 +55,7 @@
+     @Override
+     protected void onNextButtonClick() {
+         setResult(RESULT_FINISHED);
++        Settings.System.putInt(getContentResolver(), Settings.System.FINGERPRINTS_UNCLOCK_DEVICE, 1);
+         finish();
+     }
+ 

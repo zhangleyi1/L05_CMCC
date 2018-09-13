@@ -1,0 +1,10 @@
+Index: packages/apps/Contacts/res/values/strings.xml
+===================================================================
+--- packages/apps/Contacts/res/values/strings.xml	(revision 9078)
++++ packages/apps/Contacts/res/values/strings.xml	(revision 9079)
+@@ -918,4 +918,5 @@
+     <string name="menu_blocked_numbers">Blocked numbers</string>
+ 
+     <string name="fail_reason_low_memory_during_save">Not enough memory. Couldn\'t save contact changes.</string>
++	<string name="account_info_name">"Phone"</string>
+ </resources>

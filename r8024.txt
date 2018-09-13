@@ -1,0 +1,104 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/res/values-zh-rCN/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/res/values-zh-rCN/strings.xml	(revision 8023)
++++ vendor/mediatek/proprietary/packages/apps/Mms/res/values-zh-rCN/strings.xml	(revision 8024)
+@@ -235,6 +235,7 @@
+     <string name="menu_edit" msgid="3056513240155967777">"编辑"</string>
+     <string name="menu_delete_messages" msgid="2610286783513247420">"删除信息"</string>
+     <string name="menu_delete_all_messages">"删除所有信息"</string>
++    <string name="menu_copy_messages">"复制所有信息到手机内存"</string>
+     <string name="menu_lock" msgid="7603793126077557472">"锁定"</string>
+     <string name="menu_unlock" msgid="6662865558677424039">"解锁"</string>
+     <string name="sim_copy_to_phone_memory" product="tablet" msgid="3721000641648594602">"复制到平板电脑内存"</string>
+Index: vendor/mediatek/proprietary/packages/apps/Mms/res/values/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/res/values/strings.xml	(revision 8023)
++++ vendor/mediatek/proprietary/packages/apps/Mms/res/values/strings.xml	(revision 8024)
+@@ -22,6 +22,8 @@
+     <!-- The name of the SMS/MMS app as it appears to the user in the Home screen, task switcher, etc. -->
+     <string name="app_label">Messaging</string>
+ 
++    <string name="menu_copy_messages">"Copy all messages to phone memory"</string>
++
+     <!-- Command name to open a Compose screen; displays in conversation list.
+          Also used as accessibility text for widget's new message button -->
+     <string name="new_message">New message</string>
+Index: vendor/mediatek/proprietary/packages/apps/Mms/res/values-en-rGB/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/res/values-en-rGB/strings.xml	(revision 8023)
++++ vendor/mediatek/proprietary/packages/apps/Mms/res/values-en-rGB/strings.xml	(revision 8024)
+@@ -230,6 +230,7 @@
+     <string name="error_code_label" msgid="5810068247647058769">"Error code: "</string>
+     <string name="menu_edit" msgid="3056513240155967777">"Edit"</string>
+     <string name="menu_delete_messages" msgid="2610286783513247420">"Delete messages"</string>
++    <string name="menu_copy_messages">"Copy all messages to phone memory"</string>
+     <string name="menu_lock" msgid="7603793126077557472">"Lock"</string>
+     <string name="menu_unlock" msgid="6662865558677424039">"Unlock"</string>
+     <string name="sim_copy_to_phone_memory" product="tablet" msgid="3721000641648594602">"Copy to tablet memory"</string>
+@@ -392,4 +393,4 @@
+     <string name="exceed_editor_size_limitation">Text limit reached.</string>
+     <string name="add_top_slide">Add slide to top</string>
+     <string name="add_bottom_slide">Add slide to bottom</string>
+-    </resources>
+\ No newline at end of file
++    </resources>
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/simmessage/ManageSimMessages.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/simmessage/ManageSimMessages.java	(revision 8023)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/simmessage/ManageSimMessages.java	(revision 8024)
+@@ -112,6 +112,7 @@
+     private static final int MENU_DELETE_FROM_SIM = 1;
+ 
+     private static final int OPTION_MENU_DELETE = 0;
++    private static final int OPTION_MENU_COPY = 2;
+ 
+     private static final int SHOW_LIST = 0;
+     private static final int SHOW_EMPTY = 1;
+@@ -670,6 +671,8 @@
+                 .setIcon(android.R.drawable.ic_menu_delete);
+         menu.add(0, OPTION_MENU_SIM_CAPACITY, 0,
+                 R.string.menu_show_icc_sms_capacity).setIcon(R.drawable.ic_menu_sim_capacity);
++        menu.add(0, OPTION_MENU_COPY, 0, R.string.menu_copy_messages)
++                .setIcon(android.R.drawable.ic_menu_delete);
+         return true;
+     }
+ 
+@@ -693,6 +696,9 @@
+ 
+         boolean isShowCapacity = (mState == SHOW_LIST || mState == SHOW_EMPTY)
+                                 && (mMsgListAdapter == null || !mMsgListAdapter.mIsDeleteMode);
++
++        boolean isShowCopyAll = (null != mCursor) && (mCursor.getCount() > 0)
++                && mState == SHOW_LIST;
+         /// @}
+ 
+         MenuItem miDeleteAll = mOptionMenu.findItem(OPTION_MENU_DELETE);
+@@ -705,7 +711,12 @@
+             miSimCapacity.setVisible(isShowCapacity);
+         }
+ 
+-        return isShowDelectAll || isShowCapacity;
++        MenuItem miCopyAll = mOptionMenu.findItem(OPTION_MENU_COPY);
++        if (miSimCapacity != null) {
++            miCopyAll.setVisible(isShowCopyAll);
++        }
++
++        return isShowDelectAll || isShowCapacity || isShowCopyAll;
+     }
+ 
+     @Override
+@@ -737,6 +748,14 @@
+                     finish();
+                 }
+                 break;
++            case OPTION_MENU_COPY:
++                MmsLog.d(TAG, "OPTION_MENU_COPY");
++                int msgNum = mCursor.getCount();
++                for(int i=0; i < msgNum;i++) {
++                    Cursor cursor = (Cursor) mMsgListAdapter.getItem(i);
++                    copyToPhoneMemory(cursor);
++                }
++                break;
+         }
+ 
+         return true;

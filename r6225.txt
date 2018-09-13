@@ -1,0 +1,13 @@
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/vibrator/MyVibrator.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/vibrator/MyVibrator.java	(revision 6224)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/vibrator/MyVibrator.java	(revision 6225)
+@@ -105,7 +105,7 @@
+ 	private void onMyVibrator() {		
+ 	    if(vib != null){
+ 			//vib.vibrate(1000);
+-			vib.vibrate(new long[]{2000,1000,1000,1000}, 0);//
++			vib.vibrate(new long[]{500,1000,500,1000}, 0);//
+ 			//tv_base_pixi.setText(R.string.test_finished);
+ 			bt_base_left.setVisibility(View.VISIBLE);
+ 			bt_base_right.setVisibility(View.VISIBLE);

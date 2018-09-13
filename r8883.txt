@@ -1,0 +1,732 @@
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/sdcard/SdCard.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/sdcard/SdCard.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/sdcard/SdCard.java	(revision 8883)
+@@ -53,6 +53,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 
+ 		mStorageManager = (StorageManager) this
+ 				.getSystemService(Context.STORAGE_SERVICE);
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/audio/Audio.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/audio/Audio.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/audio/Audio.java	(revision 8883)
+@@ -33,7 +33,7 @@
+ 	int count = 0;
+ 	int maxVolume;
+ 	int currentVolume;
+-	private static final int MIC_VALUE = 3;
++	private static final int MIC_VALUE = 4;
+ 	private static final int TEST_VOLUME = 15;
+ 	AudioRecord audioRecord;
+ 	AudioTrack audioTrack;
+@@ -117,16 +117,18 @@
+ 					musicPlayer.release();
+ 					musicPlayer = null;
+ 				}
+-                SystemProperties.set("persist.sys.testspeaker", "0");
++     //           SystemProperties.set("persist.sys.testspeaker", "0");
+ 				bt_base_left.setEnabled(true);
+ 				tv_base_pixi.setText("Loop from MAIN MIC test");
+ 				bt_base_left.setVisibility(View.GONE);
+ 				bt_base_right.setVisibility(View.GONE);
+-				audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+-				AudioSystem.setParameters("ForceUseSpecificMic=0");
+-				setSpeakerphoneOn(false);
+-				rec = new RecordThread();
+-				rec.start();
++	//			audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
++	//			AudioSystem.setParameters("ForceUseSpecificMic=0");
++	//			setSpeakerphoneOn(false);
++	//			rec = new RecordThread();
++	//			rec.start();
++			audioManager.setParameters("SET_LOOPBACK_TYPE=0,0");
++			audioManager.setParameters("SET_LOOPBACK_TYPE=21,1");
+ 				count++;
+ 				delay(2000);
+ 			} else if (count == 2) {
+@@ -134,9 +136,11 @@
+ 				tv_base_pixi.setText("Loop from SEC MIC test");
+ 				bt_base_left.setVisibility(View.GONE);
+ 				bt_base_right.setVisibility(View.GONE);
+-				AudioSystem.setParameters("ForceUseSpecificMic=2");
+-				setSpeakerphoneOn(true);
+-				audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
++	//			AudioSystem.setParameters("ForceUseSpecificMic=2");
++	//			setSpeakerphoneOn(true);
++	//			audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
++			audioManager.setParameters("SET_LOOPBACK_TYPE=0,0");
++			audioManager.setParameters("SET_LOOPBACK_TYPE=25,3");
+ 				count++;
+ 				delay(2000);
+ 			} else if (count == 3) {
+@@ -232,6 +236,7 @@
+ 	@Override
+ 	protected void onDestroy() {
+ 		super.onDestroy();
++		audioManager.setParameters("SET_LOOPBACK_TYPE=0,0");
+ 		 SystemProperties.set("persist.sys.testearphone", "0");
+         SystemProperties.set("persist.sys.testspeaker", "0");
+         if (musicPlayer != null) {
+@@ -282,8 +287,8 @@
+ 			audioTrack.play();
+ 			if(audioTrack != null && audioRecord != null){
+ 				while (isMic) {
+-					if (audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) != MIC_VALUE) {
+-						audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, MIC_VALUE, 0);
++					if (audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) != maxVolume) {
++						audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVolume, 0);
+ 					}
+ 					int readLen = audioRecord.read(recBuf, 0, recBufSize);
+ 					audioTrack.write(recBuf, 0, readLen);
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/lightsensor/LightSensor.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/lightsensor/LightSensor.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/lightsensor/LightSensor.java	(revision 8883)
+@@ -56,6 +56,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 
+ 	}
+ 
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/proximity/Proximity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/proximity/Proximity.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/proximity/Proximity.java	(revision 8883)
+@@ -58,6 +58,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 	}
+ 
+ 	@Override
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/AutoTestItem.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/AutoTestItem.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/AutoTestItem.java	(revision 8883)
+@@ -42,6 +42,9 @@
+ 		bt_next = (Button) findViewById(R.id.bt_next);
+ 		bt_next.setText(R.string.bt_next);
+ 		bt_next.setOnClickListener(this);
++		bt_yes.getBackground().setAlpha(100);
++		bt_no.getBackground().setAlpha(100);
++		bt_next.getBackground().setAlpha(100);
+ 	}
+ 
+ 	@Override
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/flag/Flag.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/flag/Flag.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/flag/Flag.java	(revision 8883)
+@@ -19,19 +19,29 @@
+ 
+ import com.android.mmi.MMITestDevice;
+ import com.android.mmi.R;
+-
++import com.android.mmi.NvRAMAgent;
++import android.os.IBinder;
++import android.os.ServiceManager;
+ import java.io.BufferedReader;
+ import java.io.FileReader;
+ import java.io.IOException;
+ import java.io.File;
++import java.io.FileNotFoundException;
++import android.util.Log;
+ public class Flag extends Activity implements OnClickListener {
+-	
++	private static final String PRODUCT_INFO_NVRAM_PATH = "/data/nvram/APCFG/APRDEB/PRODUCT_INFO";
+ 	TextView attk_falg, iffa_flag, weixin_key,tv_base_title;
+ 	String attk_falg_string = "ATTK FLAG :";
+ 	String iffa_flag_string = "IFFA FLAG : ";
+ 	String weixin_key_string = "weixin key: ";
+ 	Button bt_base_left, bt_base_right;
+-
++	private static final int ATTK = 94;
++	private static final int ATTK_LENGTH = 1;
++	private static final int IFFA = 95;
++	private static final int IFFA_LENGTH = 1;
++	static byte[] product_info = null;
++	static NvRAMAgent agent; 
++	IBinder binder;
+ 	@Override
+ 	protected void onCreate(Bundle savedInstanceState) {
+ 		// TODO Auto-generated method stub
+@@ -66,9 +76,18 @@
+ 		if(getPaykey().equals("success") && getBeanPodkey().equals("success") && getWeChatkey().equals("success")){
+ 		bt_base_left.setEnabled(true);
+ 		}
+-	
++		initProductInfo();
++		setkeyNV();
+ 	}
+-
++	private void initProductInfo() {
++		binder = ServiceManager.getService("NvRAMAgent");
++		agent = NvRAMAgent.Stub.asInterface(binder);
++		try {
++			product_info = agent.readFileByName(PRODUCT_INFO_NVRAM_PATH);
++		} catch (Exception e) {
++			e.printStackTrace();
++	}
++	}
+ 	@Override
+ 	protected void onResume() {
+ 		super.onResume();
+@@ -125,4 +144,32 @@
+ 		String resultWeChatkey = SystemProperties.get("soter.teei.thh.wechat", "failed");
+ 		return resultWeChatkey;
+ 	}		
++	private void setkeyNV(){
++		String resultBeanPodkey = SystemProperties.get("soter.teei.thh.ek", "failed");
++		if(resultBeanPodkey.equals("success")){
++			if(null!=product_info){
++			product_info[ATTK] = 1;
++		}
++		try 
++		{
++			agent.writeFileByName(PRODUCT_INFO_NVRAM_PATH, product_info);
++		}catch(Exception e){
++			e.printStackTrace();
++			return ;
++		}	
++		}
++		String resultPaykey = SystemProperties.get("soter.teei.thh.ifaa", "failed");
++		if(resultPaykey.equals("success")){
++		if(null!=product_info){
++					product_info[IFFA] = 1;
++				}
++				try 
++				{
++					agent.writeFileByName(PRODUCT_INFO_NVRAM_PATH, product_info);
++				}catch(Exception e){
++					e.printStackTrace();
++					return ;
++				}	
++		}
++	}
+ }
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/call/Call.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/call/Call.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/call/Call.java	(revision 8883)
+@@ -39,7 +39,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
+-		
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 		Intent callIntent = new Intent(Intent.ACTION_DIAL,Uri.parse("tel:112"));
+ 		callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+ 		startActivity(callIntent);
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/simcard/SimCard.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/simcard/SimCard.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/simcard/SimCard.java	(revision 8883)
+@@ -49,6 +49,8 @@
+ 		bt_base_left.setEnabled(false);
+ 		bt_base_right = (Button) this.findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 
+ 		if (//FeatureOption.MTK_GEMINI_SUPPORT == 
+ 				true) {
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/fingerprint/Fingerprint.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/fingerprint/Fingerprint.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/fingerprint/Fingerprint.java	(revision 8883)
+@@ -100,6 +100,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 		
+ 		result1= (TextView) findViewById(R.id.result1);
+ 		result2= (TextView) findViewById(R.id.result2);
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tprawdata/TpRawData.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tprawdata/TpRawData.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tprawdata/TpRawData.java	(revision 8883)
+@@ -50,6 +50,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 		
+ 		
+ 	
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/usb/Usb.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/usb/Usb.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/usb/Usb.java	(revision 8883)
+@@ -52,6 +52,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 
+ 	}
+ 
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/accessory/Accessory.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/accessory/Accessory.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/accessory/Accessory.java	(revision 8883)
+@@ -88,6 +88,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 
+ 	}
+ 
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/wifi/Wifi.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/wifi/Wifi.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/wifi/Wifi.java	(revision 8883)
+@@ -60,6 +60,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 		mWifiManager = (WifiManager) this.getSystemService(this.WIFI_SERVICE);
+ 		if (mWifiManager.isWifiEnabled()) {
+ 			// mHandler.sendEmptyMessageDelayed(SET_WIFI_ADDRESS, 1000);
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/batterytemp/BatteryTemp.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/batterytemp/BatteryTemp.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/batterytemp/BatteryTemp.java	(revision 8883)
+@@ -67,6 +67,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 		CheckBatteryId();
+ 	}
+ 
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/chargerled/ChargerLed.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/chargerled/ChargerLed.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/chargerled/ChargerLed.java	(revision 8883)
+@@ -40,6 +40,8 @@
+ 			}
+ 			showCount++;
+ 			if (showCount == (FLASH_NUMBER - 1) * 2) {
++				bt_base_right.getBackground().setAlpha(100);
++				bt_base_left.getBackground().setAlpha(100);
+ 				bt_base_left.setVisibility(View.VISIBLE);
+ 				bt_base_right.setVisibility(View.VISIBLE);
+ 			}
+@@ -79,6 +81,8 @@
+ 		bt_base_right.setOnClickListener(this);
+ 		bt_base_left.setVisibility(View.GONE);
+ 		bt_base_right.setVisibility(View.GONE);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 		Intent sendled = new Intent(); 
+ 		sendled.setAction("com.mediatek.factorymode.led.action_red");
+ 		ChargerLed.this.sendBroadcast(sendled);
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/batterylevel/BatteryLevel.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/batterylevel/BatteryLevel.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/batterylevel/BatteryLevel.java	(revision 8883)
+@@ -65,6 +65,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 		power_off  = (Button) findViewById(R.id.power_off);
+ 		power_off.setOnClickListener(this);
+ 	}
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/bt/Bt.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/bt/Bt.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/bt/Bt.java	(revision 8883)
+@@ -54,6 +54,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 
+ 		btlistview = (ListView) this.findViewById(R.id.listView1);
+ 		adapter = new ArrayAdapter<String>(this,
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/compass/Compass.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/compass/Compass.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/compass/Compass.java	(revision 8883)
+@@ -69,6 +69,8 @@
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
+ 		bt_base_left.setEnabled(true);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 		
+         sm = (SensorManager)getSystemService(Context.SENSOR_SERVICE);  
+         aSensor = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);  
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/nfc/Nfc.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/nfc/Nfc.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/nfc/Nfc.java	(revision 8883)
+@@ -38,8 +38,9 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 		
+-		
+ 		IntentFilter mfilter = new IntentFilter();
+ 		mfilter.addAction("intent.action.NFC_FACTORY_MODE_TEST");
+ 		registerReceiver(new BroadcastReceiver() {
+@@ -54,7 +55,9 @@
+ 		//intent.setClassName("com.android.nfctester", "com.android.nfctester.SimpleListViewActivity");
+ 		//intent.setClassName("com.brcm.nfcutil", "com.brcm.nfcutil.NfcUtilActivity");
+ 		intent.setClassName("com.techain.nfctest", "com.techain.nfctest.NfcTest");
+-		startActivity(intent);
++		startActivityForResult(intent, MMITestDevice.TESTITEM_NFC);
++					finish();
++		//startActivity(intent);
+ 	}
+ 	@Override
+ 	protected void onRestart() {
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tracability/Tracability.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tracability/Tracability.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tracability/Tracability.java	(revision 8883)
+@@ -40,6 +40,7 @@
+ 	String imei1_1 = "\nIMEI1:";
+ 	String imei2_2 = "\nIMEI2:";
+ 	String bsn = "\nBSN:";
++	String suid = "\nSUID:";
+ 	String bt = "\nBT:";
+ 	String wifi = "\nWIFI:";
+ 	String cu_ref = "\nCU_REF:";
+@@ -52,6 +53,8 @@
+ 	String date_code = "\nDate Code:";
+ 	String phase = "\nPhase:";
+ 	String TP_Firmware_version = "\nTP Firmware version:";
++	String attk_falg  = "\nATTK : ";
++	String iffa_flag  = "\nIFFA : ";
+ 	int count = 0;
+ 	static byte[] product_info = null;
+ 	IBinder binder;
+@@ -69,6 +72,8 @@
+ 	private static final int IMEI2_LENGTH = 10;
+ 	private static final int BSN = 12;
+ 	private static final int BSN_LENGTH = 15;
++	private static final int SUID = 401;
++	private static final int SUID_LENGTH = 32;
+ 	private static final int BT = 309;
+ 	private static final int BT_LENGTH = 6;
+ 	private static final int WIFI = 315;
+@@ -79,6 +84,10 @@
+ 	private static final int HS_PN_LENGTH = 12;
+ 	private static final int PTH = 39;
+ 	private static final int PTH_LENGTH = 2;
++	private static final int ATTK = 94;
++	private static final int ATTK_LENGTH = 1;
++	private static final int IFFA = 95;
++	private static final int IFFA_LENGTH = 1;
+ 	private static final int PT1 = 106;
+ 	private static final int PT1_LENGTH = 1;
+ 	private static final int PT2 = 114;
+@@ -115,6 +124,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 		initProductInfo();
+ 		getTracability();
+ 	}
+@@ -151,15 +162,18 @@
+ 
+ 	private void getTracability() {
+ 		tv_base_pixi.setText(getImei() + bsn
+-				+ buffString(BSN, BSN_LENGTH, STRING) + bt
++				+ buffString(BSN, BSN_LENGTH, STRING) +suid
++				+ buffString(SUID, SUID_LENGTH, STRING) +bt
+ 				+ buffString(BT, BT_LENGTH, HEX) + wifi
+ 				+ buffString(WIFI, WIFI_LENGTH, HEX) + cu_ref
+ 				+ buffString(CU_REF, CU_REF_LENGTH, STRING) + hOrS_pn
+ 				+ buffString(HS_PN, HS_PN_LENGTH, STRING) + pth
+-				+ buffString(PTH, PTH_LENGTH, STRING) + pt + product_info[PT1]
+-				+ product_info[PT2] + bw + buffString(BW, BW_LENGTH, HEX) + mmi
++				+ buffString(PTH, PTH_LENGTH, STRING) + pt + "0"+product_info[PT1]
++				+ bw + buffString(BW, BW_LENGTH, HEX) + mmi
+ 				+ buffString(MMI, MMI_LENGTH, HEX) + ft + product_info[FT1]
+ 				+ TP_Firmware_version +gettpFwVersion()
++				+ attk_falg + product_info[ATTK]
++				+ iffa_flag + product_info[IFFA]
+ 						/*+ product_info[FT2]+ date_code
+ 				+ buffString(DATECODE, DATECODE_LENGTH, STRING) + phase
+ 				+ buffString(PHASE, PHASE_LENGTH, STRING)*/);
+@@ -183,7 +197,8 @@
+ 		}
+ 		try 
+ 		{
+-			agent.writeFile(PRODUCT_INFO_NVRAM_LID, product_info);
++	//		agent.writeFile(PRODUCT_INFO_NVRAM_LID, product_info);
++			agent.writeFileByName(PRODUCT_INFO_NVRAM_PATH, product_info);
+ 		}catch(Exception e){
+ 			e.printStackTrace();
+ 			return ;
+@@ -218,21 +233,7 @@
+         
+         if(type == STRING){
+             String stringBuffer =  new String(product_info, start, length);
+-			String su_ref=null;
+-			if(start ==CU_REF){
+-				boolean haseChar=false;
+-				if(stringBuffer.startsWith("50") || stringBuffer .startsWith("98")){
+-					haseChar=true;
+-				}
+-				if(!TextUtils.isEmpty(stringBuffer) && haseChar){
+-				 	su_ref=stringBuffer.toString().toUpperCase().trim();
+-				}else{
+-					su_ref=SystemProperties.get("ro.tct.curef.default");
+-				}
+-				return su_ref;
+-			}else{
+ 				return stringBuffer.equals("") ? null : stringBuffer.toString().toUpperCase();
+-			}
+         }else{
+             StringBuffer stringBuffer = new StringBuffer();
+             for (int i = 0; i < length; i++) {
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/efuse/Efuse.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/efuse/Efuse.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/efuse/Efuse.java	(revision 8883)
+@@ -51,6 +51,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 		CheckEfused();
+ 	}
+ 	
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/charger/Charger.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/charger/Charger.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/charger/Charger.java	(revision 8883)
+@@ -64,6 +64,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_left.getBackground().setAlpha(100);
++		bt_base_right.getBackground().setAlpha(100);
+ 	}
+ 
+ 	@Override
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/keypad/Keypad.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/keypad/Keypad.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/keypad/Keypad.java	(revision 8883)
+@@ -65,10 +65,12 @@
+ 
+ 		bt_base_left = (Button) findViewById(R.id.bt_base_left);
+ 		bt_base_left.setText(R.string.bt_pass);
++		bt_base_left.getBackground().setAlpha(100);
+ 		bt_base_left.setEnabled(false);
+ 		bt_base_left.setOnClickListener(this);
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
++		bt_base_right.getBackground().setAlpha(100);
+ 		bt_base_right.setOnClickListener(this);
+ 	}
+ 
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/hall/Hall.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/hall/Hall.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/hall/Hall.java	(revision 8883)
+@@ -38,6 +38,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 
+ 		
+ 		IntentFilter mfilter = new IntentFilter();
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/gyro/Gyro.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/gyro/Gyro.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/gyro/Gyro.java	(revision 8883)
+@@ -81,6 +81,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 	
+     }
+ 
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/gsensor/Gsensor.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/gsensor/Gsensor.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/gsensor/Gsensor.java	(revision 8883)
+@@ -82,6 +82,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 	}
+ 
+ 	@Override
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/fmradio/MyFmRadio.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/fmradio/MyFmRadio.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/fmradio/MyFmRadio.java	(revision 8883)
+@@ -39,6 +39,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);	
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 
+ 		Intent intent = new Intent();
+ 		intent.setClassName("com.android.fmradio", "com.android.fmradio.FmMainActivity");
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/backlight/Backlight.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/backlight/Backlight.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/backlight/Backlight.java	(revision 8883)
+@@ -67,7 +67,8 @@
+                 	mPowerManager.setBacklightOffForWfd(false);
+                     mPowerManager.setButtonOffForWfd(true);
+                 }
+-                
++                bt_base_right.getBackground().setAlpha(100);
++				bt_base_left.getBackground().setAlpha(100);
+ 				bt_base_left.setVisibility(View.VISIBLE);
+ 				bt_base_right.setVisibility(View.VISIBLE);
+ 				bt_retest.setVisibility(View.VISIBLE);
+@@ -113,10 +114,10 @@
+ 		bt_retest.setText(R.string.bt_retest);
+ 		bt_retest.setOnClickListener(this);
+ 		bt_retest.setVisibility(View.GONE);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 		bt_base_left.setVisibility(View.GONE);
+ 		bt_base_right.setVisibility(View.GONE);
+-		bt_base_right.getBackground().setAlpha(90);
+-		bt_base_left.getBackground().setAlpha(90);
+         
+ 		backLight();
+ 	}
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/camera/MyCamera.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/camera/MyCamera.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/camera/MyCamera.java	(revision 8883)
+@@ -169,6 +169,11 @@
+ 		}
+ 
+ 		case R.id.bt_base_right: {
++			if (camera != null) {
++				camera.stopPreview();
++				camera.release();
++				camera = null;
++			}
+ 			Intent intent = new Intent(MyCamera.this, MMITestDevice.class);
+ 			setResult(RESULT_CANCELED, intent);
+ 			finish();
+@@ -195,7 +200,6 @@
+          for (int i = 0; i < sizes.size(); i++) {
+              Size size = sizes.get(i);
+              int pix = size.width * size.height;
+-			 Log.i("TAG_ZC","pix--->"+pix);
+              if (pix > maxSize) {
+               	  maxSize = pix;
+                   width = size.width;
+@@ -251,7 +255,7 @@
+ 			for (int i = 0; i < sizes.size(); i++) {
+ 				Size size = sizes.get(i);
+ 				int pix = size.width * size.height;
+-				Log.i("TAG_ZC","pix1--->"+pix);
++				
+ 				if (pix > maxSize) {
+ 				   maxSize = pix;
+ 					width = size.width;
+@@ -314,7 +318,7 @@
+ 	}
+         @Override
+         public boolean onTouch(View v, MotionEvent event) {
+-            if (event.getPointerCount() == 1) {
++            if (event.getPointerCount() == 1 && camera != null) {
+             handleFocus(event, camera);
+ }
+             x=event.getRawX();
+@@ -324,6 +328,7 @@
+             return false;
+         }
+         private static void handleFocus(MotionEvent event, Camera camera) {
++			if(camera != null){
+             Camera.Parameters params = camera.getParameters();
+             Camera.Size previewSize = params.getPreviewSize();
+             Rect focusRect = calculateTapArea(event.getX(), event.getY(), 1f, previewSize);
+@@ -367,6 +372,7 @@
+                 Log.i("TAG", "metering areas not supported");
+             }
+         }
++        }
+         private static Rect calculateTapArea(float x, float y, float coefficient, Camera.Size previewSize) {
+             float focusAreaSize = 300;
+             int areaSize = Float.valueOf(focusAreaSize * coefficient).intValue();
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/vibrator/MyVibrator.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/vibrator/MyVibrator.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/vibrator/MyVibrator.java	(revision 8883)
+@@ -70,6 +70,9 @@
+ 		bt_retest = (Button) findViewById(R.id.bt_retest);
+ 		bt_retest.setText(R.string.bt_retest);
+ 		bt_retest.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
++		bt_retest.getBackground().setAlpha(100);
+ 		vib = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
+ 	}
+ 
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/gps/Gps.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/gps/Gps.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/gps/Gps.java	(revision 8883)
+@@ -72,6 +72,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 	}
+ 
+ 	@Override
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tplock/TpLock.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tplock/TpLock.java	(revision 8882)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/src/com/android/mmi/tplock/TpLock.java	(revision 8883)
+@@ -50,6 +50,8 @@
+ 		bt_base_right = (Button) findViewById(R.id.bt_base_right);
+ 		bt_base_right.setText(R.string.bt_fail);
+ 		bt_base_right.setOnClickListener(this);
++		bt_base_right.getBackground().setAlpha(100);
++		bt_base_left.getBackground().setAlpha(100);
+ 	}
+ 	
+ 	

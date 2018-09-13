@@ -1,0 +1,30 @@
+Index: packages/apps/Settings/src/com/android/settings/deviceinfo/UsbModeChooserActivity.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/deviceinfo/UsbModeChooserActivity.java	(revision 3881)
++++ packages/apps/Settings/src/com/android/settings/deviceinfo/UsbModeChooserActivity.java	(revision 3882)
+@@ -42,7 +42,7 @@
+ import com.android.settingslib.RestrictedLockUtils;
+ 
+ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+-
++import android.util.Log;
+ /**
+  * UI for the USB chooser dialog.
+  *
+@@ -50,7 +50,7 @@
+ public class UsbModeChooserActivity extends Activity {
+ 
+     public static final int[] DEFAULT_MODES = {
+-        UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_NONE,
++        UsbBackend.MODE_POWER_SINK,
+         UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_NONE,
+         UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MTP,
+         UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_PTP,
+@@ -111,6 +111,7 @@
+                 UserManager.DISALLOW_USB_FILE_TRANSFER, UserHandle.myUserId());
+         mBackend = new UsbBackend(this);
+         int current = mBackend.getCurrentMode();
++		
+         for (int i = 0; i < DEFAULT_MODES.length; i++) {
+             if (mBackend.isModeSupported(DEFAULT_MODES[i])
+                     && !mBackend.isModeDisallowedBySystem(DEFAULT_MODES[i])) {

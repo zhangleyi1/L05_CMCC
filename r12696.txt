@@ -1,0 +1,60 @@
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_05_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_06_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_07_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_08_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_09_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_10_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_11_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_12_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_13_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_14_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_15_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_01_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_02_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_03_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: packages/apps/WallpaperPicker/res/drawable-mdpi/wallpaper_04_small.png
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream

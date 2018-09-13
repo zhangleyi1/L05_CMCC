@@ -1,0 +1,81 @@
+Index: packages/services/Telephony/src/com/android/services/telephony/TelecomAccountRegistry.java
+===================================================================
+--- packages/services/Telephony/src/com/android/services/telephony/TelecomAccountRegistry.java	(revision 4924)
++++ packages/services/Telephony/src/com/android/services/telephony/TelecomAccountRegistry.java	(revision 4925)
+@@ -856,6 +856,7 @@
+         // Go through SIM-based phones and register ourselves -- registering an existing account
+         // will cause the existing entry to be replaced.
+         Phone[] phones = PhoneFactory.getPhones();
++        LinkedList<Integer> activeSubscriptionIds = new LinkedList<>();
+ 
+         final boolean phoneAccountsEnabled = mContext.getResources().getBoolean(
+                 R.bool.config_pstn_phone_accounts_enabled);
+@@ -873,6 +874,7 @@
+                     // }
+                     /// @}
+                     if (subscriptionId >= 0 && PhoneUtils.getIccIdForPhone(phone) != null) {
++                        activeSubscriptionIds.addLast(subscriptionId);
+                         mAccounts.add(new AccountEntry(phone, false /* emergency */,
+                                 false /* isDummy */));
+                     /// M: CC: Add Unknown Call Notification for no phone account to use @{
+@@ -932,9 +934,60 @@
+                     mTelecomManager.setUserSelectedOutgoingPhoneAccount(upgradedPhoneAccount);
+                 }
+             }
++        } else if ((defaultPhoneAccount == null)
++                && (mTelephonyManager.getPhoneCount() > 1) // multi SIM supported
++                && (activeSubscriptionIds.size() == 1) // only one SIM inserted
++                && (!isNonSimAccountFound()) // sim account valid
++                && (isRadioInValidState(phones))) { // radio state valid
++            PhoneAccountHandle phoneAccountHandle =
++                    subscriptionIdToPhoneAccountHandle(activeSubscriptionIds.getFirst());
++            if (phoneAccountHandle != null) {
++                mTelecomManager.setUserSelectedOutgoingPhoneAccount(phoneAccountHandle);
++            }
+         }
+     }
+ 
++    private boolean isNonSimAccountFound() {
++        for (PhoneAccountHandle phoneAccountHandle : mTelecomManager.getCallCapablePhoneAccounts()) {
++            final PhoneAccount phoneAccount = mTelecomManager.getPhoneAccount(phoneAccountHandle);
++            if (mTelephonyManager.getSubIdForPhoneAccount(phoneAccount) ==
++                    SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
++                return true;
++            }
++        }
++        return false;
++    }
++
++    private boolean isRadioInValidState(Phone[] phones) {
++        int isAPMOn = Settings.Global.getInt(mContext.getContentResolver(),
++                Settings.Global.AIRPLANE_MODE_ON, 0);
++
++        if (isAPMOn == 1) {
++            Log.d(this, "isRadioInValidState, isAPMOn:" + isAPMOn);
++            return false;
++        }
++
++        //Do not update default Voice subId when when device Shutdown is in progress
++        int numPhones = mTelephonyManager.getPhoneCount();
++        for (int i = 0; i < numPhones; i++) {
++            if (phones[i] != null && phones[i].isShuttingDown()) {
++                Log.d(this, " isRadioInValidState: device shutdown in progress ");
++                return false;
++            }
++        }
++        return true;
++    }
++
++    private PhoneAccountHandle subscriptionIdToPhoneAccountHandle(final int subId) {
++        for (PhoneAccountHandle phoneAccountHandle : mTelecomManager.getCallCapablePhoneAccounts()) {
++            final PhoneAccount phoneAccount = mTelecomManager.getPhoneAccount(phoneAccountHandle);
++            if (subId == mTelephonyManager.getSubIdForPhoneAccount(phoneAccount)) {
++                return phoneAccountHandle;
++            }
++        }
++        return null;
++    }
++
+     private void tearDownAccounts() {
+         synchronized (mAccountsLock) {
+             for (AccountEntry entry : mAccounts) {

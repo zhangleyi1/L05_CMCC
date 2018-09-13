@@ -1,0 +1,15 @@
+Index: device/ausshine/aus6739_66_n1/system.prop
+===================================================================
+--- device/ausshine/aus6739_66_n1/system.prop	(revision 12372)
++++ device/ausshine/aus6739_66_n1/system.prop	(revision 12373)
+@@ -89,4 +89,7 @@
+ ro.business.name=TCL V760
+ ro.mtk_gemini_support = 1
+ persist.sys.timezone = Asia/Shanghai
+-ro.camera_default_picture_size=0x0000
+\ No newline at end of file
++ro.camera_default_picture_size=0x0000
++
++# add api information
++ro.product.first_api_level=25
+\ No newline at end of file

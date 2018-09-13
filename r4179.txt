@@ -1,0 +1,43 @@
+Index: packages/apps/Settings/res/values-zh-rHK/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 4178)
++++ packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 4179)
+@@ -3324,4 +3324,5 @@
+     <string name="navigationbar_background_color_title">"背景色"</string>
+     <string name="navigationbar_background_color_summary">"改變導航欄的背景色，但不一定適用於所有的應用。"</string>
+     <string name="add_fingerprint_message_secturity">"請先設置安全密碼"</string>
++    <string name="ok">確定</string>
+ </resources>
+Index: packages/apps/Settings/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 4178)
++++ packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 4179)
+@@ -3422,4 +3422,5 @@
+     <string name="when_this_option_is_turned_off_face_scanning_will_be_performed_in_the_background_and_the_interface_will_not_be_displayed">当此选项关闭时，面部扫描将在后台进行，界面将不显示</string>
+     <string name="face_use_guide">人脸用户指南</string>
+     <string name="add_fingerprint_message_secturity">请先设置安全密码</string>
++    <string name="ok">确定</string>
+ </resources>
+Index: packages/apps/Settings/res/values-zh-rTW/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 4178)
++++ packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 4179)
+@@ -3321,4 +3321,5 @@
+     <string name="navigationbar_background_color_title">"背景色"</string>
+     <string name="navigationbar_background_color_summary">"改變導航欄的背景色，但不一定適用於所有的應用。"</string>
+     <string name="add_fingerprint_message_secturity">"請先設置安全密碼"</string>
++    <string name="ok">確定</string>
+ </resources>
+Index: frameworks/base/packages/Keyguard/res/values/strings.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/values/strings.xml	(revision 4178)
++++ frameworks/base/packages/Keyguard/res/values/strings.xml	(revision 4179)
+@@ -430,8 +430,6 @@
+     <string name="ic_default_move_face_center">Move the face into the middle of the frame</string>
+     <string name="ic_default_stay_font">Please keep your face straight</string>
+     <string name="ic_default_dark_light">The ambient light is dim at this time. Please go back to the bright place to identify</string>
+-
+-    <string name="ok">OK</string>
+     <string name="cancel">Cancel</string>
+     <string name="back_to_keyguard">Back</string>
+     <string name="delete_pin">Delete</string>

@@ -1,0 +1,66 @@
+Index: packages/apps/Email/src/com/mediatek/email/extension/AccountSetupChooseMailProvider.java
+===================================================================
+--- packages/apps/Email/src/com/mediatek/email/extension/AccountSetupChooseMailProvider.java	(revision 8751)
++++ packages/apps/Email/src/com/mediatek/email/extension/AccountSetupChooseMailProvider.java	(revision 8752)
+@@ -100,12 +100,13 @@
+ 
+     // use to save ESP names.
+     private String[] mMailProviderNames;
+-	private ArrayList<String>mMailProviderNames2=new ArrayList();
++	private ArrayList<String>mMailProviderNamesList=new ArrayList();
++	private ArrayList<String>mMailProviderDomainList=new ArrayList();
+     // use to save ESP domain names.
+     private String[] mMailProviderDomains;
+     // use to save ESP icons to show.
+     private int[] mMailProviderIcons;
+-	private ArrayList<Integer>mMailProviderIcons2=new ArrayList();
++	private ArrayList<Integer>mMailProviderIconsList=new ArrayList();
+     // decide how many ESP to show in list.
+     private int mMailProviderCount;
+     // use to save ESP email hint, only supported by Vendor Policy
+@@ -141,7 +142,7 @@
+         if (mMailProviderHints != null) {
+             intent.putExtra(EXTRA_ACCOUNT_SETUP_EMAIL_HINT, mMailProviderHints[position]);
+         }
+-        intent.putExtra(EXTRA_ACCOUNT_SETUP_DEFAULT_DOMAIN, mMailProviderDomains[position]);
++        intent.putExtra(EXTRA_ACCOUNT_SETUP_DEFAULT_DOMAIN, mMailProviderDomainList.get(position));
+         // If we select eas, add eas account type data.
+         if (isSelectedEas(mMailProviderDomains[position])) {
+             intent.putExtra(AuthenticatorSetupIntentHelper.EXTRA_FLOW_ACCOUNT_TYPE, getString(R.string.account_manager_type_exchange));
+@@ -206,8 +207,8 @@
+             }
+             ImageView logoView = (ImageView) convertView.findViewById(R.id.logo);
+             TextView othersView = (TextView) convertView.findViewById(R.id.name);
+-			logoView.setImageDrawable((mResources.getDrawable(mMailProviderIcons2.get(position))));
+-            othersView.setText(mMailProviderNames2.get(position));
++			logoView.setImageDrawable((mResources.getDrawable(mMailProviderIconsList.get(position))));
++            othersView.setText(mMailProviderNamesList.get(position));
+             return convertView;
+         }
+     }
+@@ -216,19 +217,15 @@
+         if (EmailPluginUtils.isSupportProviderList(this)) {
+             mMailProviderNames = EmailPluginUtils.getProviderNames(this);
+ 			int nameLength=mMailProviderNames.length;
++            mMailProviderIcons = EmailPluginUtils.getProviderIcons(this);
++            mMailProviderDomains = EmailPluginUtils.getProviderDomains(this);
+ 			for(int i=0;i<nameLength;i++){
+-				if(i!=2){
+-					mMailProviderNames2.add(mMailProviderNames[i]);
++				if(!"Gmail".equals(mMailProviderNames[i])){
++					mMailProviderNamesList.add(mMailProviderNames[i]);
++					mMailProviderDomainList.add(mMailProviderDomains[i]);
++					mMailProviderIconsList.add(mMailProviderIcons[i]);
+ 				}
+ 			}
+-            mMailProviderIcons = EmailPluginUtils.getProviderIcons(this);
+-			int iconLength=mMailProviderIcons.length;
+-			for(int i=0;i<iconLength;i++){
+-				if(i!=2){
+-					mMailProviderIcons2.add(mMailProviderIcons[i]);
+-				}
+-			}
+-            mMailProviderDomains = EmailPluginUtils.getProviderDomains(this);
+             mMailProviderCount = EmailPluginUtils.getProviderCount(this);
+             mResources = EmailPluginUtils.getProviderResources(this);
+             mMailProviderHints = EmailPluginUtils.getProviderHints(this);

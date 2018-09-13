@@ -1,0 +1,85 @@
+Index: packages/apps/DeskClock/src/com/android/deskclock/alarms/AlarmKlaxon.java
+===================================================================
+--- packages/apps/DeskClock/src/com/android/deskclock/alarms/AlarmKlaxon.java	(revision 5439)
++++ packages/apps/DeskClock/src/com/android/deskclock/alarms/AlarmKlaxon.java	(revision 5440)
+@@ -89,7 +89,7 @@
+         return sAsyncRingtonePlayer;
+     }
+ 
+-    private static boolean isTelephonyCalling(Context context) {
++    public static boolean isTelephonyCalling(Context context) {
+         boolean calling = false;
+         TelephonyManager telephonyManager
+                 = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+@@ -99,4 +99,5 @@
+         }
+         return calling;
+     }
+-}
+\ No newline at end of file
++
++}
+Index: packages/apps/DeskClock/src/com/android/deskclock/alarms/AlarmService.java
+===================================================================
+--- packages/apps/DeskClock/src/com/android/deskclock/alarms/AlarmService.java	(revision 5439)
++++ packages/apps/DeskClock/src/com/android/deskclock/alarms/AlarmService.java	(revision 5440)
+@@ -25,6 +25,7 @@
+ import android.os.IBinder;
+ import android.os.Handler;
+ import android.os.UserHandle;
++import android.os.Vibrator;
+ import android.telephony.PhoneStateListener;
+ import android.telephony.TelephonyManager;
+ 
+@@ -162,6 +163,7 @@
+     private AlarmInstance mCurrentAlarm = null;
+     private Context mContext = null;
+     private AlarmInstance mInstance = null;
++    private boolean mIsInTelephoneCall = false;
+ 
+     private PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
+         @Override
+@@ -170,6 +172,11 @@
+             // we register onCallStateChanged, we get the initial in-call state
+             // which kills the alarm. Check against the initial call state so
+             // we don't kill the alarm during a call.
++            if (mIsInTelephoneCall && state != TelephonyManager.CALL_STATE_RINGING && state != TelephonyManager.CALL_STATE_OFFHOOK) {
++                mIsInTelephoneCall = false;
++                AlarmNotifications.showAlarmNotification(AlarmService.this, mCurrentAlarm);
++                AlarmKlaxon.start(AlarmService.this, mCurrentAlarm);
++            }
+             if (state != TelephonyManager.CALL_STATE_IDLE && state != mInitialCallState) {
+                 startService(AlarmStateManager.createStateChangeIntent(AlarmService.this,
+                         "AlarmService", mCurrentAlarm, AlarmInstance.MISSED_STATE));
+@@ -178,6 +185,7 @@
+     };
+ 
+     private void startAlarm(AlarmInstance instance) {
++        mIsInTelephoneCall = AlarmKlaxon.isTelephonyCalling(mContext);
+         LogUtils.v("AlarmService.start with instance: " + instance.mId);
+         if (mCurrentAlarm != null) {
+             AlarmStateManager.setMissedState(this, mCurrentAlarm);
+@@ -185,14 +193,18 @@
+         }
+ 
+         AlarmAlertWakeLock.acquireCpuWakeLock(this);
+-
+         mCurrentAlarm = instance;
+-        if (!PowerOffAlarm.bootFromPoweroffAlarm()) {
+-        AlarmNotifications.showAlarmNotification(this, mCurrentAlarm);
++        if (!PowerOffAlarm.bootFromPoweroffAlarm() && !mIsInTelephoneCall) {
++            AlarmNotifications.showAlarmNotification(this, mCurrentAlarm);
+         }
++        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+         mInitialCallState = mTelephonyManager.getCallState();
+-        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+-        AlarmKlaxon.start(this, mCurrentAlarm);
++        if (mIsInTelephoneCall) {
++            final Vibrator vibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
++            vibrator.vibrate(1000);
++        } else {
++            AlarmKlaxon.start(this, mCurrentAlarm);
++        }
+         sendBroadcast(new Intent(ALARM_ALERT_ACTION));
+     }
+ 

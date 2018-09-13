@@ -1,0 +1,24 @@
+Index: frameworks/base/packages/Keyguard/res/layout/keyguard_status_area.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/layout/keyguard_status_area.xml	(revision 2739)
++++ frameworks/base/packages/Keyguard/res/layout/keyguard_status_area.xml	(revision 2740)
+@@ -35,7 +35,6 @@
+         android:textAllCaps="true"
+         android:letterSpacing="0.15"
+         android:gravity="center"
+-		android:visibility="gone"
+         />
+     <!--end-modify by zengjie  for task:5429900 -->
+     <TextView android:id="@+id/alarm_status"
+Index: frameworks/base/packages/Keyguard/res/layout/keyguard_status_view.xml
+===================================================================
+--- frameworks/base/packages/Keyguard/res/layout/keyguard_status_view.xml	(revision 2739)
++++ frameworks/base/packages/Keyguard/res/layout/keyguard_status_view.xml	(revision 2740)
+@@ -43,7 +43,6 @@
+             android:textColor="@color/clock_white"
+             android:singleLine="true"
+             style="@style/widget_big_thin_customer"
+-			android:visibility="gone"
+             android:format12Hour="@string/keyguard_widget_12_hours_format"
+             android:format24Hour="@string/keyguard_widget_24_hours_format"
+             android:layout_marginBottom="@dimen/bottom_text_spacing_digital" />

@@ -1,0 +1,14 @@
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java	(revision 6452)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java	(revision 6453)
+@@ -164,8 +164,7 @@
+                 cbInformedConsentLoc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                     @Override
+                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+-                        //TODO
+-                        //Settings.Global.putInt(getContentResolver(), "def.diagnostic.on", isChecked ? 1:0);
++                        Settings.Global.putInt(getContentResolver(), "def.share.location.on", isChecked ? 1:0);
+                     }
+                 });
+             }

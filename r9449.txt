@@ -1,0 +1,41 @@
+Index: frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardPatternView.java
+===================================================================
+--- frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardPatternView.java	(revision 9448)
++++ frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardPatternView.java	(revision 9449)
+@@ -162,8 +162,7 @@
+         }
+ 		mFaceUnlockView=(ImageView)findViewById(R.id.face_unlock);
+ 		int stateType=Settings.System.getInt(getContext().getContentResolver(),Settings.System.FACE_UNLOCK_STATE_ENABLED, 0);
+-		Log.v("yujunjie", "KeyguardPatternView:onFinishInflate()...stateType =" + stateType);
+-		if(stateType==0){
++		if(stateType==1){
+ 			int iconHeight = getResources().getDimensionPixelSize(
+                     R.dimen.keyguard_affordance_customize_icon_height);
+             int iconWidth = getResources().getDimensionPixelSize(
+Index: frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardPasswordView.java
+===================================================================
+--- frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardPasswordView.java	(revision 9448)
++++ frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardPasswordView.java	(revision 9449)
+@@ -235,8 +235,7 @@
+         }, DELAY_MILLIS_TO_REEVALUATE_IME_SWITCH_ICON);
+ 		mFaceUnlockView=(ImageView)findViewById(R.id.face_unlock);
+ 		int stateType=Settings.System.getInt(getContext().getContentResolver(),Settings.System.FACE_UNLOCK_STATE_ENABLED, 0);
+-		Log.v("yujunjie", "KeyguardPatternView:onFinishInflate()...stateType =" + stateType);
+-		if(stateType==0){
++		if(stateType==1){
+ 			int iconHeight = getResources().getDimensionPixelSize(
+                     R.dimen.keyguard_affordance_customize_icon_height);
+             int iconWidth = getResources().getDimensionPixelSize(
+Index: frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardPINView.java
+===================================================================
+--- frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardPINView.java	(revision 9448)
++++ frameworks/base/packages/Keyguard/src/com/android/keyguard/KeyguardPINView.java	(revision 9449)
+@@ -129,7 +129,7 @@
+                 }};
+ 		mFaceUnlockView=(ImageView)findViewById(R.id.face_unlock);
+ 		int stateType=Settings.System.getInt(getContext().getContentResolver(),Settings.System.FACE_UNLOCK_STATE_ENABLED, 0);
+-		if(stateType==0){
++		if(stateType==1){
+ 			int iconHeight = getResources().getDimensionPixelSize(
+                     R.dimen.keyguard_affordance_customize_icon_height);
+             int iconWidth = getResources().getDimensionPixelSize(

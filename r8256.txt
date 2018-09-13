@@ -1,0 +1,26 @@
+Index: packages/apps/Dialer/InCallUI/src/com/android/incallui/VideoCallPresenter.java
+===================================================================
+--- packages/apps/Dialer/InCallUI/src/com/android/incallui/VideoCallPresenter.java	(revision 8255)
++++ packages/apps/Dialer/InCallUI/src/com/android/incallui/VideoCallPresenter.java	(revision 8256)
+@@ -1271,7 +1271,7 @@
+         ui.setPreviewSurfaceSize(width, height);
+ 
+         // Configure the preview surface to the correct aspect ratio.
+-        float aspectRatio = 1.0f;
++        float aspectRatio = 1.3333334f;
+         if (width > 0 && height > 0) {
+             aspectRatio = (float) width / (float) height;
+         }
+Index: packages/apps/Dialer/InCallUI/res/values/dimens.xml
+===================================================================
+--- packages/apps/Dialer/InCallUI/res/values/dimens.xml	(revision 8255)
++++ packages/apps/Dialer/InCallUI/res/values/dimens.xml	(revision 8256)
+@@ -116,7 +116,7 @@
+ 
+     <!-- The smaller dimension of the video preview.  When in portrait orientation this is the
+          width of the preview.  When in landscape, this is the height. -->
+-    <dimen name="video_preview_small_dimension">120dp</dimen>
++    <dimen name="video_preview_small_dimension">90dp</dimen>
+ 
+     <dimen name="video_preview_margin">0dp</dimen>
+ 

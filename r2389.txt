@@ -1,0 +1,172 @@
+Index: vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmService.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmService.java	(revision 2388)
++++ vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FmService.java	(revision 2389)
+@@ -2050,12 +2050,16 @@
+         // lance add for MediaButtonReceive @{
+         String cmd = intent.getStringExtra("command");
+         Log.d(TAG, ">>> FmRadioService.onStartCommand command: " + cmd);
+-        if( CMDTOGGLEPAUSE.equals(cmd) ){
+-        Log.d(TAG, "onStartCommand:CMDTOGGLEPAUSE" );
+-            if(mPowerStatus == POWER_DOWN){
+-            powerUpAsync(FmUtils.computeFrequency(getFrequency()));}
+-        else{
+-            powerDownAsync();}  
++        if (CMDTOGGLEPAUSE.equals(cmd)) {
++            Log.d(TAG, "onStartCommand:CMDTOGGLEPAUSE");
++            if (mPowerStatus == POWER_DOWN) {
++                powerUpAsync(FmUtils.computeFrequency(getFrequency()));
++            } else {
++                powerDownAsync();
++            }
++        } else if (CMDNEXT.equals(cmd)){
++            Log.d(TAG, "onStartCommand:CMDNEXT");
++            seekStationAsync(FmUtils.computeFrequency(mCurrentStation), true);
+         }
+         // @}
+         if (intent != null) {
+Index: vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FMMediaButtonIntentReceiver.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FMMediaButtonIntentReceiver.java	(revision 2388)
++++ vendor/mediatek/proprietary/packages/apps/FMRadio/src/com/android/fmradio/FMMediaButtonIntentReceiver.java	(revision 2389)
+@@ -3,64 +3,86 @@
+ import android.content.BroadcastReceiver;
+ import android.content.Context;
+ import android.content.Intent;
+-import android.media.AudioManager;
+ import android.os.Handler;
+-import android.os.Message;
++import android.util.Log;
+ import android.view.KeyEvent;
+-import android.util.Log;
+-import android.app.ActivityManager;
+-import android.app.ActivityManager.RunningServiceInfo;
+-import java.util.List;
+ 
+ public class FMMediaButtonIntentReceiver extends BroadcastReceiver {
+-  public static final String TAG = "FM/Receiver";
++
++    public static final String TAG = "FM/Receiver";
++    private static final int DELAY_TIME = 250;
++    private static int clickCount = 0;
++    private static String command = null;
++    private static Context mContext;
++    private static final Runnable CLICK = new Runnable() {
++        @Override
++        public void run() {
++            Log.d(TAG, " do click");
++            command = FmService.CMDTOGGLEPAUSE;
++            sendToStartService();
++            clickCount = 0;
++        }
++    };
++    private static final Runnable DOUBLECLICK = new Runnable() {
++        @Override
++        public void run() {
++            Log.d(TAG, " do double click");
++            command = FmService.CMDNEXT;
++            sendToStartService();
++            clickCount = 0;
++        }
++    };
++    private static Handler handler = new Handler();
++
+     @Override
+     public void onReceive(Context context, Intent intent) {
+-        Log.d(TAG, " 23333mFMMediaButtonIntentReceiver onReceive");
+-         String Iaction = intent.getAction();
+-            if (Intent.ACTION_MEDIA_BUTTON.equals(Iaction)) {
+-              Log.d(TAG, " 23333mFMMediaButtonIntentReceiver onReceive ACTION_MEDIA_BUTTON");
+-              KeyEvent event = (KeyEvent)intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
+-              if (event == null) {
+-                  return; }
+-             int keycode = event.getKeyCode();
+-             int action = event.getAction();
+-             long eventtime = event.getEventTime();
+-             Log.d(TAG, "2333onReceive keycode="+keycode+",action="+action);
+-             
+-             String command = null;
+-             switch (keycode) {
+-                 case KeyEvent.KEYCODE_MEDIA_STOP:
+-                     break;
+-                 case KeyEvent.KEYCODE_HEADSETHOOK:
+-                 case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
+-                    command = FmService.CMDTOGGLEPAUSE;
+-                     break;
+-                 case KeyEvent.KEYCODE_MEDIA_NEXT:     
+-                     break;
+-                 case KeyEvent.KEYCODE_MEDIA_PREVIOUS:                  
+-                     break;
+-                 case KeyEvent.KEYCODE_MEDIA_PAUSE:
+-                     break;
+-                 case KeyEvent.KEYCODE_MEDIA_PLAY:
+-                     break;
+-                 /// M: AVRCP and Android Music AP supports the FF/REWIND @{
+-                 case KeyEvent.KEYCODE_MEDIA_FAST_FORWARD:
+-                     break;
+-                 case KeyEvent.KEYCODE_MEDIA_REWIND:
+-                     break;
+-                 default:
+-                     break;
+-                }
+-                 if (command != null) {
+-                  if ((action == KeyEvent.ACTION_DOWN) && (event.getRepeatCount() == 0)) {
+-                          sendToStartService(context, command);} 
+-                  if (isOrderedBroadcast()) {
+-                     abortBroadcast();}
+-                 }}  }
++        Log.d(TAG, "onReceive");
++        mContext = context;
++        String intentAction = intent.getAction();
++        if (Intent.ACTION_MEDIA_BUTTON.equals(intentAction)) {
++            Log.d(TAG, "onReceive ACTION_MEDIA_BUTTON");
++            KeyEvent keyEvent = (KeyEvent) intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
++            if (keyEvent == null) {
++                return;
++            }
++            int keyCode = keyEvent.getKeyCode();
++            int keyAction = keyEvent.getAction();
++            Log.d(TAG, "onReceive keyCode=" + keyCode + ",keyAction=" + keyAction);
+ 
+-      public void sendToStartService(Context context, String command) {
+-          Intent i = new Intent(context, FmService.class);
+-          i.putExtra(FmService.CMD, command);
+-          context.startService(i);    }
++            switch (keyCode) {
++                case KeyEvent.KEYCODE_MEDIA_STOP:
++                    break;
++                case KeyEvent.KEYCODE_HEADSETHOOK:
++                case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
++                    if (keyAction == KeyEvent.ACTION_UP) {
++                        clickCount++;
++                        if (clickCount % 2 == 1) {
++                            handler.postDelayed(CLICK, DELAY_TIME);
++                        } else if (clickCount % 2 == 0) {
++                            handler.removeCallbacks(CLICK);
++                            handler.postDelayed(DOUBLECLICK, DELAY_TIME);
++                        }
++                    }
++                    break;
++                case KeyEvent.KEYCODE_MEDIA_NEXT:
++                    break;
++                case KeyEvent.KEYCODE_MEDIA_PREVIOUS:
++                    break;
++                case KeyEvent.KEYCODE_MEDIA_PAUSE:
++                    break;
++                case KeyEvent.KEYCODE_MEDIA_PLAY:
++                    break;
++                case KeyEvent.KEYCODE_MEDIA_FAST_FORWARD:
++                    break;
++                case KeyEvent.KEYCODE_MEDIA_REWIND:
++                    break;
++                default:
++                    break;
++            }
++
++    public static void sendToStartService() {
++        Intent i = new Intent(mContext, FmService.class);
++        i.putExtra(FmService.CMD, command);
++        mContext.startService(i);
++    }
+ }
+\ No newline at end of file

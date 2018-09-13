@@ -1,0 +1,64 @@
+Index: packages/apps/Contacts/src/com/android/contacts/editor/CompactRawContactsEditorView.java
+===================================================================
+--- packages/apps/Contacts/src/com/android/contacts/editor/CompactRawContactsEditorView.java	(revision 9067)
++++ packages/apps/Contacts/src/com/android/contacts/editor/CompactRawContactsEditorView.java	(revision 9068)
+@@ -81,6 +81,7 @@
+ import java.util.List;
+ import java.util.Map;
+ import java.util.TreeSet;
++import java.util.Locale;
+ 
+ /**
+  * View to display information from multiple {@link RawContactDelta}s grouped together.
+@@ -902,7 +903,15 @@
+             mAccountSelectorName.setVisibility(View.GONE);
+         } else {
+             mAccountSelectorName.setVisibility(View.VISIBLE);
+-            mAccountSelectorName.setText(accountInfo.first);
++			Locale locale = getContext().getResources().getConfiguration().locale;
++			String language = locale.getLanguage().trim();
++			boolean isChineseLanguage=language.equals("zh");
++			if(accountInfo.first.equals("Phone")&& isChineseLanguage){
++				String s1 =	getContext().getString(R.string.account_info_name);
++				mAccountSelectorName.setText(s1/*accountInfo.first*/);
++			}else{
++				mAccountSelectorName.setText(accountInfo.first);
++			}
+         }
+         /// M: Modify for SIM indicator feature. @{
+         AccountType accountType = rawContactDelta.getRawContactAccountType(getContext());
+Index: packages/apps/Contacts/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Contacts/res/values-zh-rCN/strings.xml	(revision 9067)
++++ packages/apps/Contacts/res/values-zh-rCN/strings.xml	(revision 9068)
+@@ -331,4 +331,6 @@
+     <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
+ 
+     <string name="fail_reason_low_memory_during_save">内存不足，无法保存联系人.</string>
++	<string name="account_info_name">"手机"</string>
++
+ </resources>
+Index: packages/apps/Contacts/res/values-zh-rHK/strings.xml
+===================================================================
+--- packages/apps/Contacts/res/values-zh-rHK/strings.xml	(revision 9067)
++++ packages/apps/Contacts/res/values-zh-rHK/strings.xml	(revision 9068)
+@@ -328,5 +328,7 @@
+     <string name="photo_view_description_checked_no_info" msgid="4974335987092590591">"已勾選不明帳戶中的相片"</string>
+     <string name="locale_change_in_progress" msgid="1124266507671178413">"正在更新聯絡人清單以反映語言變更。\n\n請稍候…"</string>
+     <string name="menu_blocked_numbers" msgid="5272951629083025995">"已封鎖的號碼"</string>
+-    <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
++    <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
++	<string name="account_info_name">"手機"</string>
++
+ </resources>
+Index: packages/apps/Contacts/res/values-zh-rTW/strings.xml
+===================================================================
+--- packages/apps/Contacts/res/values-zh-rTW/strings.xml	(revision 9067)
++++ packages/apps/Contacts/res/values-zh-rTW/strings.xml	(revision 9068)
+@@ -329,4 +329,6 @@
+     <string name="locale_change_in_progress" msgid="1124266507671178413">"正在更新聯絡人清單以反映語言變更。\n\n請稍候…"</string>
+     <string name="menu_blocked_numbers" msgid="5272951629083025995">"已封鎖的號碼"</string>
+     <string name="from_account_format">  <xliff:g id="source" example="user@gmail.com">%1$s</xliff:g>  </string>
++	<string name="account_info_name">"手機"</string>
++
+ </resources>

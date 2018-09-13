@@ -1,0 +1,31 @@
+Index: packages/apps/Settings/AndroidManifest.xml
+===================================================================
+--- packages/apps/Settings/AndroidManifest.xml	(revision 1901)
++++ packages/apps/Settings/AndroidManifest.xml	(revision 1902)
+@@ -947,7 +947,7 @@
+                 android:value="true" />
+         </activity>
+ 
+-		<activity android:name="Settings$HomeSettingsActivity"
++		<!--<activity android:name="Settings$HomeSettingsActivity"
+                 android:label="@string/home_settings"
+                 android:icon="@drawable/home"
+                 android:taskAffinity=""
+@@ -955,7 +955,7 @@
+             <intent-filter android:priority="1">
+                 <action android:name="com.android.settings.LAUNCHER_SETTINGS" />
+                 <action android:name="android.settings.LAUNCHER_SETTINGS" />
+-
++              
+             </intent-filter>
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+@@ -972,7 +972,7 @@
+                 android:value="com.android.settings.HomeSettings" />
+             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                 android:value="true" />
+-        </activity>
++        </activity>-->
+ 
+ 
+         <activity android:name="Settings$DisplaySettingsActivity"

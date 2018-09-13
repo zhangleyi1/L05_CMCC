@@ -1,0 +1,39 @@
+Index: vendor/mediatek/proprietary/bootable/bootloader/preloader/custom/aus6739_66_n1/inc/cust_rtc.h
+===================================================================
+--- vendor/mediatek/proprietary/bootable/bootloader/preloader/custom/aus6739_66_n1/inc/cust_rtc.h	(revision 4811)
++++ vendor/mediatek/proprietary/bootable/bootloader/preloader/custom/aus6739_66_n1/inc/cust_rtc.h	(revision 4812)
+@@ -42,7 +42,7 @@
+  * Month (MTH)       : 1 ~ 12
+  * Day of Month (DOM): 1 ~ 31
+  */
+-#define RTC_DEFAULT_YEA		2010
++#define RTC_DEFAULT_YEA		2018
+ #define RTC_DEFAULT_MTH		1
+ #define RTC_DEFAULT_DOM		1
+ #define RTC_2SEC_REBOOT_ENABLE  1
+Index: vendor/mediatek/proprietary/frameworks/base/res/res/values/config.xml
+===================================================================
+--- vendor/mediatek/proprietary/frameworks/base/res/res/values/config.xml	(revision 4811)
++++ vendor/mediatek/proprietary/frameworks/base/res/res/values/config.xml	(revision 4812)
+@@ -28,7 +28,7 @@
+     <string name="config_mm_package_name">com.aspire.mm</string>
+ 
+     <!-- default year for first power on-->
+-    <integer name="default_restore_year">2015</integer>
++    <integer name="default_restore_year">2018</integer>
+ 
+     <!-- Flag indicating whether ntp sync over mobile data connection -->
+     <bool name="config_ntp_by_mobile">false</bool>
+Index: frameworks/base/services/core/java/com/android/server/NetworkTimeUpdateService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/NetworkTimeUpdateService.java	(revision 4811)
++++ frameworks/base/services/core/java/com/android/server/NetworkTimeUpdateService.java	(revision 4812)
+@@ -226,7 +226,7 @@
+               Time today = new Time(Time.getCurrentTimezone());
+               today.setToNow();
+               Log.d(TAG, "First boot:" + tempString + " with date:" + today);
+-              today.set(1, 0, mDefaultYear);
++              today.set(1, 1, 2018);
+               Log.d(TAG, "Set the year to " + mDefaultYear);
+                      SystemProperties.set(BOOT_SYS_PROPERTY, "false");
+                  SystemClock.setCurrentTimeMillis(today.toMillis(false));

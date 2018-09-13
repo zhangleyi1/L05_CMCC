@@ -1,0 +1,22 @@
+Index: packages/apps/Settings/src/com/android/settings/NightModeTypeSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/NightModeTypeSettings.java	(revision 7566)
++++ packages/apps/Settings/src/com/android/settings/NightModeTypeSettings.java	(revision 7567)
+@@ -281,7 +281,7 @@
+ 			@Override
+ 			public void onNightModeLevel(int level) {
+ 				if(level!=modePrenference.getInt(NIGHT_MODE_LEVEL,0)){
+-     				PictureQuality.setBlueLightStrength(level*40);
++     				PictureQuality.setBlueLightStrength(level*20 + 250);
+ 					/*Settings.Secure.putIntForUser(mContentResolver,Secure.ACCESSIBILITY_DISPLAY_COLOR_MATRIX,level*300 , mCurrentUser);
+ 					*/
+ 						modePrenference.edit().putInt(NIGHT_MODE_LEVEL,level).commit();
+@@ -294,7 +294,7 @@
+ 			public void onStartTouch (int level) {	
+ 					if(!automateSchedulePreference.isChecked() && !manuallyEnablePreference.isChecked() && !PictureQuality.isBlueLightEnabled()){
+ 						PictureQuality.enableBlueLight(true);
+-						PictureQuality.setBlueLightStrength(level*40);
++						PictureQuality.setBlueLightStrength(level*20 + 250);
+ 					}
+ 			};
+ 

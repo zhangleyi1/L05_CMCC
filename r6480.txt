@@ -1,0 +1,28 @@
+Index: frameworks/base/core/res/res/values/config.xml
+===================================================================
+--- frameworks/base/core/res/res/values/config.xml	(revision 6479)
++++ frameworks/base/core/res/res/values/config.xml	(revision 6480)
+@@ -171,7 +171,7 @@
+          thrashing if set too low.  Directly added to the default value chosen by
+          ActivityManager based on screen size and total memory for the largest lowmemorykiller
+          bucket, and scaled proportionally to the smaller buckets. 0 keeps the default. -->
+-    <integer name="config_lowMemoryKillerMinFreeKbytesAdjust">0</integer>
++    <integer name="config_lowMemoryKillerMinFreeKbytesAdjust">1048576</integer>
+ 
+     <!-- Device configuration setting the /proc/sys/vm/extra_free_kbytes tunable in the kernel
+          (if it exists).  A high value will increase the amount of memory that the kernel
+Index: device/mediatek/common/device.mk
+===================================================================
+--- device/mediatek/common/device.mk	(revision 6479)
++++ device/mediatek/common/device.mk	(revision 6480)
+@@ -2353,8 +2353,8 @@
+ endif
+ 
+ ifeq ($(shell test $(RESOLUTION_HXW) -ge 1000000 && test $(RESOLUTION_HXW) -lt 3500000 && echo true), true)
+-PRODUCT_PROPERTY_OVERRIDES += dalvik.vm.heapgrowthlimit=192m
+-PRODUCT_PROPERTY_OVERRIDES += dalvik.vm.heapsize=384m
++PRODUCT_PROPERTY_OVERRIDES += dalvik.vm.heapgrowthlimit=256m
++PRODUCT_PROPERTY_OVERRIDES += dalvik.vm.heapsize=512m
+ endif
+ 
+ ifeq ($(shell test $(RESOLUTION_HXW) -ge 3500000 && echo true), true)

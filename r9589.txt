@@ -1,0 +1,41 @@
+Index: frameworks/base/cmds/bootanimation/BootAnimation.cpp
+===================================================================
+--- frameworks/base/cmds/bootanimation/BootAnimation.cpp	(revision 9588)
++++ frameworks/base/cmds/bootanimation/BootAnimation.cpp	(revision 9589)
+@@ -557,6 +557,9 @@
+             ALOGD("media player is prepared");
+             mediastatus = mediaplayer->start();
+         }
++        if(mediastatus != NO_ERROR){
++            mBootVideoPlayState = MEDIA_ERROR; 
++        } 
+ 
+     }else{
+         bPlayMP3 = false;
+@@ -683,7 +686,7 @@
+         if (sleepTime > 0)
+             usleep(sleepTime);
+ 
+-        if(!bPlayMP3){
++        if(!bPlayMP3 || !bAudioStarted){
+             checkExit();
+         }else{
+             if(mBootVideoPlayState == MEDIA_PLAYBACK_COMPLETE || mBootVideoPlayState == MEDIA_ERROR) {
+@@ -1150,7 +1153,7 @@
+                         err = clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &spec, NULL);
+                     } while (err<0 && errno == EINTR);
+                 }
+-                if(!bPlayMP3){
++                if(!bPlayMP3  || !bAudioStarted){
+                     checkExit();
+                 }else{
+                     if(mBootVideoPlayState == MEDIA_PLAYBACK_COMPLETE || mBootVideoPlayState == MEDIA_ERROR) {
+@@ -2064,7 +2067,7 @@
+                         err = clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &spec, NULL);
+                     } while (err<0 && errno == EINTR);
+                 }
+-               if(!bPlayMP3){
++               if(!bPlayMP3  || !bAudioStarted){
+                     checkExit();
+                }else{
+                     if(mBootVideoPlayState == MEDIA_PLAYBACK_COMPLETE || mBootVideoPlayState == MEDIA_ERROR) {

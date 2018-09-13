@@ -1,0 +1,17 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/setting/SmsPreferenceActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/setting/SmsPreferenceActivity.java	(revision 8284)
++++ vendor/mediatek/proprietary/packages/apps/Mms/src/com/mediatek/setting/SmsPreferenceActivity.java	(revision 8285)
+@@ -437,6 +437,12 @@
+                                 MmsLog.d(TAG, "gotScNumber is: " + gotScNumber);
+ 
+                                 mNumberText.setText(gotScNumber);
++								//Dj add for 114719 by zhangle at 2018/02/09 start
++								android.text.Editable edit = mNumberText.getText();
++								if ( edit != null ) {
++									mNumberText.setSelection(edit.length());
++								}
++								//Dj add for 114719 by zhangle at 2018/02/09 end
+                                 mNumberText.setTextColor(R.color.black);
+                                 mNumberTextDialog = dialog.setIcon(
+                                         R.drawable.ic_dialog_info_holo_light).setTitle(

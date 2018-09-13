@@ -1,0 +1,21 @@
+Index: vendor/mediatek/proprietary/operator/OP01/SPEC0200/SEGC/custom.conf
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/SPEC0200/SEGC/custom.conf	(revision 1705)
++++ vendor/mediatek/proprietary/operator/OP01/SPEC0200/SEGC/custom.conf	(revision 1706)
+@@ -16,11 +16,11 @@
+ *.UserAgent = MTKDevice_TD/V1 Linux/@apc.kernel.version@ Android/@ro.build.version.release@ Release/12.21.2015 Browser/AppleWebKit537.36 Chrome/44.0.2403.119 Mobile Safari/537.36 System/Android @ro.build.version.release@; 
+ rtsp_streaming.UserAgent = stagefright/1.2 (Linux @apc.kernel.version@;Android @ro.build.version.release@; MTKDevice_TD/V1);
+ *.UAProfileURL = http://218.249.47.94/UAProfile/CMCC/MT6755_UAprofile_M.xml
+-dm.Manufacturer = MTK1
+-dm.Model = MTK
+-bluetooth.HostName = MTKDevice
+-fmtransmitter.RDSValue = Mediatek
+-wlan.SSID = MTK Device
++dm.Manufacturer = TCL
++dm.Model = V760
++bluetooth.HostName = TCL V760
++fmtransmitter.RDSValue = TCL V760
++wlan.SSID = TCL V760
+ Setting.Model= @ro.product.model@
+ Setting.SWVerno= @ro.mediatek.version.release@
+ 

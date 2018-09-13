@@ -1,0 +1,34 @@
+Index: packages/apps/Settings/res/values-zh-rTW/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 5681)
++++ packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 5682)
+@@ -3336,4 +3336,12 @@
+     <string name="button_cancel">取消</string>
+     <string name="sound_modecategory_title">模式</string>
+     <string name="fingerprint_cannot_be_repeated">指紋名稱不能重複</string>
++	<string name="fingerprint_manager_category_title">長按</string>
++	<string name="fingerprint_manager_take_photo_title">拍照/錄像</string>
++	<string name="fingerprint_manager_take_photo_summary">在相機中觸摸指紋傳感器拍攝照片/視頻</string>
++	<string name="fingerprint_function_categoty">指紋功能</string>
++	<string name="fingerprint_unlock_device_title">解鎖設備</string>
++	<string name="fingerprint_unlock_device_summary">使用指紋解鎖您的設備</string>
++	<string name="fingerprint_luncher_shortcuts_title">快速啟動功能快捷鍵</string>
++	<string name="fingerprint_luncher_shortcuts_summary">使用獨特的指紋從鎖定屏幕立即啟動相關的Func快捷方式</string>
+ </resources>
+Index: packages/apps/Settings/res/values-zh-rHK/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 5681)
++++ packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 5682)
+@@ -3339,4 +3339,12 @@
+     <string name="button_cancel">取消</string>
+     <string name="sound_modecategory_title">模式</string>
+     <string name="fingerprint_cannot_be_repeated">指纹，名唔重复</string>
++	<string name="fingerprint_manager_category_title">長按</string>
++	<string name="fingerprint_manager_take_photo_title">拍照/錄像</string>
++	<string name="fingerprint_manager_take_photo_summary">在相機中觸摸指紋傳感器拍攝照片/視頻</string>
++	<string name="fingerprint_function_categoty">指紋功能</string>
++	<string name="fingerprint_unlock_device_title">解鎖設備</string>
++	<string name="fingerprint_unlock_device_summary">使用指紋解鎖您的設備</string>
++	<string name="fingerprint_luncher_shortcuts_title">快速啟動功能快捷鍵</string>
++	<string name="fingerprint_luncher_shortcuts_summary">使用獨特的指紋從鎖定屏幕立即啟動相關的Func快捷方式</string>
+ </resources>

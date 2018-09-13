@@ -1,0 +1,91 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 1714)
++++ vendor/customer/custom.mk	(revision 1715)
+@@ -21,7 +21,9 @@
+                     TencentNews \
+                     TencentVideo \
+                     SogouInput \
+-                    MainApp
++                    MainApp \
++                    10086android \
++                    mmnes
+ 
+ # Overrides
+ PRODUCT_PROPERTY_OVERRIDES +=
+Index: vendor/customer/apps/mmnes/mmnes1.3.0_release_online_5410232117.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mmnes/mmnes1.3.0_release_online_5410232117.apk
+===================================================================
+--- vendor/customer/apps/mmnes/mmnes1.3.0_release_online_5410232117.apk	(revision 0)
++++ vendor/customer/apps/mmnes/mmnes1.3.0_release_online_5410232117.apk	(revision 1715)
+
+Property changes on: vendor/customer/apps/mmnes/mmnes1.3.0_release_online_5410232117.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/apps/10086android/10086_android_V3.7.5_20170913_D3000_V1.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/10086android/10086_android_V3.7.5_20170913_D3000_V1.apk
+===================================================================
+--- vendor/customer/apps/10086android/10086_android_V3.7.5_20170913_D3000_V1.apk	(revision 0)
++++ vendor/customer/apps/10086android/10086_android_V3.7.5_20170913_D3000_V1.apk	(revision 1715)
+
+Property changes on: vendor/customer/apps/10086android/10086_android_V3.7.5_20170913_D3000_V1.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/Android.mk
+===================================================================
+--- vendor/customer/Android.mk	(revision 1714)
++++ vendor/customer/Android.mk	(revision 1715)
+@@ -1181,3 +1181,41 @@
+ LOCAL_DEX_PREOPT := true
+ LOCAL_OVERRIDES_PACKAGES := Mms MtkMms
+ include $(BUILD_PREBUILT)
++
++#10086android
++###############################################################################
++include $(CLEAR_VARS)
++LOCAL_MODULE := 10086android
++LOCAL_MODULE_TAGS := optional
++LOCAL_SRC_FILES := apps/10086android/10086_android_V3.7.5_20170913_D3000_V1.apk
++LOCAL_MODULE_CLASS := APPS
++LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
++LOCAL_CERTIFICATE := PRESIGNED
++LOCAL_MULTILIB := 32
++LOCAL_PREBUILT_JNI_LIBS := \
++@lib/armeabi/libaes-jni.so \
++@lib/armeabi/libBaiduMapSDK_base_v4_2_0.so \
++@lib/armeabi/libBaiduMapSDK_map_v4_2_0.so \
++@lib/armeabi/libentryexpro.so \
++@lib/armeabi/libjni.so \
++@lib/armeabi/liblocSDK7a.so \
++@lib/armeabi/libnamecardrec.so \
++@lib/armeabi/libuptsmaddon.so
++LOCAL_DEX_PREOPT := true
++LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app
++include $(BUILD_PREBUILT)
++
++LOCAL_PATH := $(call my-dir)
++#########################
++## mmnes  
++########################
++include $(CLEAR_VARS)
++LOCAL_MODULE := mmnes
++LOCAL_MODULE_TAGS := optional
++LOCAL_SRC_FILES := apps/mmnes/mmnes1.3.0_release_online_5410232117.apk
++LOCAL_MODULE_CLASS := APPS
++LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
++LOCAL_CERTIFICATE := PRESIGNED
++LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app
++include $(BUILD_PREBUILT)
++

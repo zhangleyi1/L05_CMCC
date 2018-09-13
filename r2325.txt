@@ -1,0 +1,13 @@
+Index: vendor/mediatek/proprietary/packages/apps/Mms/res/layout/message_list_item_send.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/Mms/res/layout/message_list_item_send.xml	(revision 2324)
++++ vendor/mediatek/proprietary/packages/apps/Mms/res/layout/message_list_item_send.xml	(revision 2325)
+@@ -100,7 +100,7 @@
+                         android:ellipsize="middle"
+                         android:singleLine="true"
+                         android:textColor="#555555"
+-                        android:textSize="14sp"
++                        android:textSize="10sp"
+                         android:layout_marginBottom="4dip"
+                         android:linksClickable="false"
+                         android:layout_gravity="left" />

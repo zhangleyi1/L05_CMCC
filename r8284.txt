@@ -1,0 +1,17 @@
+Index: packages/apps/Settings/src/com/android/settings/sim/SimPreferenceDialog.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/sim/SimPreferenceDialog.java	(revision 8283)
++++ packages/apps/Settings/src/com/android/settings/sim/SimPreferenceDialog.java	(revision 8284)
+@@ -140,6 +140,12 @@
+         final Resources res = mContext.getResources();
+         EditText nameText = (EditText)mDialogLayout.findViewById(R.id.sim_name);
+         nameText.setText(mSubInfoRecord.getDisplayName());
++		//Dj add for 114719 by zhangle at 2018/02/09 start
++		android.text.Editable edit = nameText.getText();
++		if ( edit != null ) {
++			nameText.setSelection(edit.length());
++		}
++		//Dj add for 114719 by zhangle at 2018/02/09 end
+ 
+         /// M: only for OP09 UIM/SIM changes.
+         customizeSimNameTitle(mDialogLayout);

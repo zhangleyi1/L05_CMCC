@@ -1,0 +1,55 @@
+Index: frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml
+===================================================================
+--- frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml	(revision 2404)
++++ frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml	(revision 2405)
+@@ -16,5 +16,5 @@
+ 
+ <!-- Feature for devices with gyroscope. -->
+ <permissions>
+-    <feature name="android.hardware.sensor.gyroscope" />
++    <!--<feature name="android.hardware.sensor.gyroscope" />-->
+ </permissions>
+Index: frameworks/native/data/etc/android.hardware.nfc.hce.xml
+===================================================================
+--- frameworks/native/data/etc/android.hardware.nfc.hce.xml	(revision 2404)
++++ frameworks/native/data/etc/android.hardware.nfc.hce.xml	(revision 2405)
+@@ -17,5 +17,5 @@
+ <!-- This feature indicates that the device supports host-based
+      NFC card emulation -->
+ <permissions>
+-    <feature name="android.hardware.nfc.hce" />
++    <!--<feature name="android.hardware.nfc.hce" />-->
+ </permissions>
+Index: frameworks/native/data/etc/android.hardware.nfc.xml
+===================================================================
+--- frameworks/native/data/etc/android.hardware.nfc.xml	(revision 2404)
++++ frameworks/native/data/etc/android.hardware.nfc.xml	(revision 2405)
+@@ -17,5 +17,5 @@
+ <!-- This is the standard feature indicating that the device can communicate
+      using Near-Field Communications (NFC). -->
+ <permissions>
+-    <feature name="android.hardware.nfc" />
++   <!-- <feature name="android.hardware.nfc" />-->
+ </permissions>
+Index: frameworks/native/data/etc/android.hardware.nfc.hcef.xml
+===================================================================
+--- frameworks/native/data/etc/android.hardware.nfc.hcef.xml	(revision 2404)
++++ frameworks/native/data/etc/android.hardware.nfc.hcef.xml	(revision 2405)
+@@ -17,5 +17,5 @@
+ <!-- This feature indicates that the device supports host-based
+      NFC-F card emulation -->
+ <permissions>
+-    <feature name="android.hardware.nfc.hcef" />
++    <!--<feature name="android.hardware.nfc.hcef" />-->
+ </permissions>
+Index: frameworks/native/data/etc/android.hardware.sensor.compass.xml
+===================================================================
+--- frameworks/native/data/etc/android.hardware.sensor.compass.xml	(revision 2404)
++++ frameworks/native/data/etc/android.hardware.sensor.compass.xml	(revision 2405)
+@@ -16,5 +16,5 @@
+ 
+ <!-- Feature for devices with a compass. -->
+ <permissions>
+-    <feature name="android.hardware.sensor.compass" />
++   <!-- <feature name="android.hardware.sensor.compass" />-->
+ </permissions>

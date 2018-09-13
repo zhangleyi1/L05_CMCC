@@ -1,0 +1,13 @@
+Index: vendor/customer/Customer_res/custom_res.mk
+===================================================================
+--- vendor/customer/Customer_res/custom_res.mk	(revision 15775)
++++ vendor/customer/Customer_res/custom_res.mk	(revision 15776)
+@@ -28,7 +28,7 @@
+ PRODUCT_COPY_FILES += $(LOCAL_PATH)/alarms/Snoozer.ogg:system/media/audio/alarms/Snoozer.ogg
+ PRODUCT_COPY_FILES += $(LOCAL_PATH)/alarms/Upwards.mp3:system/media/audio/alarms/Upwards.mp3
+ 
+-PRODUCT_COPY_FILES += $(LOCAL_PATH)/alarms/Atmospheric_Forest-default.mp3:system/media/audio/alarms/Atmospheric_Forest-default.mp3
++PRODUCT_COPY_FILES += $(LOCAL_PATH)/alarms/Atmospheric_Forest-default.mp3:system/media/audio/alarms/Forest.mp3
+ PRODUCT_COPY_FILES += $(LOCAL_PATH)/alarms/Cicada.mp3:system/media/audio/alarms/Cicada.mp3
+ PRODUCT_COPY_FILES += $(LOCAL_PATH)/alarms/Cuckoo.mp3:system/media/audio/alarms/Cuckoo.mp3
+ PRODUCT_COPY_FILES += $(LOCAL_PATH)/alarms/Early_summer.mp3:system/media/audio/alarms/Early_summer.mp3

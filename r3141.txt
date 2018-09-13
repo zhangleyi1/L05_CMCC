@@ -1,0 +1,13 @@
+Index: packages/apps/Settings/src/com/android/settings/DateTimeSettings.java
+===================================================================
+--- packages/apps/Settings/src/com/android/settings/DateTimeSettings.java	(revision 3140)
++++ packages/apps/Settings/src/com/android/settings/DateTimeSettings.java	(revision 3141)
+@@ -334,7 +334,7 @@
+         // The system clock can't represent dates outside this range.
+         Calendar t = Calendar.getInstance();
+         t.clear();
+-        t.set(1970, Calendar.JANUARY, 1);
++        t.set(2007, Calendar.JANUARY, 1);
+         datePicker.setMinDate(t.getTimeInMillis());
+         t.clear();
+         t.set(2037, Calendar.DECEMBER, 31);

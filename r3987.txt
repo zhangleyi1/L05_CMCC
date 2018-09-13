@@ -1,0 +1,78 @@
+Index: packages/apps/Settings/res/values-zh-rCN/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 3986)
++++ packages/apps/Settings/res/values-zh-rCN/strings.xml	(revision 3987)
+@@ -2936,7 +2936,7 @@
+     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"仅为此设备充电"</string>
+     <string name="usb_use_power_only" msgid="6426550616883919530">"用作电源"</string>
+     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"为已连接的其他设备供电"</string>
+-    <string name="usb_use_file_transfers" msgid="7409600791007250137">"传输文件"</string>
++    <string name="usb_use_file_transfers" msgid="7409600791007250137">"传输文件 (MTP)"</string>
+     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"将文件传输至其他设备"</string>
+     <string name="usb_use_photo_transfers" msgid="7794775645350330454">"传输照片 (PTP)"</string>
+     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"如果 MTP 不受支持，则传输照片或文件 (PTP)"</string>
+Index: packages/apps/Settings/res/values-zh-rTW/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 3986)
++++ packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 3987)
+@@ -2921,7 +2921,7 @@
+     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"僅為這個裝置充電"</string>
+     <string name="usb_use_power_only" msgid="6426550616883919530">"提供電源"</string>
+     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"為其他連接的裝置提供電源"</string>
+-    <string name="usb_use_file_transfers" msgid="7409600791007250137">"傳輸檔案"</string>
++    <string name="usb_use_file_transfers" msgid="7409600791007250137">"傳輸檔案 (MTP)"</string>
+     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"將檔案轉移到另一個裝置"</string>
+     <string name="usb_use_photo_transfers" msgid="7794775645350330454">"傳輸相片 (PTP)"</string>
+     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"如果 MTP 不受支援，則轉移相片或檔案 (PTP)"</string>
+Index: packages/apps/Settings/res/values-en-rGB/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-en-rGB/strings.xml	(revision 3986)
++++ packages/apps/Settings/res/values-en-rGB/strings.xml	(revision 3987)
+@@ -2916,7 +2916,7 @@
+     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Just charge this device"</string>
+     <string name="usb_use_power_only" msgid="6426550616883919530">"Supply power"</string>
+     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Supply power to the other connected device"</string>
+-    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Transfer files"</string>
++    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Transfer files (MTP)"</string>
+     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Transfer files to another device"</string>
+     <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Transfer photos (PTP)"</string>
+     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Transfer photos or files if MTP is not supported (PTP)"</string>
+Index: packages/apps/Settings/res/values-en-rAU/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-en-rAU/strings.xml	(revision 3986)
++++ packages/apps/Settings/res/values-en-rAU/strings.xml	(revision 3987)
+@@ -2916,7 +2916,7 @@
+     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Just charge this device"</string>
+     <string name="usb_use_power_only" msgid="6426550616883919530">"Supply power"</string>
+     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Supply power to the other connected device"</string>
+-    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Transfer files"</string>
++    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Transfer files (MTP)"</string>
+     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Transfer files to another device"</string>
+     <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Transfer photos (PTP)"</string>
+     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Transfer photos or files if MTP is not supported (PTP)"</string>
+Index: packages/apps/Settings/res/values-en-rIN/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-en-rIN/strings.xml	(revision 3986)
++++ packages/apps/Settings/res/values-en-rIN/strings.xml	(revision 3987)
+@@ -2916,7 +2916,7 @@
+     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Just charge this device"</string>
+     <string name="usb_use_power_only" msgid="6426550616883919530">"Supply power"</string>
+     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Supply power to the other connected device"</string>
+-    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Transfer files"</string>
++    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Transfer files (MTP)"</string>
+     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Transfer files to another device"</string>
+     <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Transfer photos (PTP)"</string>
+     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Transfer photos or files if MTP is not supported (PTP)"</string>
+Index: packages/apps/Settings/res/values-zh-rHK/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 3986)
++++ packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 3987)
+@@ -2923,7 +2923,7 @@
+     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"只為此裝置充電"</string>
+     <string name="usb_use_power_only" msgid="6426550616883919530">"供應電源"</string>
+     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"為其他已連接的裝置供應電源"</string>
+-    <string name="usb_use_file_transfers" msgid="7409600791007250137">"傳送檔案"</string>
++    <string name="usb_use_file_transfers" msgid="7409600791007250137">"傳送檔案 (MTP)"</string>
+     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"傳送檔案至另一部裝置"</string>
+     <string name="usb_use_photo_transfers" msgid="7794775645350330454">"傳送相片 (PTP)"</string>
+     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"如不支援媒體傳輸協定，則使用相片傳輸協定傳送相片或檔案"</string>

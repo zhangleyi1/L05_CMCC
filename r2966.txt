@@ -1,0 +1,23 @@
+Index: vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/layout/base_button.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/layout/base_button.xml	(revision 2965)
++++ vendor/mediatek/proprietary/packages/apps/MMITestDevice/res/layout/base_button.xml	(revision 2966)
+@@ -15,7 +15,7 @@
+         android:layout_weight="1"
+         android:background="@drawable/button_bg"
+         android:gravity="center"
+-        android:textColor="@color/black"
++        android:textColor="@color/green"
+         android:textSize="@dimen/base_bottom_button_textsize" />
+ 
+     <Button
+@@ -26,7 +26,7 @@
+         android:layout_weight="1"
+         android:background="@drawable/button_bg"
+         android:gravity="center"
+-        android:textColor="@color/black"
++        android:textColor="@color/red"
+         android:textSize="@dimen/base_bottom_button_textsize" />
+ 
+ </LinearLayout>
+\ No newline at end of file

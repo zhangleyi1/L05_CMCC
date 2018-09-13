@@ -1,0 +1,22 @@
+Index: vendor/mediatek/proprietary/packages/apps/EngineerMode/src/com/mediatek/engineermode/PrefsFragment.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/EngineerMode/src/com/mediatek/engineermode/PrefsFragment.java	(revision 2943)
++++ vendor/mediatek/proprietary/packages/apps/EngineerMode/src/com/mediatek/engineermode/PrefsFragment.java	(revision 2944)
+@@ -156,7 +156,7 @@
+         if ( !( ChipSupport.isFeatureSupported(ChipSupport.MTK_USERLOAD_SUPPORT)
+                 || FeatureSupport.isEngLoad() || FeatureSupport.isUserDebugLoad() ) ) {
+                 Log.d("@M_" + TAG,"it is customer user load!");
+-                removePreference(screen, "atci");
++                //removePreference(screen, "atci");
+                 removePreference(screen, "bip");
+                 removePreference(screen, "voice_settings");
+                 removePreference(screen, "md_log_filter");
+@@ -223,7 +223,7 @@
+             removePreference(screen, "system_update");
+             removePreference(screen, "usbacm");
+             removePreference(screen, "saber");
+-            removePreference(screen, "usb_checker_enabler");
++            //removePreference(screen, "usb_checker_enabler");
+             removePreference(screen, "spc");
+         }
+ 

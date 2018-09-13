@@ -1,0 +1,32 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 6713)
++++ vendor/customer/custom.mk	(revision 6714)
+@@ -32,7 +32,7 @@
+ PRODUCT_COPY_FILES += vendor/customer/apps/Weather/Weather_CN_v8.0.2.2.0604.2_signed_releasekey_alldpi.apk:system/vendor/operator/app/Weather/Weather.apk \
+ vendor/customer/apps/mCloud/mCloud_3.7.5_508-000.apk:system/vendor/operator/app/mCloud/mCloud.apk \
+ vendor/customer/apps/migu_video/resigned_4.0.0.10_71_20171205094744_sec_signed.apk:system/vendor/operator/app/migu_video/migu_video.apk \
+-vendor/customer/apps/HeFition/HeFition_V6.1.0330_2017121815_PROD_release.apk:system/vendor/operator/app/HeFition/HeFition.apk \
++vendor/customer/apps/HeFition/RCS_V6.1.0342_2018012316_PROD_release.apk:system/vendor/operator/app/HeFition/HeFition.apk \
+ vendor/customer/apps/migu_reader/CMREADBC_Android_WH_V7.30_specprein_te_171214_signed.apk:system/vendor/operator/app/migu_reader/CMREADBC_Android_WH_V7.30_specprein_te_171214_signed.apk \
+ vendor/customer/apps/UCBrowser/UCBrowser_V11.7.2.954_android_pf145.apk:system/vendor/operator/app/UCBrowser/UCBrowser_V11.7.2.954_android_pf145.apk \
+ vendor/customer/apps/UCBrowser/uconfig.ini:system/etc/uconfig.ini \
+Index: vendor/customer/apps/HeFition/HeFition_V6.1.0330_2017121815_PROD_release.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/RCS_V6.1.0342_2018012316_PROD_release.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/HeFition/RCS_V6.1.0342_2018012316_PROD_release.apk
+===================================================================
+--- vendor/customer/apps/HeFition/RCS_V6.1.0342_2018012316_PROD_release.apk	(revision 0)
++++ vendor/customer/apps/HeFition/RCS_V6.1.0342_2018012316_PROD_release.apk	(revision 6714)
+
+Property changes on: vendor/customer/apps/HeFition/RCS_V6.1.0342_2018012316_PROD_release.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

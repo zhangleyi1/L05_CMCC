@@ -1,0 +1,51 @@
+Index: frameworks/base/packages/SystemUI/src/com/face/scanner/LiteManager.java
+===================================================================
+--- frameworks/base/packages/SystemUI/src/com/face/scanner/LiteManager.java	(revision 7193)
++++ frameworks/base/packages/SystemUI/src/com/face/scanner/LiteManager.java	(revision 7194)
+@@ -75,7 +75,7 @@
+ 		String livePath1 = "";
+         String livePath2 = "";
+         File dir = mContext.getExternalFilesDir("megvii");
+-        if (!dir.exists()) {
++        if (dir == null || !dir.exists()) {
+             Log.i("zxp","dir.exists()");
+ 			return;
+         }
+Index: frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 7193)
++++ frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java	(revision 7194)
+@@ -7145,8 +7145,9 @@
+ 	
+ 	
+ 	    private void startFaceVerify() { //startFaceVerifyInternal
++		Log.d(TAG,"startFaceVerify():keyguardOn()="+keyguardOn());
+ 	
+-        if (keyguardOn() /*&& !isSimPinKeyguardStart && !inCall() && !isSwitchingUser zxp*/) {
++        //if (keyguardOn() /*&& !isSimPinKeyguardStart && !inCall() && !isSwitchingUser zxp*/) {
+             String faceEnable = Settings.System.getStringForUser(mContext.getContentResolver(), Settings.System.FACE_STATE_ENABLED, 0);
+             int faceUnlockState = Settings.System.getInt(mContext.getContentResolver(), Settings.System.FACE_UNLOCK_STATE_ENABLED, 0);
+             if (faceEnable == null) {
+@@ -7159,9 +7160,9 @@
+                 }
+             }
+ 			Slog.d(TAG, "faceEnable = "+faceEnable);
+-        } else {
+-             Slog.d(TAG, "--can't bind FaceService mFaceVerifyRun:");
+-        }
++        //} else {
++         //    Slog.d(TAG, "--can't bind FaceService mFaceVerifyRun:");
++        //}
+     }
+     private void bindFaceService() {
+         Intent intent = new Intent();
+@@ -7193,7 +7194,8 @@
+     @Override
+     public void screenTurnedOff() {
+         if (DEBUG_WAKEUP) Slog.i(TAG, "Screen turned off...");
+-
++		Log.d("zxp","exitFaceVerify when screenTurnedOff ");
++		exitFaceVerify();
+         updateScreenOffSleepToken(true);
+         synchronized (mLock) {
+             mScreenOnEarly = false;

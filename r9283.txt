@@ -1,0 +1,13 @@
+Index: packages/apps/Dialer/InCallUI/src/com/mediatek/incallui/wrapper/FeatureOptionWrapper.java
+===================================================================
+--- packages/apps/Dialer/InCallUI/src/com/mediatek/incallui/wrapper/FeatureOptionWrapper.java	(revision 9282)
++++ packages/apps/Dialer/InCallUI/src/com/mediatek/incallui/wrapper/FeatureOptionWrapper.java	(revision 9283)
+@@ -80,7 +80,7 @@
+      * @return
+      */
+     public static boolean isSupportVideoDisplayTrans() {
+-        return "1".equals(SystemProperties.get(VIDEO_DISPLAY_VIEW_TRANSLATION_KEY));
++        return true;//"1".equals(SystemProperties.get(VIDEO_DISPLAY_VIEW_TRANSLATION_KEY));
+     }
+ 
+     /**

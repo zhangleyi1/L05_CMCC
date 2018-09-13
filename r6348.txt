@@ -1,0 +1,27 @@
+Index: frameworks/base/services/core/java/com/android/server/notification/NotificationManagerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/notification/NotificationManagerService.java	(revision 6347)
++++ frameworks/base/services/core/java/com/android/server/notification/NotificationManagerService.java	(revision 6348)
+@@ -3785,17 +3785,12 @@
+             }
+             if (mNotificationPulseEnabled) {
+                 // pulse repeatedly
+-                if("com.android.dialer".equals(packageName)){
+-						ContentResolver contentResolver=getContext().getContentResolver();
+-						int value=Settings.Global.getInt(contentResolver,KEY_LEDEVENT,1);
+-						if(value==1){
+-							mNotificationLight.setFlashing(ledARGB, Light.LIGHT_FLASH_TIMED,
+-                            ledOnMS, ledOffMS);
+-						}
+-				}else{
++			   ContentResolver contentResolver=getContext().getContentResolver();
++			   int value=Settings.Global.getInt(contentResolver,KEY_LEDEVENT,1);
++			   if(value==1){
+ 					mNotificationLight.setFlashing(ledARGB, Light.LIGHT_FLASH_TIMED,
+-                            ledOnMS, ledOffMS);
+-				}
++                         ledOnMS, ledOffMS);
++			   }
+             }
+             if (mStatusBar != null) {
+                 // let SystemUI make an independent decision

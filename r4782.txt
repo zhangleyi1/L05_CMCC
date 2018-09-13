@@ -1,0 +1,347 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 4781)
++++ vendor/customer/custom.mk	(revision 4782)
+@@ -24,7 +24,7 @@
+                     iReader \
+                     Diagnostics \
+                     139mail \
+-                    HeFition
++                    HeFition 
+ 
+ # Overrides
+ PRODUCT_PROPERTY_OVERRIDES +=
+@@ -31,4 +31,6 @@
+ 
+ $(call inherit-product-if-exists, vendor/customer/apps/BaiDuMap/BaiDuMap.mk)
+ $(call inherit-product-if-exists, vendor/customer/apps/MainApp/MainApp.mk)
+-PRODUCT_COPY_FILES += vendor/customer/apps/Weather/Weather_Global_v7.0.2.2.0466.0_signed_releasekey_alldpi.apk:system/vendor/operator/app/Weather/Weather.apk
+\ No newline at end of file
++PRODUCT_COPY_FILES += vendor/customer/apps/Weather/Weather_Global_v7.0.2.2.0466.0_signed_releasekey_alldpi.apk:system/vendor/operator/app/Weather/Weather.apk \
++vendor/customer/apps/mCloud/mCloud_3.7.5_508-000.apk:system/vendor/operator/app/mCloud/mCloud.apk \
++vendor/customer/apps/migu_video/resigned_4.0.0.10_71_20171205094744_sec_signed.apk:system/vendor/operator/app/migu_video/migu_video.apk 
+Index: vendor/customer/apps/mCloud/Android.mk
+===================================================================
+--- vendor/customer/apps/mCloud/Android.mk	(revision 4781)
++++ vendor/customer/apps/mCloud/Android.mk	(revision 4782)
+@@ -1,27 +0,0 @@
+-LOCAL_PATH:= $(call my-dir)
+-
+-include $(CLEAR_VARS)
+-LOCAL_MODULE := mCloud
+-LOCAL_MODULE_TAGS := optional
+-LOCAL_SRC_FILES := mCloud_3.7.5_508-000.apk
+-LOCAL_MODULE_CLASS := APPS
+-LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+-LOCAL_CERTIFICATE := PRESIGNED
+-LOCAL_TARGET_CPU_ABI := armeabi
+-LOCAL_PREBUILT_JNI_LIBS := lib/$(LOCAL_TARGET_CPU_ABI)/libcmcc_haze.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libcmcc_rusteze.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libFastKDCore.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libfileinfo.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libgif.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libijkffmpeg.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libijkplayer.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libijksdl.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libkh.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libmcloud-jni.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libpl_droidsonroids_gif.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libus.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libxmppservice.so
+-LOCAL_DEX_PREOPT := true
+-LOCAL_MULTILIB := 32
+-LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app
+-include $(BUILD_PREBUILT)
+\ No newline at end of file
+Index: vendor/customer/apps/mCloud/lib/armeabi/libcmcc_haze.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libijksdl.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libmcloud-jni.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libijkffmpeg.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libkh.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libpl_droidsonroids_gif.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libFastKDCore.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libgif.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libxmppservice.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libcmcc_rusteze.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libus.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libijkplayer.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/lib/armeabi/libfileinfo.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/Android.mk
+===================================================================
+--- vendor/customer/apps/migu_video/Android.mk	(revision 4781)
++++ vendor/customer/apps/migu_video/Android.mk	(revision 4782)
+@@ -1,58 +0,0 @@
+-LOCAL_PATH:= $(call my-dir)
+-
+-include $(CLEAR_VARS)
+-LOCAL_MODULE := migu_video
+-LOCAL_MODULE_TAGS := optional
+-LOCAL_SRC_FILES := resigned_4.0.0.10_71_20171205094744_sec_signed.apk
+-LOCAL_MODULE_CLASS := APPS
+-LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+-LOCAL_CERTIFICATE := PRESIGNED
+-LOCAL_TARGET_CPU_ABI := armeabi
+-LOCAL_PREBUILT_JNI_LIBS := lib/$(LOCAL_TARGET_CPU_ABI)/libaes.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libapi.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libapi_canvas.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libappmanager.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libArcSoftSpotlight.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libBaiduMapSDK_base_v4_2_0.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libBaiduMapSDK_map_v4_2_0.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libbarcodescanner.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libcodecgif.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libcodecjpeg.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libcodecwebp.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libcomrepository.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libdes.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libDexHelper.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libDexHelper-x86.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libDlnaClient.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libdresden.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libffmpeg.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libgetuiext2.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libgloox.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libhttppipe.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libimplugin.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libirdetodrm.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libkhmigu.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/liblauncher.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/liblocSDK7a.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/liblua.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libmapview.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libmediaplayer.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libmediaplayersystem.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libmg20pbase.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libmgdrm.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libmgmediaplayer.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libmgsoundtouch.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libmsc.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libottupnp.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libsdl.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libSkyLinkJni.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libTransferClient.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libtxcore20140804_50.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libwebbrowser.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libweibosdkcore.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libzegoavkit2_jni.so \
+-                           lib/$(LOCAL_TARGET_CPU_ABI)/libzegoavkit.so
+-LOCAL_DEX_PREOPT := true
+-LOCAL_MULTILIB := 32
+-LOCAL_MODULE_PATH := $(TARGET_OUT)/vendor/operator/app
+-include $(BUILD_PREBUILT)
+\ No newline at end of file
+Index: vendor/customer/apps/migu_video/lib/armeabi/libArcSoftSpotlight.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmediaplayersystem.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/liblauncher.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libapi_canvas.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmgdrm.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/liblocSDK7a.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmapview.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libbarcodescanner.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libdes.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmgsoundtouch.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libDexHelper.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libgetuiext2.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmg20pbase.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmgmediaplayer.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/liblua.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libsdl.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libTransferClient.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libkhmigu.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libBaiduMapSDK_base_v4_2_0.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libgloox.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libBaiduMapSDK_map_v4_2_0.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmediaplayer.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libcodecgif.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libzegoavkit.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libDexHelper-x86.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libffmpeg.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libaes.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libapi.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libottupnp.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libappmanager.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libDlnaClient.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libcomrepository.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libweibosdkcore.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libwebbrowser.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libmsc.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libcodecjpeg.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libdresden.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libimplugin.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libSkyLinkJni.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libzegoavkit2_jni.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libirdetodrm.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libtxcore20140804_50.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libcodecwebp.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/migu_video/lib/armeabi/libhttppipe.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream

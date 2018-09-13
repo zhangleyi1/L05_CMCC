@@ -1,0 +1,32 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 9242)
++++ vendor/customer/custom.mk	(revision 9243)
+@@ -33,7 +33,7 @@
+ $(call inherit-product-if-exists, vendor/customer/apps/Baidu/Baidu.mk)
+ $(call inherit-product-if-exists, vendor/customer/apps/MainApp/MainApp.mk)
+ PRODUCT_COPY_FILES += vendor/customer/apps/Weather/Weather_CN_v8.0.2.2.0604.2_signed_releasekey_alldpi.apk:system/vendor/operator/app/Weather/Weather.apk \
+-vendor/customer/apps/mCloud/mCloud_3.7.5_508-000.apk:system/vendor/operator/app/mCloud/mCloud.apk \
++vendor/customer/apps/mCloud/preInstall_master_release_20180211151413.apk:system/vendor/operator/app/mCloud/preInstall_master_release_20180211151413.apk \
+ vendor/customer/apps/migu_video/resigned_4.0.0.10_71_20171205094744_sec_signed.apk:system/vendor/operator/app/migu_video/migu_video.apk \
+ vendor/customer/apps/HeFition/RCS_V6.1.0342_2018012316_PROD_release.apk:system/vendor/operator/app/HeFition/HeFition.apk \
+ vendor/customer/apps/migu_reader/CMREADBC_Android_WH_V7.30_specprein_te_171214_signed.apk:system/vendor/operator/app/migu_reader/CMREADBC_Android_WH_V7.30_specprein_te_171214_signed.apk \
+Index: vendor/customer/apps/mCloud/mCloud_3.7.5_508-000.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/preInstall_master_release_20180211151413.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/mCloud/preInstall_master_release_20180211151413.apk
+===================================================================
+--- vendor/customer/apps/mCloud/preInstall_master_release_20180211151413.apk	(revision 0)
++++ vendor/customer/apps/mCloud/preInstall_master_release_20180211151413.apk	(revision 9243)
+
+Property changes on: vendor/customer/apps/mCloud/preInstall_master_release_20180211151413.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property

@@ -1,0 +1,64 @@
+Index: frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java	(revision 8090)
++++ frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java	(revision 8091)
+@@ -15665,6 +15665,17 @@
+         }
+ 
+         String pkgName = res.name = pkg.packageName;
++		
++		//add by mzj for cts start
++		Log.d(TAG, "mzj pkgName := "+ pkgName);
++		if (pkgName.equals("com.android.cts.net.hostside") || pkgName.equals("com.android.preconditions.cts") 
++			|| pkgName.equals("com.android.cts.net.hostside.app2")
++			|| pkgName.equals("com.android.preconditions.cts")){
++	        SystemProperties.set("persist.sys.cts", "1");
++	        Log.d(TAG, "set persist.sys.cts = 1");
++	    } 
++		//add by mzj for cts end
++		
+         if ((pkg.applicationInfo.flags&ApplicationInfo.FLAG_TEST_ONLY) != 0) {
+             if ((installFlags & PackageManager.INSTALL_ALLOW_TEST) == 0) {
+                 res.setError(INSTALL_FAILED_TEST_ONLY, "installPackageLI");
+Index: frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java
+===================================================================
+--- frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 8090)
++++ frameworks/base/services/core/java/com/android/server/power/PowerManagerService.java	(revision 8091)
+@@ -89,7 +89,7 @@
+ import com.android.server.lights.Light;
+ import com.android.server.lights.LightsManager;
+ import com.android.server.vr.VrManagerService;
+-
++import android.util.Log;
+ import libcore.util.Objects;
+ 
+ import java.io.FileDescriptor;
+@@ -1047,9 +1047,10 @@
+             });
+         }
+     }
+-private  void  handlePowerSaveMode(boolean LowPowerMode){
+-    final ContentResolver resolver = mContext.getContentResolver();
+-    if (LowPowerMode) {//�͹���ģʽ
++	
++	private  void  handlePowerSaveMode(boolean LowPowerMode){
++		final ContentResolver resolver = mContext.getContentResolver();
++		if (LowPowerMode) {//�͹���ģʽ
+         mNoLowPowerScreenoffTimeout = Settings.System.getIntForUser(resolver,
+                 Settings.System.SCREEN_OFF_TIMEOUT, DEFAULT_SCREEN_OFF_TIMEOUT,
+                 UserHandle.USER_CURRENT);//��ȡ֮ǰ����Ļ˯��ʱ��
+@@ -1071,8 +1072,12 @@
+ //        Settings.System.putInt(resolver, Settings.System.SCREEN_BRIGHTNESS, 10);//������Ļ����Ϊ10
+         Settings.Secure.putInt(resolver, Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);//�رն�λ
+ 
+-        mWifiManager.setWifiApEnabled(null, false);//�ر�wifi�ȵ�
+-        mWifiManager.setWifiEnabled(false);//�ر�wifi
++		if(!(SystemProperties.get("persist.sys.cts", "0").equals("1"))){//add by mzj for cts
++			Log.d("mzj","is not running cts ================");
++			mWifiManager.setWifiApEnabled(null, false);//�ر�wifi�ȵ�
++			mWifiManager.setWifiEnabled(false);//�ر�wifi
++		}
++		
+         mTelephonyManager.setDataEnabled(false);//�ر���������
+         mBluetoothAdapter.disable();//�ر�����
+ //        mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_OFF);//�ر�������

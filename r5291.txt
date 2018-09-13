@@ -1,0 +1,1024 @@
+Index: device/mediatek/common/device.mk
+===================================================================
+--- device/mediatek/common/device.mk	(revision 5290)
++++ device/mediatek/common/device.mk	(revision 5291)
+@@ -2070,9 +2070,10 @@
+ 
+ ifeq ($(strip $(MICROTRUST_TEE_SUPPORT)), yes)
+   PRODUCT_PACKAGES += teei_daemon
+-#  PRODUCT_PACKAGES += init_thh
++  PRODUCT_PACKAGES += init_thh
+ #  PRODUCT_PACKAGES += libteei_fp
+ #  PRODUCT_PACKAGES += libfingerprint_tac
++  PRODUCT_PACKAGES += ut_clientd
+   PRODUCT_PROPERTY_OVERRIDES += ro.mtk_microtrust_tee_support=1
+ endif
+ 
+Index: device/mediatek/common/sepolicy/bsp/file_contexts
+===================================================================
+--- device/mediatek/common/sepolicy/bsp/file_contexts	(revision 5290)
++++ device/mediatek/common/sepolicy/bsp/file_contexts	(revision 5291)
+@@ -85,20 +85,5 @@
+ /(system\/vendor|system)/bin/ifaad u:object_r:ifaad_exec:s0
+ #microtrust_ifaa end
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++# microtrust thh daemon
++/(system\/vendor|vendor)/bin/ut_clientd u:object_r:ut_clientd_exec:s0
+Index: device/mediatek/common/sepolicy/bsp/service_contexts
+===================================================================
+--- device/mediatek/common/sepolicy/bsp/service_contexts	(revision 5290)
++++ device/mediatek/common/sepolicy/bsp/service_contexts	(revision 5291)
+@@ -24,3 +24,7 @@
+ #microtrust_ifaa begin
+ android.hardware.ifaa.IIfaaDaemon             u:object_r:ifaad_service:s0
+ #microtrust_ifaa end
++
++# microtrust thh service begin
++android.hardware.microtrust.IUtClientApiDaemon  u:object_r:ut_clientd_service:s0
++# microtrust thh service end
+Index: device/mediatek/common/sepolicy/bsp/ut_clientd.te
+===================================================================
+--- device/mediatek/common/sepolicy/bsp/ut_clientd.te	(revision 0)
++++ device/mediatek/common/sepolicy/bsp/ut_clientd.te	(revision 5291)
+@@ -0,0 +1,55 @@
++type ut_clientd, domain;
++type ut_clientd_exec, exec_type, file_type;
++type ut_clientd_service,service_manager_type;
++
++allow ut_clientd self:capability sys_module;
++allow ut_clientd teei_data_file:dir create_dir_perms;
++allow ut_clientd teei_data_file:file rw_file_perms;
++allow ut_clientd teei_data_file:file create_file_perms;
++allow ut_clientd self:capability dac_override;
++allow ut_clientd device:dir rw_dir_perms;
++
++#enable access android property
++allow ut_clientd property_socket:sock_file {read write};
++allow ut_clientd init:unix_stream_socket {connectto};
++allow ut_clientd soter_teei_prop:property_service {set};
++allow ut_clientd teei_vfs_device:chr_file rw_file_perms;
++
++init_daemon_domain(ut_clientd)
++binder_use(ut_clientd)
++
++# systemServer
++binder_call(system_server, ut_clientd)
++
++# For permissions checking
++allow ut_clientd permission_service:service_manager find;
++allow ut_clientd servicemanager:binder call;
++allow ut_clientd servicemanager:binder transfer;
++allow servicemanager ut_clientd:binder set_context_mgr;
++# exec
++allow servicemanager ut_clientd:dir search;
++allow ut_clientd servicemanager:dir search;
++allow servicemanager ut_clientd:file read;
++allow ut_clientd servicemanager:file read;
++allow servicemanager ut_clientd:file open;
++allow ut_clientd servicemanager:file open;;
++allow servicemanager ut_clientd:process getattr;
++allow ut_clientd servicemanager:process getattr;
++allow ut_clientd self:process execmem;
++
++allow ut_clientd teei_client_device:chr_file { read write open ioctl };
++allow untrusted_app ut_clientd:binder call;
++binder_call(platform_app, ut_clientd)
++allow ut_clientd ut_clientd_service:service_manager add;
++allow ut_clientd ut_clientd_service:service_manager find;
++allow untrusted_app ut_clientd_service:service_manager find;
++
++allow shell ut_clientd_service:service_manager add;
++allow shell ut_clientd_exec:file { getattr execute read open execute_no_trans };
++allow init_thh_service servicemanager:binder call;
++allow shell ut_clientd:binder call;
++allow servicemanager init_thh_service:dir search;
++allow servicemanager init_thh_service:file { open read write ioctl };
++allow servicemanager init_thh_service:process getattr;
++allow init_thh_service ut_clientd_service:service_manager find;
++allow init_thh_service ut_clientd:binder call;
+Index: device/mediatek/common/sepolicy/bsp/shell.te
+===================================================================
+--- device/mediatek/common/sepolicy/bsp/shell.te	(revision 5290)
++++ device/mediatek/common/sepolicy/bsp/shell.te	(revision 5291)
+@@ -123,8 +123,8 @@
+ # Date : 2016/06/01
+ # Operation: TEEI integration
+ # Purpose: Microtrust init_thh service
+-userdebug_or_eng(`
++#userdebug_or_eng(`
+   allow shell init_thh_service_exec:file rx_file_perms;
+   allow shell init_thh_service_exec:dir r_dir_perms;
+   allow shell init_thh_service_exec:file {execute execute_no_trans};
+-')
++#')
+Index: device/mediatek/mt6739/init.microtrust.rc
+===================================================================
+--- device/mediatek/mt6739/init.microtrust.rc	(revision 5290)
++++ device/mediatek/mt6739/init.microtrust.rc	(revision 5291)
+@@ -98,9 +98,13 @@
+    # oneshot
+ 
+ on property:soter.teei.init=INIT_OK
++    write /proc/bootprof "start ut_clientd (on fs)"
++    start ut_clientd
++    write /proc/bootprof "start ut_clientd end (on fs)"
+     start init_thh_service
++    start ifaad
+ 
+-service init_thh_service /vendor/bin/init_thh startload init
++service init_thh_service /vendor/bin/init_thh startload
+     class core
+     user system
+     group system
+@@ -107,8 +111,6 @@
+     disabled
+     oneshot
+ 	
+-on property:soter.teei.init=INIT_OK
+-    start ifaad
+ 
+ # ifaa daemon
+ service ifaad /system/vendor/bin/ifaad
+@@ -116,3 +118,10 @@
+     user system
+     group system
+     disabled
++
++# thh daemon
++service ut_clientd /vendor/bin/ut_clientd
++    class core
++    user system
++    group system shell
++    disabled
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/include/tee_init_thh.h
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/include/tee_init_thh.h	(revision 0)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/include/tee_init_thh.h	(revision 5291)
+@@ -0,0 +1,60 @@
++/*
++ * Copyright (c) 2015-2017 MICROTRUST Incorporated
++ * All rights reserved
++ *
++ * This file and software is confidential and proprietary to MICROTRUST Inc.
++ * Unauthorized copying of this file and software is strictly prohibited.
++ * You MUST NOT disclose this file and software unless you get a license
++ * agreement from MICROTRUST Incorporated.
++ */
++
++#ifndef __TEE_INIT_THH_H_
++#define __TEE_INIT_THH_H_
++
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++typedef struct
++{
++    int ishelp;
++    char *cmd;
++    char *target;/* target */
++    char *property;/* target */
++    char *in;/* input */
++    char *out;/* output */
++    char *string;/* input */
++} global_args_t;
++
++#define UNKNOWN_COMMAND             0
++#define EXPORT_COMMAND              1
++#define INIT_CHECK_COMMAND          2
++#define UPDATE_COMMAND              3
++#define CHECK_THH_STATUS_COMMAND    4
++#define VERSION_COMMAND             5
++#define STARTLOAD_COMMAND           6
++#define RESET_COMMAND               7
++
++#define SUCCESS_FILEPATH            "/data/local/tmp/init_thh_SUCCESS"
++#define FACTORY_SUCCESS             0xFF01
++#define MAX_BUFFER_SIZE             2000
++#define FILEPATH_BUFFER_SIZE        512
++
++extern int do_version(global_args_t *global_args);
++extern int do_export(global_args_t *global_args, int *is_write, unsigned char *buffer, unsigned int *buffer_len, char *filepath, unsigned int *filepath_len);
++extern int do_reset(global_args_t *global_args);
++extern int do_initcheck(global_args_t *global_args);
++extern int do_check_thh_status(global_args_t *global_args, int *ret);
++extern int do_update(global_args_t *global_args, unsigned int *buffer_len);
++extern int do_startload(global_args_t *global_args);
++extern void free_global_args(global_args_t *global_args);
++extern void init_global_args(global_args_t *global_args);
++extern int thh_param_parser(int nargs, char **args, global_args_t *global_args);
++
++#ifdef __cplusplus
++}
++#endif
++
++#endif
++
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/IUtClientApiDaemon.h
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/IUtClientApiDaemon.h	(revision 0)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/IUtClientApiDaemon.h	(revision 5291)
+@@ -0,0 +1,40 @@
++/*
++ * Copyright (C) 2015 The Android Open Source Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++#ifndef ICLIENT_API_DAEMON_H_
++#define ICLIENT_API_DAEMON_H_
++
++#include <binder/IInterface.h>
++#include <binder/Parcel.h>
++//#include <include/tee_client_api.h>
++namespace android {
++
++class IUtClientApiDaemon: public IInterface {
++public:
++	DECLARE_META_INTERFACE (UtClientApiDaemon);
++    virtual int ut_init_thh(int argc, char **argv, int *is_write, char *filepath, unsigned char *write_buffer, unsigned int *write_buffer_len) = 0;
++};
++
++class BnUtClientApiDaemon: public BnInterface<IUtClientApiDaemon> {
++    public:
++       virtual status_t onTransact(uint32_t code, const Parcel& data, Parcel* reply,
++               uint32_t flags = 0);
++};
++
++}
++
++#endif // ICLIENT_API_DAEMON_H_
++
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/Android.mk
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/Android.mk	(revision 0)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/Android.mk	(revision 5291)
+@@ -0,0 +1,66 @@
++LOCAL_PATH := $(call my-dir)
++
++include $(CLEAR_VARS)
++
++LOCAL_MODULE := libut_client_api_daemon
++LOCAL_MODULE_TAGS := optional
++LOCAL_CFLAGS := -Wall -Wextra -Werror -Wunused
++
++LOCAL_SRC_FILES := \
++	IUtClientApiDaemon.cpp \
++
++LOCAL_SHARED_LIBRARIES := \
++	libcutils \
++	libutils \
++	libc \
++	libbinder \
++	libinit_thh \
++	liblog
++
++include $(BUILD_SHARED_LIBRARY)
++
++include $(CLEAR_VARS)
++
++LOCAL_MODULE := init_thh
++LOCAL_MODULE_TAGS := optional
++LOCAL_CFLAGS := -Wall -Wextra -Werror -Wunused
++
++LOCAL_SRC_FILES := \
++	UtClientApiTester.cpp \
++
++LOCAL_SHARED_LIBRARIES := \
++	libcutils \
++	libutils \
++	libc \
++	libbinder \
++	liblog \
++	libut_client_api_daemon
++
++LOCAL_PROPRIETARY_MODULE := true
++LOCAL_MODULE_OWNER := mtk
++
++include $(BUILD_EXECUTABLE)
++
++
++include $(CLEAR_VARS)
++
++LOCAL_MODULE := ut_clientd
++#LOCAL_MODULE_TAGS := optional
++LOCAL_CFLAGS := -Wall -Wextra -Werror -Wunused
++
++#LOCAL_C_INCLUDES +=
++
++LOCAL_SRC_FILES := \
++	UtClientApiDaemonProxy.cpp \
++	UtClientApiDaemon.cpp
++
++LOCAL_SHARED_LIBRARIES := \
++	libbinder \
++	libutils \
++	libut_client_api_daemon \
++	liblog
++	
++LOCAL_PROPRIETARY_MODULE := true
++LOCAL_MODULE_OWNER := mtk
++
++include $(BUILD_EXECUTABLE)
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/UtClientApiDaemon.cpp
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/UtClientApiDaemon.cpp	(revision 0)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/UtClientApiDaemon.cpp	(revision 5291)
+@@ -0,0 +1,40 @@
++/*
++ * Copyright (C) 2015 The Android Open Source Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++#define IMSG_TAG "UTVSim-Daemon"
++
++#include <binder/IPCThreadState.h>
++#include <binder/IServiceManager.h>
++#include <utils/String16.h>
++#include <utils/Log.h>
++#include "UtClientApiDaemonProxy.h"
++
++int main() {
++    android::sp<android::IServiceManager> serviceManager = android::defaultServiceManager();
++    android::sp<android::UtClientApiDaemonProxy> proxy = android::UtClientApiDaemonProxy::getInstance();
++    android::status_t ret = serviceManager->addService(android::UtClientApiDaemonProxy::descriptor, proxy);
++    if (ret != android::OK) {
++        ALOGE("Couldn't register " IMSG_TAG " binder service!");
++        return -1;
++    }
++    /*
++     * We're the only thread in existence, so we're just going to process
++     * Binder transaction as a single-threaded program.
++     */
++    android::IPCThreadState::self()->joinThreadPool();
++    ALOGD("Done");
++    return 0;
++}
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/UtClientApiDaemonProxy.cpp
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/UtClientApiDaemonProxy.cpp	(revision 0)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/UtClientApiDaemonProxy.cpp	(revision 5291)
+@@ -0,0 +1,46 @@
++/*
++ * Copyright (C) 2015 The Android Open Source Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++#define IMSG_TAG "UtVSim-Daemon-Proxy"
++
++#include <binder/IServiceManager.h>
++
++#include "UtClientApiDaemonProxy.h"
++
++
++namespace android {
++
++UtClientApiDaemonProxy* UtClientApiDaemonProxy::sInstance = NULL;
++
++UtClientApiDaemonProxy::UtClientApiDaemonProxy(){
++}
++
++UtClientApiDaemonProxy::~UtClientApiDaemonProxy() {
++}
++int UtClientApiDaemonProxy::ut_init_thh(int argc, char **argv, int *is_write, char *filepath, unsigned char *write_buffer, unsigned int *write_buffer_len) {
++    (void) argc;
++    (void) argv;
++    (void) is_write;
++    (void) filepath;
++    (void) write_buffer;
++    (void) write_buffer_len;
++    return 0;
++}
++void UtClientApiDaemonProxy::binderDied(const wp<IBinder>& who) {
++      if (who == who)
++			ALOGD("SKIP");
++}
++}
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/UtClientApiTester.cpp
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/UtClientApiTester.cpp	(revision 0)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/UtClientApiTester.cpp	(revision 5291)
+@@ -0,0 +1,121 @@
++/*
++ * UtClientApiTester.cpp
++ *
++ *  Created on: Apr 20, 2017
++ *      Author: napoleonliu
++ */
++
++#include "IUtClientApiDaemon.h"
++#include <binder/IServiceManager.h>
++#include <binder/IPCThreadState.h>
++#include <binder/ProcessState.h>
++#include <android_runtime/AndroidRuntime.h>
++#include <utils/Log.h>
++#include <sys/types.h>
++#include <sys/stat.h>
++#include <fcntl.h>
++#include <stdio.h>
++#include <unistd.h>
++
++#include "include/tee_init_thh.h"
++
++using namespace android;
++static const char* IClientApiDaemonDescriptor = "android.hardware.microtrust.IUtClientApiDaemon";
++static int call_send(int argc, char **argv)
++{
++    int count = 5;
++    int is_write = 0;
++    int fd = 0;
++    char *filepath = NULL;
++    unsigned char *write_buffer = NULL;
++    unsigned int write_buffer_len = 0;
++    unsigned int write_result = 0;
++    int ret = 0;
++
++    ALOGE("call send version is 1.1.3");
++    sp<IUtClientApiDaemon> mUtClientApiDaemon;
++    if (mUtClientApiDaemon.get() == 0) {
++        android::sp<IServiceManager> sm = defaultServiceManager();
++        sp<IBinder> binder;
++        do {
++            binder = sm->getService(String16(IClientApiDaemonDescriptor));
++            if (binder != 0)
++                break;
++            ALOGI("getService fail");
++            printf("getService fail\n");
++            if (count > 0) {
++                usleep(500000); // 0.5 s
++                count--;
++            } else {
++                ALOGE("getService fail, init_thh exit");
++                goto END;
++            }
++        } while (true);
++
++        ALOGI("getService success");
++        mUtClientApiDaemon = interface_cast<IUtClientApiDaemon> (binder);
++        LOG_ALWAYS_FATAL_IF(mUtClientApiDaemon == 0);
++
++        filepath = (char*)malloc(FILEPATH_BUFFER_SIZE);
++        if (NULL == filepath) {
++            ALOGE("malloc filepath buffer (500) is null.");
++            goto END;
++        }
++        memset(filepath, 0, FILEPATH_BUFFER_SIZE);
++
++        write_buffer = (unsigned char*)malloc(MAX_BUFFER_SIZE);
++        if (NULL == write_buffer) {
++            ALOGE("malloc write_buffer (2000) is null.");
++            goto END;
++        }
++        memset(write_buffer, 0, MAX_BUFFER_SIZE);
++
++        ret  = mUtClientApiDaemon->ut_init_thh(argc, argv, &is_write, filepath, write_buffer, &write_buffer_len);
++
++        if (is_write == 0) {
++            ALOGE("no buffer to write\n");
++            goto END;
++        }
++
++        fd = open(filepath, O_RDWR|O_CREAT|O_TRUNC, S_IRWXU|S_IRGRP|S_IROTH);
++        if (fd <= 0) {
++            ALOGE("open file failed%d\n", ret);
++            ret = -1;
++            goto END;
++        }
++        printf("after open\n");
++
++        write_result = write(fd, write_buffer, write_buffer_len);
++        if (write_result != write_buffer_len) {
++            ALOGE("write file failed%d\n", write_result);
++
++            ret = -1;
++            goto END;
++        }
++
++        ALOGI("Service return value is %08x", ret);
++    }
++
++END:
++    if (fd > 0) {
++        close(fd);
++    }
++    if (write_buffer) {
++        free(write_buffer);
++        write_buffer = NULL;
++    }
++    if (filepath) {
++        free(filepath);
++        filepath = NULL;
++    }
++
++    return ret;
++
++}
++int main(int argc, char** argv) {
++    (void) argc;
++    (void) argv;
++    call_send(argc, argv);
++
++    return 0;
++}
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/UtClientApiDaemonProxy.h
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/UtClientApiDaemonProxy.h	(revision 0)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/UtClientApiDaemonProxy.h	(revision 5291)
+@@ -0,0 +1,43 @@
++/*
++ * Copyright (C) 2015 The Android Open Source Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++#ifndef UT_CLIENT_API_DAEMON_PROXY_H_
++#define UT_CLIENT_API_DAEMON_PROXY_H_
++
++#include "IUtClientApiDaemon.h"
++
++namespace android {
++
++class UtClientApiDaemonProxy : public BnUtClientApiDaemon {
++    public:
++        static UtClientApiDaemonProxy* getInstance() {
++            if (sInstance == NULL) {
++                sInstance = new UtClientApiDaemonProxy();
++            }
++            return sInstance;
++        }
++    virtual int ut_init_thh(int argc, char **argv, int *is_wirte, char *filepath, unsigned char *write_buffer, unsigned int *write_buffer_len);
++
++    private:
++        UtClientApiDaemonProxy();
++        virtual ~UtClientApiDaemonProxy();
++        void binderDied(const wp<IBinder>& who);
++        static UtClientApiDaemonProxy* sInstance;
++};
++
++} // namespace android
++
++#endif // UT_CLIENT_API_DAEMON_PROXY_H_
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/IUtClientApiDaemon.cpp
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/IUtClientApiDaemon.cpp	(revision 0)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/ut_clientd/IUtClientApiDaemon.cpp	(revision 5291)
+@@ -0,0 +1,384 @@
++/*
++ * Copyright 2015, The Android Open Source Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++#define IMSG_TAG "IUtVSim-Daemon"
++
++#include <stdio.h>
++#include <string.h>
++#include <sys/stat.h>
++#include <fcntl.h>
++#include <sys/mman.h>
++#include <cutils/ashmem.h>
++#include <inttypes.h>
++#include <binder/IPCThreadState.h>
++#include <binder/IServiceManager.h>
++#include <utils/String16.h>
++#include <utils/Looper.h>
++
++#include "IUtClientApiDaemon.h"
++#include "include/tee_init_thh.h"
++
++namespace android {
++
++class BpUtClientApiDaemon: public BpInterface<IUtClientApiDaemon> {
++public:
++	BpUtClientApiDaemon(const sp<IBinder>& impl) :
++			BpInterface<IUtClientApiDaemon>(impl) {
++	}
++    virtual int ut_init_thh(int argc, char **argv, int *is_write, char *filepath, unsigned char *write_buffer, unsigned int *write_buffer_len) {
++		Parcel data, reply;
++        int ret, length;
++        global_args_t global_args;
++        unsigned int filepath_len = 0;
++        int is_update = 0;
++        char update_buffer[2000] = {0};
++
++        ALOGE("ut_init_thh version 1.1.2");
++
++        memset(&global_args, 0, sizeof(global_args_t));
++
++        ret = thh_param_parser(argc, argv, &global_args);
++        if (0 != ret) {
++            ALOGE("[E]thh_param_parser failed! ret = %d.", ret);
++            return ret;
++        }
++
++        data.writeInt32(global_args.ishelp);
++
++        length = strlen(global_args.cmd);
++        printf("cmd length is %d\n", length);
++        if (0 != length) {
++            data.writeUint32(length);
++            data.write(global_args.cmd, length);
++            if (strncmp(global_args.cmd, "update", length) == 0) {
++                is_update = 1;
++            }
++        } else {
++            data.writeUint32(0);
++        }
++
++        if (global_args.target != NULL) {
++            length = strlen(global_args.target);
++            if (0 != length) {
++                data.writeUint32(length);
++                data.write(global_args.target, length);
++            }
++        } else {
++            ALOGE("target is null");
++            data.writeUint32(0);
++        }
++
++        if (global_args.property != NULL) {
++            length = strlen(global_args.property);
++            if (0 != length) {
++                data.writeUint32(length);
++                data.write(global_args.property, length);
++            } 
++        } else {
++            data.writeUint32(0);
++        }
++
++        if (global_args.in != NULL) {
++            length = strlen(global_args.in);
++            if (0 != length) {
++                if (is_update) {
++                    int fd = open(global_args.in, O_RDONLY);
++                    if (fd < 0) {
++                        return -1;
++                    }
++                    int ret = read(fd, update_buffer, 2000);
++                    if (ret <= 0) {
++                        close(fd);
++                        return -1;
++                    }
++                    close(fd);
++                    data.writeUint32(ret);
++                    data.write(update_buffer, ret);
++                }
++            } 
++        } else {
++            data.writeUint32(0);
++        }
++
++        if (global_args.out != NULL) {
++            length = strlen(global_args.out);
++            if (0 != length) {
++                data.writeUint32(length);
++                data.write(global_args.out, length);
++            } 
++        } else {
++            data.writeUint32(0);
++        }
++
++        if (global_args.string != NULL) {
++            length = strlen(global_args.string);
++            if (0 != length) {
++                data.writeUint32(length);
++                data.write(global_args.string, length);
++            } 
++        } else {
++            data.writeUint32(0);
++        }
++
++        ret = data.writeInterfaceToken(
++            IUtClientApiDaemon::getInterfaceDescriptor());
++        if (NO_ERROR != ret) {
++            ALOGE("[E]writeInterfaceToken failed! ret = %d.", ret);
++            return -1;
++        }
++
++        status_t status = remote()->transact(0, data, &reply);
++
++        *is_write = reply.readInt32();
++        ALOGE("status is %08x", status);
++        ALOGE("is_write is %d", *is_write);
++
++        if (1 == *is_write) {
++            *write_buffer_len = reply.readUint32();
++            if (NULL == write_buffer) {
++                ALOGE("malloc write_buffer failed\n");
++                return -1;
++            }
++            reply.read(write_buffer, *write_buffer_len);
++
++            filepath_len = reply.readUint32();
++
++            if (filepath_len > 0) {
++                if (NULL == filepath) {
++                    ALOGE("filepath buffer is null");
++                    return -1;
++                }
++                reply.read(filepath, filepath_len);
++            } 
++        } else if (2 == *is_write) {
++            *write_buffer_len = reply.readUint32();
++            if (NULL == write_buffer) {
++                ALOGE("malloc write_buffer failed\n");
++                return -1;
++            }
++            reply.read(write_buffer, *write_buffer_len);
++            length = strlen(SUCCESS_FILEPATH);
++            if (NULL == filepath) {
++                ALOGE("filepath buffer is null");
++                return -1;
++            }
++            memcpy(filepath, SUCCESS_FILEPATH , length);
++        }
++
++        ALOGE("transact finish\n");
++
++        free_global_args(&global_args);
++
++        return status;
++    }
++};
++
++int get_thh_command_id(char *command_str, unsigned int *command_id)
++{
++    if(0 == strncmp(command_str, "export", strlen(command_str))) {
++        *command_id = EXPORT_COMMAND;
++    } else if (0 == strncmp(command_str, "startload", strlen(command_str))) {
++        *command_id = STARTLOAD_COMMAND;
++    } else if (0 == strncmp(command_str, "check_thh_status", strlen(command_str))) {
++        *command_id = CHECK_THH_STATUS_COMMAND;
++    } else if (0 == strncmp(command_str, "version", strlen(command_str))) {
++        *command_id = VERSION_COMMAND;
++    } else if (0 == strncmp(command_str, "update", strlen(command_str))) {
++        *command_id = UPDATE_COMMAND;
++    } else if (0 == strncmp(command_str, "initcheck", strlen(command_str))) {
++        *command_id = INIT_CHECK_COMMAND;
++    } else if (0 == strncmp(command_str, "reset", strlen(command_str))) {
++        *command_id = RESET_COMMAND;
++    } else {
++        *command_id = UNKNOWN_COMMAND;
++    }
++
++    return 0;
++}
++
++IMPLEMENT_META_INTERFACE(UtClientApiDaemon,"android.hardware.microtrust.IUtClientApiDaemon");
++
++status_t BnUtClientApiDaemon::onTransact(uint32_t code, const Parcel& data,
++		Parcel* reply, uint32_t flags) {
++	status_t ret = NO_ERROR;
++    unsigned int command_id = 0;
++    int is_write = 0;
++    unsigned char *buffer = NULL;
++    unsigned int buffer_len = 0;
++    char *filepath = NULL;
++    unsigned int filepath_len = 0;
++
++    global_args_t global_args;
++    memset(&global_args, 0, sizeof(global_args_t));
++    init_global_args(&global_args);
++
++    global_args.ishelp = data.readInt32();
++    uint32_t length = data.readUint32();
++    if (0 != length) {
++        global_args.cmd = (char*)malloc(length+1);
++        if (NULL == global_args.cmd) {
++	        ALOGE("malloc init_thh command buffer failed.");
++            return -1;
++        }
++        memset(global_args.cmd, 0, length+1);
++        data.read(global_args.cmd, length);
++    }
++      
++    length = data.readUint32();
++    if (0 != length) {
++        global_args.target = (char*)malloc(length+1);
++        if (NULL == global_args.target) {
++	        ALOGE("malloc init_thh target buffer failed.");
++            return -1;
++        }
++        memset(global_args.target, 0, length+1);
++        data.read(global_args.target, length);
++    }
++      
++    length = data.readUint32();
++    if (0 != length) {
++        global_args.property = (char*)malloc(length+1);
++        if (NULL == global_args.property) {
++	        ALOGE("malloc init_thh property buffer failed.");
++            return -1;
++        }
++        memset(global_args.property, 0, length+1);
++        data.read(global_args.property, length);
++    }
++      
++    length = data.readUint32();
++    if (0 != length) {
++        global_args.in = (char*)malloc(length+1);
++        if (NULL == global_args.in) {
++	        ALOGE("malloc init_thh input buffer failed.");
++            return -1;
++        }
++        memset(global_args.in, 0, length+1);
++        data.read(global_args.in, length);
++        buffer_len = length;
++    }
++      
++    length = data.readUint32();
++    if (0 != length) {
++        global_args.out = (char*)malloc(length+1);
++        if (NULL == global_args.out) {
++	        ALOGE("malloc init_thh output buffer failed.");
++            return -1;
++        }
++        memset(global_args.out, 0, length+1);
++        data.read(global_args.out, length);
++    }
++
++    length = data.readUint32();
++    if (0 != length) {
++        global_args.string = (char*)malloc(length+1);
++        if (NULL == global_args.string) {
++	        ALOGE("malloc init_thh string  buffer failed.");
++            return -1;
++        }
++        memset(global_args.string, 0, length+1);
++        data.read(global_args.string, length);
++    }
++
++    if (global_args.cmd != NULL) {
++        get_thh_command_id(global_args.cmd, &command_id);
++    }
++      
++	switch (command_id) {
++	case VERSION_COMMAND: {
++		CHECK_INTERFACE(IUtClientApiDaemon, data, reply);
++        ret = do_version(&global_args);
++        free_global_args(&global_args);
++        return 0;
++	}
++	case EXPORT_COMMAND: {
++		CHECK_INTERFACE(IUtClientApiDaemon, data, reply);
++
++        buffer = (unsigned char*)malloc(MAX_BUFFER_SIZE);
++        if (NULL == buffer) {
++            return -1; 
++        }
++        memset(buffer, 0, MAX_BUFFER_SIZE);
++        filepath = (char*)malloc(FILEPATH_BUFFER_SIZE);
++        if (NULL == filepath) {
++            return -1;
++        }
++        memset(filepath, 0, FILEPATH_BUFFER_SIZE);
++
++        ret = do_export(&global_args, &is_write, buffer, &buffer_len, filepath, &filepath_len);
++
++        reply->writeInt32(is_write);
++        reply->writeUint32(buffer_len);
++        reply->write(buffer, buffer_len);
++        if (filepath_len > 0) {
++            reply->writeUint32(filepath_len);
++            reply->write(filepath, filepath_len);
++        } else {
++            reply->writeUint32(0);
++        }
++
++        free_global_args(&global_args);
++        free(filepath);
++        free(buffer);
++        return 0;
++	}
++	case STARTLOAD_COMMAND: {
++		CHECK_INTERFACE(IUtClientApiDaemon, data, reply);
++        ret = do_startload(&global_args);
++        free_global_args(&global_args);
++        return 0;
++	}
++	case CHECK_THH_STATUS_COMMAND: {
++		CHECK_INTERFACE(IUtClientApiDaemon, data, reply);
++        int ret = 0;
++        do_check_thh_status(&global_args, &ret);
++        if (FACTORY_SUCCESS == ret) {
++            ALOGE("ret is %08x, FACTORY_SUCCESS is %08x", ret, FACTORY_SUCCESS);
++           reply->writeInt32(2); 
++           reply->writeUint32(7); 
++           reply->write("success", 7);
++        }
++        ALOGE("ret is %08x, FACTORY_SUCCESS is %08x", ret, FACTORY_SUCCESS);
++        free_global_args(&global_args);
++
++        return ret;
++	}
++    case INIT_CHECK_COMMAND: {
++        CHECK_INTERFACE(IUtClientApiDaemon, data, reply);
++        ret = do_initcheck(&global_args);
++        free_global_args(&global_args);
++        return 0;
++    }
++    case UPDATE_COMMAND: {
++        CHECK_INTERFACE(IUtClientApiDaemon, data, reply);
++        ret = do_update(&global_args, &buffer_len);
++        free_global_args(&global_args);
++        return 0;
++    }
++    case RESET_COMMAND: {
++        CHECK_INTERFACE(IUtClientApiDaemon, data, reply);
++        ret = do_reset(&global_args);
++        free_global_args(&global_args);
++        return 0;
++    }
++	default:
++		ALOGE("default transact");
++    	free_global_args(&global_args);
++		return BBinder::onTransact(code, data, reply, flags);
++	}
++
++}
++} // namespace android
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/Android.mk
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/Android.mk	(revision 0)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/external/libinit_thh/Android.mk	(revision 5291)
+@@ -0,0 +1,10 @@
++LOCAL_PATH := $(call my-dir)
++include $(CLEAR_VARS)
++
++LOCAL_MODULE := libinit_thh
++LOCAL_MODULE_CLASS := SHARED_LIBRARIES
++LOCAL_SRC_FILES_arm := lib/armeabi/libinit_thh.so
++LOCAL_SRC_FILES_arm64 := lib/arm64-v8a/libinit_thh.so
++LOCAL_MODULE_SUFFIX := .so
++LOCAL_MULTILIB := both
++include $(BUILD_PREBUILT)

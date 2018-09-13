@@ -1,0 +1,12 @@
+Index: vendor/mediatek/proprietary/operator/OP01/SPEC0200/SEGC/optr_apk_config.mk
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/SPEC0200/SEGC/optr_apk_config.mk	(revision 2724)
++++ vendor/mediatek/proprietary/operator/OP01/SPEC0200/SEGC/optr_apk_config.mk	(revision 2725)
+@@ -38,7 +38,6 @@
+     OP01Plugin \
+     OP01FwkPlugin \
+     Stopwatch \
+-    TaskManager \
+     ConfigureCheck2 \
+     BackupAndRestore \
+     DataDialog \

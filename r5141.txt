@@ -1,0 +1,127 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MusicPicker.java
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MusicPicker.java	(revision 5140)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/OP01Music/src/com/android/music/MusicPicker.java	(revision 5141)
+@@ -32,6 +32,7 @@
+ import android.database.CharArrayBuffer;
+ import android.database.Cursor;
+ import android.media.AudioManager;
++import android.media.AudioManager.OnAudioFocusChangeListener;
+ import android.media.MediaPlayer;
+ import android.media.RingtoneManager;
+ import android.net.Uri;
+@@ -174,6 +175,27 @@
+ 
+     /// M: Indicate whether the BroadReceiver is registered
+     private boolean mIsBroadcastReg = false;
++    
++    // Use to set or abandon audio focus
++    private AudioManager mAm;
++
++    private OnAudioFocusChangeListener mAudioFocusChangeListener
++             = new OnAudioFocusChangeListener() {
++       public void onAudioFocusChange(int focusChange) {
++           if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
++               // Pause playback
++                pauseMediaPlayer();
++           } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
++               // Resume playback
++               resumeMediaPlayer();
++           } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
++               releaseAudioFocus();
++               // Stop playback
++               stopMediaPlayer();
++           }
++       }
++    };
++
+     /**
+      * A special implementation of SimpleCursorAdapter that knows how to bind
+      * our cursor data to our list item structure, and takes care of other
+@@ -582,6 +604,8 @@
+         /// @}
+         mIsBroadcastReg = true;
+         setSortMode(sortMode);
++        
++        mAm = (AudioManager) getSystemService(AUDIO_SERVICE);
+     }
+ 
+     @Override public void onRestart() {
+@@ -631,6 +655,7 @@
+     @Override
+     public void onPause() {
+         super.onPause();
++        releaseAudioFocus();
+         stopMediaPlayer();
+     }
+ 
+@@ -763,6 +788,9 @@
+         mSelectedId = newId;
+         if (newId != mPlayingId || mMediaPlayer == null) {
+             stopMediaPlayer();
++            if (requestAudioFocus()) {
++                MusicLogUtils.v(TAG, "requestAudioFocus success");
++            }
+             mMediaPlayer = new MediaPlayer();
+             try {
+                 mMediaPlayer.setDataSource(this, mSelectedUri);
+@@ -775,6 +803,7 @@
+                 //getListView().invalidateViews();
+             } catch (IOException e) {
+                 MusicLogUtils.e(TAG, "Unable to play track", e);
++                releaseAudioFocus();
+             /// M: finally just get invalidate list view @{
+             } finally {
+                 getListView().invalidateViews();
+@@ -788,6 +817,7 @@
+ 
+     @Override
+     public void onCompletion(MediaPlayer mp) {
++        releaseAudioFocus();
+         if (mMediaPlayer == mp) {
+             mp.stop();
+             mp.release();
+@@ -798,6 +828,43 @@
+     }
+ 
+     /**
++     * Get Audio Focus
++     */
++    private boolean requestAudioFocus() {
++        int result = mAm.requestAudioFocus(mAudioFocusChangeListener,
++                AudioManager.STREAM_MUSIC,
++                AudioManager.AUDIOFOCUS_GAIN);
++        return result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
++    }
++
++    /**
++     * Release Audio Focus
++     */
++    private void releaseAudioFocus() {
++        if (mAm != null) {
++            mAm.abandonAudioFocus(mAudioFocusChangeListener);
++        }
++    }
++
++    /**
++     * For pause music when lose audio focus 
++     */
++    void pauseMediaPlayer() {
++        if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
++            mMediaPlayer.pause();
++        }
++    }
++
++    /**
++     * For resume music when gain audio focus 
++     */
++    void resumeMediaPlayer() {
++        if (mMediaPlayer != null) {
++            mMediaPlayer.start();
++        }
++    }
++
++    /**
+      * Stop the media player.
+      */
+     void stopMediaPlayer() {

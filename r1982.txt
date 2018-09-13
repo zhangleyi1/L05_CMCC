@@ -1,0 +1,32 @@
+Index: vendor/customer/apps/CameraTcl/CameraForA3Plus-20171123.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/CameraTcl/CameraForA3Plus-20171124.apk
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/customer/apps/CameraTcl/CameraForA3Plus-20171124.apk
+===================================================================
+--- vendor/customer/apps/CameraTcl/CameraForA3Plus-20171124.apk	(revision 0)
++++ vendor/customer/apps/CameraTcl/CameraForA3Plus-20171124.apk	(revision 1982)
+
+Property changes on: vendor/customer/apps/CameraTcl/CameraForA3Plus-20171124.apk
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/customer/Android.mk
+===================================================================
+--- vendor/customer/Android.mk	(revision 1981)
++++ vendor/customer/Android.mk	(revision 1982)
+@@ -926,7 +926,7 @@
+ include $(CLEAR_VARS)
+ LOCAL_MODULE := CameraTcl
+ LOCAL_MODULE_TAGS := optional
+-LOCAL_SRC_FILES := apps/CameraTcl/CameraForA3Plus-20171123.apk
++LOCAL_SRC_FILES := apps/CameraTcl/CameraForA3Plus-20171124.apk
+ LOCAL_MODULE_CLASS := APPS
+ LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+ LOCAL_CERTIFICATE := platform

@@ -1,0 +1,60 @@
+Index: device/chipsailing/64-bit/isee/libfp_tac.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: device/chipsailing/64-bit/Android7/libfp_hal.so
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: device/chipsailing
+===================================================================
+--- device/chipsailing	(revision 13116)
++++ device/chipsailing	(revision 13117)
+
+Property changes on: device/chipsailing
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/device/chipsailing:r13115
+Index: device
+===================================================================
+--- device	(revision 13116)
++++ device	(revision 13117)
+
+Property changes on: device
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/device:r13115
+Index: kernel-4.4/drivers/input/chipsailing/cf_ctl.c
+===================================================================
+--- kernel-4.4/drivers/input/chipsailing/cf_ctl.c	(revision 13116)
++++ kernel-4.4/drivers/input/chipsailing/cf_ctl.c	(revision 13117)
+@@ -618,6 +618,7 @@
+ 	__set_bit(KEY_HOME, cf_dev->input->keybit);
+ 	__set_bit(KEY_MENU, cf_dev->input->keybit);
+ 	__set_bit(KEY_BACK, cf_dev->input->keybit);
++	__set_bit(KEY_F11, cf_dev->input->keybit);
+ 	__set_bit(KEY_F18, cf_dev->input->keybit);
+ 	__set_bit(KEY_F19, cf_dev->input->keybit);
+ 	__set_bit(KEY_F20, cf_dev->input->keybit);
+@@ -677,7 +678,7 @@
+ 		key_code = KEY_F18;
+ 		break;
+ 	case CF_KEY_ONETAP:
+-		key_code = KEY_F19;
++		key_code = KEY_F11;
+ 		break;
+ 	case CF_KEY_DOUBLETAP:
+ 		key_code = KEY_F20;
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/fp_server_chipsailing
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/fp_server_chipsailing
+===================================================================
+--- vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/fp_server_chipsailing	(revision 13116)
++++ vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/fp_server_chipsailing	(revision 13117)
+
+Property changes on: vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/fp_server_chipsailing
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /L05A/Trunk/ALPS-MP-N1.MP18-V1_AUS6739_66_N1_INHOUSE/vendor/mediatek/proprietary/trustzone/microtrust/source/platform/mt6739/teei/fp_server_chipsailing:r13115

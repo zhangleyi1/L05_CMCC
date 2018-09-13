@@ -1,0 +1,12 @@
+Index: frameworks/base/core/java/com/android/internal/policy/PhoneWindow.java
+===================================================================
+--- frameworks/base/core/java/com/android/internal/policy/PhoneWindow.java	(revision 5904)
++++ frameworks/base/core/java/com/android/internal/policy/PhoneWindow.java	(revision 5905)
+@@ -1850,7 +1850,6 @@
+         }
+ 		//add wqq for shotscreen start{
+ 		int count=event.getPointerCount();
+-		Log.d("wqq-->", "superDispatchTouchEvent = " + event + ", handled = " + handled+"  count = "+count);
+ 			if(count==3){
+ 				switch (event.getAction() & MotionEvent.ACTION_MASK) {
+ 				case MotionEvent.ACTION_POINTER_DOWN:

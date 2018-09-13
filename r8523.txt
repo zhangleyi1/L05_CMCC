@@ -1,0 +1,41 @@
+Index: packages/apps/Settings/res/values-zh-rHK/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 8522)
++++ packages/apps/Settings/res/values-zh-rHK/strings.xml	(revision 8523)
+@@ -3327,8 +3327,13 @@
+     <string name="ok">確定</string>
+     <string name="ic_default_face_scan_demonstration_title">手機解鎖</string>
+     <string name="ic_default_face_scan_settings_title">人臉識別設定</string>
+-    <string name="ic_default_start_entry_face_btn">開始</string>
+-	
++    <string name="ic_default_start_entry_face_btn">開始</string>	
++    <string name="ic_default_sacn_face_description_info">請將臉部與手機保持在20-50釐米，並把臉部放在荧幕上的圓圈上 </string>
++    <string name="title_face_remove">删除人臉</string>
++	<string name="ic_default_face_unlock_entry_failed">進入失敗</string>
++    <string name="ic_default_face_unlock_name">人臉識別</string>
++    <string name="ic_default_remove_face_unlock">删除人臉數據</string>
++    <string name="ic_default_face_unlock_manager_title">人臉管理</string>	
+ 	<string name="fingerprint_manager_back_to_home_title">返回主界面</string>
+ 	<string name="fingerprint_manager_back_to_home_summary">在任意界面觸摸指紋傳感器返回主界面。</string>
+     <string name="title_activity_face_entry_settings">人臉科技</string>
+Index: packages/apps/Settings/res/values-zh-rTW/strings.xml
+===================================================================
+--- packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 8522)
++++ packages/apps/Settings/res/values-zh-rTW/strings.xml	(revision 8523)
+@@ -3323,9 +3323,14 @@
+     <string name="add_fingerprint_message_secturity">"請先設置安全密碼"</string>
+     <string name="ok">確定</string>
+     <string name="ic_default_face_scan_demonstration_title">手機解鎖</string>
+-   <string name="ic_default_face_scan_settings_title">人臉識別設定</string>
++    <string name="ic_default_face_scan_settings_title">人臉識別設定</string>
+     <string name="ic_default_start_entry_face_btn">開始</string>
+-	
++    <string name="ic_default_sacn_face_description_info">請將臉部與手機保持在20-50釐米，並把臉部放在荧幕上的圓圈上 </string>
++    <string name="title_face_remove">删除人臉</string>
++	<string name="ic_default_face_unlock_entry_failed">進入失敗</string>
++    <string name="ic_default_face_unlock_name">人臉識別</string>
++    <string name="ic_default_remove_face_unlock">删除人臉數據</string>
++    <string name="ic_default_face_unlock_manager_title">人臉管理</string>	
+ 	<string name="fingerprint_manager_back_to_home_title">返回主界面</string>
+ 	<string name="fingerprint_manager_back_to_home_summary">在任意界面觸摸指紋傳感器返回主界面。</string>
+     <string name="title_activity_face_entry_settings">人臉科技</string>

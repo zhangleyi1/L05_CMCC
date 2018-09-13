@@ -1,0 +1,44 @@
+Index: packages/apps/Email/UnifiedEmail/src/com/android/mail/preferences/FolderPreferences.java
+===================================================================
+--- packages/apps/Email/UnifiedEmail/src/com/android/mail/preferences/FolderPreferences.java	(revision 2307)
++++ packages/apps/Email/UnifiedEmail/src/com/android/mail/preferences/FolderPreferences.java	(revision 2308)
+@@ -33,6 +33,10 @@
+ import java.util.LinkedHashSet;
+ import java.util.Set;
+ 
++import android.provider.MediaStore;
++import android.provider.MediaStore.Audio;
++import android.util.Log;
++import java.io.File;
+ /**
+  * Preferences relevant to one specific folder. In Email, this would only be used for an account's
+  * inbox. In Gmail, this is used for every account/label pair.
+@@ -218,8 +222,27 @@
+     }
+ 
+     public String getNotificationRingtoneUri() {
+-        return getSharedPreferences().getString(PreferenceKeys.NOTIFICATION_RINGTONE,
++    	String ringtoneUri = getSharedPreferences().getString(PreferenceKeys.NOTIFICATION_RINGTONE,
+                 Settings.System.DEFAULT_NOTIFICATION_URI.toString());
++     	if (ringtoneUri.startsWith("content://media/external")) {
++     		String path = "";
++     		String[] proj = { MediaStore.Audio.Media.DATA };  
++            Cursor cursor = getContext().getContentResolver().query(Uri.parse(ringtoneUri), proj, null, null, null);  
++            if (cursor.moveToFirst()) {  
++                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);  
++                path = cursor.getString(columnIndex);  
++            }  
++            cursor.close();  
++  
++            File f = new File(path);
++            Log.d("xiawei", "f exist:" + f.exists());  
++            if (!f.exists()) {
++    		    ringtoneUri = Settings.System.DEFAULT_NOTIFICATION_URI.toString();
++    		    setNotificationRingtoneUri(ringtoneUri);
++            }
++            
++    	}
++        return ringtoneUri;
+     }
+ 
+     public void setNotificationRingtoneUri(final String uri) {

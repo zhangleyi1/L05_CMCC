@@ -1,0 +1,34 @@
+Index: device/ausshine/aus6739_66_n1/ProjectConfig.mk
+===================================================================
+--- device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 2917)
++++ device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 2918)
+@@ -470,7 +470,7 @@
+ MTK_MDM_SCOMO = no
+ MTK_MD_DIRECT_TETHERING_SUPPORT = no
+ MTK_MD_LOW_BAT_SUPPORT = no
+-MTK_MD_SBP_CUSTOM_VALUE =
++MTK_MD_SBP_CUSTOM_VALUE = 1
+ MTK_MD_SHUT_DOWN_NT = yes
+ MTK_MEMORY_COMPRESSION_SUPPORT = no
+ MTK_MERGE_INTERFACE_SUPPORT = no
+Index: kernel-4.4/arch/arm64/configs/aus6739_66_n1_defconfig
+===================================================================
+--- kernel-4.4/arch/arm64/configs/aus6739_66_n1_defconfig	(revision 2917)
++++ kernel-4.4/arch/arm64/configs/aus6739_66_n1_defconfig	(revision 2918)
+@@ -525,6 +525,7 @@
+ CONFIG_SECURITY_NETWORK=y
+ CONFIG_SECURITY_SELINUX=y
+ CONFIG_SECURITY_SELINUX_BOOTPARAM=y
++CONFIG_CRYPTO_NULL=y
+ CONFIG_CRYPTO_ECHAINIV=y
+ CONFIG_CRYPTO_XCBC=y
+ CONFIG_CRYPTO_SHA512=y
+@@ -541,4 +542,5 @@
+ CONFIG_MTK_WAPI_SUPPORT=y
+ CONFIG_MICROTRUST_TEE_SUPPORT=y
+ CONFIG_MTK_TEE_SUPPORT=y
+-CONFIG_MTK_ROUND_CORNER_SUPPORT=y
+\ No newline at end of file
++CONFIG_MTK_ROUND_CORNER_SUPPORT=y
++CONFIG_MTK_MD_SBP_CUSTOM_VALUE="1"
+\ No newline at end of file

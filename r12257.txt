@@ -1,0 +1,51 @@
+Index: vendor/branch/CMCC_Netcom/frameworks/opt/telephony/src/java/com/mediatek/internal/telephony/dataconnection/DataSubSelector.java
+===================================================================
+--- vendor/branch/CMCC_Netcom/frameworks/opt/telephony/src/java/com/mediatek/internal/telephony/dataconnection/DataSubSelector.java	(revision 12256)
++++ vendor/branch/CMCC_Netcom/frameworks/opt/telephony/src/java/com/mediatek/internal/telephony/dataconnection/DataSubSelector.java	(revision 12257)
+@@ -132,6 +132,7 @@
+ 
+     protected static SharedPreferences mSimSwitchPreference;
+     private PreferenceListener mPrefListener;
++    private static final boolean mSet_DefaulData_to_Slot0= false;
+ 
+     protected BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+         @Override
+@@ -1360,6 +1361,30 @@
+         } else if (insertedSimCount >= 2) {
+             // default data policy for this case will be executed
+             //     in checkOp01CapSwitch6m->handleDefaultDataOp01MultiSims()
++          if(true == mSet_DefaulData_to_Slot0){
++             phoneId = 0;
++ 
++            if (isCanSwitch() == false) {
++                // need wait imsi ready
++                setNeedWaitImsi(NEED_TO_WAIT_IMSI, Boolean.toString(true));
++                mIntent = intent;
++                setSimStatus(intent);
++                setNewSimSlot(intent);
++                return;
++            }
++
++            log("OP01 Change for Customer Two SIM: Set Default data to phone: 0");
++                setCapability(phoneId);
++
++                if (detectedType != SubscriptionManager.EXTRA_VALUE_NOCHANGE) {
++                    setDefaultData(phoneId);
++                    syncDefaultDataToMd(phoneId);
++                }
++
++            turnOffNewSimData(intent);
++            }
++            else {
++            	
+             if (intent != null &&
+                     TelephonyIntents.ACTION_SUBINFO_RECORD_UPDATED.equals(intent.getAction())) {
+                 mIntent = intent; // this will be used in
+@@ -1378,6 +1403,7 @@
+                 }
+                 return;
+             }
++          }
+         }
+         mIntent = null;
+         // clean system property

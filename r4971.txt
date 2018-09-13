@@ -1,0 +1,39 @@
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/AndroidManifest.xml
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/AndroidManifest.xml	(revision 4970)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/AndroidManifest.xml	(revision 4971)
+@@ -72,7 +72,7 @@
+     <permission android:name="android.permission.READ_SPEED_DIAL" />
+     <permission android:name="android.permission.WRITE_SPEED_DIAL" />    
+     <!-- Add your plug-in service here -->
+-    <application android:label="OperatorPlugin"
++    <application android:label="@string/plug_lable"
+                  android:icon="@mipmap/ic_launcher_settings">
+ 
+         <!-- Mms Plugin Start-->
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/res/values-zh-rCN/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/res/values-zh-rCN/strings.xml	(revision 4970)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/res/values-zh-rCN/strings.xml	(revision 4971)
+@@ -367,6 +367,6 @@
+     <string name="email_choose_provider_139">139邮箱</string>
+ 	
+     <string name="email_choose_provider_others">其他</string>
++    <string name="plug_lable">插件操作</string>
+ 
+-
+ </resources>
+Index: vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/res/values/strings.xml
+===================================================================
+--- vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/res/values/strings.xml	(revision 4970)
++++ vendor/mediatek/proprietary/operator/OP01/packages/apps/Plugins/res/values/strings.xml	(revision 4971)
+@@ -488,8 +488,6 @@
+     <string name="CMCC_provider_email_account_name_description">139 mail</string>
+     <string name="email_choose_provider_sina">Sina</string>
+     <string name="email_choose_provider_others">Others</string>
+-
+     <string name="email_choose_provider_139">139 Mail</string>
+-
+-
++    <string name="plug_lable">OperatorPlugin</string>
+ </resources>

@@ -1,0 +1,13 @@
+Index: device/ausshine/aus6739_66_n1/ProjectConfig.mk
+===================================================================
+--- device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 2274)
++++ device/ausshine/aus6739_66_n1/ProjectConfig.mk	(revision 2275)
+@@ -651,7 +651,7 @@
+ MTK_UFS_BOOTING = no
+ MTK_UFS_OTP = no
+ MTK_ULTRA_DIMMING_SUPPORT = no
+-MTK_USB_CBA_SUPPORT = no
++MTK_USB_CBA_SUPPORT = yes
+ MTK_USB_PHONECALL = AP
+ MTK_USER_ROOT_SWITCH = no
+ MTK_USER_SPACE_DEBUG_FW = yes

@@ -1,0 +1,12 @@
+Index: vendor/customer/custom.mk
+===================================================================
+--- vendor/customer/custom.mk	(revision 4088)
++++ vendor/customer/custom.mk	(revision 4089)
+@@ -17,7 +17,6 @@
+                     HiLauncherOverlay \
+                     TencentNews \
+                     TencentVideo \
+-                    SogouInput \
+                     MainApp \
+                     10086android \
+                     mmnes \

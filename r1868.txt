@@ -1,0 +1,13 @@
+Index: build/tools/buildinfo.sh
+===================================================================
+--- build/tools/buildinfo.sh	(revision 1867)
++++ build/tools/buildinfo.sh	(revision 1868)
+@@ -33,7 +33,7 @@
+ fi
+ echo "ro.product.model=TCL V760"
+ echo "ro.product.brand=TCL"
+-echo "ro.product.name=TCL V760"
++echo "ro.product.name=ALCATEL 980CN1"
+ echo "ro.product.device=TCL V760"
+ echo "ro.product.board=$TARGET_BOOTLOADER_BOARD_NAME"
+ 

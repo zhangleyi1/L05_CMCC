@@ -1,0 +1,12 @@
+Index: frameworks/base/media/java/android/media/MediaRecorder.java
+===================================================================
+--- frameworks/base/media/java/android/media/MediaRecorder.java	(revision 3825)
++++ frameworks/base/media/java/android/media/MediaRecorder.java	(revision 3826)
+@@ -768,6 +768,7 @@
+             throw new IllegalArgumentException("Video encoding bit rate is not positive");
+         }
+         setParameter("video-param-encoding-bitrate=" + bitRate);
++		setParameter("param-use-64bit-offset=1");
+     }
+ 
+     /**

@@ -1,0 +1,14 @@
+Index: packages/services/Telephony/src/com/android/phone/EditPhoneNumberPreference.java
+===================================================================
+--- packages/services/Telephony/src/com/android/phone/EditPhoneNumberPreference.java	(revision 8269)
++++ packages/services/Telephony/src/com/android/phone/EditPhoneNumberPreference.java	(revision 8270)
+@@ -346,6 +346,9 @@
+         if (mDialogOnClosedListener != null) {
+             mDialogOnClosedListener.onDialogClosed(this, mButtonClicked);
+         }
++	    if(mGetDefaultNumberListener != null){
++			mGetDefaultNumberListener.onGetDefaultNumber(this);
++		}
+     }
+ 
+     /*

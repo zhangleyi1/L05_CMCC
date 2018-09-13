@@ -1,0 +1,147 @@
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java	(revision 8556)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/src/com/gome/bootwizard/activity/WelcomeActivity.java	(revision 8557)
+@@ -16,7 +16,7 @@
+ import android.view.animation.AlphaAnimation;
+ import android.widget.Button;
+ import android.widget.ImageView;
+-import android.widget.LinearLayout;
++import android.widget.RelativeLayout;
+ import android.content.IntentFilter; 
+ import java.util.List;
+ import android.content.pm.ResolveInfo;
+@@ -54,7 +54,7 @@
+     ImageView ivWelcomeText;
+ 
+    
+-    LinearLayout rootView;
++    RelativeLayout rootView;
+     /**
+      * Determine whether it is the last page,default is false.
+      * see {@link Navigator#navigateToWelcomeActivity(BaseActivity, boolean)}
+@@ -84,7 +84,7 @@
+     protected void initData(Bundle savedInstanceState) {
+ //        Settings.System.putString(getContentResolver(),"show_navigation_bar","false");
+ 
+-          rootView = (LinearLayout) findViewById(R.id.root);
++          rootView = (RelativeLayout) findViewById(R.id.root);
+ 		 ivWelcomeText = (ImageView) findViewById(R.id.iv_welcome_text);
+ 		 ivWelcome = (ImageView) findViewById(R.id.iv_welcome_image);
+ 		 btnStart = (Button) findViewById(R.id.btn_start);
+@@ -106,8 +106,10 @@
+         if (mIsLastPage){ 
+ 		    btnStart.setText(getString(R.string.start_launch));
+ 		    findViewById(R.id.tv_tips_finish).setVisibility(View.VISIBLE);
++			findViewById(R.id.tcl_welcome).setVisibility(View.GONE);
+ 		    findViewById(R.id.tv_tips_welcome).setVisibility(View.GONE);
+ 		}else{
++			findViewById(R.id.tcl_welcome).setVisibility(View.VISIBLE);
+ 			findViewById(R.id.tv_tips_finish).setVisibility(View.GONE);
+ 		    findViewById(R.id.tv_tips_welcome).setVisibility(View.VISIBLE);
+ 		}
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/drawable-hdpi/welcome.jpg
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/drawable-hdpi/welcome.jpg
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/drawable-hdpi/welcome.jpg	(revision 0)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/drawable-hdpi/welcome.jpg	(revision 8557)
+
+Property changes on: vendor/mediatek/proprietary/packages/apps/BootWizard/res/drawable-hdpi/welcome.jpg
+___________________________________________________________________
+Added: svn:mime-type
+## -0,0 +1 ##
++application/octet-stream
+\ No newline at end of property
+Index: vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/activity_welcome.xml
+===================================================================
+--- vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/activity_welcome.xml	(revision 8556)
++++ vendor/mediatek/proprietary/packages/apps/BootWizard/res/layout/activity_welcome.xml	(revision 8557)
+@@ -1,26 +1,36 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:id="@+id/root"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:fitsSystemWindows="false"
+-    android:gravity="center_horizontal"
+-    android:orientation="vertical">
+-
++    android:paddingBottom="50dp"
++    android:gravity="center"
++    >
++	
++    <ImageView
++        android:id="@+id/tcl_welcome"
++        android:layout_width="wrap_content"
++	android:layout_alignParentTop="true" 
++        android:layout_height="wrap_content"
++        android:layout_gravity="center_vertical"
++	android:layout_centerHorizontal="true"
++	android:layout_marginTop="60dp"
++        android:src="@drawable/welcome" />
++		
+     <TextView
++	android:layout_below="@id/tcl_welcome" 
+         android:id="@+id/tv_tips_welcome"
+         style="@style/AppTextAppearance.MainText"
+         android:layout_width="wrap_content"
+-        android:layout_height="500dp"
+-        android:layout_marginLeft="50dp"
++        android:layout_height="wrap_content"
++        android:layout_marginLeft="40dp"
+ 	android:textSize="40px"
+-        android:layout_marginRight="50dp"
++        android:layout_marginRight="40dp"
+ 	android:lineSpacingExtra="3dp"
+         android:lineSpacingMultiplier="1.5"
+-	android:layout_centerVertical="true"
+-        android:layout_marginStart="20dp"
+ 	android:textColor="@drawable/btn_gome_button_text_color"
+-        android:layout_marginTop="24dp"
++        android:layout_marginTop="80dp"
+         android:text="@string/guide_welcome"
+          />
+ 		
+@@ -28,17 +38,15 @@
+         android:id="@+id/tv_tips_finish"
+         style="@style/AppTextAppearance.MainText"
+         android:layout_width="wrap_content"
+-        android:layout_height="500dp"
++        android:layout_height="wrap_content"
+ 	android:textColor="@drawable/btn_gome_button_text_color"
+ 	android:textSize="40px"
+-        android:layout_marginEnd="20dp"
++	android:layout_centerVertical="true"
+ 	android:lineSpacingExtra="3dp"
++	android:layout_marginTop="300dp"
+         android:lineSpacingMultiplier="1.5"
+-        android:layout_marginLeft="50dp"
+-        android:layout_marginRight="50dp"
+-	android:layout_centerVertical="true"
+-        android:layout_marginStart="20dp"
+-        android:layout_marginTop="24dp"
++        android:layout_marginLeft="40dp"
++        android:layout_marginRight="40dp"
+         android:text="@string/guide_finish"
+          />
+ 
+@@ -45,8 +53,10 @@
+     <Button
+         android:id="@+id/btn_start"
+         style="@style/Widget.GOME.Light.Button"
+-        android:layout_width="101dp"
+-        android:layout_height="48dp"
++        android:layout_width="wrap_content"
++	android:layout_alignParentBottom="true" 
++        android:layout_height="wrap_content"
++	android:layout_centerHorizontal="true"
+         android:text="@string/start"
+         android:textSize="16sp" />
+-</LinearLayout>
+\ No newline at end of file
++</RelativeLayout>
+\ No newline at end of file
